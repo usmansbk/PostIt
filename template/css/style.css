@@ -1,1 +1,12 @@
-header, nav, footer, article {display:block;}
+body {
+  margin: 8px; }
+
+form label {
+  margin-bottom: 2px; }
+
+#signup input {
+  display: block; }
+  #signup input[type=radio] {
+    display: inline; }
+
+/*# sourceMappingURL=style.css.map */

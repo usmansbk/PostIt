@@ -1,0 +1,18 @@
+body {
+  margin:8px;
+}
+
+form {
+  label {
+    margin-bottom:2px;
+  }
+}
+
+#signup {
+  input {
+    display:block;
+    &[type=radio] {
+     display:inline;
+    }
+  }
+}
