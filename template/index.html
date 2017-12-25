@@ -9,13 +9,12 @@
   <body>
     <header>
       <a href=/><img src=img/logo.png alt=home></a>
-      <!-- Signin form -->
       <form method=post>
         <label for=username>Username</label>
-        <input name=username type=text required>
+        <input name=username type=text required aria-required>
         
         <label for=password>Password</label>
-        <input name=password type=password required>
+        <input name=password type=password required aria-required>
   
         <input type=submit value="Log In">
       </form>
@@ -33,22 +32,22 @@
 
     <form method=post>
       <label for=f-firstname>Firstname</label>
-      <input id=f-firstname name=firstname type=text required>
+      <input id=f-firstname name=firstname type=text required aria-required>
 
       <label for=f-surname>Surname</label>
-      <input id=f-surname name=surname type=text required>
+      <input id=f-surname name=surname type=text required aria-required>
 
       <label for=f-username>Username</label>
-      <input id=f-username name=username type=text required>
+      <input id=f-username name=username type=text required aria-required>
 
       <label for=f-email>Email</label>
-      <input id=f-email name=email type=email required>
+      <input id=f-email name=email type=email required aria-required>
 
       <label for=f-password>New Password</label>
-      <input id=f-password name=password type=password required>
+      <input id=f-password name=password type=password placeholder="at least 8 characters" required aria-required>
 
       <label for=f-retype>Retype Password</label>
-      <input id=f-retype type=password required>
+      <input id=f-retype type=password required aria-required>
 
       <label type=f-birthday>Birthday</label>
       <input id=f-birthday name=birthday type=date>
