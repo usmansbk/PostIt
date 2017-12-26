@@ -9,32 +9,37 @@
   </head>
 
   <body>
-    <header class="navbar bg-dark">
-      <a href='../index.html'>
+    <header>
+      <nav class='navbar navbar-expand navbar-dark fixed-top bg-dark'>
+      <a class=navbar-brand href=../index.html>
         <input type=button class='btn btn-outline-info' value=PostIt>
       </a>
+      </nav>
     </header>
 
     <div class=container-fluid>
+      <div class=row>
 
-      <article>
-        Hello
-      </article>
-      <aside> 
-        <nav>
-          <a href=#>Message board</a>
-          <section>
-            <a href='newgroup.html'>
-              <input class='btn btn-outline-dark' type=button value='New Group'>
-            </a>
-            <a href='newpost.html'>
-              <input class='btn btn-outline-dark' type=button value='New Post'>
-            </a>
-          </section>
-        </nav>
-      </aside>
+      <nav class='col-sm-3 col-md-3 d-none d-sm-block bg-light sidebar'>
+        <ul class="nav nav-pills flex-column">
+          <li class='nav-item'>
+            <a class='nav-link' href='#'>Message Board</a>
+          </li>
+        </ul>
+        <section class=nav-item>
+          <input type=button value='New Post' class='btn btn-outline-dark'>
+          <input type=button value='New Group' class='btn btn-outline-dark'>
+        </section>
+      </nav>
 
+      <main class='col-sm-9 ml-sm-auto col-md-10 pt-3' role=main>
+        Dashboard
+      </main>
+
+      </div>
     </div>
-
+  <script src=../js/jquery.js></script>
+  <script src=../js/popper.js></script>
+  <script src=../js/bootstrap.js></script>
   </body>
 </html>
