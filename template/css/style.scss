@@ -3,6 +3,10 @@ header {
     color: white;
     font-family: Geneva, Helvetica, serif;
     font-size:40px;
+    &:hover {
+      text-decoration: none;
+      color:white;
+    }
   }
 }
 

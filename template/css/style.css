@@ -2,6 +2,9 @@ header a {
   color: white;
   font-family: Geneva, Helvetica, serif;
   font-size: 40px; }
+  header a:hover {
+    text-decoration: none;
+    color: white; }
 
 table label {
   color: white; }
