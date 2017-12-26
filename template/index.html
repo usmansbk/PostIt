@@ -2,22 +2,32 @@
 <html lang=en>
   <head>
     <meta charset=utf-8>
-    <title>PostIt</title>
+    <title>PostIt - log in or sign up</title>
     <link href=css/bootstrap.css rel=stylesheet>
     <link href=css/style.css rel=stylesheet>
   </head>
   <body>
-    <header>
-      <a href=/><img src=img/logo.png alt=home></a>
-      <form id=signin method=post>
-        <label for=username>Username</label>
-        <input name=username type=text required aria-required>
-        
-        <label for=password>Password</label>
-        <input name=password type=password required aria-required>
-  
-        <input type=submit value="Log In">
-      </form>
+    <header class="navbar bg-dark">
+      <a class=navbar-brand href=#><img src=img/logo.png alt=PostIt></a>
+      <table>
+        <tr>
+          <td>Username</td>
+          <td>Password</td>
+        </tr>
+        <tr>
+          <td><input class=form-control-sm form=signin name=username type=text required aria-required></td>
+          <td><input class=form-control-sm form=signin name=password type=password required aria-required></td>
+          <td>
+            <form method=post id=signin>
+              <input class=btn-sm type=submit value="Sign In">
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <!-- Placeholder -->
+          <!-- Forgotten account feature placeholder -->
+        </tr>
+      </table>
     </header>
     
     <aside>
@@ -31,38 +41,39 @@
     </aside>
 
     <form id=signup method=post>
+      <h2 class=form-signin-heading>Create an Account</h2>
       <label for=f-firstname>Firstname</label>
-      <input id=f-firstname name=firstname type=text required aria-required>
+      <input class=form-control id=f-firstname name=firstname type=text placeholder=Firstname required aria-required>
+
       <label for=f-surname>Surname</label>
-      <input id=f-surname name=surname type=text required aria-required>
+      <input class=form-control id=f-surname name=surname type=text placeholder=Surname required aria-required>
 
       <label for=f-username>Username</label>
-      <input id=f-username name=username type=text required aria-required>
+      <input class=form-control id=f-username name=username type=text placeholder=Username required aria-required>
 
       <label for=f-email>Email</label>
-      <input id=f-email name=email type=email required aria-required>
+      <input class=form-control id=f-email name=email type=email placeholder=email required aria-required>
 
       <label for=f-password>New Password</label>
-      <input id=f-password name=password type=password placeholder="at least 8 characters" required aria-required>
+      <input class=form-control id=f-password name=password type=password placeholder="New password" required aria-required>
 
       <label for=f-retype>Retype Password</label>
-      <input id=f-retype type=password required aria-required>
+      <input class=form-control id=f-retype type=password placeholder="Re-type password" required aria-required>
 
       <label type=f-birthday>Birthday</label>
-      <input id=f-birthday name=birthday type=date>
-
-      <input type=radio name=gender value=Male> Male
-      <input type=radio name=gender value=Female> Female
-
-      <input type=submit value="Sign Up">
+      <input class=form-control id=f-birthday name=birthday type=date>
+      <input class=form-check type=radio name=gender value=Male> Male
+      <input class=form-check type=radio name=gender value=Female> Female
+      <br>
+      <input class=btn type=submit value="Sign Up">
     </form>
 
     <footer>
       <small>
         <nav>
-          <a href=https://twitter.com/usmansbk><img src=img/twitter-logo.png alt=twitter></a>
-          <a href=https://facebook.com/usmansbk><img src=img/fb-logo.png alt=facebook></a>
-          <a href=https://github.com/usmansbk><img src=img/github-logo.png alt=GitHub></a>
+          <a href=https://twitter.com/usmansbk><img src=img/twitterlogo.png alt=twitter></a>
+          <a href=https://facebook.com/usmansbk><img src=img/fblogo.png alt=facebook></a>
+          <a href=https://github.com/usmansbk><img src=img/githublogo.png alt=GitHub></a>
         </nav>
         <a href=https://andela.com>Andela</a> &copy; 2017
       </small>

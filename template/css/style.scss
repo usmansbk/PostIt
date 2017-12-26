@@ -1,18 +1,15 @@
-body {
-  margin:8px;
+label {
+  margin-bottom:1px;
+  display:none;
 }
 
-form {
-  label {
-    margin-bottom:2px;
-  }
-}
-
-#signup {
+form[id=signup] {
   input {
     display:block;
+    margin-bottom:8px;
     &[type=radio] {
-     display:inline;
+      display:inline;
     }
   }
 }
+

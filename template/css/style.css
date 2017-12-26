@@ -1,12 +1,11 @@
-body {
-  margin: 8px; }
+label {
+  margin-bottom: 1px;
+  display: none; }
 
-form label {
-  margin-bottom: 2px; }
-
-#signup input {
-  display: block; }
-  #signup input[type=radio] {
+form[id=signup] input {
+  display: block;
+  margin-bottom: 8px; }
+  form[id=signup] input[type=radio] {
     display: inline; }
 
 /*# sourceMappingURL=style.css.map */
