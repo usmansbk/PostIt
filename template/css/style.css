@@ -1,3 +1,8 @@
+header a {
+  color: white;
+  font-family: Geneva, Helvetica, serif;
+  font-size: 40px; }
+
 table label {
   color: white; }
 
@@ -22,10 +27,9 @@ form[id=signup] {
       display: inline; }
 
 footer {
-  text-align: center; }
-
-#brand-logo {
-  width: 68px;
-  height: 36px; }
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 5px;
+  background-color: white; }
 
 /*# sourceMappingURL=style.css.map */
