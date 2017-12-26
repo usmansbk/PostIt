@@ -3,16 +3,17 @@
   <head>
     <meta charset=utf-8>
     <title>PostIt - log in or sign up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href=css/bootstrap.css rel=stylesheet>
     <link href=css/style.css rel=stylesheet>
   </head>
   <body>
     <header class="navbar bg-dark">
-      <a class=navbar-brand href=#><img src=img/logo.png alt=PostIt></a>
+      <a href=#>PostIt</a>
       <table>
         <tr>
-          <td>Username</td>
-          <td>Password</td>
+          <td><label for=username>Username<label></td>
+          <td><label for=password>Password<label></td>
         </tr>
         <tr>
           <td><input class=form-control-sm form=signin name=username type=text required aria-required></td>
@@ -29,17 +30,8 @@
         </tr>
       </table>
     </header>
-    
-    <aside>
-      <article>
-        <h1>PostIt</h1>
-        <p>
-         <b>PostIt</b> is a simple application that allows friends and colleagues create groups for noitifications.
-         This way one person can post notifications to everyone by sending a message once.
-        </p>
-      </article>
-    </aside>
 
+    <div class=main role=main> 
     <form id=signup method=post>
       <h2 class=form-signin-heading>Create an Account</h2>
       <label for=f-firstname>Firstname</label>
@@ -67,14 +59,19 @@
       <br>
       <input class=btn type=submit value="Sign Up">
     </form>
-
+    <aside>
+      <article>
+        <h1 class=display-4>PostIt</h1>
+        <p class="h3 text-muted">
+         PostIt is a simple application that allows friends and colleagues create groups for notifications.
+         This way one person can post notifications to everyone by sending a message once.
+        </p>
+      </article>
+    </aside>
+    </div>
     <footer>
       <small>
-        <nav>
-          <a href=https://twitter.com/usmansbk><img src=img/twitterlogo.png alt=twitter></a>
-          <a href=https://facebook.com/usmansbk><img src=img/fblogo.png alt=facebook></a>
-          <a href=https://github.com/usmansbk><img src=img/githublogo.png alt=GitHub></a>
-        </nav>
+        <a href=https://github.com/usmansbk><img src=img/github-logo.png alt=GitHub></a><br>
         <a href=https://andela.com>Andela</a> &copy; 2017
       </small>
     </footer>
