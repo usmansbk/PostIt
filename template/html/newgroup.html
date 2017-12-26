@@ -4,31 +4,47 @@
     <meta charset=utf-8>
     <title>Create broadcast group</title>
     <link href=../css/bootstrap.css rel=stylesheet>
+    <style>
+      .container {
+        width:50%;
+        margin-top:3%;
+      }
+    </style>
   </head>
 
   <body>
+    <div class=container>
     <form method=post>
       <hgroup>
         <h1>Create a group</h1>
-        <small>Groups are where you post notifications to everyone.</small>
+        <p class='form-text text-muted'>Groups are where you post notifications to everyone.</p>
       <hgroup>
-      
-      <label for=name>Name</label>
-      <input id=name name=name placeholder='e.g. Good People' required>
-      <small>Names must be shorter than 22 characters.</small>
+     
+      <div class=form-group> 
+        <label class=font-weight-bold for=name>Name</label>
+        <input id=name name=name class=form-control placeholder='e.g. Good People' required>
+        <small class='form-text text-muted'>Names must be shorter than 22 characters.</small>
+      </div>
 
-      <label for=purpose>Purpose <span>(optional)</span></label>
-      <input id=purpose name=purpose>
-      <small>What's this group about?</small>
+      <div class=form-group>
+        <label for=purpose><span class=font-weight-bold>Purpose</span> <span class='text-muted'>(optional)</span></label>
+        <input id=purpose name=purpose class=form-control>
+        <small class='form-text text-muted'>What's this group about?</small>
+      </div>
 
-      <label for=invites>Invite: <span>(optional)</span></label>
-      <input id=invites name=invites placeholder='Search by username' multiple>
-      <small>Seperate usernames with whitespace.</small>
-
-      <section>
-        <input type=button value=Cancel>
-        <input type=submit value="Create Group">
+      <div class=form-group>
+        <label for=invites>
+          <span class=font-weight-bold>Invite:</span>
+          <span class='text-muted'>(optional)</span>
+        </label>
+        <input id=invites name=invites class=form-control placeholder='Search by username' multiple>
+        <small class='form-text text-muted'>Select up to 200 people to add to this group.</small>
+      </div>
+      <section class=text-right>
+        <input type=button class='btn-lg btn-primary' value=Cancel>
+        <input type=submit class=btn-lg value="Create Group">
       </section>
     </form>
+    </div>
   </body>
 </html>
