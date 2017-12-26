@@ -24,10 +24,8 @@ div[class=main] {
 form[id=signup] {
   float: right;
   width: 40%; }
-  form[id=signup] label {
-    display: none; }
-    form[id=signup] label[type=f-birthday] {
-      display: block; }
+  form[id=signup] label[type=f-birthday] {
+    display: block; }
   form[id=signup] input {
     display: block;
     margin-bottom: 8px; }

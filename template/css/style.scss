@@ -13,6 +13,7 @@ header {
 input {
   margin-right:10px;
 }
+
 table {
   label {
     color:white;
@@ -34,7 +35,6 @@ form[id=signup] {
   float:right;
   width:40%;
   label {
-    display:none;
     &[type=f-birthday] {
       display:block;
     }
