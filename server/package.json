@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/usmansbk/PostIt/issues"
   },
-  "homepage": "https://github.com/usmansbk/PostIt#readme"
+  "homepage": "https://github.com/usmansbk/PostIt#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
