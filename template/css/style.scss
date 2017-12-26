@@ -35,6 +35,9 @@ form[id=signup] {
   width:40%;
   label {
     display:none;
+    &[type=f-birthday] {
+      display:block;
+    }
   };
   input {
     display:block;
