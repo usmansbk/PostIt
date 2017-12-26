@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "PostIt back-end implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usmansbk/PostIt.git"
+  },
+  "keywords": [
+    "'Social",
+    "Network'",
+    "Node",
+    "Sequelize",
+    "Postgres"
+  ],
+  "author": "Babakolo Usman Suleiman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/usmansbk/PostIt/issues"
+  },
+  "homepage": "https://github.com/usmansbk/PostIt#readme"
+}
