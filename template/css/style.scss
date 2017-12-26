@@ -10,6 +10,9 @@ header {
   }
 }
 
+input {
+  margin-right:10px;
+}
 table {
   label {
     color:white;
@@ -38,6 +41,7 @@ form[id=signup] {
     margin-bottom:8px;
     &[type=radio] {
       display:inline;
+      margin-right:2px;
     }
   }
 }

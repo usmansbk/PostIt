@@ -6,6 +6,9 @@ header a {
     text-decoration: none;
     color: white; }
 
+input {
+  margin-right: 10px; }
+
 table label {
   color: white; }
 
@@ -27,7 +30,8 @@ form[id=signup] {
     display: block;
     margin-bottom: 8px; }
     form[id=signup] input[type=radio] {
-      display: inline; }
+      display: inline;
+      margin-right: 2px; }
 
 footer {
   text-align: center;
