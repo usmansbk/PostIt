@@ -2,8 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "PostIt back-end implementation",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "jasmine"
   },
   "repository": {
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/usmansbk/PostIt#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
