@@ -5,25 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>PostIt</title>
     <link href=../css/bootstrap.css rel=stylesheet>
+    <link href=../css/dashboard.css rel=stylesheet>
   </head>
 
   <body>
-    <header>
-      <a href='../index.html'>PostIt</a>
+    <header class="navbar bg-dark">
+      <a href='../index.html'>
+        <input type=button class='btn btn-outline-info' value=PostIt>
+      </a>
     </header>
-    <article role=main>
-    </article>   
-    <aside> 
-      <nav>
+
+    <div class=container-fluid>
+
+      <article>
+        Hello
+      </article>
+      <aside> 
+        <nav>
           <a href=#>Message board</a>
-        <section>
-          <ul>
-            <li><a href='newgroup.html'>New Group</a></li>
-            <li><a href='newpost.html'>New Post</a></li>
-          </ul>
-        </section>
-      </nav>
-    </aside>
+          <section>
+            <a href='newgroup.html'>
+              <input class='btn btn-outline-dark' type=button value='New Group'>
+            </a>
+            <a href='newpost.html'>
+              <input class='btn btn-outline-dark' type=button value='New Post'>
+            </a>
+          </section>
+        </nav>
+      </aside>
+
+    </div>
 
   </body>
 </html>
