@@ -2,7 +2,7 @@
 <html lang=en>
   <head>
     <meta charset=utf-8>
-    <title>Create broadcast group</title>
+    <title>Create broadcast group | PostIt</title>
     <link href=../css/bootstrap.css rel=stylesheet>
     <style>
       .container {
@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <div class=container>
+    <div class=container role=main>
     <form method=post>
       <hgroup>
         <h1>Create a group</h1>
@@ -40,6 +40,11 @@
         <input id=invites name=invites class='form-control form-control-lg' placeholder='Search by username' multiple>
         <small class='form-text text-muted'>Select up to 200 people to add to this group.</small>
       </div>
+      <section id=users>
+        <!-- List of auto complete users found -->
+        <ul>
+        </ul>
+      </section>
       <section class=text-right>
         <input type=button class='btn-lg btn-primary' value=Cancel>
         <input type=submit class=btn-lg value="Create Group">
