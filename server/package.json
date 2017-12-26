@@ -4,7 +4,8 @@
   "description": "PostIt back-end implementation",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "build": "sh scripts/babel.sh",
+    "start": "node build/server.js",
     "test": "jasmine"
   },
   "repository": {
