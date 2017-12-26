@@ -35,24 +35,24 @@
     <form id=signup method=post>
       <h2 class=form-signin-heading>Create an Account</h2>
       <label for=f-firstname>Firstname</label>
-      <input class=form-control id=f-firstname name=firstname type=text placeholder=Firstname required aria-required>
+      <input class=form-control id=f-firstname name=firstname type=text placeholder required aria-required>
 
       <label for=f-surname>Surname</label>
-      <input class=form-control id=f-surname name=surname type=text placeholder=Surname required aria-required>
+      <input class=form-control id=f-surname name=surname type=text placeholder required aria-required>
 
       <label for=f-username>Username</label>
-      <input class=form-control id=f-username name=username type=text placeholder=Username required aria-required>
+      <input class=form-control id=f-username name=username type=text placeholder required aria-required>
 
       <label for=f-email>Email</label>
-      <input class=form-control id=f-email name=email type=email placeholder=email required aria-required>
+      <input class=form-control id=f-email name=email type=email placeholder required aria-required>
 
       <label for=f-password>New Password</label>
-      <input class=form-control id=f-password name=password type=password placeholder="New password" required aria-required>
+      <input class=form-control id=f-password name=password type=password placeholder required aria-required>
 
       <label for=f-retype>Retype Password</label>
-      <input class=form-control id=f-retype type=password placeholder="Re-type password" required aria-required>
+      <input class=form-control id=f-retype type=password placeholder required aria-required>
 
-      <label type=f-birthday>Birthday</label>
+      <label id=birthday type=f-birthday>Birthday</label>
       <input class=form-control id=f-birthday name=birthday type=date>
       <input class=form-check type=radio name=gender value=Male> Male
       <input class=form-check type=radio name=gender value=Female> Female
@@ -75,5 +75,7 @@
         <a href=https://andela.com>Andela</a> &copy; 2017
       </small>
     </footer>
+
+    <script src=js/script.js></script> 
   </body>
 </html>
