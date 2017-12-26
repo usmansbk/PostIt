@@ -4,23 +4,41 @@
     <meta charset=utf-8>
     <title>New Post | PostIt</title>
     <link rel=stylesheet href=../css/bootstrap.css>
+    <link rel=stylesheet href=../css/newpost.css>
   </head>
 
   <body>
     <div class=container role=main>
       <header>
-        <input type=text readonly value='Firstname Surname'>
-        <select>
-          <option>Choose Group</option>
-        </select>
+        <table>
+          <tr>
+            <td>
+              <!-- User Thumbnail feature -->
+            </td>
+            <td>
+              <input id=name class=form-control-plaintext type=text readonly value='Firstname Surname'>
+            </td>
+            <td><!-- Arrow -> --> 
+              <svg width="18px" height="18px" viewBox="0 0 36 36" fill="#757575">
+                <path d="M20 34l10-10 -10-10z"></path>
+              </svg>
+            </td>
+            <td>
+              <select class=form-control placeholder=Choose>
+                <option>Choose Group</option>
+              </select>
+            </td>
+          <tr>
+        </table>
       </header>
-      <textarea spellcheck=false placeholder='Type your message...'></textarea>
+      <textarea rows=10 class=form-control spellcheck=false placeholder='Type your message...'></textarea>
       <section>
+        <!-- Extra features like attach documents etc. -->
       <section>
       <footer>
         <form id=post>
-          <input type=button value=Cancel>
-          <input type=submit value=Post>
+          <input class='btn btn-primary' type=button value=Cancel>
+          <input class=btn disabled type=submit value=Post>
         </form>
       </footer>
     </div>
