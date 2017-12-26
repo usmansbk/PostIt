@@ -1,11 +1,24 @@
-label {
-  margin-bottom: 1px;
-  display: none; }
+table label {
+  color: white; }
 
-form[id=signup] input {
-  display: block;
-  margin-bottom: 8px; }
-  form[id=signup] input[type=radio] {
-    display: inline; }
+label {
+  margin-bottom: 1px; }
+
+div[class=main] {
+  overflow: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px; }
+
+form[id=signup] {
+  float: right;
+  width: 40%; }
+  form[id=signup] label {
+    display: none; }
+  form[id=signup] input {
+    display: block;
+    margin-bottom: 8px; }
+    form[id=signup] input[type=radio] {
+      display: inline; }
 
 /*# sourceMappingURL=style.css.map */
