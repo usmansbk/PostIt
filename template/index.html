@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <title>PostIt - log in or sign up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href=css/bootstrap.css rel=stylesheet>
+    <link href=css/style.css rel=stylesheet>
+  </head>
+  <body>
+    <header class="navbar bg-dark">
+      <a href=#>
+        <input type=button class='btn btn-outline-info' value=PostIt>
+      </a>
+      <table>
+        <tr>
+          <td><label for=username>Username<label></td>
+          <td><label for=password>Password<label></td>
+        </tr>
+        <tr>
+          <td><input class=form-control-sm form=signin name=username type=text required aria-required></td>
+          <td><input class=form-control-sm form=signin name=password type=password required aria-required></td>
+          <td>
+            <form method=post id=signin>
+              <input class=btn-sm type=submit value="Sign In">
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <!-- Placeholder -->
+          <!-- Forgotten account feature placeholder -->
+        </tr>
+      </table>
+    </header>
+
+    <div class=main role=main> 
+    <form id=signup method=post>
+      <h2 class=form-signin-heading>Create an Account</h2>
+      <label for=f-firstname>Firstname</label>
+      <input class=form-control id=f-firstname name=firstname type=text placeholder required aria-required>
+
+      <label for=f-surname>Surname</label>
+      <input class=form-control id=f-surname name=surname type=text placeholder required aria-required>
+
+      <label for=f-username>Username</label>
+      <input class=form-control id=f-username name=username type=text placeholder required aria-required>
+
+      <label for=f-email>Email</label>
+      <input class=form-control id=f-email name=email type=email placeholder required aria-required>
+
+      <label for=f-password>New Password</label>
+      <input class=form-control id=f-password name=password type=password placeholder required aria-required>
+
+      <label for=f-retype>Retype Password</label>
+      <input class=form-control id=f-retype type=password placeholder required aria-required>
+
+      <label id=birthday type=f-birthday>Birthday</label>
+      <input class=form-control id=f-birthday name=birthday type=date>
+
+      <input class=form-check type=radio name=gender value=Male> Male
+      <input class=form-check type=radio name=gender value=Female> Female
+      <br>
+      <input class=btn type=submit value="Sign Up">
+    </form>
+    <aside>
+      <article>
+        <h1 class=display-4>PostIt</h1>
+        <p class="h3 text-muted">
+         PostIt is a simple application that allows friends and colleagues create groups for notifications.
+         This way one person can post notifications to everyone by sending a message once.
+        </p>
+      </article>
+    </aside>
+    </div>
+    <footer>
+      <small>
+        <a href=https://github.com/usmansbk><img src=img/github-logo.png alt=GitHub></a><br>
+        <a href=https://andela.com>Andela</a> &copy; 2017
+      </small>
+    </footer>
+
+    <script src=js/script.js></script> 
+  </body>
+</html>

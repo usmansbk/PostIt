@@ -1,0 +1,57 @@
+header {
+  a {
+    color: white;
+    font-family: Geneva, Helvetica, serif;
+    font-size:40px;
+    &:hover {
+      text-decoration: none;
+      color:white;
+    }
+  }
+}
+
+input {
+  margin-right:10px;
+}
+
+table {
+  label {
+    color:white;
+  }
+}
+
+label {
+  margin-bottom:1px;
+}
+
+div[class=main] {
+  overflow:auto;
+  padding-left:30px;
+  padding-right:30px;
+  padding-top:30px;
+}
+
+form[id=signup] {
+  float:right;
+  width:40%;
+  label {
+    &[type=f-birthday] {
+      display:block;
+    }
+  };
+  input {
+    display:block;
+    margin-bottom:8px;
+    &[type=radio] {
+      display:inline;
+      margin-right:2px;
+    }
+  }
+}
+
+footer {
+  text-align:center;
+  padding-bottom:20px;
+  padding-top:5px;
+  background-color: white;
+}
