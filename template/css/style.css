@@ -6,8 +6,8 @@ label {
 
 div[class=main] {
   overflow: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   padding-top: 30px; }
 
 form[id=signup] {
@@ -20,5 +20,12 @@ form[id=signup] {
     margin-bottom: 8px; }
     form[id=signup] input[type=radio] {
       display: inline; }
+
+footer {
+  text-align: center; }
+
+#brand-logo {
+  width: 68px;
+  height: 36px; }
 
 /*# sourceMappingURL=style.css.map */
