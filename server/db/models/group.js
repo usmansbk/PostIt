@@ -1,12 +1,11 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var Group = sequelize.define('Group', {
+export default function (sequelize, DataTypes) {
+  let Group = sequelize.define('Group', {
     name: DataTypes.STRING,
     purpose: DataTypes.STRING,
     invites: DataTypes.STRING
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: (models) => {
         // associations can be defined here
       }
     }
