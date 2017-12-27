@@ -1,9 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import logger from 'bunyan-request-logger';
 import apiRouter from './routes/api';
 
 const app = express();
 const router = express.Router();
+const log = logger({
+  name: "PostIt"
+});
+
 const appInfo = {
   name: 'PostIt Server',
   version: '1.0.0',
@@ -15,6 +20,7 @@ const appInfo = {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(log.requestLogger());
 
 router.get('/', (req, res) => {
   res.json(appInfo);
@@ -23,4 +29,4 @@ router.get('/', (req, res) => {
 router.use('/api', apiRouter);
 app.use('/', router);
 
-export default app;
+export { app, log };
