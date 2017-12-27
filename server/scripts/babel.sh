@@ -1,3 +1,4 @@
+babel ._sequelizerc --out-file .sequelizerc
 babel server.js --out-file build/server.js
 babel bin/www --out-file build/bin/www
 babel controllers --out-dir build/controllers

@@ -1,8 +1,18 @@
-import path from 'path';
+'use strict';
 
-export default {
-  config: path.resolve('config', 'config.js'),
-  'models-path': path.resolve('db', 'models'),
-  'seeders-path': path.resolve('db', 'seeders'),
-  'migrations-path': path.resolve('db', 'migrations')
-}
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  config: _path2.default.resolve('build/db/config', 'config.js'),
+  'models-path': _path2.default.resolve('build/db', 'models'),
+  'seeders-path': _path2.default.resolve('build/db', 'seeders'),
+  'migrations-path': _path2.default.resolve('build/db', 'migrations')
+};
