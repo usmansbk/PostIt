@@ -1,7 +1,7 @@
 import express from 'express';
-import user from './user.js';
-import message from './message.js';
-import messages from './messages.js';
+import user from './user';
+import message from './message';
+import messages from './messages';
 
 const router = express.Router();
 
