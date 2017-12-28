@@ -29,4 +29,4 @@ router.get('/', (req, res) => {
 router.use('/api', apiRouter);
 app.use('/', router);
 
-export { app as default, log };
+export { app, log };
