@@ -1,8 +1,17 @@
 import logger from 'bunyan-request-logger';
 import { app, log } from '../server';
+import { sequelize } from '../../db/models';
 
 const port = process.env.PORT || 8888;
 
 app.listen(port, () => {
-  log.info(`Server is listening to port ${port}`);
+  log.info(`Server started at port ${port}`);
+  sequelize
+    .authenticate()
+    .then(() => {
+      log.info('Connection to database has been established successfully.');
+    })
+    .catch(err => {
+      log.fatal('Unable to connect to the database:', err);
+    });  
 });
