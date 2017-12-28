@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     username: process.env.DEV_DB_USERNAME || 'usman',
-    password: process.env.DEV_DB_PASSWORD ||  null,
+    password: process.env.DEV_DB_PASSWORD || null,
     database: process.env.DEV_DB_NAME || 'postit_dev',
     host: process.env.DEV_DB_HOSTNAME || '127.0.0.1',
     port: process.env.DEV_DB_PORT || '5432',
@@ -23,4 +23,4 @@ module.exports = {
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT
   }
-}
+};

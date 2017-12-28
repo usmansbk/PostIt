@@ -6,7 +6,7 @@ import apiRouter from './routes/api';
 const app = express();
 const router = express.Router();
 const log = logger({
-  name: "PostIt"
+  name: 'PostIt'
 });
 
 const appInfo = {
