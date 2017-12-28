@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     username: {
       type: DataTypes.STRING,
+      unique: true,
       validate: {
         notNull: true,
       },
@@ -39,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
+      unique: true,
       validate: {
         isEmail: true,
         notNull: true,
@@ -66,14 +68,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
-      }
+      },
       set(val) {
         this.setDataValue('birthday', val);
       },
       get() {
         return this.getDataValue('birthday');
       }
-    }
+    },
     gender: {
       type: DataTypes.ENUM,
       values: ['male', 'female'],
@@ -87,6 +89,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: function associate(models) {
+        const User = models.User,
+              Group = models.Group;
+        User.belongsToMany(Group, { through: 'UserGroup' });
       }
     },
     getterMethods: {
