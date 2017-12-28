@@ -1,9 +1,8 @@
 import express from 'express';
+import { Group } from '../../controllers/api';
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
-  res.send('/api/group/group id/user works!');
-});
+router.post('/', Group.addUser);
 
 export default router;

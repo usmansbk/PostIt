@@ -1,9 +1,8 @@
 import express from 'express';
+import { Group } from '../../../controllers/api;
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send('/api/group/group id/messages works!');
-});
+router.get('/',Group.retrieveMessages);
 
 export default router;
