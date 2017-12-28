@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        notNull: true,
+        notNull: true
       },
       set(val) {
         this.setDataValue('message', val);
@@ -12,7 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       get() {
         return this.getDataValue('message');
       }
-    },
+    }
+  }, {
+    classMethods: {
+      associate: function associate(models) {
+      // associations can be defined here
+      }
+    }
   });
   return Post;
 };

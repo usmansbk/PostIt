@@ -66,7 +66,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
-        isBefore: `${(new Date()).getFullYear()}-${((new Date()).getMonth()}-${(new Date()).getDate()}`
       }
       set(val) {
         this.setDataValue('birthday', val);
@@ -86,6 +85,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {
+    classMethods: {
+      associate: function associate(models) {
+      }
+    },
     getterMethods: {
       fullName() {
         return `${this.firstname} ${this.surname}`;

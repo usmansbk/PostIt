@@ -34,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
         return this.getDataValue('invites');
       }
     }
+  }, {
+    classMethods: {
+      associate: function associate(models) {
+      }
+    }
   });
   return Group;
 };
