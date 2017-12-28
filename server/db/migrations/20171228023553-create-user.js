@@ -22,10 +22,10 @@ module.exports = {
       type: Sequelize.STRING
     },
     birthday: {
-      type: Sequelize.STRING
+      type: Sequelize.DATEONLY
     },
     gender: {
-      type: Sequelize.STRING
+      type: Sequelize.ENUM('male', 'female')
     },
     createdAt: {
       allowNull: false,
