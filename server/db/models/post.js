@@ -5,6 +5,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: true,
+      },
+      set(val) {
+        this.setDataValue('message', val);
+      },
+      get() {
+        return this.getDataValue('message');
       }
     },
   });
