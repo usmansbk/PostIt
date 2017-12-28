@@ -1,10 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import env_variables from 'dotenv';
 import Sequelize from 'sequelize';
 import configFile from '../config/config';
-
-env_variables.config();
 
 const basename  = path.basename(__filename);
 const env       = process.env.NODE_ENV || 'development';
