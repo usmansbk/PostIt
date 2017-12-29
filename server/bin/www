@@ -1,4 +1,3 @@
-import logger from 'bunyan-request-logger';
 import { app, log } from '../server';
 import { sequelize } from '../../db/models';
 
