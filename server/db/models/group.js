@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     purpose: {
       type: DataTypes.STRING,
       validate: {
-        len: [0, 50] 
+        len: [0, 50]
       },
       set(val) {
         this.setDataValue('purpose', val);
@@ -37,9 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: function associate(models) {
-        const Group = models.Group,
-              User = models.User,
-              Post = models.Post;
+        const { User, Post } = models;
         Group.belongsTo(User, { as: 'creator' });
         Group.belongsToMany(User, { through: 'UserGroup' });
         Group.hasMany(Post, { as: 'Messages' });

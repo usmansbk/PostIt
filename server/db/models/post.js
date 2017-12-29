@@ -16,9 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: function associate(models) {
-        const Group = models.Group,
-              Post = models.Post,
-              User = models.User;
+        const { Group, User } = models;
         Post.belongsTo(Group);
         Post.belongsTo(User, { as: 'author' });
       }
