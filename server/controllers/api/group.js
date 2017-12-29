@@ -15,6 +15,18 @@ export default class GroupController {
   }
 
   static createGroup(req, res) {
-    res.send('createGroup');
+    Group.create(req.body).then(group => {
+      res.status(201).json({
+        status: 'success',
+        message: 'Created new group',
+        data: group
+      });
+    }).catch(error => {
+      res.status(400).json({
+        status: 'fail',
+        message: 'Failed to create group',
+        data: error 
+      });
+    });
   }
 }

@@ -31,13 +31,13 @@ export default class UserController {
     User.create(req.body).then(user => {
       res.status(201).json({
         status: 'success',
-        message: 'New user created',
+        message: 'Created new user',
         data: user
       });
     }).catch(error => {
       res.status(400).json({
         status: 'fail',
-        message: 'Fail to create new user',
+        message: 'Created new user',
         data: error
       });
     });
