@@ -1,5 +1,8 @@
-export default class Group {
+import { Group } from '../../../db/models';
+
+export default class GroupController {
   static postMessage(req, res) {
+   const { message } = req.body;
     res.send('postMessage');
   }
 

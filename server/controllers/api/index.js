@@ -1,4 +1,4 @@
-import User from './user';
-import Group from './group';
+import UserController from './user';
+import GroupController from './group';
 
-export { User, Group };
+export { UserController, GroupController };
