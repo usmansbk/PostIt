@@ -35,11 +35,21 @@ export default class GroupController {
     }).then(users => {
       userModels = users;
     }).catch(error => {
+      res.status(400).json({
+        status: 'fail',
+        message: 'Unable to get users',
+        data: error
+      });
     });
 
     Group.findById(guid).then(group => {
-      res.send(userModels);
+      group.addUsers(userModels);
     }).catch(error => {
+      res.status(400).json({
+        status: 'fail',
+        message: 'Failed to add users',
+        data: error
+      });
     });
   }
 
