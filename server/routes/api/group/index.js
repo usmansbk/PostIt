@@ -6,9 +6,9 @@ import { GroupController } from '../../../controllers/api';
 
 const router = express.Router();
 
-router.use('/:guid/user', user);
-router.use('/:guid/message', message);
-router.use('/:guid/messages', messages);
+router.use('/:guid/user', GroupController.addUser);
+router.use('/:guid/message', GroupController.postMessage);
+router.use('/:guid/messages', GroupController.retrieveMessages);
 router.post('/', GroupController.createGroup);
 
 export default router;
