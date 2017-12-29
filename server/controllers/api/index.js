@@ -1,4 +1,4 @@
 import User from './user';
-//import Group from './group/group';
+import Group from './group';
 
-export { User, /*Group*/ };
+export { User, Group };
