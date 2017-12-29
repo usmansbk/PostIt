@@ -8,6 +8,7 @@ export default class UserController {
       if (user) {
         res.status(200).json({
           status: 'success',
+          message: 'Sign-In successful',
           data: user
         });
       } else {
@@ -18,9 +19,15 @@ export default class UserController {
         });
       }
     }).catch(error => {
+      const data = {
+        name: error.name,
+        severity: error.original.severity,
+        hint: error.original.hint
+      }
       res.status(500).json({
         status: 'error',
-        message: 'Database error'
+        message: 'Database error',
+        data
       });
     });
   }
@@ -29,11 +36,13 @@ export default class UserController {
     User.create(req.body).then(user => {
       res.status(201).json({
         status: 'success',
+        message: 'New user created',
         data: user
       });
     }).catch(error => {
       res.status(400).json({
         status: 'fail',
+        message: 'Fail to create new user',
         data: error
       });
     });
