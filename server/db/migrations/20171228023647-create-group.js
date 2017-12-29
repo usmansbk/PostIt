@@ -7,12 +7,10 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     name: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
     },
     purpose: {
-      type: Sequelize.STRING
-    },
-    invites: {
       type: Sequelize.STRING
     },
     createdAt: {
@@ -22,7 +20,8 @@ module.exports = {
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATE
-    }
+    },
+
   }),
   down: queryInterface => queryInterface.dropTable('Groups')
 };

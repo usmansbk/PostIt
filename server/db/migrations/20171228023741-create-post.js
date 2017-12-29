@@ -7,6 +7,7 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     message: {
+      allowNull: false,
       type: Sequelize.STRING
     },
     createdAt: {
