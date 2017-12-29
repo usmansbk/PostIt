@@ -19,15 +19,10 @@ export default class UserController {
         });
       }
     }).catch(error => {
-      const data = {
-        name: error.name,
-        severity: error.original.severity,
-        hint: error.original.hint
-      }
       res.status(500).json({
         status: 'error',
         message: 'Database error',
-        data
+        data: error
       });
     });
   }
