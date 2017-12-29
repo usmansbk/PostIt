@@ -6,7 +6,8 @@
   "scripts": {
     "build": "sh scripts/babel.sh",
     "start": "node build/bin/www",
-    "test": "jasmine"
+    "start:dev": "nodemon build/bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
