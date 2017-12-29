@@ -1,8 +1,8 @@
 import express from 'express';
-import { Group } from '../../../controllers/api';
+import { GroupController } from '../../../controllers/api';
 
 const router = express.Router();
 
-router.post('/', Group.postMessage);
+router.post('/', GroupController.postMessage);
 
 export default router;

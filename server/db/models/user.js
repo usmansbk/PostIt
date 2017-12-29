@@ -27,9 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       unique: true,
-      validate: {
-        notNull: true,
-      },
       allowNull: false,
       set(val) {
         this.setDataValue('username', val);
@@ -43,8 +40,6 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         isEmail: true,
-        notNull: true,
-        len: [8, 16],
       },
       allowNull: false,
       set(val) {
