@@ -1,10 +1,17 @@
-import { User } from '../../../db/models';
+import { User, Sequelize } from '../../../db/models';
+
+const Op = Sequelize.Op;
 
 export default class UserController {
 
   static signin(req, res) {
-    const body = req.body;
-    User.findOne({ where: body }).then(user => {
+    const { username, password } = req.body;
+    User.findOne({
+      where: {
+        username,
+        password
+      }
+    }).then(user => {
       if (user) {
         res.status(200).json({
           status: 'success',

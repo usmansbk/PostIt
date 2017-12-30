@@ -74,22 +74,29 @@ export default class GroupController {
    */
   static addUsers(req, res) {
     const { guid } = req.params,
-      { invites } = req.body,
+      { invites, sender} = req.body,
       usersQueryList = Util.makeColumnList(invites, 'username');
 
-    User.findAll({
-      where: {
-        [Op.or]: usersQueryList
-      }
-    }).then(users => {
-      return Group.findById(guid).then(group => {
+    Group.findOne({
+      where: { id: guid },
+      include: [{
+        model: User,
+        as: 'Creator',
+        where: { username: sender },
+      }]
+    }).then(group => {
+      return User.findAll({
+        where: {
+          [Op.or]: usersQueryList
+        }
+      }).then(users => {
         return group.addMembers(users)
       });
-    }).then(addedUsers => {
+    }).then(result => {
       res.status(200).json({
         status: 'success',
-        message: 'Users added to group [idempotent action]',
-        data: addedUsers
+        message: 'Users added successfully',
+        data: result
       });
     }).catch(error => {
       res.status(400).json({
@@ -109,7 +116,11 @@ export default class GroupController {
       sequelize.transaction(function (t) {
         if (!user) throw new Error();
         return Group.create(req.body, { transaction: t }).then(group => {
-          return group.setCreator(user, { transaction: t });
+          return group.setCreator(user, { transaction: t }).then(group => {
+            return group.addMember(user, { transaction: t }).then( () => {
+              return group;
+            });
+          });
         });
       }).then(result => {
         res.status(201).json({
