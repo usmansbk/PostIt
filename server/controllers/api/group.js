@@ -1,4 +1,4 @@
-import { Group, User, Sequelize } from '../../../db/models';
+import { Group, User, Post, Sequelize, sequelize } from '../../../db/models';
 import { Util } from '../../helpers';
 
 const Op = Sequelize.Op;
@@ -9,21 +9,70 @@ export default class GroupController {
    * POST: /api/group/<group id>/message
    */
   static postMessage(req, res) {
-   const { message } = req.body;
-    res.send('postMessage');
+    const { message, username } = req.body,
+          { guid } = req.params;
+
+    Group.findOne({
+      where: { id: guid },
+      include: [{
+        model: User,
+        as: 'Members',
+        where: { username },
+      }]
+    }).then(group => {
+      if (!group) throw new Error();
+      return User.findOne({ where: { username } }).then(user => {
+        return sequelize.transaction(function (t) {
+          return Post.create({ message }, { transaction: t }).then( post => { 
+            return post.setAuthor(user, { transaction: t }).then( () => {
+              return group.addPost(post, { transaction: t }).then( (addedPost) => {
+                return post;
+              });
+            });
+          });
+        });
+      });
+    }).then(result => {
+      res.status(201).json({
+        status: 'success',
+        message: 'Posted message successfully',
+        data: result
+      });
+    }).catch(error => {
+      res.status(400).json({
+        status: 'fail',
+        message: 'Failed to post message',
+        data: error
+      });
+    });
   }
 
   /**
    * GET: /api/group/<group id>/messages
    */ 
   static retrieveMessages(req, res) {
-    res.send('retrieveMessages');
+    const { guid } = req.params;
+    Group.findById(guid).then(group => {
+      return group.getPosts();
+    }).then(posts => {
+      res.status(200).json({
+        status: 'success',
+        message: 'Retrieved messages successfully',
+        data: posts 
+      });
+    }).catch(error => {
+      res.status(400).json({
+        status: 'fail',
+        message: 'Failed to retrieve messages',
+        data: error
+      });
+    });
   }
 
   /**
    * POST: /api/group/<group id>/user
    */
-  static addUser(req, res) {
+  static addUsers(req, res) {
     const { guid } = req.params,
       { invites } = req.body,
       usersQueryList = Util.makeColumnList(invites, 'username');
@@ -33,15 +82,15 @@ export default class GroupController {
         [Op.or]: usersQueryList
       }
     }).then(users => {
-      Group.findById(guid).then(group => {
-        group.addUsers(users).then(addedUsers => {
-          res.status(200).json({
-            status: 'success',
-            message: 'Users added to group',
-            data: addedUsers
-          });
-        });
-      })
+      return Group.findById(guid).then(group => {
+        return group.addMembers(users)
+      });
+    }).then(addedUsers => {
+      res.status(200).json({
+        status: 'success',
+        message: 'Users added to group [idempotent action]',
+        data: addedUsers
+      });
     }).catch(error => {
       res.status(400).json({
         status: 'fail',
@@ -55,17 +104,25 @@ export default class GroupController {
    * POST: /api/group
    */
   static createGroup(req, res) {
-    Group.create(req.body).then(group => {
-      res.status(201).json({
-        status: 'success',
-        message: 'Created new group',
-        data: group
-      });
-    }).catch(error => {
-      res.status(400).json({
-        status: 'fail',
-        message: 'Failed to create group',
-        data: error 
+    const { username } = req.body;
+    User.findOne({ where: { username } }).then(user => {
+      sequelize.transaction(function (t) {
+        if (!user) throw new Error();
+        return Group.create(req.body, { transaction: t }).then(group => {
+          return group.setCreator(user, { transaction: t });
+        });
+      }).then(result => {
+        res.status(201).json({
+          status: 'success',
+          message: 'Created new group',
+          data: result
+        }); 
+      }).catch(error => {
+        res.status(400).json({
+          status: 'fail',
+          message: 'Failed to create group',
+          data: error
+        });
       });
     });
   }
