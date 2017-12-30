@@ -31,11 +31,13 @@ module.exports = (sequelize, DataTypes) => {
         return this.getDataValue('invites');
       }
     }
-  }, {
-    classMethods: {
-      associate: function associate(models) {
-      }
-    }
   });
+
+  Group.associate = function associate(models) {
+    const { User, Post } = models;
+    Group.hasMany(Post, { as: 'Posts', foreignKey: 'groupId' });
+    Group.belongsTo(User, { as: 'creator' });
+    Group.belongsToMany(User, { through: 'UserGroup' });
+  }
   return Group;
 };

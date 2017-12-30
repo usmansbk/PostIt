@@ -13,11 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         return this.getDataValue('message');
       }
     }
-  }, {
-    classMethods: {
-      associate: function associate(models) {
-      }
-    }
   });
+  Post.associate = function associate(models) {
+    const { User, Group } = models;
+    Post.belongsTo(User, { as: 'author' });
+  }
   return Post;
 };

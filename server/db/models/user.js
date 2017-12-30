@@ -81,18 +81,17 @@ module.exports = (sequelize, DataTypes) => {
         return this.getDataValue('gender');
       }
     }
-  }, {
-    classMethods: {
-      associate: function associate(models) {
-        const { Group } = models;
-        User.belongsToMany(Group, { through: 'UserGroup' });
-      }
-    },
-    getterMethods: {
-      fullName() {
-        return `${this.firstname} ${this.surname}`;
-      }
-    }
   });
+
+  User.associate = function associate(models) {
+    const { Group } = models;
+    User.belongsToMany(Group, { through: 'UserGroup' });
+  }
+  
+  User.getterMethods = {
+    fullName() {
+      return `${this.firstname} ${this.surname}`;
+    }
+  }
   return User;
 };
