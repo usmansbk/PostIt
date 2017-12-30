@@ -27,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
   Group.associate = function associate(models) {
     const { User, Post } = models;
     Group.hasMany(Post, { as: 'Posts', foreignKey: 'groupId' });
-    Group.belongsTo(User, { as: 'creator' });
-    Group.belongsToMany(User, { through: 'UserGroup' });
+    Group.belongsTo(User, { as: 'Creator' });
+    Group.belongsToMany(User, { as: 'Members', through: 'UserGroup' });
   }
   return Group;
 };
