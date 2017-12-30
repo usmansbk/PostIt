@@ -51,8 +51,17 @@ export default class GroupController {
    * GET: /api/group/<group id>/messages
    */ 
   static retrieveMessages(req, res) {
-    const { guid } = req.params;
-    Group.findById(guid).then(group => {
+    const { guid } = req.params,
+      { username } = req.body;
+
+    Group.findOne({
+      where: { id: guid },
+      include: [{
+        model: User,
+        as: 'Members',
+        where: { username },
+      }]
+    }).then(group => {
       return group.getPosts();
     }).then(posts => {
       res.status(200).json({
