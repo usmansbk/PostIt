@@ -123,7 +123,7 @@ export default class GroupController {
     const { username } = req.body;
     User.findOne({ where: { username } }).then(user => {
       sequelize.transaction(function (t) {
-        if (!user) throw new Error();
+        if (!user) throw new Error('401');
         return Group.create(req.body, { transaction: t }).then(group => {
           return group.setCreator(user, { transaction: t }).then(group => {
             return group.addMember(user, { transaction: t }).then( () => {
@@ -138,7 +138,11 @@ export default class GroupController {
           data: result
         }); 
       }).catch(error => {
-        res.status(400).json({
+        let status = 400; 
+        if (error.message == '401') {
+           status = 401;
+        } 
+        res.status(status).json({
           status: 'fail',
           message: 'Failed to create group',
           data: error
