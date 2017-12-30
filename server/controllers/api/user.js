@@ -12,23 +12,16 @@ export default class UserController {
         password
       }
     }).then(user => {
-      if (user) {
-        res.status(200).json({
-          status: 'success',
-          message: 'Sign-In successful',
-          data: user
-        });
-      } else {
-        res.status(400).json({
-          status: 'fail',
-          message: 'Invalid username or password',
-          data: user
-        });
-      }
+      if (!user) throw new Error();
+      res.status(200).json({
+        status: 'success',
+        message: 'Sign-In successful',
+        data: user
+      });
     }).catch(error => {
-      res.status(500).json({
+      res.status(400).json({
         status: 'error',
-        message: 'Database error',
+        message: 'Invalid username/password',
         data: error
       });
     });
