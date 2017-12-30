@@ -3,7 +3,7 @@ const request = require('request'),
 
 describe('POST:/api/user/signup', () => {
   describe('API route for users to create accounts', () => {
-    it('Should return status code 201', (done) => {
+    it('should return status code 201', (done) => {
       const options = {
         username: 'kurosaki',
         password: '12345678',
@@ -17,7 +17,7 @@ describe('POST:/api/user/signup', () => {
   });
 
   describe('password length not at least 8 characters long', () => {
-    it('Should not return status code 201', (done) => {
+    it('should not return status code 201', (done) => {
       const options = {
         username: 'uzumaki',
         password: '1234567',
@@ -31,7 +31,7 @@ describe('POST:/api/user/signup', () => {
   });
 
   describe('Not using a unique username', () => {
-    it('Should not return status code 201', (done) => {
+    it('should not return status code 201', (done) => {
       const options = {
         username: 'kurosaki',
         password: '123456789',
@@ -45,7 +45,7 @@ describe('POST:/api/user/signup', () => {
   });
 
   describe('Not using a unique email', () => {
-    it('Should not return status code 201', (done) => {
+    it('should not return status code 201', (done) => {
       const options = {
         username: 'kurosaki3',
         password: 'bankai3',
@@ -59,7 +59,7 @@ describe('POST:/api/user/signup', () => {
   });
 
   describe('Not using a unique password', () => {
-    it('Should return status code 201', (done) => {
+    it('should return status code 201', (done) => {
       const options = {
         username: 'kurosaki3',
         password: '12345678',
@@ -73,7 +73,7 @@ describe('POST:/api/user/signup', () => {
   });
 
   describe('Not passing in a password', () => {
-    it('Should return status code 400', (done) => {
+    it('should return status code 400', (done) => {
       const options = {
         username: 'kurosaki3',
         email: 'shinigami3@subtitute.com'
@@ -86,7 +86,7 @@ describe('POST:/api/user/signup', () => {
   });
 
   describe('Not passing in a username', () => {
-    it('Should return status code 400', (done) => {
+    it('should return status code 400', (done) => {
       const options = {
         password: 'kurosaki3',
         email: 'shinigami3@subtitute.com'
@@ -99,7 +99,7 @@ describe('POST:/api/user/signup', () => {
   });
 
   describe('Not passing in an email', () => {
-    it('Should return status code 400', (done) => {
+    it('should return status code 400', (done) => {
       const options = {
         username: 'ichigo',
         password: 'kurosaki3',
@@ -111,8 +111,8 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('firstname must only contain alphabets', () => {
-    it('Should return status code 400', (done) => {
+  describe('Firstname must only contain alphabets', () => {
+    it('should return status code 400', (done) => {
       const options = {
         firstname: 'rukia2',
         username: 'rukia2',
@@ -126,8 +126,8 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('surname must only contain alphabets', () => {
-    it('Should return status code 400', (done) => {
+  describe('Surname must only contain alphabets', () => {
+    it('should return status code 400', (done) => {
       const options = {
         firstname: 'rukia',
         surname: 'byakuyaku2',
@@ -142,8 +142,8 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('surname must only contain alphabets', () => {
-    it('Should return status code 201', (done) => {
+  describe('Surname must only contain alphabets', () => {
+    it('should return status code 201', (done) => {
       const options = {
         firstname: 'rukia',
         surname: 'byakuyaku',
@@ -159,8 +159,8 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('gender must be male or female only', () => {
-    it('Should return status code 400', (done) => {
+  describe('Gender must be male or female only', () => {
+    it('should return status code 400', (done) => {
       const options = {
         firstname: 'Monkey',
         surname: 'Luffy',
@@ -176,8 +176,8 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('gender must be male or female only', () => {
-    it('Should return status code 400', (done) => {
+  describe('Gender must be male or female only', () => {
+    it('should return status code 400', (done) => {
       const options = {
         firstname: 'Natsu',
         surname: 'Dragneel',
