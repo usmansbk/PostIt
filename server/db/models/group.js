@@ -22,15 +22,6 @@ module.exports = (sequelize, DataTypes) => {
         return this.getDataValue('purpose');
       }
     },
-    invites: {
-      type: DataTypes.STRING,
-      set(val) {
-        this.setDataValue('invites', val);
-      },
-      get() {
-        return this.getDataValue('invites');
-      }
-    }
   });
 
   Group.associate = function associate(models) {
