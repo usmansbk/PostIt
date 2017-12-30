@@ -27,23 +27,21 @@ export default class GroupController {
     const { guid } = req.params,
       { invites } = req.body,
       usersQueryList = Util.makeColumnList(invites, 'username');
-    let userModels;
+
     User.findAll({
       where: {
         [Op.or]: usersQueryList
       }
     }).then(users => {
-      userModels = users;
-    }).catch(error => {
-      res.status(400).json({
-        status: 'fail',
-        message: 'Unable to get users',
-        data: error
-      });
-    });
-
-    Group.findById(guid).then(group => {
-      group.addUsers(userModels);
+      Group.findById(guid).then(group => {
+        group.addUsers(users).then(addedUsers => {
+          res.status(200).json({
+            status: 'success',
+            message: 'Users added to group',
+            data: addedUsers
+          });
+        });
+      })
     }).catch(error => {
       res.status(400).json({
         status: 'fail',
