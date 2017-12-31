@@ -1,19 +1,19 @@
-import { app, log } from '../server';
+import app from '../server';
 import { sequelize } from '../../db/models';
 
 const port = process.env.PORT || 8888;
 
 app.listen(port, () => {
-  log.info(`Server started at port ${port}`);
+  console.log(`Server started at port ${port}`);
   sequelize
     .authenticate()
     .then(() => {
-      log.info('Connection to database has been established successfully.');
+      console.log('Connection to database has been established successfully.');
       sequelize.sync({force: true}).then(() => {
-        log.info('Sync all models successfully.');
+        console.log('Sync all models successfully.');
       });
     })
     .catch(err => {
-      log.fatal('Unable to connect to the database:', err);
+      console.log('Unable to connect to the database:', err);
     });  
 });
