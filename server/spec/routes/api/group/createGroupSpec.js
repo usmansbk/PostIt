@@ -9,6 +9,15 @@ describe('POST:/api/group', () => {
 
   describe('Submitting a form with', () => {
 
+    describe('GET method', () => {
+      it('should return status code 405', (done) => {
+        request.get(url, (err, res, body) => {
+          expect(res.statusCode).toBe(405);
+          done();
+        });
+      });
+    });
+
     describe('unregistered "username"', () => {
       it('should return status code 401', (done) => {
         request.post({ url, form: { username: unregistered } }, (err, res, body) => {

@@ -8,7 +8,7 @@ const request = require('request'),
 describe('GET:/api/group/<group id>/messages', () => {
   describe('API route that allows a logged in user retrieve messages that have been posted to groups he/she belongs to.', () => {
 
-    decribe('Unregistered user', () => {
+    describe('Unregistered user', () => {
       it('should return 401', (done) => {
         const url = `${baseUrl}${memberGroup}${endPoint}`;
         request.get(url, (err, res, body) => {
