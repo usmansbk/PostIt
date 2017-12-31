@@ -1,3 +1,4 @@
 import Route from './route';
+import Validate from './validate';
 
-export { Route };
+export { Route, Validate };
