@@ -1,4 +1,5 @@
 import { User, Sequelize } from '../../../db/models';
+import { Route } from '../../helpers';
 
 const Op = Sequelize.Op;
 
@@ -12,15 +13,17 @@ export default class UserController {
         password
       }
     }).then(user => {
-      if (!user) throw new Error();
-      res.status(200).json({
-        status: 'success',
+      if (!user) throw new Error('401');
+      Route.response({
+        res,
+        statusCode: 200,
         message: 'Sign-In successful',
         data: user
       });
     }).catch(error => {
-      res.status(400).json({
-        status: 'error',
+      Route.response({
+        res,
+        statusCode: 400,
         message: 'Invalid username/password',
         data: error
       });
@@ -29,14 +32,16 @@ export default class UserController {
 
   static signup(req, res) {
     User.create(req.body).then(user => {
-      res.status(201).json({
-        status: 'success',
+      Route.response({
+        res,
+        statusCode: 201,
         message: 'Created new user',
         data: user
       });
     }).catch(error => {
-      res.status(400).json({
-        status: 'fail',
+      Route.response({
+        res,
+        statusCode: 400,
         message: 'Failed to create new user',
         data: error
       });
