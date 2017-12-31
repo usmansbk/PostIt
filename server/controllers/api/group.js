@@ -1,5 +1,5 @@
 import { Group, User, Post, Sequelize, sequelize } from '../../../db/models';
-import { Util } from '../../helpers';
+import { Util, Route } from '../../helpers';
 
 const Op = Sequelize.Op;
 
@@ -20,7 +20,7 @@ export default class GroupController {
         where: { username },
       }]
     }).then(group => {
-      if (!group) throw new Error();
+      if (!group) throw new Error('401');
       return User.findOne({ where: { username } }).then(user => {
         return sequelize.transaction(function (t) {
           return Post.create({ message }, { transaction: t }).then( post => { 
@@ -33,16 +33,18 @@ export default class GroupController {
         });
       });
     }).then(result => {
-      res.status(201).json({
-        status: 'success',
+      Route.response({
+        res,
+        statusCode: 201,
         message: 'Posted message successfully',
         data: result
       });
     }).catch(error => {
-      res.status(400).json({
-        status: 'fail',
-        message: 'Failed to post message',
-        data: error
+      Route.response({
+         res,
+         statusCode: 400,
+         message: 'Failed to post message',
+         data: error
       });
     });
   }
@@ -62,18 +64,21 @@ export default class GroupController {
         where: { username },
       }]
     }).then(group => {
+      if (!group) throw new Error('401');
       return group.getPosts();
     }).then(posts => {
-      res.status(200).json({
-        status: 'success',
+      Route.response({
+        res,
+        statusCode: 200,
         message: 'Retrieved messages successfully',
         data: posts 
       });
     }).catch(error => {
-      res.status(400).json({
-        status: 'fail',
-        message: 'Failed to retrieve messages',
-        data: error
+      Route.response({
+         res,
+         statusCode: 400,
+         message: 'Failed to retrieve messages',
+         data: error
       });
     });
   }
@@ -94,6 +99,7 @@ export default class GroupController {
         where: { username: sender },
       }]
     }).then(group => {
+      if (!group) throw new Error('401');
       return User.findAll({
         where: {
           [Op.or]: usersQueryList
@@ -102,15 +108,17 @@ export default class GroupController {
         return group.addMembers(users)
       });
     }).then(result => {
-      res.status(200).json({
-        status: 'success',
+      Route.response({
+        res,
+        statusCode: 200,
         message: 'Users added successfully',
         data: result
       });
     }).catch(error => {
-      res.status(400).json({
-        status: 'fail',
-        message: 'Failed to add users',
+      Route.response({
+        res,
+        statusCode: 400,
+        message: 'Failed to add add users to group',
         data: error
       });
     });
@@ -132,20 +140,18 @@ export default class GroupController {
           });
         });
       }).then(result => {
-        res.status(201).json({
-          status: 'success',
+        Route.response({
+          res,
+          statusCode: 201,
           message: 'Created new group',
           data: result
         }); 
       }).catch(error => {
-        let status = 400; 
-        if (error.message == '401') {
-           status = 401;
-        } 
-        res.status(status).json({
-          status: 'fail',
-          message: 'Failed to create group',
-          data: error
+        Route.response({
+         res,
+         statusCode: 400,
+         message: 'Failed to create new group',
+         data: error
         });
       });
     });
