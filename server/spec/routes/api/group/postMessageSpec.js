@@ -7,7 +7,8 @@ describe('POST:/api/group/<group id>/message', () => {
 
     describe('Making a GET request to route', () => {
       it('should return status code 405', (done) => {
-        request.get(`{baseUrl}1${endPoint}`, (err, res, body) => {
+        const url = `${baseUrl}groupId${endPoint}`;
+        request(url, (err, res, body) => {
           expect(res.statusCode).toBe(405);
           done();
         });
@@ -32,4 +33,5 @@ describe('POST:/api/group/<group id>/message', () => {
     });
 
   });
+
 });
