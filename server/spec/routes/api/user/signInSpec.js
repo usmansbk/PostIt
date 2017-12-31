@@ -28,12 +28,12 @@ describe('POST:/api/user/signin', () => {
   });
 
   describe('unregistered username and password', () => {
-    it('should not return status code 201', (done) => {
+    it('should not return status code 200', (done) => {
       request.post({
         url,
         form: { username: 'madara', password: '12345678' }
       }, (err, res, body) => {
-        expect(res.statusCode).not.toBe(201);
+        expect(res.statusCode).not.toBe(200);
         done();
       });
     });
