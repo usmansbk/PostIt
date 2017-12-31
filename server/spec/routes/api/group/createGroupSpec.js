@@ -1,37 +1,29 @@
 const request = require('request'),
-  url = 'http://localhost:8888/api/group';
-
+  url = 'http://localhost:8888/api/group',
+  username = 'naruto',
+  unregistered = 'zetsu',
+  password = '12345678'; 
 
 describe('POST:/api/group', () => {
-  describe('An API route that allows users create broadcast groups', () => {
-    describe('Unregistered user', () => {
+  describe('API route that allows users create broadcast groups.', () => {
+
+  describe('Submitting a form with', () => {
+
+    describe('unregistered "username"', () => {
       it('should return status code 401', (done) => {
-        request.post({ url, form: { username: 'zetsu' } }, (err, res, body) => {
+        request.post({ url, form: { username: unregistered } }, (err, res, body) => {
           expect(res.statusCode).toBe(401);
           done();
         });
       }); 
     });
 
-    describe('Register user', () => {
-      it('should signup a new user', (done) => {
-        request.post({
-          url: 'http://localhost:8888/api/user/signup',
-          form: {
-            username: 'zetsu',
-            password: '12345678',
-            email: 'blackzetsu@naruto.com'
-          }
-        }, (err, res, body) => done());
-      });
-    });
-
-    describe('Registered user', () => {
+    describe('registered "username", and group "name" field', () => {
       it('should return status code 201', (done) => {
         request.post({
           url,
           form: {
-            username: 'zetsu',
+            username,
             name: 'PlantsPlan',
             purpose: 'how to kill zombies',
           }
@@ -42,27 +34,12 @@ describe('POST:/api/group', () => {
       }); 
     });
 
-    describe('Not passing a username', () => {
-      it('should return status code 401', (done) => {
-        request.post({
-          url,
-          form: {
-            name: 'PlantsPlan',
-            purpose: 'how to kill zombies',
-          }
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(401);
-          done();
-        });
-      }); 
-    });
-
-    describe('Not passing a name', () => {
+    describe('null "username" field', () => {
       it('should return status code 400', (done) => {
         request.post({
           url,
           form: {
-            username: 'zetsu',
+            name: 'PlantsPlan',
             purpose: 'how to kill zombies',
           }
         }, (err, res, body) => {
@@ -72,12 +49,27 @@ describe('POST:/api/group', () => {
       }); 
     });
 
-    describe('Passing used name', () => {
+    describe('group "name" field', () => {
+      it('should return status code 400', (done) => {
+        request.post({
+          url,
+          form: {
+            username,
+            purpose: 'how to kill zombies',
+          }
+        }, (err, res, body) => {
+          expect(res.statusCode).toBe(400);
+          done();
+        });
+      }); 
+    });
+
+    describe('used group "name" field', () => {
       it('should return status code 201', (done) => {
         request.post({
           url,
           form: {
-            username: 'zetsu',
+            username,
             name: 'PlantsPlan',
             purpose: 'how to kill zombies',
           }
@@ -88,12 +80,12 @@ describe('POST:/api/group', () => {
       }); 
     });
 
-    describe('Not passing purpose', () => {
+    describe('null group "purpose" field', () => {
       it('should return status code 201', (done) => {
         request.post({
           url,
           form: {
-            username: 'zetsu',
+            username,
             name: 'PlantsPlan-B',
           }
         }, (err, res, body) => {
@@ -103,12 +95,12 @@ describe('POST:/api/group', () => {
       }); 
     });
 
-    describe('Passing an empty string name', () => {
+    describe('empty string group "name"', () => {
       it('should return status code 400', (done) => {
         request.post({
           url,
           form: {
-            username: 'zetsu',
+            username,
             name: '',
           }
         }, (err, res, body) => {
@@ -118,16 +110,17 @@ describe('POST:/api/group', () => {
       }); 
     });;
 
-    describe('Not passing any form data', () => {
-      it('should not return status code 201', (done) => {
+    describe('empty form data', () => {
+      it('should return status code 400', (done) => {
         request.post({
           url
         }, (err, res, body) => {
-          expect(res.statusCode).not.toBe(400);
+          expect(res.statusCode).toBe(400);
           done();
         });
       }); 
     });
 
+  });
   });
 });
