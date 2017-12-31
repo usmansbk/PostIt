@@ -24,7 +24,7 @@ export default class UserController {
       Route.response({
         res,
         statusCode: 400,
-        message: 'Invalid username/password',
+        errorMessage: 'Invalid username/password',
         data: error
       });
     });
