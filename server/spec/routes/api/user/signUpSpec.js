@@ -30,6 +30,21 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
+  describe('Empty string username', () => {
+    it('should not return status code 201', (done) => {
+      const options = {
+        username: '',
+        password: '1234567',
+        email: 'shinobi@hokage.com'
+      };
+      request.post({ url, form: options }, (err, res, body) => {
+        expect(res.statusCode).not.toBe(201);
+        done();
+      });
+    });
+  });
+
+
   describe('Not using a unique username', () => {
     it('should not return status code 201', (done) => {
       const options = {
