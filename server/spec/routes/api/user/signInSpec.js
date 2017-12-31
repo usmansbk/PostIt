@@ -6,22 +6,19 @@ describe('POST:/api/user/signin', () => {
 
   describe('Submission of form with', () => {
   
-    describe('no email', () => {
+    describe('no username', () => {
     });
 
     describe('no password', () => {
     });
 
-    describe('email containing character not a letter or @._', () => {
+    describe('non alphanumeric character (excluding underscore) in username'), () => {
     });
 
-    describe('non email-format(a_b@c.efg) email', () => {
+    describe('unregistered username and password', () => {
     });
 
-    describe('unregistered email and password', () => {
-    });
-
-    describe('registered email and password', () => {
+    describe('registered username and password', () => {
     });
 
   });
