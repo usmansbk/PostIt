@@ -2,7 +2,10 @@ const request = require('request'),
   url = 'http://localhost:8888/api/user/signin';
 
 describe('POST:/api/user/signin', () => {
-  describe('API route for users to login to the application', () => {
+  describe('API route for users to login to the application.', () => {
+  describe('Submitting a form with', () => {
+
+  describe('registered username and password', () => {
     it('should return status code 200', (done) => {
       const options = {
         username: 'hashirama',
@@ -24,45 +27,57 @@ describe('POST:/api/user/signin', () => {
     });
   });
 
-  describe('Passing an unregistered username', () => {
-    it('should not return status code 200', (done) => {
+  describe('unregistered username and password', () => {
+    it('should not return status code 201', (done) => {
       request.post({
         url,
         form: { username: 'madara', password: '12345678' }
       }, (err, res, body) => {
-        expect(res.statusCode).not.toBe(200);
+        expect(res.statusCode).not.toBe(201);
         done();
       });
     });
   });
 
-  describe('Passing an invalid password', () => {
-    it('should not return status code 200', (done) => {
+  describe('password less than 8 characters', () => {
+    it('should return status code 400', (done) => {
       request.post({
         url,
         form: { username: 'hashirama', password: '1234567' }
       }, (err, res, body) => {
-        expect(res.statusCode).not.toBe(200);
+        expect(res.statusCode).toBe(400);
         done();
       });
     });
   });
 
-  describe('Passing an invalid password', () => {
-    it('should not return status code 200', (done) => {
+  describe('empty string username', () => {
+    it('should return status code 400', (done) => {
+      request.post({
+        url,
+        form: { username: ' ', password: '12345678' }
+      }, (err, res, body) => {
+        expect(res.statusCode).toBe(400);
+        done();
+      });
+    });
+  });
+
+
+
+  describe('empty string password', () => {
+    it('should return status code 400', (done) => {
       request.post({
         url,
         form: { username: 'hashirama', password: '' }
       }, (err, res, body) => {
-        expect(res.statusCode).not.toBe(200);
+        expect(res.statusCode).toBe(400);
         done();
       });
     });
   });
 
-
-
-  describe('Not passing a username', () => {
+  describe('null username', () => {
     it('should return status code 400', (done) => {
       request.post({
         url,
@@ -74,7 +89,7 @@ describe('POST:/api/user/signin', () => {
     });
   });
 
-  describe('Not passing a password', () => {
+  describe('null password', () => {
     it('should return status code 400', (done) => {
       request.post({
         url,
@@ -84,5 +99,8 @@ describe('POST:/api/user/signin', () => {
         done();
       });
     });
+  });
+
+  });
   });
 });

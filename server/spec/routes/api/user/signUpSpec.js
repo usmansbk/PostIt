@@ -2,7 +2,11 @@ const request = require('request'),
   url = 'http://localhost:8888/api/user/signup';
 
 describe('POST:/api/user/signup', () => {
-  describe('API route for users to create accounts', () => {
+
+  describe('API route for users to create accounts.', () => {
+  describe('Submitting a form with', () => {
+
+  describe('valid username, email, and password', () => {
     it('should return status code 201', (done) => {
       const options = {
         username: 'kurosaki',
@@ -16,69 +20,69 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('password length not at least 8 characters long', () => {
-    it('should not return status code 201', (done) => {
+  describe('password less than 8 characters', () => {
+    it('should return status code 400', (done) => {
       const options = {
         username: 'uzumaki',
         password: '1234567',
         email: 'shinobi@hokage.com'
       };
       request.post({ url, form: options }, (err, res, body) => {
-        expect(res.statusCode).not.toBe(201);
+        expect(res.statusCode).toBe(400);
         done();
       });
     });
   });
 
-  describe('Empty string username', () => {
-    it('should not return status code 201', (done) => {
+  describe('empty string username', () => {
+    it('should return status code 400', (done) => {
       const options = {
         username: '',
         password: '1234567',
         email: 'shinobi@hokage.com'
       };
       request.post({ url, form: options }, (err, res, body) => {
-        expect(res.statusCode).not.toBe(201);
+        expect(res.statusCode).toBe(400);
         done();
       });
     });
   });
 
 
-  describe('Not using a unique username', () => {
-    it('should not return status code 201', (done) => {
+  describe('unavailable username', () => {
+    it('should return status code 400', (done) => {
       const options = {
         username: 'kurosaki',
-        password: '123456789',
+        password: '12345678',
         email: 'shinigami2@subtitute.com'
       };
       request.post({ url, form: options }, (err, res, body) => {
-        expect(res.statusCode).not.toEqual(201);
+        expect(res.statusCode).toEqual(400);
         done();
       });
     });
   });
 
-  describe('Not using a unique email', () => {
+  describe('unavailable email', () => {
     it('should not return status code 201', (done) => {
       const options = {
-        username: 'kurosaki3',
-        password: 'bankai3',
+        username: 'kuchiki',
+        password: '12345678',
         email: 'shinigami@subtitute.com'
       };
       request.post({ url, form: options }, (err, res, body) => {
-        expect(res.statusCode).not.toEqual(201);
+        expect(res.statusCode).toEqual(400);
         done();
       });
     });
   });
 
-  describe('Not using a unique password', () => {
+  describe('duplicate password in database', () => {
     it('should return status code 201', (done) => {
       const options = {
-        username: 'kurosaki3',
+        username: 'commander',
         password: '12345678',
-        email: 'shinigami3@subtitute.com'
+        email: 'shinigami@commander.com'
       };
       request.post({ url, form: options }, (err, res, body) => {
         expect(res.statusCode).toEqual(201);
@@ -87,11 +91,11 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('Not passing in a password', () => {
+  describe('null password', () => {
     it('should return status code 400', (done) => {
       const options = {
-        username: 'kurosaki3',
-        email: 'shinigami3@subtitute.com'
+        username: 'zaraki',
+        email: 'shinigami@captain.com'
       };
       request.post({ url, form: options }, (err, res, body) => {
         expect(res.statusCode).toEqual(400);
@@ -100,7 +104,7 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('Not passing in a username', () => {
+  describe('null username', () => {
     it('should return status code 400', (done) => {
       const options = {
         password: 'kurosaki3',
@@ -113,11 +117,11 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('Not passing in an email', () => {
+  describe('null email', () => {
     it('should return status code 400', (done) => {
       const options = {
         username: 'ichigo',
-        password: 'kurosaki3',
+        password: '12345678',
       };
       request.post({ url, form: options }, (err, res, body) => {
         expect(res.statusCode).toEqual(400);
@@ -126,12 +130,12 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('Firstname must only contain alphabets', () => {
+  describe('"firstname" field containing non alphabets', () => {
     it('should return status code 400', (done) => {
       const options = {
         firstname: 'rukia2',
-        username: 'rukia2',
-        password: 'kurosaki3',
+        username: 'rukia',
+        password: '12345678',
         email: 'kunoichi@shinigami.com'
       };
       request.post({ url, form: options }, (err, res, body) => {
@@ -141,13 +145,13 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('Surname must only contain alphabets', () => {
+  describe('"surname" field containing non alphabets', () => {
     it('should return status code 400', (done) => {
       const options = {
         firstname: 'rukia',
         surname: 'byakuyaku2',
-        username: 'rukia2',
-        password: 'kurosaki3',
+        username: 'rukia',
+        password: '12345678',
         email: 'kunoichi@shinigami.com'
       };
       request.post({ url, form: options }, (err, res, body) => {
@@ -157,7 +161,7 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('Surname must only contain alphabets', () => {
+  describe('"surname" containing only alphabets', () => {
     it('should return status code 201', (done) => {
       const options = {
         firstname: 'rukia',
@@ -174,7 +178,7 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('Gender must be male or female only', () => {
+  describe('optional gender value not [male or female]', () => {
     it('should return status code 400', (done) => {
       const options = {
         firstname: 'Monkey',
@@ -191,7 +195,7 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
-  describe('Gender must be male or female only', () => {
+  describe('optional gender value [male or female] only', () => {
     it('should return status code 400', (done) => {
       const options = {
         firstname: 'Natsu',
@@ -208,4 +212,6 @@ describe('POST:/api/user/signup', () => {
     });
   });
 
+  });
+  });
 }); 
