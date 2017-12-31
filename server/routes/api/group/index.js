@@ -1,8 +1,10 @@
 import express from 'express';
 import { GroupController } from '../../../controllers/api';
-import { Validate } from '../../../middlewares';
+import { Validate, Route } from '../../../middlewares';
 
 const router = express.Router();
+
+router.use(Route.auth);
 
 router.post('/:guid/user', Validate.addUsers, GroupController.addUsers);
 router.post('/:guid/message', Validate.postMessage, GroupController.postMessage);
