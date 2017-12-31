@@ -1,5 +1,5 @@
-import { User, Sequelize } from '../../../db/models';
-import { Route } from '../../helpers';
+import { User, Sequelize } from '../../db/models';
+import { Route } from '../helpers';
 
 const Op = Sequelize.Op;
 
