@@ -1,11 +1,11 @@
 export default class Route {
   static response(obj) {
-    let { res, statusCode, message, data } = obj,
+    let { res, statusCode, errorMessage, message, data } = obj,
       status;
     
     if (+data.message === 401) {
       statusCode = 401;
-      message = 'User is unauthorized to perform action';
+      message = errorMessage;
     }
 
     if (statusCode < 300) {
