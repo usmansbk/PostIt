@@ -1,135 +1,49 @@
 const request = require('request'),
-  url = 'http://localhost:8888/api/group',
-  username = 'naruto',
-  unregistered = 'zetsu',
-  password = '12345678'; 
+  url = 'http://localhost:8888/api/group';
 
 describe('POST:/api/group', () => {
   describe('API route that allows users create broadcast groups.', () => {
 
-  describe('Submitting a form with', () => {
-
-    describe('GET method', () => {
-      it('should return status code 405', (done) => {
+    describe('Making a GET request to route', () => {
+      it('should return a status code of 405', (done) => {
         request.get(url, (err, res, body) => {
           expect(res.statusCode).toBe(405);
           done();
         });
       });
     });
+ 
+    describe('Unauthenticated access to route', () => {
 
-    describe('unregistered "username"', () => {
-      it('should return status code 401', (done) => {
-        request.post({ url, form: { username: unregistered } }, (err, res, body) => {
-          expect(res.statusCode).toBe(401);
-          done();
-        });
-      }); 
     });
 
-    describe('registered "username", and group "name" field', () => {
-      it('should return status code 201', (done) => {
-        request.post({
-          url,
-          form: {
-            username,
-            name: 'PlantsPlan',
-            purpose: 'how to kill zombies',
-          }
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(201);
-          done();
-        });
-      }); 
+    decribe('Submitting a form with', () => {
+
+      describe('no name', () => {
+      });
+
+      describe('no purpose', () => {
+      });
+
+      describe('name longer than 22 characters', () => {
+      });
+
+      describe('purpose longer than  50 characters', () => {
+      });
+
+      describe('name less than 23 characters', () => {
+      });
+
+      describe('purpose less than 51 characters', () => {
+      });
+
+      describe('name identical to another group', () => {
+      });
+
+      describe('purpose identical to another group', () => {
+      });
+
     });
 
-    describe('null "username" field', () => {
-      it('should return status code 400', (done) => {
-        request.post({
-          url,
-          form: {
-            name: 'PlantsPlan',
-            purpose: 'how to kill zombies',
-          }
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(400);
-          done();
-        });
-      }); 
-    });
-
-    describe('group "name" field', () => {
-      it('should return status code 400', (done) => {
-        request.post({
-          url,
-          form: {
-            username,
-            purpose: 'how to kill zombies',
-          }
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(400);
-          done();
-        });
-      }); 
-    });
-
-    describe('used group "name" field', () => {
-      it('should return status code 201', (done) => {
-        request.post({
-          url,
-          form: {
-            username,
-            name: 'PlantsPlan',
-            purpose: 'how to kill zombies',
-          }
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(201);
-          done();
-        });
-      }); 
-    });
-
-    describe('null group "purpose" field', () => {
-      it('should return status code 201', (done) => {
-        request.post({
-          url,
-          form: {
-            username,
-            name: 'PlantsPlan-B',
-          }
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(201);
-          done();
-        });
-      }); 
-    });
-
-    describe('empty string group "name"', () => {
-      it('should return status code 400', (done) => {
-        request.post({
-          url,
-          form: {
-            username,
-            name: '',
-          }
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(400);
-          done();
-        });
-      }); 
-    });;
-
-    describe('empty form data', () => {
-      it('should return status code 400', (done) => {
-        request.post({
-          url
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(400);
-          done();
-        });
-      }); 
-    });
-
-  });
   });
 });
