@@ -38,6 +38,9 @@ describe('POST:/api/group/<group id>/user', () => {
       describe('multiple registered and unregistered users invites field', () => {
       });
 
+      describe('invites to group not created by user', () => {
+      });
+
     });
 
   });
