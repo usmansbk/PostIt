@@ -17,7 +17,7 @@ describe('POST:/api/group', () => {
 
     });
 
-    decribe('Submitting a form with', () => {
+    decribe('Authenticated submission of form with', () => {
 
       describe('no name', () => {
       });
