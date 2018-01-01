@@ -10,10 +10,10 @@ app.listen(port, () => {
     .then(() => {
       console.log('Connection to database has been established successfully.');
       sequelize.sync({force: true}).then(() => {
-        console.log('Sync all models successfully.');
+        console.log('Synchronized models to database successfully.');
       });
     })
     .catch(err => {
-      console.log('Unable to connect to the database:', err);
+      console.log('Unable to establish database connection.', err);
     });  
 });
