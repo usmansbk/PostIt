@@ -54,6 +54,16 @@ describe('POST:/api/group/<group id>/message', () => {
             done();
           });
         });
+      });;
+
+      describe('message to a group user belong to', () => {
+        const url = `${baseUrl}/group/1/message`;
+        it('should return status code 401', (done) => {
+          request.post(url, { form: { message: 'Hello random group' } }, (err, res, body) => {
+            expect(res.statusCode).toBe(201);
+            done();
+          });
+        });
       });
     });
   });
