@@ -7,7 +7,7 @@ const callback = function callback() {
   response.statusCode = 200;
 };
 
-describe('The isAuthenticated function would grant access.', () => {
+describe('The isAuthenticated function grants authentication.', () => {
   describe('When request session property doesn\'t contains userId property', () => {
     it('should return a status code of 403', () => {
       request.session.userId = false;
