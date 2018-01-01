@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+        is: /^[a-zA-Z0-9_]+$/i
+      },
       set(val) {
         this.setDataValue('username', val);
       },
@@ -40,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         isEmail: true,
+        notEmpty: true
       },
       allowNull: false,
       set(val) {
@@ -53,7 +58,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [8, 32]
+        len: [8, 32],
+        notEmpty: true
       },
       set(val) {
         this.setDataValue('password', val);
