@@ -166,7 +166,7 @@ describe('POST:/api/user/signup', () => {
           const form = {
             username: 'keneki',
             email: '_tokyo@ghoul.com',
-            password: '12.3*45-abCDE?'
+            password: '12345678?'
           };
           request.post(url, { form }, (err, res, body) => {
             expect(res.statusCode).toBe(201);
@@ -180,7 +180,7 @@ describe('POST:/api/user/signup', () => {
           const form = {
             username: 'keneki',
             email: '_tokyo@ghoul.com',
-            password: '12.3*45-abCDE?'
+            password: '12345678?'
           };
           request.post(url, { form }, (err, res, body) => {
             expect(res.statusCode).toBe(400);
