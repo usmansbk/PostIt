@@ -1,5 +1,8 @@
-const request = require('request').defaults({ jar: true }),
-  url = 'http://localhost:8888/api/group',
+let request = require('request');
+  j = request.jar();
+  request = request.defaults({ jar: j });
+
+const url = 'http://localhost:8888/api/group',
   signUrl = 'http://localhost:8888/api/user/signin';
 
 describe('POST:/api/group', () => {
@@ -17,17 +20,27 @@ describe('POST:/api/group', () => {
     });
 
     describe('Authenticated submission of form with', () => {
-      describe('no name', () => {
-        it('should return status code 400', (done) => {
+      describe('sigined in user', () => {
+        it('should return status code 200', (done) => {
           const form = {
 	    username: 'keneki',
 	    password: '12345678?',
           };
           request.post(signUrl, { form }, (err, res, body) => {
-            request.post(url, { form }, (err, response, body) => {
-              expect(response.statusCode).toBe(400);
-              done();
-            });
+            expect(res.statusCode).toBe(200);
+            done();
+          });
+        });
+      });
+
+      describe('no name', () => {
+        it('should return status code 400', (done) => {
+          const form = {
+            purpose: 'How to live with humans'
+          };
+          request.post(url, { form }, (err, response, body) => {
+            expect(response.statusCode).toBe(400);
+            done();
           });
         });
       });
@@ -35,15 +48,11 @@ describe('POST:/api/group', () => {
       describe('no purpose', () => {
         it('should return status code 201', (done) => {
           const form = {
-	    username: 'keneki',
-	    password: '12345678?',
             name: 'Tokyo Ghoul S1',
           };
-          request.post(signUrl, { form }, (err, res, body) => {
-            request.post(url, { form }, (err, response, body) => {
-              expect(response.statusCode).toBe(201);
-              done();
-            });
+          request.post(url, { form }, (err, response, body) => {
+            expect(response.statusCode).toBe(201);
+            done();
           });
         });
       });
@@ -51,16 +60,12 @@ describe('POST:/api/group', () => {
       describe('name longer than 22 characters', () => {
         it('should return status code 400', (done) => {
           const form = {
-	    username: 'keneki',
-	    password: '12345678?',
             name: '1111111111111111111111122',
             purpose: 'How to live with humans'
           };
-          request.post(signUrl, { form }, (err, res, body) => {
-            request.post(url, { form }, (err, response, body) => {
-              expect(response.statusCode).toBe(400);
-              done();
-            });
+          request.post(url, { form }, (err, response, body) => {
+            expect(response.statusCode).toBe(400);
+            done();
           });
         });
       });
@@ -68,16 +73,12 @@ describe('POST:/api/group', () => {
       describe('purpose longer than  50 characters', () => {
         it('should return status code 400', (done) => {
           const form = {
-	    username: 'keneki',
-	    password: '12345678?',
             name: 'Tokyo Ghoul',
             purpose: '11111111111111111111111111111111111111111111111111150'
           };
-          request.post(signUrl, { form }, (err, res, body) => {
-            request.post(url, { form }, (err, response, body) => {
-              expect(response.statusCode).toBe(400);
-              done();
-            });
+          request.post(url, { form }, (err, response, body) => {
+            expect(response.statusCode).toBe(400);
+            done();
           });
         });
       });
@@ -85,16 +86,12 @@ describe('POST:/api/group', () => {
       describe('name less than 23 characters and purpose not greater than 50 characters', () => {
         it('should return status code 201', (done) => {
           const form = {
-	    username: 'keneki',
-	    password: '12345678?',
             name: 'Tokyo Ghoul',
             purpose: 'How to live with humans'
           };
-          request.post(signUrl, { form }, (err, res, body) => {
-            request.post(url, { form }, (err, response, body) => {
-              expect(response.statusCode).toBe(201);
-              done();
-            });
+          request.post(url, { form }, (err, response, body) => {
+            expect(response.statusCode).toBe(201);
+            done();
           });
         });
       });
@@ -102,16 +99,12 @@ describe('POST:/api/group', () => {
       describe('name identical to another group', () => {
         it('should return status code 201', (done) => {
           const form = {
-	    username: 'keneki',
-	    password: '12345678?',
             name: 'Tokyo Ghoul',
             purpose: 'How to eat humans'
           };
-          request.post(signUrl, { form }, (err, res, body) => {
-            request.post(url, { form }, (err, response, body) => {
-              expect(response.statusCode).toBe(201);
-              done();
-            });
+          request.post(url, { form }, (err, response, body) => {
+            expect(response.statusCode).toBe(201);
+            done();
           });
         });
       });
@@ -119,16 +112,12 @@ describe('POST:/api/group', () => {
       describe('purpose identical to another group', () => {
         it('should return status code 201', (done) => {
           const form = {
-	    username: 'keneki',
-	    password: '12345678?',
             name: 'Attack on Titans',
             purpose: 'How to eat humans'
           };
-          request.post(signUrl, { form }, (err, res, body) => {
-            request.post(url, { form }, (err, response, body) => {
-              expect(response.statusCode).toBe(201);
-              done();
-            });
+          request.post(url, { form }, (err, response, body) => {
+            expect(response.statusCode).toBe(201);
+            done();
           });
         });
       });

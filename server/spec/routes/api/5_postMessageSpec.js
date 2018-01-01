@@ -1,5 +1,8 @@
-const request = require('request'),
-  baseUrl = 'http://localhost:8888/api/group/',
+let request = require('request');
+  j = request.jar();
+  request = request.defaults({ jar: j });
+
+const baseUrl = 'http://localhost:8888/api/group/',
   endPoint = '/message';
 
 describe('POST:/api/group/<group id>/message', () => {
