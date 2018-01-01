@@ -8,7 +8,7 @@ const callback = function callback() {
 };
 
 describe('The isAuthenticated function grants authentication.', () => {
-  describe('When request session property doesn\'t contains userId property', () => {
+  describe('No userId property in request.session object', () => {
     it('should return a status code of 403', () => {
       request.session.userId = false;
       Route.isAuthenticated(request, response, callback);
@@ -16,7 +16,7 @@ describe('The isAuthenticated function grants authentication.', () => {
     });
   });
 
-  describe('When request session property contains userId property', () => {
+  describe('When request.session has userId property defined,', () => {
     describe('the callback function is invoked and', () => {
       Route.isAuthenticated(request, response, callback);
       it('should set the value of response status to 200', () => {
