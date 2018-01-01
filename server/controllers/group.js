@@ -9,19 +9,20 @@ export default class GroupController {
    * POST: /api/group/<group id>/message
    */
   static postMessage(req, res) {
-    const { message, username } = req.body,
-          { guid } = req.params;
+    const { message } = req.body,
+          { guid } = req.params,
+          { userId } = req.session;
 
     Group.findOne({
       where: { id: guid },
       include: [{
         model: User,
         as: 'Members',
-        where: { username },
+        where: { id: userId },
       }]
     }).then(group => {
       if (!group) throw new Error('401');
-      return User.findOne({ where: { username } }).then(user => {
+      return User.findById(userId).then(user => {
         return sequelize.transaction(function (t) {
           return Post.create({ message }, { transaction: t }).then( post => { 
             return post.setAuthor(user, { transaction: t }).then( () => {
@@ -54,14 +55,14 @@ export default class GroupController {
    */ 
   static retrieveMessages(req, res) {
     const { guid } = req.params,
-      { username } = req.body;
+      { userId } = req.session;
 
     Group.findOne({
       where: { id: guid },
       include: [{
         model: User,
         as: 'Members',
-        where: { username },
+        where: { id: userId },
       }]
     }).then(group => {
       if (!group) throw new Error('401');
@@ -88,7 +89,8 @@ export default class GroupController {
    */
   static addUsers(req, res) {
     const { guid } = req.params,
-      { invites, sender} = req.body,
+      { invites } = req.body,
+      { userId } = req.session,
       usersQueryList = Util.makeColumnList(invites, 'username');
 
     Group.findOne({
@@ -96,7 +98,7 @@ export default class GroupController {
       include: [{
         model: User,
         as: 'Creator',
-        where: { username: sender },
+        where: { id: userId },
       }]
     }).then(group => {
       if (!group) throw new Error('401');
@@ -128,8 +130,8 @@ export default class GroupController {
    * POST: /api/group
    */
   static createGroup(req, res) {
-    const { username } = req.body;
-    User.findOne({ where: { username } }).then(user => {
+    const { userId } = req.session;
+    User.findById(userId).then(user => {
       sequelize.transaction(function (t) {
         if (!user) throw new Error('401');
         return Group.create(req.body, { transaction: t }).then(group => {

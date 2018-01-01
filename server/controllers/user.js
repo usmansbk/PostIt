@@ -14,7 +14,7 @@ export default class UserController {
       }
     }).then(user => {
       if (!user) throw new Error('401');
-      req.session.authenticated = true;
+      req.session.userId = user.id;
       console.log(req.session);
       Route.response({
         res,
