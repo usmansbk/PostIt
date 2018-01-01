@@ -24,8 +24,8 @@ describe('POST:/api/group/<group id>/user', () => {
     });
 
     describe('Authenticated submission of form with', () => {
-      describe('signed in user', () => {
-        it('should return status code 200', (done) => {
+      describe('[sign in user successfully', () => {
+        it('should return status code 200]', (done) => {
           request.post(signinUrl, { form }, (err, res, body) => {
             expect(res.statusCode).toBe(200);
             done();
@@ -36,16 +36,16 @@ describe('POST:/api/group/<group id>/user', () => {
       describe('null invites field', () => {
         it('should return status code 400', (done) => {
             request.post(url, { form: {} }, (err, response, body) => {
-              expect(response.statusCode).toBe(500);
+              expect(response.statusCode).toBe(400);
               done();
             });
         });
       });
 
       describe('empty string invites field', () => {
-        it('should return status code 200', (done) => {
+        it('should return status code 400', (done) => {
           request.post(url, { form: { invites: '  ' } }, (err, response, body) => {
-            expect(response.statusCode).toBe(200);
+            expect(response.statusCode).toBe(400);
             done();
           });
         });
