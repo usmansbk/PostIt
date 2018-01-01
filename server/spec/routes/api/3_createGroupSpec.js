@@ -1,4 +1,4 @@
-let request = require('request');
+let request = require('request'),
   j = request.jar();
   request = request.defaults({ jar: j });
 
