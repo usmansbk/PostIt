@@ -1,7 +1,7 @@
 import { Group, User, Post, Sequelize, sequelize } from '../../db/models';
 import { Util, Route } from '../helpers';
 
-const Op = Sequelize.Op;
+const { Op } = Sequelize;
 
 export default class GroupController {
 

@@ -1,11 +1,11 @@
 import { User, Sequelize } from '../../db/models';
 import { Route } from '../helpers';
 
-const Op = Sequelize.Op;
+const { Op } = Sequelize;
 
 export default class UserController {
 
-  static signin(req, res) {
+  static signIn(req, res) {
     const { username, password } = req.body;
     User.findOne({
       where: {
@@ -14,6 +14,8 @@ export default class UserController {
       }
     }).then(user => {
       if (!user) throw new Error('401');
+      req.session.authenticated = true;
+      console.log(req.session);
       Route.response({
         res,
         statusCode: 200,
@@ -30,7 +32,7 @@ export default class UserController {
     });
   }
 
-  static signup(req, res) {
+  static signUp(req, res) {
     User.create(req.body).then(user => {
       Route.response({
         res,

@@ -1,10 +1,10 @@
 import express from 'express';
+import session from 'express-session';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import apiRouter from './routes/api';
+import router from './routes/api';
 
 const app = express();
-const router = express.Router();
 const logger = morgan('dev');
 
 const appInfo = {
@@ -19,12 +19,15 @@ const appInfo = {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger);
+app.use(session({
+  secret: 's3cr3t',
+  cookie: {}
+}));
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.json(appInfo);
 });
 
-router.use('/api', apiRouter);
-app.use('/', router);
+app.use(router);
 
 export default app;
