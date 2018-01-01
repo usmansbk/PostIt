@@ -1,19 +1,8 @@
-const middlewares = require('../../build/middlewares');
+const middlewares = require('../../build/middlewares'),
+  helper = require('../helpers');
 
-const { Route } = middlewares,
-  request = {
-    session: {}
-  },
-  response = {
-    status: function status(code) {
-      this.statusCode = code;
-      return this;
-    },
-
-    json: function(obj) {
-    }
-  };
-
+const { Route } = middlewares;
+const { request, response } = helper;
 let callback = function callback() {
   response.statusCode = 200;
 };
