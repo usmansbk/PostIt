@@ -7,7 +7,7 @@ export default class Validate {
     const { name, purpose } = req.body;
     if (!name || isEmpty.test(name) ||
         name.length > MAX_NAME_LEN ||
-        (purpose && purpose.length > MAX_PURPOSE_LENGTH) ) {
+        (purpose && purpose.length > MAX_PURPOSE_LENGTH)) {
       res.status(400).json({
         status: 'fail',
         data: {
