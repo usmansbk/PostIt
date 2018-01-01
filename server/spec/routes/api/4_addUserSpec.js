@@ -1,6 +1,8 @@
-let request = require('request'),
-  j = request.jar();
-  request = request.defaults({ jar: j });
+let request = require('request');
+
+const j = request.jar();
+
+request = request.defaults({ jar: j });
 
 const url = 'http://localhost:8888/api/group/1/user',
   signinUrl = 'http://localhost:8888/api/user/signin',
@@ -16,7 +18,7 @@ describe('POST:/api/group/<group id>/user', () => {
     describe('Unauthenticated access to route', () => {
       it('should return status code 403', (done) => {
         const users = registeredUsers.join('');
-        request.post(url, { form: { invites: users } }, (err, res, body) => {
+        request.post(url, { form: { invites: users } }, (err, res) => {
           expect(res.statusCode).toBe(403);
           done();
         });
@@ -26,7 +28,7 @@ describe('POST:/api/group/<group id>/user', () => {
     describe('Authenticated submission of form with', () => {
       describe('[sign in user successfully', () => {
         it('should return status code 200]', (done) => {
-          request.post(signinUrl, { form }, (err, res, body) => {
+          request.post(signinUrl, { form }, (err, res) => {
             expect(res.statusCode).toBe(200);
             done();
           });
@@ -35,16 +37,16 @@ describe('POST:/api/group/<group id>/user', () => {
 
       describe('null invites field', () => {
         it('should return status code 400', (done) => {
-            request.post(url, { form: {} }, (err, response, body) => {
-              expect(response.statusCode).toBe(400);
-              done();
-            });
+          request.post(url, { form: {} }, (err, response) => {
+            expect(response.statusCode).toBe(400);
+            done();
+          });
         });
       });
 
       describe('empty string invites field', () => {
         it('should return status code 400', (done) => {
-          request.post(url, { form: { invites: '  ' } }, (err, response, body) => {
+          request.post(url, { form: { invites: '  ' } }, (err, response) => {
             expect(response.statusCode).toBe(400);
             done();
           });
@@ -54,7 +56,7 @@ describe('POST:/api/group/<group id>/user', () => {
       describe('single unregistered user invites field', () => {
         it('should return status code 200', (done) => {
           const user = unregisteredUsers[0];
-          request.post(url, { form: { invites: user } }, (err, response, body) => {
+          request.post(url, { form: { invites: user } }, (err, response) => {
             expect(response.statusCode).toBe(200);
             done();
           });
@@ -64,7 +66,7 @@ describe('POST:/api/group/<group id>/user', () => {
       describe('single registered user invites field', () => {
         it('should return status code 200', (done) => {
           const user = registeredUsers[0];
-          request.post(url, { form: { invites: user } }, (err, response, body) => {
+          request.post(url, { form: { invites: user } }, (err, response) => {
             expect(response.statusCode).toBe(200);
             done();
           });
@@ -74,7 +76,7 @@ describe('POST:/api/group/<group id>/user', () => {
       describe('multiple registered users invites field', () => {
         it('should return status code 200', (done) => {
           const users = registeredUsers.join('');
-          request.post(url, { form: { invites: users } }, (err, response, body) => {
+          request.post(url, { form: { invites: users } }, (err, response) => {
             expect(response.statusCode).toBe(200);
             done();
           });
@@ -84,7 +86,7 @@ describe('POST:/api/group/<group id>/user', () => {
       describe('multiple registered and unregistered users invites field', () => {
         it('should return status code 200', (done) => {
           const users = registeredUsers.join('').concat(unregisteredUsers.join(''));
-          request.post(url, { form: { invites: users } }, (err, response, body) => {
+          request.post(url, { form: { invites: users } }, (err, response) => {
             expect(response.statusCode).toBe(200);
             done();
           });
@@ -95,7 +97,7 @@ describe('POST:/api/group/<group id>/user', () => {
         it('should return status code 401', (done) => {
           const user = registeredUsers[0],
             notUserGroup = 'http://localhost:8888/api/group/8/user';
-          request.post(notUserGroup, { form: { invites: user } }, (err, response, body) => {
+          request.post(notUserGroup, { form: { invites: user } }, (err, response) => {
             expect(response.statusCode).toBe(401);
             done();
           });

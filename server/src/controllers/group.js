@@ -33,6 +33,7 @@ export default class GroupController {
           status: 'fail',
           data: {
             message: 'Only members can post message!',
+            error
           }
         });
       });
@@ -60,7 +61,8 @@ export default class GroupController {
       res.status(401).json({
         status: 'fail',
         data: {
-          message: 'Only members can retrieve messages!'
+          message: 'Only members can retrieve messages!',
+          error
         }
       });
     });
@@ -80,7 +82,7 @@ export default class GroupController {
         where: { id: userId },
       }]
     }).then((group) => {
-      if (!group) throw new Error(); 
+      if (!group) throw new Error();
       return User.findAll({
         where: {
           [Op.or]: usersQueryList
@@ -95,6 +97,7 @@ export default class GroupController {
         status: 'fail',
         data: {
           message: 'Only group owner can add users!',
+          error
         }
       });
     });
@@ -119,6 +122,7 @@ export default class GroupController {
         status: 'fail',
         data: {
           message: 'Register a new account or sign-in!',
+          error
         }
       });
     });

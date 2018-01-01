@@ -3,7 +3,7 @@ const middlewares = require('../../build/middlewares'),
 
 const { Route } = middlewares;
 const { request, response } = helper;
-let callback = function callback() {
+const callback = function callback() {
   response.statusCode = 200;
 };
 
@@ -27,4 +27,3 @@ describe('The isAuthenticated function would grant access.', () => {
     });
   });
 });
-

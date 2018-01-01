@@ -1,6 +1,8 @@
-let request = require('request'),
-  j = request.jar();
-  request = request.defaults({ jar: j });
+let request = require('request');
+
+const j = request.jar();
+
+request = request.defaults({ jar: j });
 
 const url = 'http://localhost:8888/api/group',
   signUrl = 'http://localhost:8888/api/user/signin';
@@ -12,7 +14,7 @@ describe('POST:/api/group', () => {
         const form = {
           name: 'Tokyo Ghoul'
         };
-        request.post(url, { form }, (err, response, body) => {
+        request.post(url, { form }, (err, response) => {
           expect(response.statusCode).toBe(403);
           done();
         });
@@ -23,10 +25,10 @@ describe('POST:/api/group', () => {
       describe('sigined in user', () => {
         it('should return status code 200', (done) => {
           const form = {
-	    username: 'keneki',
-	    password: '12345678?',
+            username: 'keneki',
+            password: '12345678?',
           };
-          request.post(signUrl, { form }, (err, res, body) => {
+          request.post(signUrl, { form }, (err, res) => {
             expect(res.statusCode).toBe(200);
             done();
           });
@@ -38,7 +40,7 @@ describe('POST:/api/group', () => {
           const form = {
             purpose: 'How to live with humans'
           };
-          request.post(url, { form }, (err, response, body) => {
+          request.post(url, { form }, (err, response) => {
             expect(response.statusCode).toBe(400);
             done();
           });
@@ -50,7 +52,7 @@ describe('POST:/api/group', () => {
           const form = {
             name: 'Tokyo Ghoul S1',
           };
-          request.post(url, { form }, (err, response, body) => {
+          request.post(url, { form }, (err, response) => {
             expect(response.statusCode).toBe(201);
             done();
           });
@@ -63,7 +65,7 @@ describe('POST:/api/group', () => {
             name: '1111111111111111111111122',
             purpose: 'How to live with humans'
           };
-          request.post(url, { form }, (err, response, body) => {
+          request.post(url, { form }, (err, response) => {
             expect(response.statusCode).toBe(400);
             done();
           });
@@ -76,7 +78,7 @@ describe('POST:/api/group', () => {
             name: 'Tokyo Ghoul',
             purpose: '11111111111111111111111111111111111111111111111111150'
           };
-          request.post(url, { form }, (err, response, body) => {
+          request.post(url, { form }, (err, response) => {
             expect(response.statusCode).toBe(400);
             done();
           });
@@ -89,7 +91,7 @@ describe('POST:/api/group', () => {
             name: 'Tokyo Ghoul',
             purpose: 'How to live with humans'
           };
-          request.post(url, { form }, (err, response, body) => {
+          request.post(url, { form }, (err, response) => {
             expect(response.statusCode).toBe(201);
             done();
           });
@@ -102,7 +104,7 @@ describe('POST:/api/group', () => {
             name: 'Tokyo Ghoul',
             purpose: 'How to eat humans'
           };
-          request.post(url, { form }, (err, response, body) => {
+          request.post(url, { form }, (err, response) => {
             expect(response.statusCode).toBe(201);
             done();
           });
@@ -115,7 +117,7 @@ describe('POST:/api/group', () => {
             name: 'Attack on Titans',
             purpose: 'How to eat humans'
           };
-          request.post(url, { form }, (err, response, body) => {
+          request.post(url, { form }, (err, response) => {
             expect(response.statusCode).toBe(201);
             done();
           });
