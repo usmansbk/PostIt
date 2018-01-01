@@ -3,15 +3,6 @@ const request = require('request'),
 
 describe('POST:/api/group', () => {
   describe('API route that allows users create broadcast groups.', () => {
-    describe('Making a GET request to route', () => {
-      it('should return a status code of 405', (done) => {
-        request.get(url, (err, res) => {
-          expect(res.statusCode).toBe(405);
-          done();
-        });
-      });
-    });
-
     describe('Unauthenticated access to route', () => {
 
     });

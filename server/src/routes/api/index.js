@@ -12,12 +12,5 @@ router.post('/api/group/', GroupController.createGroup);
 router.post('/api/group/:guid/message', GroupController.postMessage);
 router.post('/api/group/:guid/user', GroupController.addUsers);
 router.get('/api/group/:guid/messages', GroupController.retrieveMessages);
-router.all('*', (req, res) => {
-  res.status(405).json({
-    status: 'fail',
-    message: 'Method not supported',
-    data: null
-  });
-});
 
 export default router;
