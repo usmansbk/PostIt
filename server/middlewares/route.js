@@ -1,9 +1,8 @@
 export default class Route {
 
   static isAuthenticated(req, res, next) {
-    const { authenticated } = req.session;
-    console.log(req.url, req.session);
-    if (!authenticated) {
+    const { userId } = req.session;
+    if (!userId) {
 
       res.status(403).json({
         status: 'fail',
