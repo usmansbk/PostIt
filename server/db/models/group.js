@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: true,
+        len: [1, 22]
       },
       set(val) {
         this.setDataValue('name', val);
