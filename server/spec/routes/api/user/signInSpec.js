@@ -4,16 +4,23 @@ const request = require('request'),
 describe('POST:/api/user/signin', () => {
   describe('API route for users to login to the application.', () => {
     describe('Submission of form with', () => {
-      describe('no username', () => {
+      describe('invalid password with', () => {
+        describe('null field', () => {
+        });
+
+        describe('blank space string', () => {
+        });
       });
 
-      describe('no password', () => {
+      describe('invalid username with', () => {
+        describe('null field', () => {
+        });
+
+        describe('blank space string', () => {
+        });
       });
 
-      describe('non alphanumeric character (excluding underscore) in username', () => {
-      });
-
-      describe('unregistered username and password', () => {
+      describe('valid unregistered username and password', () => {
       });
 
       describe('registered username and password', () => {
