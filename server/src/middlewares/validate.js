@@ -1,5 +1,3 @@
-import validator from 'validator';
-
 const isEmpty = /^\s*$/m,
   MAX_NAME_LEN = 22,
   MAX_PURPOSE_LENGTH = 50;
