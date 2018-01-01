@@ -28,7 +28,6 @@
   "homepage": "https://github.com/usmansbk/PostIt#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "morgan": "^1.9.0",
@@ -36,8 +35,7 @@
     "pg-hstore": "^2.3.2",
     "request": "^2.83.0",
     "sequelize": "^4.28.6",
-    "sequelize-cli": "^3.2.0",
-    "validator": "^9.2.0"
+    "sequelize-cli": "^3.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
