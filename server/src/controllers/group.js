@@ -1,5 +1,5 @@
 import { Group, User, Post, Sequelize, sequelize } from '../../db/models';
-import { Util, Route } from '../helpers';
+import { Util } from '../helpers';
 
 const { Op } = Sequelize;
 
@@ -17,25 +17,25 @@ export default class GroupController {
         where: { id: userId },
       }]
     }).then((group) => {
-      if (!group) throw new Error('401');
+      if (!group) throw new Error();
       return User.findById(userId).then(user =>
         sequelize.transaction(t =>
           Post.create({ message }, { transaction: t }).then(post =>
             post.setAuthor(user, { transaction: t }).then(() =>
               group.addPost(post, { transaction: t }).then(() => post)))));
     }).then(result =>
-      Route.response({
-        res,
-        statusCode: 201,
-        message: 'Posted message successfully',
+      res.status(201).json({
+        status: 'success',
         data: result
-      })).catch(error =>
-      Route.response({
-        res,
-        statusCode: 400,
-        message: 'Failed to post message',
-        data: error
-      }));
+      }))
+      .catch((error) => {
+        res.status(401).json({
+          status: 'fail',
+          data: {
+            message: 'Only members can post message!',
+          }
+        });
+      });
   }
 
   static retrieveMessages(req, res) {
@@ -50,21 +50,20 @@ export default class GroupController {
         where: { id: userId },
       }]
     }).then((group) => {
-      if (!group) throw new Error('401');
+      if (!group) throw new Error();
       return group.getPosts();
     }).then(posts =>
-      Route.response({
-        res,
-        statusCode: 200,
-        message: 'Retrieved messages successfully',
-        data: posts
-      })).catch(error =>
-      Route.response({
-        res,
-        statusCode: 400,
-        message: 'Failed to retrieve messages',
-        data: error
-      }));
+      res.status(200).json({
+        status: 'success',
+        data: { posts }
+      })).catch((error) => {
+      res.status(401).json({
+        status: 'fail',
+        data: {
+          message: 'Only members can retrieve messages!'
+        }
+      });
+    });
   }
 
   static addUsers(req, res) {
@@ -81,47 +80,47 @@ export default class GroupController {
         where: { id: userId },
       }]
     }).then((group) => {
-      if (!group) throw new Error('401');
+      if (!group) throw new Error(); 
       return User.findAll({
         where: {
           [Op.or]: usersQueryList
         }
       }).then(users => group.addMembers(users));
     }).then(result =>
-      Route.response({
-        res,
-        statusCode: 200,
-        message: 'Users added successfully',
-        data: result
-      })).catch(error =>
-      Route.response({
-        res,
-        message: 'Failed to add add users to group',
-        statusCode: 400,
-        data: error
-      }));
+      res.status(200).json({
+        status: 'success',
+        data: { result }
+      })).catch((error) => {
+      res.status(401).json({
+        status: 'fail',
+        data: {
+          message: 'Only group owner can add users!',
+        }
+      });
+    });
   }
 
   static createGroup(req, res) {
     const { userId } = req.session;
     User.findById(userId).then(user =>
       sequelize.transaction((t) => {
-        if (!user) throw new Error('401');
+        if (!user) throw new Error();
         return Group.create(req.body, { transaction: t }).then(group =>
           group.setCreator(user, { transaction: t }).then(creatorGroup =>
             group.addMember(user, { transaction: t }).then(() => creatorGroup)));
       })).then(result =>
-      Route.response({
-        res,
-        statusCode: 201,
-        message: 'Created new group',
-        data: result
-      })).catch(error =>
-      Route.response({
-        res,
-        statusCode: 400,
-        message: 'Failed to create new group',
-        data: error
-      }));
+      res.status(201).json({
+        status: 'success',
+        data: {
+          result
+        }
+      })).catch((error) => {
+      res.status(401).json({
+        status: 'fail',
+        data: {
+          message: 'Register a new account or sign-in!',
+        }
+      });
+    });
   }
 }
