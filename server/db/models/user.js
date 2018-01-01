@@ -89,12 +89,12 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function associate(models) {
     const { Group } = models;
     User.belongsToMany(Group, { through: 'UserGroup' });
-  }
-  
+  };
+
   User.getterMethods = {
     fullName() {
       return `${this.firstname} ${this.surname}`;
     }
-  }
+  };
   return User;
 };

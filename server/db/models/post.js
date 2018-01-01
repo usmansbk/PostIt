@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     message: {
       type: DataTypes.TEXT,
       allowNull: false,
-     set(val) {
+      set(val) {
         this.setDataValue('message', val);
       },
       get() {
@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   Post.associate = function associate(models) {
-    const { User, Group } = models;
+    const { User } = models;
     Post.belongsTo(User, { as: 'author' });
-  }
+  };
   return Post;
 };

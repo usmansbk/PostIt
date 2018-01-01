@@ -3,9 +3,7 @@ const request = require('request'),
 
 describe('POST:/api/user/signin', () => {
   describe('API route for users to login to the application.', () => {
-
     describe('Submission of form with', () => {
-  
       describe('no username', () => {
       });
 
@@ -20,9 +18,6 @@ describe('POST:/api/user/signin', () => {
 
       describe('registered username and password', () => {
       });
-
     });
-
   });
-
 });

@@ -1,5 +1,4 @@
 export default class Util {
-  
   /**
    * @param {String} values a list of space delimited strings
    * @param {String} key
@@ -11,11 +10,10 @@ export default class Util {
       len = list.length,
       ret = [];
     for (let i = 0; i < len; i += 1) {
-      let obj = {};
+      const obj = {};
       obj[key] = list[i];
       ret.push(obj);
     }
     return ret;
   }
 }
-

@@ -1,8 +1,15 @@
 export default class Route {
   static response(obj) {
-    let { res, statusCode, errorMessage, message, data } = obj,
+    const {
+      res,
+      errorMessage,
+      data
+    } = obj;
+    let {
+        statusCode,
+        message,
+      } = obj,
       status;
-    
     if (+data.message === 401) {
       statusCode = 401;
       message = errorMessage;

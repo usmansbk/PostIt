@@ -32,6 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     Group.hasMany(Post, { as: 'Posts', foreignKey: 'groupId' });
     Group.belongsTo(User, { as: 'Creator' });
     Group.belongsToMany(User, { as: 'Members', through: 'UserGroup' });
-  }
+  };
   return Group;
 };
