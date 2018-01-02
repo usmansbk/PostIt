@@ -1,14 +1,37 @@
 let request = require('request');
 
-const j = request.jar();
+const db = require('../../../db/models'),
+  j = request.jar(),
+  { sequelize } = db;
 
 request = request.defaults({ jar: j });
 
-const url = 'http://localhost:8888/api/group',
-  signUrl = 'http://localhost:8888/api/user/signin';
+const baseUrl = 'http://localhost:8888/api',
+  url = `${baseUrl}/group`,
+  signInUrl = `${baseUrl}/user/signin`,
+  signUpUrl = `${baseUrl}/user/signup`;
 
 describe('POST:/api/group', () => {
+  afterAll((done) => {
+    sequelize.sync({ force: true }).then(() => {
+      done();
+    });
+  });
+
   describe('API route that allows users create broadcast groups.', () => {
+    beforeAll((done) => {
+      request.post(signUpUrl, {
+        form: {
+          username: 'zetsu',
+          email: 'zetsu@naruto.com',
+          password: '12345678?'
+        }
+      }, (err, response) => {
+        expect(response.statusCode).toBe(201);
+        done();
+      });
+    });
+
     describe('Unauthenticated access to route', () => {
       it('should return status code 403', (done) => {
         const form = {
@@ -22,16 +45,14 @@ describe('POST:/api/group', () => {
     });
 
     describe('Authenticated submission of form with', () => {
-      describe('sigined in user', () => {
-        it('should return status code 200', (done) => {
-          const form = {
-            username: 'keneki',
-            password: '12345678?',
-          };
-          request.post(signUrl, { form }, (err, res) => {
-            expect(res.statusCode).toBe(200);
-            done();
-          });
+      beforeAll((done) => {
+        const form = {
+          username: 'zetsu',
+          password: '12345678?',
+        };
+        request.post(signInUrl, { form }, (err, res) => {
+          expect(res.statusCode).toBe(200);
+          done();
         });
       });
 

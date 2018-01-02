@@ -1,7 +1,17 @@
 const request = require('request'),
   url = 'http://localhost:8888/api/user/signup';
 
+const db = require('../../../db/models'),
+  { sequelize } = db;
+
+
 describe('POST:/api/user/signup', () => {
+  afterAll((done) => {
+    sequelize.sync({ force: true }).then(() => {
+      done();
+    });
+  });
+
   describe('API route for users to create accounts.', () => {
     describe('Submission of form with', () => {
       describe('invalid username with', () => {

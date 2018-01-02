@@ -1,17 +1,19 @@
-const request = {
+const req = {
     session: {},
     body: {},
   },
 
-  response = {
+  res = {
     status: function status(code) {
       this.statusCode = code;
       return this;
     },
 
-    json: function json(obj) {
+    json: function json() {
       return this;
     }
   };
 
-module.exports = { request, response };
+module.exports = {
+  req, res
+};
