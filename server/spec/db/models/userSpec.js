@@ -111,7 +111,7 @@ describe('User database model:', () => {
       User.create({
         username: 'validusername',
         email: 'valid@email.who',
-        password: null 
+        password: null
       }).catch((error) => {
         expect(error.value).toBeFalsy();
         done();
@@ -173,7 +173,7 @@ describe('User database model:', () => {
       });
     });
   });
- 
+
   describe('firstname with', () => {
     afterEach((done) => {
       User.sync({ force: true }).then(() => done());
@@ -184,7 +184,7 @@ describe('User database model:', () => {
         username: 'validusername',
         email: 'valid@email.who',
         password: 'valid-password',
-        firstname: null 
+        firstname: null
       }).then((user) => {
         expect(!!user).toBeTruthy();
         done();
@@ -196,7 +196,7 @@ describe('User database model:', () => {
         username: 'valid_username',
         email: '_valid@email.com',
         password: 'valid*passw0rd',
-        firstname: undefined 
+        firstname: undefined
       }).then((user) => {
         expect(!!user).toBeTruthy();
         done();
@@ -238,7 +238,7 @@ describe('User database model:', () => {
       });
     });
   });
-  
+
   describe('surname with', () => {
     afterEach((done) => {
       User.sync({ force: true }).then(() => done());
@@ -249,7 +249,7 @@ describe('User database model:', () => {
         username: 'validusername',
         email: 'valid@email.who',
         password: 'valid-password',
-        firstname: null 
+        firstname: null
       }).then((user) => {
         expect(user).toBeTruthy();
         done();
@@ -261,7 +261,7 @@ describe('User database model:', () => {
         username: 'valid_username',
         email: '_valid@email.com',
         password: 'valid*passw0rd',
-        firstname: undefined 
+        firstname: undefined
       }).then((user) => {
         expect(user).toBeTruthy();
         done();
@@ -304,7 +304,7 @@ describe('User database model:', () => {
       });
     });
   });
-  
+
   describe('gender with', () => {
     afterEach((done) => {
       User.sync({ force: true }).then(() => done());
@@ -413,7 +413,7 @@ describe('User database model:', () => {
         done();
       });
     });
- 
+
     it('time format YYYY-MM-DD HH:MI:SS', (done) => {
       User.create({
         username: 'validusername',
@@ -459,6 +459,20 @@ describe('User database model:', () => {
       });
     });
 
+    it('fake date: 2018-11-32', (done) => {
+      User.create({
+        username: 'validusername',
+        email: '2valid_@email.com',
+        password: '12345678',
+        firstname: 'validname',
+        surname: 'validname',
+        gender: 'female',
+        birthday: '2018-01-32'
+      }).catch((error) => {
+        expect(error.value).toBeFalsy();
+        done();
+      });
+    });
     it('YYYY,Mmm-Dd format', (done) => {
       User.create({
         username: 'validusername',
