@@ -1,5 +1,4 @@
 const middlewares = require('../../build/middlewares'),
-  db = require('../../db/models'),
   helpers = require('../helpers'),
   { Validate } = middlewares,
   { req, res } = helpers;
