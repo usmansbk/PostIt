@@ -5,7 +5,8 @@ module.exports = {
     database: process.env.DEV_DB_NAME || 'postit_dev',
     host: process.env.DEV_DB_HOSTNAME || '127.0.0.1',
     port: process.env.DEV_DB_PORT || '5432',
-    dialect: process.env.DIALECT || 'postgres'
+    dialect: process.env.DIALECT || 'postgres',
+    logging: false
   },
   test: {
     username: process.env.TEST_DB_USERNAME,
