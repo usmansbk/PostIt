@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         isAlpha: true,
+        notEmpty: true
       },
       set(val) {
         this.setDataValue('firstname', val);
@@ -16,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         isAlpha: true,
+        notEmpty: true
       },
       set(val) {
         this.setDataValue('surname', val);
