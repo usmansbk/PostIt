@@ -3,6 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     message: {
       type: DataTypes.TEXT,
       allowNull: false,
+      validate: {
+        notEmpty: true
+      },
       set(val) {
         this.setDataValue('message', val);
       },
