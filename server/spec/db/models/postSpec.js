@@ -59,7 +59,7 @@ describe('Post database model.', () => {
       newPost.setAuthor(null).then((post) => {
         expect(post).toBeTruthy();
         done();
-      }); 
+      });
     });
 
     it('generic object', (done) => {
@@ -71,14 +71,13 @@ describe('Post database model.', () => {
     });
 
     it('user object', (done) => {
-       newPost.setAuthor(author).then((post) => {
+      newPost.setAuthor(author).then((post) => {
         expect(post).toBeTruthy();
-        post.getAuthor().then((author) => {
-          expect(author).toBeTruthy();
+        post.getAuthor().then((auth) => {
+          expect(auth).toBeTruthy();
           done();
         });
       });
     });
   });
-
 });
