@@ -11,7 +11,7 @@ describe('Validate class contains methods that validate the form data of a reque
   describe('addUser() method with', () => {
     describe('no invites property in request body', () => {
       it('should return status code of 400', () => {
-        Validate.addUser(request, response, callback);
+        Validate.addUsers(request, response, callback);
         expect(response.statusCode).toBe(400);
       });
     });
@@ -19,7 +19,7 @@ describe('Validate class contains methods that validate the form data of a reque
     describe('empty string invites property in request body', () => {
       it('should return status code of 400', () => {
         request.body.invites = '    ';
-        Validate.addUser(request, response, callback);
+        Validate.addUsers(request, response, callback);
         expect(response.statusCode).toBe(400);
       });
     });
@@ -27,7 +27,7 @@ describe('Validate class contains methods that validate the form data of a reque
     describe('valid string invites property in request body', () => {
       it('should return status code of 400', () => {
         request.body.invites = 'ben10';
-        Validate.addUser(request, response, callback);
+        Validate.addUsers(request, response, callback);
         expect(response.statusCode).toBe(200);
       });
     });

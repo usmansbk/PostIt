@@ -1,5 +1,4 @@
 import { User } from '../../db/models';
-import { Route } from '../helpers';
 
 export default class UserController {
   static signIn(req, res) {
@@ -10,36 +9,37 @@ export default class UserController {
         password
       }
     }).then((user) => {
-      if (!user) throw new Error('401');
+      if (!user) throw new Error();
       req.session.userId = user.id;
-      Route.response({
-        res,
-        statusCode: 200,
-        message: 'Sign-In successful',
-        data: user
+      res.status(200).json({
+        status: 'success',
+        data: {
+          user
+        }
       });
     }).catch(error =>
-      Route.response({
-        res,
-        statusCode: 400,
-        errorMessage: 'Invalid username/password',
-        data: error
+      res.status(400).json({
+        status: 'fail',
+        data: {
+          message: 'Invalid user / password'
+        }
       }));
   }
 
   static signUp(req, res) {
     User.create(req.body).then(user =>
-      Route.response({
-        res,
-        statusCode: 201,
-        message: 'Created new user',
-        data: user
+      res.status(201).json({
+        status: 'success',
+        data: {
+          user
+        }
       })).catch(error =>
-      Route.response({
-        res,
-        statusCode: 400,
-        message: 'Failed to create new user',
-        data: error
+      res.status(400).json({
+        status: 'fail',
+        data: {
+          message: 'Failed to create new user',
+          error
+        }
       }));
   }
 }

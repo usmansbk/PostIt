@@ -1,5 +1,5 @@
 import { Group, User, Post, Sequelize, sequelize } from '../../db/models';
-import { Util } from '../helpers';
+import Util from '../helpers';
 
 const { Op } = Sequelize;
 

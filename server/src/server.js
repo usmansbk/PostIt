@@ -29,11 +29,13 @@ app.get('/', (req, res) => {
 });
 
 app.use(router);
+/*
 app.use((err, req, res, next) => {
   res.status(500).json({
     status: 'error',
     message: 'Nothing you can do about it!'
   });
 });
+*/
 
 export default app;

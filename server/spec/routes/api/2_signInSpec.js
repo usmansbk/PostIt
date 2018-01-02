@@ -6,20 +6,20 @@ describe('POST:/api/user/signin', () => {
     describe('Submission of form with', () => {
       describe('invalid password with', () => {
         describe('no field and', () => {
-          it('should return status code 401', (done) => {
+          it('should return status code 400', (done) => {
             const form = { username: 'keneki' };
             request.post(url, { form }, (err, res) => {
-              expect(res.statusCode).toBe(401);
+              expect(res.statusCode).toBe(400);
               done();
             });
           });
         });
 
         describe('blank space string', () => {
-          it('should return status code 401', (done) => {
+          it('should return status code 400', (done) => {
             const form = { username: 'keneki', password: '  ' };
             request.post(url, { form }, (err, res) => {
-              expect(res.statusCode).toBe(401);
+              expect(res.statusCode).toBe(400);
               done();
             });
           });
@@ -28,20 +28,20 @@ describe('POST:/api/user/signin', () => {
 
       describe('invalid username with', () => {
         describe('null field', () => {
-          it('should return status code 401', (done) => {
+          it('should return status code 400', (done) => {
             const form = { password: '12345678?' };
             request.post(url, { form }, (err, res) => {
-              expect(res.statusCode).toBe(401);
+              expect(res.statusCode).toBe(400);
               done();
             });
           });
         });
 
         describe('blank space string', () => {
-          it('should return status code 401', (done) => {
+          it('should return status code 400', (done) => {
             const form = { username: '  ', password: '12345678?' };
             request.post(url, { form }, (err, res) => {
-              expect(res.statusCode).toBe(401);
+              expect(res.statusCode).toBe(400);
               done();
             });
           });
@@ -49,10 +49,10 @@ describe('POST:/api/user/signin', () => {
       });
 
       describe('valid unregistered username and password', () => {
-        it('should return status code 401', (done) => {
+        it('should return status code 400', (done) => {
           const form = { username: 'sakura', password: '12345678' };
           request.post(url, { form }, (err, res) => {
-            expect(res.statusCode).toBe(401);
+            expect(res.statusCode).toBe(400);
             done();
           });
         });

@@ -10,8 +10,7 @@ const request = {
     },
 
     json: function json(obj) {
-      this.status = obj.status;
-      this.data = obj.data;
+      return this;
     }
   };
 

@@ -19,7 +19,7 @@ export default class Validate {
     next();
   }
 
-  static addUser(req, res, next) {
+  static addUsers(req, res, next) {
     const { invites } = req.body;
     if (!invites || isEmpty.test(invites)) {
       res.status(400).json({
