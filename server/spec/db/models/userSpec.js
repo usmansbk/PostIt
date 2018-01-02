@@ -94,7 +94,7 @@ describe('User database model:', () => {
       });
     });
 
-    it('non email', (done) => {
+    it('non email format', (done) => {
       User.create({
         username: '_valid_username',
         email: 'invalidemail.com',
@@ -174,7 +174,7 @@ describe('User database model:', () => {
     });
   });
 
-  describe('firstname with', () => {
+  describe('optional firstname with', () => {
     afterEach((done) => {
       User.sync({ force: true }).then(() => done());
     });
@@ -239,7 +239,7 @@ describe('User database model:', () => {
     });
   });
 
-  describe('surname with', () => {
+  describe('optional surname with', () => {
     afterEach((done) => {
       User.sync({ force: true }).then(() => done());
     });
@@ -305,7 +305,7 @@ describe('User database model:', () => {
     });
   });
 
-  describe('gender with', () => {
+  describe('optional gender with', () => {
     afterEach((done) => {
       User.sync({ force: true }).then(() => done());
     });
@@ -394,7 +394,7 @@ describe('User database model:', () => {
     });
   });
 
-  describe('birthday with', () => {
+  describe('optional birthday with', () => {
     afterEach((done) => {
       User.sync({ force: true }).then(() => done());
     });
