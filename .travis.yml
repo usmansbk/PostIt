@@ -24,4 +24,3 @@ before_script:
   - "npm run start:server &"
 after_success:
   - npm run coverage
-  - npm test | codeclimate-test-reporter

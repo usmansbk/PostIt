@@ -8,7 +8,7 @@
     "start:server": "node server/build/bin/www",
     "start:dev": "nodemon server/build/bin/www",
     "test": "nyc jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=lcov | coveralls"
   },
   "repository": {
     "type": "git",
