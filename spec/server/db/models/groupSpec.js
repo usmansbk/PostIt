@@ -1,4 +1,4 @@
-const db = require('../../../db/models');
+const db = require('../../../../server/db/models');
 const helpers = require('../../helpers');
 
 const { users, posts } = helpers.seed;

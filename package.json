@@ -1,12 +1,12 @@
 {
-  "name": "server",
+  "name": "postit",
   "version": "1.0.0",
-  "description": "PostIt back-end implementation",
+  "description": "Minimalist social network web app",
   "main": "server.js",
   "scripts": {
-    "build": "sh scripts/babel.sh",
-    "start": "node build/bin/www",
-    "start:dev": "nodemon build/bin/www",
+    "build": "sh scripts/babel-server.sh",
+    "start:server": "node server/build/bin/www",
+    "start:devserver": "nodemon server/build/bin/www",
     "test": "jasmine"
   },
   "repository": {
@@ -14,11 +14,13 @@
     "url": "git+https://github.com/usmansbk/PostIt.git"
   },
   "keywords": [
-    "'Social Network'",
+    "PostIt",
+    "Social Network",
     "Node",
     "Sequelize",
     "Postgres",
-    "Server"
+    "React",
+    "Redux"
   ],
   "author": "Babakolo Usman Suleiman",
   "license": "MIT",
