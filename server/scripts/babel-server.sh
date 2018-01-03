@@ -5,7 +5,7 @@ cd build
 mkdir bin controllers helpers middlewares routes
 mkdir routes/api
 
-cd ../..
+cd ../
 
 ./node_modules/.bin/babel src/server.js --out-file server/build/server.js
 ./node_modules/.bin/babel src/bin/www --out-file server/build/bin/www
