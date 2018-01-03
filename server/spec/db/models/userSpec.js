@@ -1,6 +1,6 @@
 const db = require('../../../db/models');
 
-const { User } = db;
+const { User, Group } = db;
 
 describe('User database model:', () => {
   describe('username with', () => {
@@ -500,6 +500,29 @@ describe('User database model:', () => {
       }).then((user) => {
         expect(user).toBeTruthy();
         done();
+      });
+    });
+  });
+
+  describe('get user groups', () => {
+    it('should be truthy', (done) => {
+      let user;
+      User.create({
+        username: 'validname',
+        email: 'valid@email.com',
+        password: '12345678'
+      }).then((newuser) => {
+        user = newuser;
+        Group.create({
+          name: 'Valid Group'
+        }).then((group) => {
+          group.addMember(user).then(() => {
+            user.getGroups().then((found) => {
+              expect(found).toBeTruthy();
+              done();
+            });
+          });
+        });
       });
     });
   });
