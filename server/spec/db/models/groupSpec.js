@@ -1,14 +1,29 @@
 const db = require('../../../db/models');
+const helpers = require('../../helpers');
+
+const { seedTable } = helpers.util;
+const { users, posts } = helpers.seed; 
 
 const {
   Group, User, Post, sequelize
 } = db;
 
-let group, users, posts;
+let group, userModels, postModels;
 
 describe('Group database model', () => {
   beforeAll((done) => {
-    done();
+  Group.create({ name: 'valid' }).then((newGroup) => {
+    Post.bulkCreate(posts).then(() => Post.findAll())
+    .then((foundPosts) => {
+      postModels = foundPosts;
+      User.bulkCreate(users).then(() => User.findAll())
+        .then((foundUsers) => {
+          userModels = foundUsers;
+          done();
+      });
+    });
+    group = newGroup;
+  });
   });
 
   afterAll((done) => {
@@ -21,79 +36,135 @@ describe('Group database model', () => {
     });
 
     it('null name value', (done) => {
-      done();
+      Group.create({ name: null }).catch((error) => {
+        expect(error.value).toBeFalsy();
+        done();
+      });
     });
 
     it('empty string name value', (done) => {
-      done();
+      Group.create({ name: '' }).catch((error) => {
+        expect(error.value).toBeFalsy();
+        done();
+      });
     });
 
     it('blank string name value', (done) => {
-      done();
+      Group.create({ name: '  ' }).catch((error) => {
+        expect(error.value).toBeFalsy();
+        done();
+      });
     });
 
     it('name longer than 22 characters', (done) => {
-      done();
+      Group.create({
+        name: 'Vaaaaaaaaaaaaaaaalid Name',
+      }).catch((error) => {
+        expect(error.value).toBeFalsy();
+        done();
+      });
     });
 
     it('purpose longer than 50 characters', (done) => {
-      done();
+      Group.create({
+        name: 'Valid Name',
+        purpose: '0123456789-0123456789-0123456789-0123456789-0123456789-' 
+      }).catch((error) => {
+        expect(error.value).toBeFalsy();
+        done();
+      });
     });
 
     it('null purpose value', (done) => {
-      done();
+      Group.create({ name: 'Valid Name', purpose: null }).then((group) => {
+        expect(group).toBeTruthy();
+        done();
+      });
     });
 
     it('blank purpose value', (done) => {
-      done();
+      Group.create({ name: 'Valid Name', purpose: '  ' }).then((group) => {
+        expect(group).toBeTruthy();
+        done();
+      });
     });
   });
 
   describe('add post with', () => {
     it('null value', (done) => {
-      done();
+      group.addPost(null).then((post) => {
+        expect(post).toBeFalsy();
+        done();
+      });
     });
 
     it('generic object value', (done) => {
-      done();
+      group.addPost({}).catch((error) => {
+        expect(error.value).toBeFalsy();
+        done();
+      });
     });
 
     it('post model object', (done) => {
-      done();
+      group.addPost(postModels[0]).then(post => {
+        expect(post).toBeTruthy();
+        done();
+      });
     });
 
     it('array of post models', (done) => {
-      done();
+      group.setPosts(postModels).then(associatedPosts => {
+        expect(associatedPosts).toBeTruthy();
+        done();
+      });
     });
   });
 
   describe('retrieve posts', () => {
     it('should return all posts as array', (done) => {
-      done();
+      group.getPosts().then(associatedPosts => {
+        expect(associatedPosts).toBeTruthy();
+        done();
+      });
     });
   });
 
   describe('add member', () => {
     it('null value', (done) => {
-      done();
+      group.addMember(userModels[0]).then((addedMember) => {
+        expect(addedMember).toBeTruthy();
+        done();
+      });
     });
 
     it('generic object value', (done) => {
-      done();
+      group.addMember(null).then((addedMember) => {
+        expect(addedMember).toBeFalsy();
+        done();
+      });
     });
 
     it('user model object', (done) => {
-      done();
+      group.addMember(userModels[0]).then((addedMember) => {
+        expect(addedMember).toBeTruthy();
+        done();
+      });
     });
 
     it('array of user models', (done) => {
-      done();
+      group.addMembers(userModels).then((addedMembers) => {
+        expect(addedMembers).toBeTruthy();
+        done();
+      });
     });
   });
 
   describe('retrieve member', () => {
     it('should return all the members of the group', (done) => {
-      done();
+      group.getMembers().then((associatedMembers) => {
+        expect(associatedMembers).toBeTruthy();
+        done();
+      });
     });
   });
 });
