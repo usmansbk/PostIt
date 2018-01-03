@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/usmansbk/PostIt.svg?branch=chore%2Ftravis-integration)](https://travis-ci.org/usmansbk/PostIt)
 PostIt
 
 Introduction
