@@ -3,6 +3,7 @@ cache:
   directories:
     - "node_modules"
 before_install:
+  - npm i -g npm
   - createdb postit_dev
 before_script:
   - npm run build 
