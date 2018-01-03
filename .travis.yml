@@ -9,6 +9,7 @@ before_install:
   - export TEST_DB_USERNAME=postgres
   - export TEST_DB_PASSWORD=null
   - export TEST_DB_NAME=postit_test
+  - export JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json
 services:
   - postgresql
 before_script:

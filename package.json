@@ -7,7 +7,9 @@
     "build": "sh server/scripts/build.sh",
     "start:server": "node server/build/bin/www",
     "start:devserver": "nodemon server/build/bin/www",
-    "test": "jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json"
+    "test": "jasmine",
+    "cover": "istanbul cover jasmine",
+    "coveralls": "npm run cover"
   },
   "repository": {
     "type": "git",
@@ -46,6 +48,7 @@
     "eslint": "^4.14.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "istanbul": "^0.4.5",
     "jasmine": "^2.8.0",
     "nodemon": "^1.14.3"
   }
