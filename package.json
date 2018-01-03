@@ -7,9 +7,8 @@
     "build": "sh server/scripts/build.sh",
     "start:server": "node server/build/bin/www",
     "start:dev": "nodemon server/build/bin/www",
-    "test": "nyc jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "cc": "nyc report --reporter=lcov | codeclimate-test-reporter"
+    "test": "nyc --reporter=lcov --reporter=text-lcov jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
