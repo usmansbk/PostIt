@@ -22,7 +22,4 @@ before_script:
   - "./node_modules/.bin/babel server/src/bin/www --out-file server/build/bin/www"
   - "npm run start:server &"
 after_success:
-  - npm i -g nyc
-  - npm i -g coveralls
-  - npm run coveralls
   - npm run coverage
