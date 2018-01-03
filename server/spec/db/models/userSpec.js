@@ -1,6 +1,6 @@
 const db = require('../../../db/models');
 
-const { User, Group } = db;
+const { User, Group, sequelize } = db;
 
 describe('User database model:', () => {
   describe('username with', () => {
@@ -505,6 +505,9 @@ describe('User database model:', () => {
   });
 
   describe('get user groups', () => {
+    afterAll((done) => {
+      sequelize.sync({ force: true }).then(() => done());
+    });
     it('should be truthy', (done) => {
       let user;
       User.create({
