@@ -1,8 +1,7 @@
 const db = require('../../../db/models');
 const helpers = require('../../helpers');
 
-const { seedTable } = helpers.util;
-const { users, posts } = helpers.seed; 
+const { users, posts } = helpers.seed;
 
 const {
   Group, User, Post, sequelize
@@ -12,18 +11,18 @@ let group, userModels, postModels;
 
 describe('Group database model', () => {
   beforeAll((done) => {
-  Group.create({ name: 'valid' }).then((newGroup) => {
-    Post.bulkCreate(posts).then(() => Post.findAll())
-    .then((foundPosts) => {
-      postModels = foundPosts;
-      User.bulkCreate(users).then(() => User.findAll())
-        .then((foundUsers) => {
-          userModels = foundUsers;
-          done();
-      });
+    Group.create({ name: 'valid' }).then((newGroup) => {
+      Post.bulkCreate(posts).then(() => Post.findAll())
+        .then((foundPosts) => {
+          postModels = foundPosts;
+          User.bulkCreate(users).then(() => User.findAll())
+            .then((foundUsers) => {
+              userModels = foundUsers;
+              done();
+            });
+        });
+      group = newGroup;
     });
-    group = newGroup;
-  });
   });
 
   afterAll((done) => {
@@ -68,7 +67,7 @@ describe('Group database model', () => {
     it('purpose longer than 50 characters', (done) => {
       Group.create({
         name: 'Valid Name',
-        purpose: '0123456789-0123456789-0123456789-0123456789-0123456789-' 
+        purpose: '0123456789-0123456789-0123456789-0123456789-0123456789-'
       }).catch((error) => {
         expect(error.value).toBeFalsy();
         done();
@@ -76,15 +75,15 @@ describe('Group database model', () => {
     });
 
     it('null purpose value', (done) => {
-      Group.create({ name: 'Valid Name', purpose: null }).then((group) => {
-        expect(group).toBeTruthy();
+      Group.create({ name: 'Valid Name', purpose: null }).then((newGroup) => {
+        expect(newGroup).toBeTruthy();
         done();
       });
     });
 
     it('blank purpose value', (done) => {
-      Group.create({ name: 'Valid Name', purpose: '  ' }).then((group) => {
-        expect(group).toBeTruthy();
+      Group.create({ name: 'Valid Name', purpose: '  ' }).then((newGroup) => {
+        expect(newGroup).toBeTruthy();
         done();
       });
     });
@@ -106,14 +105,14 @@ describe('Group database model', () => {
     });
 
     it('post model object', (done) => {
-      group.addPost(postModels[0]).then(post => {
+      group.addPost(postModels[0]).then((post) => {
         expect(post).toBeTruthy();
         done();
       });
     });
 
     it('array of post models', (done) => {
-      group.setPosts(postModels).then(associatedPosts => {
+      group.setPosts(postModels).then((associatedPosts) => {
         expect(associatedPosts).toBeTruthy();
         done();
       });
@@ -122,7 +121,7 @@ describe('Group database model', () => {
 
   describe('retrieve posts', () => {
     it('should return all posts as array', (done) => {
-      group.getPosts().then(associatedPosts => {
+      group.getPosts().then((associatedPosts) => {
         expect(associatedPosts).toBeTruthy();
         done();
       });
