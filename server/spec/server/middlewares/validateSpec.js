@@ -1,4 +1,4 @@
-const middlewares = require('../../../server/build/middlewares'),
+const middlewares = require('../../../build/middlewares'),
   helpers = require('../helpers'),
   { Validate } = middlewares,
   { req, res } = helpers.util;
