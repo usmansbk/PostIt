@@ -8,8 +8,8 @@
     "start:server": "node server/build/bin/www",
     "start:dev": "nodemon server/build/bin/www",
     "test": "jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
-    "cover": "istanbul cover jasmine",
-    "coveralls": "npm run cover"
+    "cover": "nyc --reporter=lcov npm test",
+    "coverage": "nyc report"
   },
   "repository": {
     "type": "git",
@@ -43,12 +43,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-istanbul": "^4.1.5",
     "babel-preset-env": "^1.6.1",
-    "coveralls": "^3.0.0",
     "eslint": "^4.14.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "istanbul": "^0.4.5",
     "jasmine": "^2.8.0",
     "nodemon": "^1.14.3"
   }
