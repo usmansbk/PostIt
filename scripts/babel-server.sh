@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 cd server
 mkdir build
 cd build
