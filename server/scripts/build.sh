@@ -22,4 +22,3 @@ export DEV_DB_PASSWORD=null
 export DEV_DB_NAME=postit_dev
 export DEV_DB_HOSTNAME='127.0.0.1'
 export DEV_DB_PORT=5432
-export JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json

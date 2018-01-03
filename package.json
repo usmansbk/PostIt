@@ -6,8 +6,8 @@
   "scripts": {
     "build": "sh server/scripts/build.sh",
     "start:server": "node server/build/bin/www",
-    "start:devserver": "nodemon server/build/bin/www",
-    "test": "jasmine",
+    "start:dev": "nodemon server/build/bin/www",
+    "test": "jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
     "cover": "istanbul cover jasmine",
     "coveralls": "npm run cover"
   },
