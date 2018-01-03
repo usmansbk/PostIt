@@ -17,19 +17,8 @@ const baseUrl = 'http://localhost:8888/api/',
     password: '12345678?',
     email: 'vash@trigun.com'
   },
-  registeredUsers = [
-    {
-      username: 'naruto',
-      password: '12345678',
-      email: 'naruto@shinobi.com',
-    },
-    {
-      username: 'rukia',
-      password: '12345678',
-      email: 'rukia@shinigami.com'
-    }
-  ],
-  unregisteredUsers = ['sasuke', 'orochimaru'];
+  registeredUsers = helpers.seed.users,
+  unregisteredUsers = helpers.seed.unregisteredUsernames;
 
 let groupId, groupUrl;
 

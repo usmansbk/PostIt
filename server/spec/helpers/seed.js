@@ -31,6 +31,9 @@ const groups = [
   }
 ];
 
+const unregisteredUsernames = ['gordon', 'dflash', 'batman'];
+
 exports.users = users;
 exports.groups = groups;
 exports.posts = posts;
+exports.unregisteredUsernames = unregisteredUsernames;
