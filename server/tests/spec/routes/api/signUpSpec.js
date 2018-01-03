@@ -1,7 +1,7 @@
 const request = require('request'),
   url = 'http://localhost:8888/api/user/signup';
 
-const db = require('../../../../../db/models'),
+const db = require('../../../../db/models'),
   { sequelize } = db;
 
 

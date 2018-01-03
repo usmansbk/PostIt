@@ -1,4 +1,4 @@
-const middlewares = require('../../../../build/middlewares'),
+const middlewares = require('../../../build/middlewares'),
   helper = require('../helpers');
 
 const { Route } = middlewares;

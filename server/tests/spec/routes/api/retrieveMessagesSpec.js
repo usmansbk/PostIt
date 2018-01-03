@@ -1,5 +1,5 @@
 let request = require('request');
-const db = require('../../../../../db/models'),
+const db = require('../../../../db/models'),
   { sequelize } = db,
   j = request.jar();
 

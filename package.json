@@ -7,7 +7,7 @@
     "build": "sh scripts/babel-server.sh",
     "start:server": "node server/build/bin/www",
     "start:devserver": "nodemon server/build/bin/www",
-    "test": "jasmine"
+    "test": "jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json"
   },
   "repository": {
     "type": "git",
