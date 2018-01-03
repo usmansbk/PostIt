@@ -1,7 +1,7 @@
 const middlewares = require('../../build/middlewares'),
   helpers = require('../helpers'),
   { Validate } = middlewares,
-  { req, res } = helpers;
+  { req, res } = helpers.util;
 
 const callback = function callback() {
   res.statusCode = 200;

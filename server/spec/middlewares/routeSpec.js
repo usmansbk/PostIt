@@ -2,7 +2,7 @@ const middlewares = require('../../build/middlewares'),
   helper = require('../helpers');
 
 const { Route } = middlewares;
-const { req, res } = helper;
+const { req, res } = helper.util;
 const callback = function callback() {
   res.statusCode = 200;
 };

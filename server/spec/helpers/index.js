@@ -1,3 +1,5 @@
-const route = require('./util');
+const util = require('./util');
+const seed = require('./seed');
 
-module.exports = route;
+exports.util = util;
+exports.seed = seed;

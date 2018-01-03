@@ -7,7 +7,7 @@ const db = require('../../../db/models'),
 request = request.defaults({ jar: j });
 
 const baseUrl = 'http://localhost:8888/api/',
-  { registerUsers, getUsernames } = helpers,
+  { registerUsers, getUsernames } = helpers.util,
   url = `${baseUrl}group/`,
   endPoint = '/user',
   signInUrl = `${baseUrl}user/signin`,
