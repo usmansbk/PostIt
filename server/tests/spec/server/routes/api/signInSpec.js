@@ -1,5 +1,5 @@
 const request = require('request');
-const db = require('../../../../db/models');
+const db = require('../../../../../db/models');
 
 const baseUrl = 'http://localhost:8888/api/user',
   url = `${baseUrl}/signin`,

@@ -1,4 +1,4 @@
-const db = require('../../../../db/models');
+const db = require('../../../../../db/models');
 
 const { User, Group, sequelize } = db;
 

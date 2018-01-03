@@ -1,6 +1,6 @@
 let request = require('request');
 const helpers = require('../../helpers');
-const db = require('../../../../db/models'),
+const db = require('../../../../../db/models'),
   j = request.jar(),
   { sequelize } = db;
 
