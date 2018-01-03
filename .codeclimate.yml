@@ -1,5 +1,5 @@
 exclude_patterns:
- - 'server/tests/'
- - 'server/db'
- - 'server/scripts'
+ - '**/tests/'
+ - '**/db'
+ - '**/scripts'
  - 'template/'
