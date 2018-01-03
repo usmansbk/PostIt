@@ -19,7 +19,7 @@ cd ../../
 ./node_modules/.bin/babel server/src/helpers --out-dir server/build/helpers
 ./node_modules/.bin/babel server/src/routes --out-dir server/build/routes
 
-## Set environment variables for development
+## Set environment variables for local development
 export NODE_ENV=development
 export DEV_DB_USERNAME=usman
 export DEV_DB_PASSWORD=null
