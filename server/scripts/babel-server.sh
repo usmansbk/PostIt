@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
-rm -r build
-mkdir build
-cd build
+rm -r server/build
+mkdir server/build
+cd server/build
 mkdir bin controllers helpers middlewares routes
 mkdir routes/api
 
-cd ../
+cd ../../
 
-./node_modules/.bin/babel src/server.js --out-file build/server.js
-./node_modules/.bin/babel src/bin/www --out-file build/bin/www
-./node_modules/.bin/babel src/controllers --out-dir build/controllers
-./node_modules/.bin/babel src/middlewares --out-dir build/middlewares
-./node_modules/.bin/babel src/helpers --out-dir build/helpers
-./node_modules/.bin/babel src/routes --out-dir build/routes
+./node_modules/.bin/babel server/src/server.js --out-file server/build/server.js
+./node_modules/.bin/babel server/src/bin/www --out-file server/build/bin/www
+./node_modules/.bin/babel server/src/controllers --out-dir server/build/controllers
+./node_modules/.bin/babel server/src/middlewares --out-dir server/build/middlewares
+./node_modules/.bin/babel server/src/helpers --out-dir server/build/helpers
+./node_modules/.bin/babel server/src/routes --out-dir server/build/routes
