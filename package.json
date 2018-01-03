@@ -4,7 +4,7 @@
   "description": "Minimalist social network web app",
   "main": "server.js",
   "scripts": {
-    "build": "sh server/scripts/transpile.sh",
+    "build": "sh server/scripts/build.sh",
     "start:server": "node server/build/bin/www",
     "start:devserver": "nodemon server/build/bin/www",
     "test": "jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json"
