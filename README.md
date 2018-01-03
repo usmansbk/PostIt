@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/usmansbk/PostIt.svg?branch=chore%2Ftravis-integration)](https://travis-ci.org/usmansbk/PostIt)
+[![Build Status](https://travis-ci.org/usmansbk/PostIt.svg?branch=chore%2Ftravis-integration)](https://travis-ci.org/usmansbk/PostIt) [![Coverage Status](https://coveralls.io/repos/github/usmansbk/PostIt/badge.svg?branch=chore%2Ftravis-integration)](https://coveralls.io/github/usmansbk/PostIt?branch=chore%2Ftravis-integration)
 PostIt
 
 Introduction
