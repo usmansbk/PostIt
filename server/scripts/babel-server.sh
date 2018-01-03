@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-rm -r server/build
+if test -d ./server/build;
+then
+  rm -r server/build
+fi
 mkdir server/build
 cd server/build
 mkdir bin controllers helpers middlewares routes
