@@ -21,3 +21,5 @@ before_script:
   - "./node_modules/.bin/babel server/src --out-dir server/build"
   - "./node_modules/.bin/babel server/src/bin/www --out-file server/build/bin/www"
   - "npm run start:server &"
+after_success:
+  - npm run coveralls
