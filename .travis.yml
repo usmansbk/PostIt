@@ -24,3 +24,4 @@ before_script:
   - "npm run start:server &"
 after_success:
   - npm run coverage
+  - codeclimate-test-reporter < coverage/lcov.info
