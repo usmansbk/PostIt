@@ -4,7 +4,19 @@ node_js:
 cache:
   directories:
     - "node_modules"
+env:
+  - NODE_ENV=test
+  - TEST_DB_USERNAME=postgres
+  - TEST_DB_PASSWORD=null
+  - TEST_DB_NAME=postit_test
 services:
   - postgresql
 before_script:
-  - psql -c 'CREATE DATABASE postit_dev;' -U postgres 
+  - psql -c 'CREATE DATABASE postit_test;' -U postgres
+  - "mkdir server/build"
+  - "cd server/build"
+  - "mkdir bin controllers helpers middlewares routes"
+  - "mkdir routes/api"
+  - "cd ../../"
+  - "./node_modules/.bin/babel server/src --out-dir server/build"
+  - "./node_modules/.bin/babel server/src/bin/www --out-file server/build/bin/www"
