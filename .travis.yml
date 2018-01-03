@@ -1,12 +1,10 @@
 language: node_js
+node_js:
+  - "node"
 cache:
   directories:
     - "node_modules"
 services:
   - postgresql
-before_install:
-  - npm i -g npm
-  - npm install
-  - createdb postit_dev
 before_script:
-  - npm run build
+  - psql -c 'CREATE DATABASE postit_dev;' -U postgres 

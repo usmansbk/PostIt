@@ -12,12 +12,8 @@ mkdir routes/api
 cd ../../
 
 ## Transpile src/ codes to build/
-./node_modules/.bin/babel server/src/server.js --out-file server/build/server.js
+./node_modules/.bin/babel server/src --out-dir server/build
 ./node_modules/.bin/babel server/src/bin/www --out-file server/build/bin/www
-./node_modules/.bin/babel server/src/controllers --out-dir server/build/controllers
-./node_modules/.bin/babel server/src/middlewares --out-dir server/build/middlewares
-./node_modules/.bin/babel server/src/helpers --out-dir server/build/helpers
-./node_modules/.bin/babel server/src/routes --out-dir server/build/routes
 
 ## Set environment variables for local development
 export NODE_ENV=development
