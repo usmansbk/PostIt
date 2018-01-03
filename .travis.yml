@@ -4,11 +4,11 @@ node_js:
 cache:
   directories:
     - "node_modules"
-env:
-  - NODE_ENV=test
-  - TEST_DB_USERNAME=postgres
-  - TEST_DB_PASSWORD=null
-  - TEST_DB_NAME=postit_test
+before_install:
+  - export NODE_ENV=test
+  - export TEST_DB_USERNAME=postgres
+  - export TEST_DB_PASSWORD=null
+  - export TEST_DB_NAME=postit_test
 services:
   - postgresql
 before_script:
