@@ -1,6 +1,4 @@
-const db = require('../../../../db/models');
-
-const { Post, User, sequelize } = db;
+import { Post, User, sequelize } from '../../../../../db/models';
 
 let author, newPost;
 

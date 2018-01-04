@@ -1,8 +1,7 @@
-const middlewares = require('../../../build/middlewares'),
-  helper = require('../helpers');
+import { Route } from '../../../middlewares';
+import { util } from '../helpers';
 
-const { Route } = middlewares;
-const { req, res } = helper.util;
+const { req, res } = util;
 const callback = function callback() {
   res.statusCode = 200;
 };

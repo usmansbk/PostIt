@@ -7,7 +7,8 @@
     "build": "sh server/scripts/build.sh",
     "start:server": "node server/build/bin/www",
     "start:dev": "nodemon server/build/bin/www",
-    "test": "nyc --reporter=lcov --reporter=text-lcov jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
+    "test:dev": "jasmine JASMINE_CONFIG_PATH=server/build/tests/spec/support/jasmine.json",
+    "test": "nyc --reporter=lcov --reporter=text-lcov jasmine JASMINE_CONFIG_PATH=server/build/tests/spec/support/jasmine.json",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -36,9 +37,9 @@
     "morgan": "^1.9.0",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
-    "request": "^2.83.0",
     "sequelize": "^4.28.6",
-    "sequelize-cli": "^3.2.0"
+    "sequelize-cli": "^3.2.0",
+    "supertest": "^3.0.0"
   },
   "nyc": {
     "exclude": [
@@ -56,7 +57,6 @@
     "eslint-plugin-import": "^2.8.0",
     "jasmine": "^2.8.0",
     "nodemon": "^1.14.3",
-    "nyc": "^11.4.1",
-    "supertest": "^3.0.0"
+    "nyc": "^11.4.1"
   }
 }

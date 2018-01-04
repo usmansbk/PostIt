@@ -54,7 +54,4 @@ const groups = [
 
 const unregisteredUsernames = ['gordon', 'dflash', 'batman', 'shazam'];
 
-exports.users = users;
-exports.groups = groups;
-exports.posts = posts;
-exports.unregisteredUsernames = unregisteredUsernames;
+export { users, groups, posts, unregisteredUsernames };

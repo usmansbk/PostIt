@@ -1,7 +1,7 @@
-const db = require('../../../../db/models');
-const helpers = require('../../helpers');
+import db from '../../../../../db/models';
+import { seed } from '../../helpers';
 
-const { users, posts } = helpers.seed;
+const { users, posts } = seed;
 
 const {
   Group, User, Post, sequelize

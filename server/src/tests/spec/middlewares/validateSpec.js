@@ -1,7 +1,7 @@
-const middlewares = require('../../../build/middlewares'),
-  helpers = require('../helpers'),
-  { Validate } = middlewares,
-  { req, res } = helpers.util;
+import { Validate } from '../../../middlewares';
+import { util } from '../helpers';
+
+const { req, res } = util;
 
 const callback = function callback() {
   res.statusCode = 200;

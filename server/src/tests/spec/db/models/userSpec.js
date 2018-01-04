@@ -1,6 +1,4 @@
-const db = require('../../../../db/models');
-
-const { User, Group, sequelize } = db;
+import { User, Group, sequelize } from '../../../../../db/models';
 
 describe('User database model:', () => {
   describe('username with', () => {

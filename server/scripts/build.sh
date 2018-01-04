@@ -1,15 +1,19 @@
 #!/usr/bin/env sh
 
 ## Make required build directories
-if test -d ./server/build;
-then
-  rm -r server/build
-fi
-mkdir server/build
-cd server/build
-mkdir bin controllers helpers middlewares routes
-mkdir routes/api
-cd ../../
+#if test -d ./server/build;
+#then
+#  rm -r server/build
+#fi
+#mkdir server/build
+#cd server/build
+#mkdir bin controllers helpers middlewares routes tests
+#mkdir routes/api
+#mkdir tests/spec
+#cd test/spec
+#mkdir db db/models middlewares routes support helpers
+#cd ../../
+#cd ../../
 
 ## Transpile src/ codes to build/
 ./node_modules/.bin/babel server/src --out-dir server/build
