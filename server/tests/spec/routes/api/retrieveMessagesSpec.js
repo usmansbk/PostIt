@@ -5,7 +5,8 @@ const db = require('../../../../db/models'),
 
 request = request.defaults({ jar: j });
 
-const baseUrl = 'http://localhost:8888/api',
+const port = process.env.PORT || 8888;
+const baseUrl = `http://localhost:${port}/api/`,
   url = `${baseUrl}/group/`,
   endPoint = '/messages',
   signInUrl = `${baseUrl}/user/signin`,

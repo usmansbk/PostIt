@@ -6,7 +6,8 @@ const db = require('../../../../db/models'),
 
 request = request.defaults({ jar: j });
 
-const baseUrl = 'http://localhost:8888/api',
+const port = process.env.PORT || 8888;
+const baseUrl = `http://localhost:${port}/api/`,
   url = `${baseUrl}/group`,
   signInUrl = `${baseUrl}/user/signin`,
   signUpUrl = `${baseUrl}/user/signup`;

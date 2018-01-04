@@ -1,7 +1,8 @@
 const request = require('request');
 const db = require('../../../../db/models');
 
-const baseUrl = 'http://localhost:8888/api/user',
+const port = process.env.PORT || 8888;
+const baseUrl = `http://localhost:${port}/api/user`,
   url = `${baseUrl}/signin`,
   signUpUrl = `${baseUrl}/signup`,
   { sequelize } = db;
