@@ -1,3 +1,4 @@
+## Server badges
 [![Build Status](https://travis-ci.org/usmansbk/PostIt.svg?branch=chore%2Ftravis-integration)](https://travis-ci.org/usmansbk/PostIt) [![Coverage Status](https://coveralls.io/repos/github/usmansbk/PostIt/badge.svg?branch=chore%2Ftravis-integration)](https://coveralls.io/github/usmansbk/PostIt?branch=chore%2Ftravis-integration) [![Maintainability](https://api.codeclimate.com/v1/badges/322551aca6414dc8d2a7/maintainability)](https://codeclimate.com/github/usmansbk/PostIt/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/322551aca6414dc8d2a7/test_coverage)](https://codeclimate.com/github/usmansbk/PostIt/test_coverage)
 
 # PostIt
@@ -35,4 +36,3 @@ These instructions will get you a copy of the project up and running on your loc
 ## License
 
 This project is licensed under the MIT License - see the the [LICENSE.md](https://opensource.org/licenses/MIT) file for details
-
