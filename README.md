@@ -25,11 +25,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Running the tests
 
+```
+```
+
 ## Author
 
 * **Babakolo Usman** - [usmansbk](https://github.com/usmansbk)
 
 ## License
 
-This project is licensed under the MIT License - see the the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the the [LICENSE.md](https://opensource.org/licenses/MIT) file for details
 
