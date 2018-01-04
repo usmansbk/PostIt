@@ -21,8 +21,8 @@
           <td><input class=form-control-sm form=signin name=username type=text required aria-required></td>
           <td><input class=form-control-sm form=signin name=password type=password required aria-required></td>
           <td>
-            <form action=http://localhost:8888/api/user/signin method=post id=signin>
-              <input class=btn-sm type=submit value="Sign In">
+            <form id=signin>
+              <input id=signin-btn class=btn-sm type=submit value="Sign In" data-method=post data-action=http://localhost:8888/api/user/signin data-form=signin>
             </form>
           </td>
         </tr>
@@ -34,33 +34,33 @@
     </header>
 
     <div class=main role=main>
-    <form action=http://localhost:8888/api/user/signup id=signup method=post>
+    <form id=signup>
       <h2 class=form-signin-heading>Create an Account</h2>
       <label for=f-firstname>Firstname</label>
-      <input class=form-control id=f-firstname name=firstname type=text placeholder required aria-required>
+      <input form=signup class=form-control id=f-firstname name=firstname type=text placeholder required aria-required>
 
       <label for=f-surname>Surname</label>
-      <input class=form-control id=f-surname name=surname type=text placeholder required aria-required>
+      <input form=signup class=form-control id=f-surname name=surname type=text placeholder required aria-required>
 
       <label for=f-username>Username</label>
-      <input class=form-control id=f-username name=username type=text placeholder required aria-required>
+      <input class=form-control id=f-username name=username type=text placeholder required aria-required form=signup >
 
       <label for=f-email>Email</label>
-      <input class=form-control id=f-email name=email type=email placeholder required aria-required>
+      <input class=form-control id=f-email name=email type=email placeholder required aria-required form=signup>
 
       <label for=f-password>New Password</label>
-      <input class=form-control id=f-password name=password type=password placeholder required aria-required>
+      <input class=form-control id=f-password name=password type=password placeholder required aria-required form=signup>
 
-      <label for=f-retype>Retype Password</label>
-      <input class=form-control id=f-retype type=password placeholder required aria-required>
+      <label for=f-confirm-password>Confirm Password</label>
+      <input class=form-control id=f-confirm-password type=password placeholder required aria-required form=signup>
 
       <label id=birthday type=f-birthday>Birthday</label>
-      <input class=form-control id=f-birthday name=birthday type=date>
+      <input class=form-control id=f-birthday name=birthday type=date form=signup>
 
-      <input class=form-check type=radio name=gender value=male> Male
-      <input class=form-check type=radio name=gender value=female> Female
+      <input class=form-check type=radio name=gender value=male form=signup> Male
+      <input class=form-check type=radio name=gender value=female form=signup> Female
       <br>
-      <input class=btn type=submit value="Sign Up">
+      <input data-form=signup  id=signup-btn class=btn type=submit data-method=post data-action=http://localhost:8888/api/user/signup value="Sign Up">
     </form>
     <aside>
       <article>
@@ -80,5 +80,6 @@
     </footer>
 
     <script src=js/util.js></script>
+    <script src=js/script.js></script>
   </body>
 </html>
