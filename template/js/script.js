@@ -9,7 +9,7 @@
     /**
      * The function applies a style to a list of DOM elements
      * @param {String} query
-     * @param {String} style property 
+     * @param {String} style property
      * @param {String} style value
      */
     function queryStyleAll(query, prop, value, ignoreIds) {

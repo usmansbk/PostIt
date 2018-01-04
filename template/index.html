@@ -21,7 +21,7 @@
           <td><input class=form-control-sm form=signin name=username type=text required aria-required></td>
           <td><input class=form-control-sm form=signin name=password type=password required aria-required></td>
           <td>
-            <form action=https://localhost:5000/api/user/signin method=post id=signin>
+            <form action=http://localhost:8888/api/user/signin method=post id=signin>
               <input class=btn-sm type=submit value="Sign In">
             </form>
           </td>
@@ -57,8 +57,8 @@
       <label id=birthday type=f-birthday>Birthday</label>
       <input class=form-control id=f-birthday name=birthday type=date>
 
-      <input class=form-check type=radio name=gender value=Male> Male
-      <input class=form-check type=radio name=gender value=Female> Female
+      <input class=form-check type=radio name=gender value=male> Male
+      <input class=form-check type=radio name=gender value=female> Female
       <br>
       <input class=btn type=submit value="Sign Up">
     </form>
