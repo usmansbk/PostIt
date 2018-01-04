@@ -75,10 +75,15 @@ const Util = (function (_import) {
     return form;
   }
 
+  const request = function request(method, action, form, handler) {
+    handler(form);
+  };
+
   module.queryStyleAll = queryStyleAll;
   module.addPlaceholders = addPlaceholders;
   module.contains = contains;
   module.parseFormNodes = parseFormNodes;
+  module.request = request;
 
   return module;
 })();

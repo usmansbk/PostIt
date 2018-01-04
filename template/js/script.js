@@ -1,4 +1,4 @@
-const Script = (function (Util) {
+const Script = (function (Util, Route) {
   const module = {};
 
   let signUpBtn
@@ -20,16 +20,19 @@ const Script = (function (Util) {
 
     let formElem = document.querySelector('[id='+ form +']');
     let valid = formElem.checkValidity();
+    let signHandler;
     if (valid) {
       if (form === 'signin') {
         form = Util.parseFormNodes(signInNodes);
+        signHandler = Route.signInHandler;
       } else if (form === 'signup') {
         form = Util.parseFormNodes(signUpNodes);
+        signHandler = Route.signUpHandler;
       }
-      console.log(form);
+      Util.request(method, action, form, signHandler);
       event.preventDefault();
     }
-   //  Util.request(method, action, form);
+    
   };
   signInBtn.addEventListener('click',submitHandler);
   signUpBtn.addEventListener('click', submitHandler);
@@ -37,4 +40,4 @@ const Script = (function (Util) {
   module.submitHandler = submitHandler;
 
   return module;
-})(Util);
+})(Util, Route);
