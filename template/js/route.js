@@ -1,12 +1,25 @@
+/** @module Route - Handles all the route*/
 const Route = (function () {
   const module = {};
 
-  let signInHandler = function signInHandler(res, body, err) {
-    console.log(res);
+  /**
+   * @callback signInHandler
+   * @param {Object} res - The response object
+   * @param {Object} body - The body object
+   * @param {Object} err - The error object
+   */
+  let signInHandler = function signInHandler(statusCode, body) {
+    console.log(statusCode, body);
   };
 
-  let signUpHandler = function signUpHandler(res, body, err) {
-    console.log(res);
+  /**
+   * @callback signInHandler
+   * @param {Object} res - The response object
+   * @param {Object} body - The body object
+   * @param {Object} err - The error object
+   */
+  let signUpHandler = function signUpHandler(statusCode, body) {
+    console.log(statusCode, body);
   };
 
   module.signInHandler = signInHandler;

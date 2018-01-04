@@ -1,3 +1,4 @@
+/** @module Util - Helper functions */
 const Util = (function (_import) {
   const module = {};
 
@@ -6,11 +7,11 @@ const Util = (function (_import) {
   }
 
   /**
-   * The function applies a style to a list of DOM elements
-   * @param {String} query
-   * @param {String} style - property
-   * @param {String} style - value
-   * @return {Object} - elements
+   * This function applies a style to a list of DOM elements
+   * @param {string} query - CSS selector
+   * @param {string} style - property
+   * @param {string} style - value
+   * @return {Object[]} - applied elements
    */
   function queryStyleAll(query, prop, value, ignoreIds) {
     let elems = document.querySelectorAll(query)
@@ -28,7 +29,7 @@ const Util = (function (_import) {
 
   /**
    * Add placeholders to the labels target nodes
-   * @param labels - Array of label Nodes
+   * @param {Object[]} labels - An array of label tag Nodes
    */
   function addPlaceholders(labels) {
     let labelsLength = labels.length, i;
@@ -59,14 +60,16 @@ const Util = (function (_import) {
   })();
 
   /**
-   * @desc Parses a DOM Nodes collection to JSON format.
-   * @param {DOMNodeCollection} nodes - form children nodes
-   * @return {Object} - form json object
+   * @function parseFormNodes
+   * @desc - Parses a DOM Nodes collection to JSON format.
+   * @param {Object[]} nodes - form children nodes
+   * @return {Object} - form json format object
    */
   const parseFormNodes = function parseFormNodes(nodes) {
     const form = {};
     nodes = [].slice.call(nodes, 0);
     nodes.forEach((node) => {
+      // Makes sure the checked radio button and no confirm node is selected
       if ((node.type == 'radio' && !node.checked) || !node.name) return;
       const name = node['name'];
       const value = node['value'];
@@ -75,8 +78,27 @@ const Util = (function (_import) {
     return form;
   }
 
+  /**
+   * @function request
+   * @desc - This function initiates an AJAX request and handles it with the callback, by passing
+   * calling it callback(statusCode, body)
+   * @param {string} method - HTTP VERB
+   * @param {string} action - RESTful API
+   * @param {Object} form - JSON form object
+   * @param {function} handler - callback to handle request
+   */
   const request = function request(method, action, form, handler) {
-    handler(form);
+    const xhr = new XMLHttpRequest();
+    xhr.onstatereadychange = () => {
+      if(this.readyState === 4) {
+        handler(this.status, this.statusText);
+      }
+    };
+    xhr.open(method, action, true);
+    if (method.toLowerCase() === 'post') {
+      xhr.setRequestHeader("Content-type", "application/json");
+    }
+    xhr.send(JSON.stringify(form));
   };
 
   module.queryStyleAll = queryStyleAll;

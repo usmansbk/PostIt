@@ -1,3 +1,4 @@
+/** @module Script - Main entry */
 const Script = (function (Util, Route) {
   const module = {};
 
@@ -11,7 +12,7 @@ const Script = (function (Util, Route) {
   signUpNodes = document.querySelectorAll('[form=signup]');
   signInNodes = document.querySelectorAll('[form=signin]');
 
-  let submitHandler = function submitHandler(event) {
+  let submit = function submit(event) {
     const target = event.target;
     const dataset = target.dataset;
     const method = dataset.method;
@@ -32,12 +33,12 @@ const Script = (function (Util, Route) {
       Util.request(method, action, form, signHandler);
       event.preventDefault();
     }
-    
-  };
-  signInBtn.addEventListener('click',submitHandler);
-  signUpBtn.addEventListener('click', submitHandler);
 
-  module.submitHandler = submitHandler;
+  };
+  signInBtn.addEventListener('click',submit);
+  signUpBtn.addEventListener('click', submit);
+
+  module.submit = submit;
 
   return module;
 })(Util, Route);
