@@ -89,16 +89,16 @@ const Util = (function (_import) {
    */
   const request = function request(method, action, form, handler) {
     const xhr = new XMLHttpRequest();
-    xhr.onstatereadychange = () => {
+    xhr.onreadystatechange = function () {
       if(this.readyState === 4) {
         handler(this.status, this.statusText);
       }
     };
     xhr.open(method, action, true);
     if (method.toLowerCase() === 'post') {
-      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.setRequestHeader("Content-Type", "application/json");
     }
-    xhr.send(JSON.stringify(form));
+    xhr.send(form);
   };
 
   module.queryStyleAll = queryStyleAll;

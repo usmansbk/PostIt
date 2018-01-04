@@ -30,6 +30,7 @@ const Script = (function (Util, Route) {
         form = Util.parseFormNodes(signUpNodes);
         signHandler = Route.signUpHandler;
       }
+      form = JSON.stringify(form);
       Util.request(method, action, form, signHandler);
       event.preventDefault();
     }

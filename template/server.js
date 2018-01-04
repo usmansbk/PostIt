@@ -1,9 +1,16 @@
-const express = require('express');
-const morgan = require('morgan');
+const express = require('express')
+    , morgan = require('morgan')
+    , bodyParser = require('body-parser');
+
+let request = require('request');
 
 const app = express()
     , port = process.env.FRONTEND_PORT || 8999;
 
+request = request.defaults({ jar: true });
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.static('public'));
 
@@ -14,7 +21,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/user/signin', (req, res) => {
-  res.send('sign in');
+  const { username, password } = req.body;
+  res.status(200).json({message: 'works'});
 });
 
 app.post('/user/signup', (req, res) => {
