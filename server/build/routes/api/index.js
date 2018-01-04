@@ -24,5 +24,13 @@ router.post('/api/group/', _middlewares.Validate.createGroup, _controllers.Group
 router.post('/api/group/:guid/message', _middlewares.Validate.postMessage, _controllers.GroupController.postMessage);
 router.post('/api/group/:guid/user', _middlewares.Validate.addUsers, _controllers.GroupController.addUsers);
 router.get('/api/group/:guid/messages', _controllers.GroupController.retrieveMessages);
+router.all('*', function (req, res) {
+  res.status(405).json({
+    status: 'fail',
+    data: {
+      message: 'Bad url'
+    }
+  });
+});
 
 exports.default = router;

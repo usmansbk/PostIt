@@ -14,8 +14,6 @@ services:
   - postgresql
 before_script:
   - psql -c 'CREATE DATABASE postit_test;' -U postgres
-  - "./node_modules/.bin/babel server/src --out-dir server/build"
-  - "./node_modules/.bin/babel server/src/bin/www --out-file server/build/bin/www"
   - "npm run start &"
 after_success:
   - npm run coveralls

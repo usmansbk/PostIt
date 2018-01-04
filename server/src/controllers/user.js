@@ -33,12 +33,11 @@ export default class UserController {
         data: {
           user
         }
-      })).catch(error =>
+      })).catch(() =>
       res.status(400).json({
         status: 'fail',
         data: {
-          message: 'Failed to create new user',
-          error
+          message: 'Failed to create new user'
         }
       }));
   }

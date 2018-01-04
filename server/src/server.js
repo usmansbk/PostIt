@@ -2,19 +2,13 @@ import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import bunyan from 'bunyan';
 import router from './routes/api';
+import appInfo from './helpers/info';
 
 const app = express();
 const logger = morgan('dev');
-
-const appInfo = {
-  name: 'PostIt Server',
-  version: '1.0.0',
-  status: 'online',
-  about: 'This application allows people create accounts, create groups and add registerd users to the groups, and the send messages out to these groups whenever they want.',
-  author: 'Babakolo Usman Suleiman',
-  contact: 'https://github.com/usmansbk',
-};
+const log = bunyan.createLogger({ name: 'postit' });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -29,13 +23,12 @@ app.get('/', (req, res) => {
 });
 
 app.use(router);
-/*
-app.use((err, req, res, next) => {
+
+app.use((err, req, res, /* next */) => {
+  log.error('Error', err);
   res.status(500).json({
     status: 'error',
     message: 'Nothing you can do about it!'
   });
 });
-*/
-
 export default app;

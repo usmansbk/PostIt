@@ -55,12 +55,11 @@ var UserController = function () {
             user: user
           }
         });
-      }).catch(function (error) {
+      }).catch(function () {
         return res.status(400).json({
           status: 'fail',
           data: {
-            message: 'Failed to create new user',
-            error: error
+            message: 'Failed to create new user'
           }
         });
       });

@@ -1,7 +1,9 @@
+import bunyan from 'bunyan';
 import { Group, User, Post, Sequelize, sequelize } from '../../db/models';
 import Util from '../helpers';
 
 const { Op } = Sequelize;
+const log = bunyan.createLogger({ name: 'postit' });
 
 export default class GroupController {
   static postMessage(req, res) {
@@ -29,11 +31,11 @@ export default class GroupController {
         data: result
       }))
       .catch((error) => {
+        log.info('postMessage()', error);
         res.status(401).json({
           status: 'fail',
           data: {
-            message: 'Only members can post message!',
-            error
+            message: 'Only members can post message'
           }
         });
       });
@@ -58,11 +60,11 @@ export default class GroupController {
         status: 'success',
         data: { posts }
       })).catch((error) => {
+      log.info('retrieveMessages()', error);
       res.status(401).json({
         status: 'fail',
         data: {
-          message: 'Only members can retrieve messages!',
-          error
+          message: 'Only members can retrieve messages'
         }
       });
     });
@@ -93,11 +95,11 @@ export default class GroupController {
         status: 'success',
         data: { result }
       })).catch((error) => {
+      log.info('addUsers', error);
       res.status(401).json({
         status: 'fail',
         data: {
-          message: 'Only group owner can add users!',
-          error
+          message: 'Only group owner can add users'
         }
       });
     });
@@ -118,11 +120,11 @@ export default class GroupController {
           result
         }
       })).catch((error) => {
+      log.info('createGroup()', error);
       res.status(401).json({
         status: 'fail',
         data: {
-          message: 'Register a new account or sign-in!',
-          error
+          message: 'Register a new account or sign-in'
         }
       });
     });
