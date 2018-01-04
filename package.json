@@ -57,5 +57,8 @@
     "eslint-plugin-import": "^2.8.0",
     "jasmine": "^2.8.0",
     "nodemon": "^1.14.3"
+  },
+  "engines": {
+    "node": "8.9.3"
   }
 }
