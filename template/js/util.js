@@ -1,4 +1,4 @@
-const Util = (function (exports) {
+const Util = (function (_import) {
   const module = {};
 
   function contains (arr, target) {
@@ -8,9 +8,9 @@ const Util = (function (exports) {
   /**
    * The function applies a style to a list of DOM elements
    * @param {String} query
-   * @param {String} style property
-   * @param {String} style value
-   * @return {Object} elements
+   * @param {String} style - property
+   * @param {String} style - value
+   * @return {Object} - elements
    */
   function queryStyleAll(query, prop, value, ignoreIds) {
     let elems = document.querySelectorAll(query)
@@ -28,6 +28,7 @@ const Util = (function (exports) {
 
   /**
    * Add placeholders to the labels target nodes
+   * @param labels - Array of label Nodes
    */
   function addPlaceholders(labels) {
     let labelsLength = labels.length, i;
@@ -57,6 +58,11 @@ const Util = (function (exports) {
     password.addEventListener('change', validatePassword);
   })();
 
+  /**
+   * @desc Parses a DOM Nodes collection to JSON format.
+   * @param {DOMNodeCollection} nodes - form children nodes
+   * @return {Object} - form json object
+   */
   const parseFormNodes = function parseFormNodes(nodes) {
     const form = {};
     nodes = [].slice.call(nodes, 0);
@@ -66,7 +72,7 @@ const Util = (function (exports) {
       const value = node['value'];
       form[name] = value;
     });
-    console.log(form);
+    return form;
   }
 
   module.queryStyleAll = queryStyleAll;

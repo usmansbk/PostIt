@@ -12,16 +12,24 @@ const Script = (function (Util) {
   signInNodes = document.querySelectorAll('[form=signin]');
 
   let submitHandler = function submitHandler(event) {
-    const method = event.target.dataset.method;
-    const action = event.target.dataset.action;
-    let form = event.target.dataset.form;
-    if (form === 'signin') {
-      form = Util.parseFormNodes(signInNodes);
-    } else if (form === 'signup') {
-      form = Util.parseFormNodes(signUpNodes);
+    const target = event.target;
+    const dataset = target.dataset;
+    const method = dataset.method;
+    const action = dataset.action;
+    let form = dataset.form;
+
+    let formElem = document.querySelector('[id='+ form +']');
+    let valid = formElem.checkValidity();
+    if (valid) {
+      if (form === 'signin') {
+        form = Util.parseFormNodes(signInNodes);
+      } else if (form === 'signup') {
+        form = Util.parseFormNodes(signUpNodes);
+      }
+      console.log(form);
+      event.preventDefault();
     }
-  //  Util.request(method, action, form);
-    event.preventDefault();
+   //  Util.request(method, action, form);
   };
   signInBtn.addEventListener('click',submitHandler);
   signUpBtn.addEventListener('click', submitHandler);
