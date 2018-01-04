@@ -3,3 +3,4 @@ exclude_patterns:
  - '**/db'
  - '**/scripts'
  - 'template/'
+ - 'server/build'
