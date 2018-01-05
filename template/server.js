@@ -3,9 +3,11 @@ const express = require('express')
     , bodyParser = require('body-parser');
 
 let request = require('request');
+const db_url = 'http://localhost'
+    , db_port = 8888;
 
 const app = express()
-    , port = process.env.FRONTEND_PORT || 8999;
+    , port = 8999;
 
 request = request.defaults({ jar: true });
 
@@ -20,29 +22,109 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/user/signin', (req, res) => {
-  const { username, password } = req.body;
-  res.status(200).json({message: 'works'});
+function stripJSON(json, keys) {
+  if (json === null || json === undefined) return json;
+  let obj = {}, key;
+  for (key in json) {
+    let inside = keys.indexOf(key);
+    if (inside !== -1) continue;
+
+    if (typeof json[key] === 'object') {
+      obj[key] = stripJSON(json[key], keys);
+    } else {
+      obj[key] = json[key];
+    }
+  }
+  return obj;
+}
+
+
+app.post('/api/user/signin', (req, res) => {
+  const url = `${db_url}:${db_port}${req.url}`;
+  console.log(url);
+  request.post(url, { form: req.body }, (err, response, body) => {
+    if (err) {
+      throw new Error();
+    } else {
+      const statusCode = response.statusCode;
+      body = JSON.parse(body);
+      body = stripJSON(body, ["password"]);
+      res.status(statusCode).json(body);
+    }
+  });
 });
 
-app.post('/user/signup', (req, res) => {
-  res.send('sign up');
+app.post('/api/user/signup', (req, res) => {
+  const url = `${db_url}:${db_port}${req.url}`;
+  request.post(url, { form: req.body }, (err, response, body) => {
+    if (err) {
+      throw new Error();
+    } else {
+      const statusCode = response.statusCode;
+      body = JSON.parse(body);
+      body = stripJSON(body, ["password"]);
+      res.status(statusCode).json(jsonBody);
+    }
+  });
 });
 
-app.post('/group', (req, res) => {
-  res.send('create group');
+app.post('/api/group', (req, res) => {
+  const url = `${db_url}:${db_port}${req.url}`;
+  request.post(url, { form: req.body }, (err, response, body) => {
+    if (err) {
+      throw new Error();
+    } else {
+      const statusCode = response.statusCode;
+      body = JSON.parse(body);
+      res.status(statusCode).json(body);
+    }
+  });
 });
 
-app.post('/group/:guid/user', (req, res) => {
-  res.send('add user');
+app.post('/api/group/:guid/user', (req, res) => {
+  const url = `${db_url}:${db_port}${req.url}`;
+  request.post(url, { form: req.body }, (err, response, body) => {
+    if (err) {
+      throw new Error();
+    } else {
+      const statusCode = response.statusCode;
+      body = JSON.parse(body);
+      res.status(statusCode).json(body);
+    }
+  });
 });
 
-app.post('/group/:guid/message', (req, res) => {
-  res.send('post message');
+app.post('/api/group/:guid/message', (req, res) => {
+  let url = `${db_url}:${db_port}${req.url}`;
+  request.post(url, { form: req.body }, (err, response, body) => {
+    if (err) {
+      throw new Error();
+    } else {
+      const statusCode = response.statusCode;
+      body = JSON.parse(body);
+      res.status(statusCode).json(body);
+    }
+  });
 });
 
-app.get('/group/:guid/messages', (req, res) => {
-  res.send('retrieve messages');
+app.get('/api/group/:guid/messages', (req, res) => {
+  let url = `${db_url}:${db_port}${req.url}`;
+  request.post(url, { form: req.body }, (err, response, body) => {
+    if (err) {
+      throw new Error();
+    } else {
+      const statusCode = response.statusCode;
+      body = JSON.parse(body);
+      res.status(statusCode).json(body);
+    }
+  });
+});
+
+app.use((err, req, res, next) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'Unable to connect to database'
+  });
 });
 
 app.listen(port, () => {

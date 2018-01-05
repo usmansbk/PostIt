@@ -91,7 +91,7 @@ const Util = (function (_import) {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if(this.readyState === 4) {
-        handler(this.status, this.statusText);
+        handler(this.status, this.response);
       }
     };
     xhr.open(method, action, true);
