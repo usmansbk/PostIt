@@ -49,7 +49,9 @@ const Util = (function () {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if(this.readyState === 4) {
-        handler(this.status, this.response);
+        if (handler) {
+          handler(this.status, this.response);
+        }
       }
     };
     xhr.open(method, action, true);
@@ -58,9 +60,35 @@ const Util = (function () {
     }
     xhr.send(form);
   };
+
+  /**
+   *  Parses the event and passes control to
+   * to the handler.
+   * @param {Object} - Request trigger
+   * @param {Object[]} - Form Nodes
+   * @param handler - Callback
+   */
+  let submit = function submit(event, formNodes, handler) {
+    const target = event.target;
+    const dataset = target.dataset;
+    const method = dataset.method;
+    const action = dataset.action;
+    let form = dataset.form;
+
+    let formElem = document.querySelector('[id='+ form +']');
+    let valid = formElem.checkValidity();
+    if (valid) {
+      form = parseFormNodes(formNodes);
+      form = JSON.stringify(form);
+      request(method, action, form, handler);
+      event.preventDefault();
+    }
+
+  };
  module.parseFormNodes = parseFormNodes;
  module.request = request;
  module.passwordValidator = passwordValidator;
+ module.submit = submit;
 
   return module;
 })();

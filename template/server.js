@@ -1,7 +1,8 @@
 const express = require('express')
     , morgan = require('morgan')
     , bodyParser = require('body-parser')
-    , dotenv = require('dotenv');
+    , dotenv = require('dotenv')
+    , session = require('express-session');
 
 dotenv.config();
 
@@ -17,9 +18,33 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.static('public'));
+app.use(session({
+  secret: 's3cr3t',
+  cookie: {}
+}));
+
+
+const auth = function (req, res, next) {
+  const { userId } = req.session;
+  if (!userId) {
+    res.status(403).json({
+      status: 'fail',
+      message: 'Unauthenticated',
+      data: null
+    });
+    return;
+  }
+  next();
+};
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html', {
+  res.status(200).sendFile('index.html', {
+    root: __dirname,
+  });
+});
+
+app.get('/dashboard', auth, (req, res) => {
+  res.status(200).sendFile('dashboard.html', {
     root: __dirname,
   });
 });
@@ -56,6 +81,9 @@ app.post('/api/user/signin', (req, res) => {
     } else {
       const statusCode = response.statusCode;
       body = JSON.parse(body);
+      if (statusCode < 300) {
+        req.session.userId = body.data.user.id;
+      }
       body = stripJSON(body, ["password"]);
       res.status(statusCode).json(body);
     }
@@ -70,6 +98,9 @@ app.post('/api/user/signup', (req, res) => {
     } else {
       const statusCode = response.statusCode;
       body = JSON.parse(body);
+      if (statusCode < 300) {
+        req.session.userId = body.data.user.id;
+      }
       body = stripJSON(body, ["password"]);
       res.status(statusCode).json(body);
     }

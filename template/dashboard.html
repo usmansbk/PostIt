@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PostIt</title>
+    <link href=css/bootstrap.css rel=stylesheet>
+  </head>
+
+  <body>
+    <div id=main class=container>
+      <header>
+        <nav class='navbar navbar-expand navbar-dark fixed-top bg-dark'>
+        <a class=navbar-brand href=/dashboard>
+          <input type=button class='btn btn-outline-info' value=PostIt>
+        </a>
+        </nav>
+      </header>
+
+    </div>
+      <!-- CREATE NEW POST FORM -->
+      <div class='container newpost' style="display:none">
+        <form id=newpost>
+          <div class=form-group>
+            <select class=form-control>
+              <option>Select group</option>
+            </select>
+          </div>
+          <div class=form-group>
+            <textarea rows=10 class=form-control name=message form=newpost spellcheck=false placeholder='Type your message...'>
+            </textarea>
+          </div>
+          <div class='form-group text-right'>
+            <input class='btn btn-lg btn-outline-primary' id=cancel-create-post for=newpost type=button value=Cancel>
+            <input id=newpost-btn class='btn btn-lg btn-outline-secondary' type=submit value=Post data-form=newpost data-method=post data-action=/api/group/:groupId/message>
+          </div>
+        </form>
+      </div>
+
+      <!-- CREATE NEW GROUP FORM-->
+      <div class='container newgroup' style="display:none">
+        <form id=newgroup>
+          <hgroup>
+            <h1>Create a group</h1>
+            <p class='form-text text-muted'>Groups are where you post notifications to everyone.</p>
+          <hgroup>
+
+          <div class=form-group>
+            <label class=font-weight-bold for=group-name>Name</label>
+            <input id=group-name name=name form=newgroup class='form-control form-control-lg' placeholder='e.g. Good People' required>
+            <small class='form-text text-muted'>Names must be shorter than 23 characters.</small>
+          </div>
+
+          <div class=form-group>
+            <label for=group-purpose><span class=font-weight-bold>Purpose</span> <span class='text-muted'>(optional)</span></label>
+            <input id=group-purpose name=purpose form=newgroup class='form-control form-control-lg'>
+            <small class='form-text text-muted'>What's this group about?</small>
+          </div>
+
+          <div class=form-group>
+            <label for=group-invites>
+              <span class=font-weight-bold>Invite:</span>
+              <span class='text-muted'>(optional)</span>
+            </label>
+            <input id=group-invites name=invites form=newgroup class='form-control form-control-lg' placeholder='Search by username' multiple>
+            <small class='form-text text-muted'>Select up to 200 people to add to this group.</small>
+          </div>
+            <section id=users>
+            <!-- List of auto complete users found -->
+            <ul>
+            </ul>
+            </section>
+          <section class=text-right>
+            <input type=button for=newgroup class='btn btn-lg btn-outline-primary' id=cancel-create-group for=newgroup value=Cancel>
+            <input id=newgroup-btn type=submit class='btn btn-lg btn-outline-secondary' value='Create Group' data-form=newgroup data-method=post data-action=/api/group>
+          </section>
+        </form>
+      </div>
+  <!-- script src=../js/jquery.js></script>
+  <script src=../js/popper.js></script>
+  <script src=../js/bootstrap.js></script -->
+  <script src=js/route.js></script>
+  <script src=js/util.js></script>
+  <script src=js/dashboard.js></script>
+  </body>
+</html>
