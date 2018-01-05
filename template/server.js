@@ -1,13 +1,16 @@
 const express = require('express')
     , morgan = require('morgan')
-    , bodyParser = require('body-parser');
+    , bodyParser = require('body-parser')
+    , dotenv = require('dotenv');
+
+dotenv.config();
 
 let request = require('request');
-const db_url = 'http://localhost'
-    , db_port = 8888;
+const db_url = process.env.FRONTEND_HOSTNAME;
+    , db_port = process.env.DEV_DB_PORT;
 
 const app = express()
-    , port = 8999;
+    , port = process.env.FRONTEND_PORT;
 
 request = request.defaults({ jar: true });
 
@@ -22,6 +25,13 @@ app.get('/', (req, res) => {
   });
 });
 
+/**
+ * @function stripJSON
+ * @desc - This function removes selected object keys
+ * @param {Object} json - JavaScript object to strip
+ * @param {Object[]} keys - array of selected keys (string)
+ * @return {Object} - deep copy of object without keys
+ */
 function stripJSON(json, keys) {
   if (json === null || json === undefined) return json;
   let obj = {}, key;
