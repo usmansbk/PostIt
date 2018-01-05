@@ -63,7 +63,7 @@ app.post('/api/user/signup', (req, res) => {
       const statusCode = response.statusCode;
       body = JSON.parse(body);
       body = stripJSON(body, ["password"]);
-      res.status(statusCode).json(jsonBody);
+      res.status(statusCode).json(body);
     }
   });
 });
