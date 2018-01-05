@@ -1,53 +1,11 @@
 /** @module Util - Helper functions */
-const Util = (function (_import) {
+const Util = (function () {
   const module = {};
 
-  function contains (arr, target) {
-    return arr.indexOf(target) >= 0
-  }
-
-  /**
-   * This function applies a style to a list of DOM elements
-   * @param {string} query - CSS selector
-   * @param {string} style - property
-   * @param {string} style - value
-   * @return {Object[]} - applied elements
-   */
-  function queryStyleAll(query, prop, value, ignoreIds) {
-    let elems = document.querySelectorAll(query)
-      , length = elems.length
-      , i;
-    for (i = 0; i < length; i += 1) {
-      let elem = elems[i];
-      if (elem.hasAttribute('id') && contains(ignoreIds, elem.id)) {
-        continue;
-      }
-      elem.style[prop] = value;
-    }
-    return elems;
-  }
-
-  /**
-   * Add placeholders to the labels target nodes
-   * @param {Object[]} labels - An array of label tag Nodes
-   */
-  function addPlaceholders(labels) {
-    let labelsLength = labels.length, i;
-    for (i = 0; i < labelsLength; i += 1) {
-      let label = labels[i],
-          forAttr = label.getAttribute('for'),
-          input = document.querySelector('input[id=' + forAttr + ']');
-      if (input)
-        input.setAttribute('placeholder', label.innerText);
-     }
-  }
-  let labels = queryStyleAll('form > label', 'display', 'none', ['birthday']);
-  addPlaceholders(labels);
-
-  // Password validation
+  //Password validation
   (function() {
-    let password = document.querySelector('#f-password'),
-      confirm_password = document.querySelector('#f-confirm-password');
+    let password = document.querySelector('#signup-password'),
+      confirm_password = document.querySelector('#confirm-password');
     let validatePassword = function () {
       if(password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Passwords Don't Match");
@@ -100,12 +58,8 @@ const Util = (function (_import) {
     }
     xhr.send(form);
   };
-
-  module.queryStyleAll = queryStyleAll;
-  module.addPlaceholders = addPlaceholders;
-  module.contains = contains;
-  module.parseFormNodes = parseFormNodes;
-  module.request = request;
+ module.parseFormNodes = parseFormNodes;
+ module.request = request;
 
   return module;
 })();
