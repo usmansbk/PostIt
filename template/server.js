@@ -6,12 +6,11 @@ const express = require('express')
 dotenv.config();
 
 let request = require('request');
-const db_url = process.env.FRONTEND_HOSTNAME,
-    , db_port = process.env.DEV_DB_PORT;
-
-const app = express()
+const db_url = process.env.FRONTEND_HOSTNAME
+    , db_port = process.env.DEV_DB_PORT
     , port = process.env.FRONTEND_PORT;
 
+const app = express();
 request = request.defaults({ jar: true });
 
 app.use(bodyParser.urlencoded({ extended: true }));
