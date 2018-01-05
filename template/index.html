@@ -11,7 +11,7 @@
     <header>
       <nav class='navbar bg-dark text-light'>
         <a class=navbar-brand href=#>
-            <input type=button class='btn btn-outline-info' value=PostIt>
+            <input type=button class='btn btn-lg btn-outline-info' value=PostIt>
         </a>
         <form id=signin>
           <div class=form-row>
@@ -34,7 +34,7 @@
 
     <div class=container>
       <div class='row main pt-4' role=main>
-        <div class=col-md-8>
+        <div class=col-md-6>
           <aside>
             <article>
               <h1 class=display-4>PostIt</h1>
@@ -44,24 +44,27 @@
             </article>
           </aside>
         </div>
-        <div class='col-12 col-md-4'>
+        <div class='col-12 col-md-6'>
           <form id=signup>
             <h2 class=form-signin-heading>Create an Account</h2>
-            <div class=form-group>
-              <input form=signup class=form-control name=firstname placeholder='First name' required aria-required>
-            </div>
-            <div class=form-group>
-              <input form=signup class=form-control name=surname placeholder=Surname required aria-required>
+            <div class=row>
+              <div class='col-md-6 form-group'>
+                <input form=signup class=form-control name=firstname placeholder='First name'>
+              </div>
+              <div class='col-md-6 form-group'>
+                <input form=signup class=form-control name=surname placeholder=Surname>
+              </div>
             </div>
             <div class=form-group>
               <input form=signup class=form-control name=username placeholder=Username required aria-required>
+              <small class='form-text text-muted'>Username can only contain letters, numbers and underscore.</small>
             </div>
             <div class=form-group>
               <input form=signup class=form-control name=email type=email placeholder='Email address' required aria-required>
             </div>
             <div class=form-group>
               <input form=signup class=form-control name=password type=password id=signup-password placeholder=Password required aria-required>
-              <small class='form-text text-muted'>Your password must be 8-32 characters long</small>
+              <small class='form-text text-muted'>Your password must be 8-32 characters long.</small>
             </div>
             <div class=form-group>
               <input form=signup class=form-control type=password id=confirm-password placeholder='Confirm Password' required aria-required>
@@ -81,12 +84,12 @@
               </div>
             </div>
             <div class='form-group text-center'>
-              <input data-form=signup id=signup-btn class='btn btn-outline-dark btn-lg px-5' type=submit data-method=post data-action=/api/user/signup value="Sign Up">
+              <input data-form=signup id=signup-btn class='btn btn-outline-dark btn-lg px-5' type=submit data-method=post data-action=/api/user/signup value='Sign Up'>
             </div>
           </form>
         </div>
       </div>
-      <div>
+      <div class=page-header>
         <footer class=text-center>
           <small>
             <a href=https://github.com/usmansbk><img src=img/github-logo.png alt=GitHub></a><br>
