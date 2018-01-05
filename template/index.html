@@ -19,11 +19,12 @@
               <label class=form-label for=username>Username</label>
               <input class=form-control form=signin name=username placeholder=Username id=username type=text required aria-required>
             </div>
-            <div class='form-group col-sm-auto'>
+            <div class='form-group col-sm-auto mb-0'>
               <label class=form-label for=password>Password</label>
               <input class=form-control form=signin name=password type=password placeholder=Password id=password required aria-required>
+              <small class='form-text text-muted'><a href=# class='form-label text-light'>Forgotten account?</a></small>
             </div>
-            <div class='form-group col-sm-auto align-self-end'>
+            <div class='form-group col-sm-auto align-self-center mb-0 mt-2'>
               <input id=signin-btn class='btn btn-outline-primary' type=submit value='Sign In' data-method=post data-action=/api/user/signin data-form=signin>
             </div>
           </div>
@@ -32,13 +33,13 @@
     </header>
 
     <div class=container>
-      <div class='row main' role=main>
+      <div class='row main pt-4' role=main>
         <div class=col-md-8>
           <aside>
             <article>
               <h1 class=display-4>PostIt</h1>
               <p class="h3 text-muted">
-                PostIt is a simple application that allows friends and colleagues create groups for notifications. This way one person can post notifications to everyone by sending a message once.
+                PostIt allows friends and colleagues create groups for notifications.
               </p>
             </article>
           </aside>
@@ -47,7 +48,7 @@
           <form id=signup>
             <h2 class=form-signin-heading>Create an Account</h2>
             <div class=form-group>
-              <input form=signup class=form-control name=firstname placeholder=Firstname required aria-required>
+              <input form=signup class=form-control name=firstname placeholder='First name' required aria-required>
             </div>
             <div class=form-group>
               <input form=signup class=form-control name=surname placeholder=Surname required aria-required>
@@ -56,7 +57,7 @@
               <input form=signup class=form-control name=username placeholder=Username required aria-required>
             </div>
             <div class=form-group>
-              <input form=signup class=form-control name=email type=email placeholder=email required aria-required>
+              <input form=signup class=form-control name=email type=email placeholder='Email address' required aria-required>
             </div>
             <div class=form-group>
               <input form=signup class=form-control name=password type=password id=signup-password placeholder=Password required aria-required>
@@ -69,7 +70,7 @@
               <label for=birthday>Birthday</label>
               <input form=signup class=form-control name=birthday type=date id=birthday>
             </div>
-            <div class='form-group form-inline'>
+            <div class='form-group form-inline ml-4'>
               <div class='form-check form-check-inline'>
                 <input class=form-check-input id=male type=radio name=gender value=male form=signup>
                 <label class=form-check-label for=male>Male</label>
@@ -79,8 +80,8 @@
                 <label class=form-check-label for=female>Female</label>
               </div>
             </div>
-            <div class=form-group>
-              <input data-form=signup id=signup-btn class=btn type=submit data-method=post data-action=/api/user/signup value="Sign Up">
+            <div class='form-group text-center'>
+              <input data-form=signup id=signup-btn class='btn btn-outline-dark btn-lg px-5' type=submit data-method=post data-action=/api/user/signup value="Sign Up">
             </div>
           </form>
         </div>

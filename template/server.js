@@ -129,6 +129,7 @@ app.get('/api/group/:guid/messages', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
+  console.log('Throw Error');
   res.status(500).json({
     status: 'error',
     message: 'Unable to connect to database'
