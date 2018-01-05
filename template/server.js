@@ -37,7 +37,6 @@ function stripJSON(json, keys) {
   for (key in json) {
     let inside = keys.indexOf(key);
     if (inside !== -1) continue;
-
     if (typeof json[key] === 'object') {
       obj[key] = stripJSON(json[key], keys);
     } else {
