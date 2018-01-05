@@ -1,5 +1,6 @@
 /** @module Script - Main entry */
 const Script = (function (Util, Route) {
+  Util.passwordValidator('signup-password', 'confirm-password');
   const module = {};
 
   let signUpBtn

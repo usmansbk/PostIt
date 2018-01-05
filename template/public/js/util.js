@@ -3,9 +3,9 @@ const Util = (function () {
   const module = {};
 
   //Password validation
-  (function() {
-    let password = document.querySelector('#signup-password'),
-      confirm_password = document.querySelector('#confirm-password');
+  const passwordValidator = function passwordValidator(password1Id, password2Id) {
+    let password = document.querySelector(`#${password1Id}`),
+      confirm_password = document.querySelector(`#${password2Id}`);
     let validatePassword = function () {
       if(password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Passwords Don't Match");
@@ -15,7 +15,7 @@ const Util = (function () {
     }
     confirm_password.addEventListener('change', validatePassword);
     password.addEventListener('change', validatePassword);
-  })();
+  };
 
   /**
    * @function parseFormNodes
@@ -60,6 +60,7 @@ const Util = (function () {
   };
  module.parseFormNodes = parseFormNodes;
  module.request = request;
+ module.passwordValidator = passwordValidator;
 
   return module;
 })();

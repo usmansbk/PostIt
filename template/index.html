@@ -1,85 +1,100 @@
 <!DOCTYPE html>
 <html lang=en>
-  <head>
-    <meta charset=utf-8>
-    <title>PostIt - log in or sign up</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href=css/bootstrap.css rel=stylesheet>
-    <link href=css/style.css rel=stylesheet>
-  </head>
+<head>
+  <meta charset=utf-8>
+  <title>PostIt - log in or sign up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href=css/bootstrap.css rel=stylesheet>
+</head>
+
   <body>
-    <div id=app-container>
-    <header class="navbar bg-dark">
-      <a href=#>
-        <input type=button class='btn btn-outline-info' value=PostIt>
-      </a>
-      <table>
-        <tr>
-          <td><label for=username>Username<label></td>
-          <td><label for=password>Password<label></td>
-        </tr>
-        <tr>
-          <td><input class=form-control-sm form=signin name=username type=text required aria-required></td>
-          <td><input class=form-control-sm form=signin name=password type=password required aria-required></td>
-          <td>
-            <form id=signin>
-              <input id=signin-btn class=btn-sm type=submit value="Sign In" data-method=post data-action=/api/user/signin data-form=signin>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <!-- Placeholder -->
-          <!-- Forgotten account feature placeholder -->
-        </tr>
-      </table>
+    <header>
+      <nav class='navbar bg-dark text-light'>
+        <a class=navbar-brand href=#>
+            <input type=button class='btn btn-outline-info' value=PostIt>
+        </a>
+        <form id=signin>
+          <div class=form-row>
+            <div class='form-group col-sm-auto'>
+              <label class=form-label for=username>Username</label>
+              <input class=form-control form=signin name=username placeholder=Username id=username type=text required aria-required>
+            </div>
+            <div class='form-group col-sm-auto'>
+              <label class=form-label for=password>Password</label>
+              <input class=form-control form=signin name=password type=password placeholder=Password id=password required aria-required>
+            </div>
+            <div class='form-group col-sm-auto align-self-end'>
+              <input id=signin-btn class='btn btn-outline-primary' type=submit value='Sign In' data-method=post data-action=/api/user/signin data-form=signin>
+            </div>
+          </div>
+        </form>
+      </nav>
     </header>
 
-    <div class=main role=main>
-    <form id=signup>
-      <h2 class=form-signin-heading>Create an Account</h2>
-      <label for=f-firstname>Firstname</label>
-      <input form=signup class=form-control id=f-firstname name=firstname type=text placeholder required aria-required>
-
-      <label for=f-surname>Surname</label>
-      <input form=signup class=form-control id=f-surname name=surname type=text placeholder required aria-required>
-
-      <label for=f-username>Username</label>
-      <input class=form-control id=f-username name=username type=text placeholder required aria-required form=signup >
-
-      <label for=f-email>Email</label>
-      <input class=form-control id=f-email name=email type=email placeholder required aria-required form=signup>
-
-      <label for=f-password>New Password</label>
-      <input class=form-control id=f-password name=password type=password placeholder required aria-required form=signup>
-
-      <label for=f-confirm-password>Confirm Password</label>
-      <input class=form-control id=f-confirm-password type=password placeholder required aria-required form=signup>
-
-      <label id=birthday type=f-birthday>Birthday</label>
-      <input class=form-control id=f-birthday name=birthday type=date form=signup>
-
-      <input class=form-check type=radio name=gender value=male form=signup> Male
-      <input class=form-check type=radio name=gender value=female form=signup> Female
-      <br>
-      <input data-form=signup  id=signup-btn class=btn type=submit data-method=post data-action=/api/user/signup value="Sign Up">
-    </form>
-    <aside>
-      <article>
-        <h1 class=display-4>PostIt</h1>
-        <p class="h3 text-muted">
-         PostIt is a simple application that allows friends and colleagues create groups for notifications.
-         This way one person can post notifications to everyone by sending a message once.
-        </p>
-      </article>
-    </aside>
+    <div class=container>
+      <div class='row main' role=main>
+        <div class=col-md-8>
+          <aside>
+            <article>
+              <h1 class=display-4>PostIt</h1>
+              <p class="h3 text-muted">
+                PostIt is a simple application that allows friends and colleagues create groups for notifications. This way one person can post notifications to everyone by sending a message once.
+              </p>
+            </article>
+          </aside>
+        </div>
+        <div class='col-12 col-md-4'>
+          <form id=signup>
+            <h2 class=form-signin-heading>Create an Account</h2>
+            <div class=form-group>
+              <input form=signup class=form-control name=firstname placeholder=Firstname required aria-required>
+            </div>
+            <div class=form-group>
+              <input form=signup class=form-control name=surname placeholder=Surname required aria-required>
+            </div>
+            <div class=form-group>
+              <input form=signup class=form-control name=username placeholder=Username required aria-required>
+            </div>
+            <div class=form-group>
+              <input form=signup class=form-control name=email type=email placeholder=email required aria-required>
+            </div>
+            <div class=form-group>
+              <input form=signup class=form-control name=password type=password id=signup-password placeholder=Password required aria-required>
+              <small class='form-text text-muted'>Your password must be 8-32 characters long</small>
+            </div>
+            <div class=form-group>
+              <input form=signup class=form-control type=password id=confirm-password placeholder='Confirm Password' required aria-required>
+            </div>
+            <div class=form-group>
+              <label for=birthday>Birthday</label>
+              <input form=signup class=form-control name=birthday type=date id=birthday>
+            </div>
+            <div class='form-group form-inline'>
+              <div class='form-check form-check-inline'>
+                <input class=form-check-input id=male type=radio name=gender value=male form=signup>
+                <label class=form-check-label for=male>Male</label>
+              </div>
+              <div class='form-check form-check-inline'>
+                <input class=form-check-input id=female type=radio name=gender value=female form=signup>
+                <label class=form-check-label for=female>Female</label>
+              </div>
+            </div>
+            <div class=form-group>
+              <input data-form=signup id=signup-btn class=btn type=submit data-method=post data-action=/api/user/signup value="Sign Up">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div>
+        <footer class=text-center>
+          <small>
+            <a href=https://github.com/usmansbk><img src=img/github-logo.png alt=GitHub></a><br>
+            <a href=https://andela.com>Andela</a> &copy; 2017
+          </small>
+        </footer>
+      </div>
     </div>
-    <footer>
-      <small>
-        <a href=https://github.com/usmansbk><img src=img/github-logo.png alt=GitHub></a><br>
-        <a href=https://andela.com>Andela</a> &copy; 2017
-      </small>
-    </footer>
-  </div>
+
     <script src=js/route.js></script>
     <script src=js/util.js></script>
     <script src=js/script.js></script>
