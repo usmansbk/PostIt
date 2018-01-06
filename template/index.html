@@ -13,7 +13,7 @@
         <a class=navbar-brand href=#>
             <input type=button class='btn btn-lg btn-outline-info' value=PostIt>
         </a>
-        <form id=signin>
+        <form id=signin method=get action=html/dashboard.html>
           <div class=form-row>
             <div class='form-group col-sm-auto'>
               <label class=form-label for=username>Username</label>
@@ -25,7 +25,7 @@
               <small class='form-text text-muted'><a href=# class='form-label text-light'>Forgotten account?</a></small>
             </div>
             <div class='form-group col-sm-auto align-self-center mb-0 mt-2'>
-              <input id=signin-btn class='btn btn-outline-primary' type=submit value='Sign In' data-method=post data-action=/api/user/signin data-form=signin>
+              <input id=signin-btn class='btn btn-outline-primary' type=submit value='Sign In'>
             </div>
           </div>
         </form>
@@ -45,62 +45,60 @@
           </aside>
         </div>
         <div class='col-12 col-md-6'>
-          <form id=signup>
+          <form id=signup method=get action=html/dashboard.html>
             <h2 class=form-signin-heading>Create an Account</h2>
             <div class=row>
               <div class='col-md-6 form-group'>
-                <input form=signup class=form-control name=firstname placeholder='First name'>
+                <input class=form-control name=firstname placeholder='First name'>
               </div>
               <div class='col-md-6 form-group'>
-                <input form=signup class=form-control name=surname placeholder=Surname>
+                <input class=form-control name=surname placeholder=Surname>
               </div>
             </div>
             <div class=form-group>
-              <input form=signup class=form-control name=username placeholder=Username required aria-required>
+              <input class=form-control name=username placeholder=Username required aria-required>
               <small class='form-text text-muted'>Username can only contain letters, numbers and underscore.</small>
             </div>
             <div class=form-group>
-              <input form=signup class=form-control name=email type=email placeholder='Email address' required aria-required>
+              <input class=form-control name=email type=email placeholder='Email address' required aria-required>
             </div>
             <div class=form-group>
-              <input form=signup class=form-control name=password type=password id=signup-password placeholder=Password required aria-required>
+              <input class=form-control name=password type=password id=signup-password placeholder=Password required aria-required>
               <small class='form-text text-muted'>Your password must be 8-32 characters long.</small>
             </div>
             <div class=form-group>
-              <input form=signup class=form-control type=password id=confirm-password placeholder='Confirm Password' required aria-required>
+              <input class=form-control type=password id=confirm-password placeholder='Confirm Password' required aria-required>
             </div>
             <div class=form-group>
               <label for=birthday>Birthday</label>
-              <input form=signup class=form-control name=birthday type=date id=birthday>
+              <input class=form-control name=birthday type=date id=birthday>
             </div>
             <div class='form-group form-inline ml-4'>
               <div class='form-check form-check-inline'>
-                <input class=form-check-input id=male type=radio name=gender value=male form=signup>
+                <input class=form-check-input id=male type=radio name=gender value=male>
                 <label class=form-check-label for=male>Male</label>
               </div>
               <div class='form-check form-check-inline'>
-                <input class=form-check-input id=female type=radio name=gender value=female form=signup>
+                <input class=form-check-input id=female type=radio name=gender value=female>
                 <label class=form-check-label for=female>Female</label>
               </div>
             </div>
             <div class='form-group text-center'>
-              <input data-form=signup id=signup-btn class='btn btn-outline-dark btn-lg px-5' type=submit data-method=post data-action=/api/user/signup value='Sign Up'>
+              <input id=signup-btn class='btn btn-outline-dark btn-lg px-5' type=submit value='Sign Up'>
             </div>
           </form>
         </div>
       </div>
       <div class=page-header>
-        <footer class=text-center>
-          <small>
-            <a href=https://github.com/usmansbk><img src=img/github-logo.png alt=GitHub></a><br>
-            <a href=https://andela.com>Andela</a> &copy; 2017
-          </small>
+        <footer class='footer text-center'>
+          <div class=container>
+            <small>
+              <a href=https://github.com/usmansbk><img src=img/github-logo.png alt=GitHub></a><br>
+              <a href=https://andela.com>Andela</a> &copy; 2017
+            </small>
+          </div>
         </footer>
       </div>
     </div>
-
-    <script src=js/util.js></script>
-    <script src=js/route.js></script>
-    <script src=js/index.js></script>
   </body>
 </html>
