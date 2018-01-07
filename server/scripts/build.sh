@@ -8,7 +8,6 @@ export TEST_DB_NAME=postit_test
 export CODECLIMATE_REPO_TOKEN=b95782ae5d24665d875eca8e39db4206a35ac1ec33c4e57c660c6956cbe443e7
 
 ## Set environment variables for local development
-export NODE_ENV=development
 export DEV_DB_USERNAME=usman
 export DEV_DB_PASSWORD=null
 export DEV_DB_NAME=postit_dev
