@@ -5,7 +5,7 @@ cache:
   directories:
     - "node_modules"
 before_install:
-  - sh sever/scripts/build.sh
+  - sh server/scripts/build.sh
 services:
   - postgresql
 before_script:
