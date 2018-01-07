@@ -10,6 +10,14 @@ before_install:
   - export TEST_DB_PASSWORD=null
   - export TEST_DB_NAME=postit_test
   - export CODECLIMATE_REPO_TOKEN=b95782ae5d24665d875eca8e39db4206a35ac1ec33c4e57c660c6956cbe443e7
+  - mkdir server/build
+  - cd server/build
+  - mkdir bin controllers helpers middlewares routes
+  - mkdir routes/api
+  - cd ../../
+  - ./node_modules/.bin/babel server/src --out-dir server/build
+  - ./node_modules/.bin/babel server/src/bin/www --out-file server/build/bin/www
+
 services:
   - postgresql
 before_script:
