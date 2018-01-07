@@ -12,7 +12,6 @@ export DEV_DB_USERNAME=usman
 export DEV_DB_PASSWORD=null
 export DEV_DB_NAME=postit_dev
 export DEV_DB_HOSTNAME='127.0.0.1'
-export DEV_DB_PORT=5432
 
 ## Make required build directories
 if test -d ./server/build;
