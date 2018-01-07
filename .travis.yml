@@ -5,6 +5,11 @@ cache:
   directories:
     - "node_modules"
 before_install:
+  - export NODE_ENV=test
+  - export TEST_DB_USERNAME=postgres
+  - export TEST_DB_PASSWORD=null
+  - export TEST_DB_NAME=postit_test
+  - export CODECLIMATE_REPO_TOKEN=b95782ae5d24665d875eca8e39db4206a35ac1ec33c4e57c660c6956cbe443e7
   - sh server/scripts/build.sh
 services:
   - postgresql

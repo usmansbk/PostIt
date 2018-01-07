@@ -1,18 +1,5 @@
 #!/usr/bin/env sh
 
-## Set evnironment variable for CI
-export NODE_ENV=test
-export TEST_DB_USERNAME=postgres
-export TEST_DB_PASSWORD=null
-export TEST_DB_NAME=postit_test
-export CODECLIMATE_REPO_TOKEN=b95782ae5d24665d875eca8e39db4206a35ac1ec33c4e57c660c6956cbe443e7
-
-## Set environment variables for local development
-export DEV_DB_USERNAME=usman
-export DEV_DB_PASSWORD=null
-export DEV_DB_NAME=postit_dev
-export DEV_DB_HOSTNAME='127.0.0.1'
-
 ## Make required build directories
 if test -d ./server/build;
 then
