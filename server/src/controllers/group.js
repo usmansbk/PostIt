@@ -34,7 +34,7 @@ export default class GroupController {
         res.status(401).json({
           status: 'fail',
           data: {
-            message: 'Only members can post message'
+            message: 'Not a group member'
           }
         });
       });
@@ -62,7 +62,7 @@ export default class GroupController {
       res.status(401).json({
         status: 'fail',
         data: {
-          message: 'Only members can retrieve messages'
+          message: 'Not a group member'
         }
       });
     });
@@ -96,7 +96,7 @@ export default class GroupController {
       res.status(401).json({
         status: 'fail',
         data: {
-          message: 'Only group owner can add users'
+          message: 'Only admin can add user'
         }
       });
     });
