@@ -21,7 +21,7 @@ export default class Validate {
 
   static addUsers(req, res, next) {
     const { invites } = req.body;
-    if (!invites || isEmpty.test(invites)) {
+    if (test(invites)) {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -35,7 +35,7 @@ export default class Validate {
 
   static postMessage(req, res, next) {
     const { message } = req.body;
-    if (!message || isEmpty.test(message)) {
+    if (test(message)) {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -46,4 +46,9 @@ export default class Validate {
     }
     next();
   }
+
+}
+
+function test(target) {
+  return !target || isEmpty.test(target);
 }
