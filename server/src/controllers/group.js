@@ -3,14 +3,13 @@ import { Group, User, Post, Sequelize, sequelize } from '../../db/models';
 import Util from '../helpers';
 
 const { Op } = Sequelize;
-const log = bunyan.createLogger({ name: 'postit' });
+const log = bunyan.createLogger({ name: 'postit-group-controller' });
 
 export default class GroupController {
   static postMessage(req, res) {
     const { message } = req.body,
       { guid } = req.params,
       { userId } = req.session;
-
     Group.findOne({
       where: { id: guid },
       include: [{
@@ -44,7 +43,6 @@ export default class GroupController {
   static retrieveMessages(req, res) {
     const { guid } = req.params,
       { userId } = req.session;
-
     Group.findOne({
       where: { id: guid },
       include: [{
@@ -75,7 +73,6 @@ export default class GroupController {
       { invites } = req.body,
       { userId } = req.session,
       usersQueryList = Util.makeColumnList(invites, 'username');
-
     Group.findOne({
       where: { id: guid },
       include: [{
@@ -124,7 +121,7 @@ export default class GroupController {
       res.status(401).json({
         status: 'fail',
         data: {
-          message: 'Register a new account or sign-in'
+          message: 'Not signed in'
         }
       });
     });

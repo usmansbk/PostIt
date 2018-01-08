@@ -9,7 +9,7 @@ app.listen(port, () => {
     .authenticate()
     .then(() => {
       console.log('Connection to database has been established successfully.');
-      sequelize.sync().then(() => {
+      sequelize.sync({ force: true }).then(() => {
         console.log('Synchronized models to database successfully.');
       });
     })

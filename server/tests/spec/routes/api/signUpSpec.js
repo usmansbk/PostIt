@@ -200,51 +200,6 @@ describe('POST:/api/user/signup', () => {
           });
         });
       });
-
-      describe('optional gender value not [male or female]', () => {
-        it('should return status code 400', (done) => {
-          const form = {
-            username: 'rukia',
-            email: 'shinigami@captain.com',
-            password: '12345678?',
-            gender: 'spirit'
-          };
-          request.post(url, { form }, (err, res) => {
-            expect(res.statusCode).toBe(400);
-            done();
-          });
-        });
-      });
-
-      describe('optional gender value [female]', () => {
-        it('should return status code 201', (done) => {
-          const form = {
-            username: 'rukia',
-            email: 'shinigami@captain.com',
-            password: '12345678?',
-            gender: 'female',
-          };
-          request.post(url, { form }, (err, res) => {
-            expect(res.statusCode).toBe(201);
-            done();
-          });
-        });
-      });
-
-      describe('optional gender value [male]', () => {
-        it('should return status code 201', (done) => {
-          const form = {
-            username: 'naruto',
-            email: 'shinobi@hokage.com',
-            password: '12345678?',
-            gender: 'male',
-          };
-          request.post(url, { form }, (err, res) => {
-            expect(res.statusCode).toBe(201);
-            done();
-          });
-        });
-      });
     });
   });
 });
