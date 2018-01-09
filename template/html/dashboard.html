@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <meta name=viewport content='width=device-width, initial-scale=1.0'>
+    <title>PostIt | Dashboard</title>
+    <link rel=stylesheet href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel=stylesheet href=../css/materialize.css>
+    <link rel=stylesheet href=../css/style.css>
+  </head>
+
+  <body class='blue-grey lighten-5'>
+    <div class=navbar-fixed>
+      <nav>
+        <div class='nav-wrapper white'>
+           <a data-target=slide-out href=# class='sidenav-trigger'><i class='material-icons grey-text'>menu</i></a>
+           <a href=# class='brand-logo grey-text text-darken-1 hide-on-small-only'>PostIt</a>
+           <input id=search type=text  placeholder=Search class='hide-on-small-only'>
+           <ul class=right>
+             <li class=hide-on-med-and-up><a href=#><i class='grey-text material-icons'>search</i></a></li>
+             <li class=hide><a href=#><i class='grey-text material-icons'>person_add</i></a></li>
+             <li class=hide><a href=#><i class='grey-text material-icons'>group_add</i></a></li>
+             <li><a href=#><i class='grey-text material-icons'>notifications</i></a></li>
+             <li><a href=# class='grey-text dropdown-trigger' data-target=useraction><img id=avatar src=../images/pp.jpeg width=24 height=24 alt='' class='circle responsive-img'></a></li>
+           </ul>
+        </div>
+      </nav>
+    </div>
+    <ul id=slide-out class='sidenav'>
+      <li class=fixed>
+        <a class='sidenav-close grey-text text-darken-1' href=#>
+          <div class='row valign-wrapper'>
+            <h5 class='col s10'>PostIt</h5>
+            <i class='material-icons col s2'>chevron_left</i>
+          </div>
+        </a>
+      </li>
+      <li><div class=divider></div></li>
+      <li><a href=#><i class=material-icons>home</i>Home</a></li>
+      <li><a href=#><i class=material-icons>group</i>Groups</a></li>
+      <li><a href=#><i class=material-icons>account_circle</i>Profile</a></li>
+      <li><a href=#><i class=material-icons>notifications</i>Notifications</a></li>
+      <li><div class=divider></div></li>
+      <li><a href=# class='grey-text'>Report an issue</a></li>
+      <li><a href=# class='grey-text'>Help</a></li>
+      <li>
+      <div class='grey-text my-nav-subitem nav-footer'>
+        <footer>
+          <small>&copy;2018 Andela <b>&middot;</b> MIT License <b>&middot;</b>
+            GitHub <b>&middot;</b> facebook
+          </small>
+        </footer>
+      </div>
+      </li>
+    </ul>
+    <div class=row>
+      <div class='col m2 hide-on-small-only my-side-nav'>
+        <div class=section>
+          <a href=#>
+            <div class='my-nav-item valign-wrapper grey-text'>
+              <i class=material-icons>home</i>
+              <span class='my-nav-label grey-text text-darken-4'>Home</span>
+            </div>
+          </a>
+          <a href=#>
+            <div class='my-nav-item valign-wrapper grey-text'>
+              <i class=material-icons>group</i>
+              <span class='my-nav-label grey-text text-darken-4'>Groups</span>
+            </div>
+          </a>
+          <a href=#>
+            <div class='my-nav-item valign-wrapper grey-text'>
+              <i class=material-icons>account_circle</i>
+              <span class='my-nav-label grey-text text-darken-4'>Profile</span>
+            </div>
+          </a>
+          <a href=#>
+            <div class='my-nav-item valign-wrapper grey-text'>
+              <i class=material-icons>notifications</i>
+              <span class='my-nav-label grey-text text-darken-4'>Notifications</span>
+            </div>
+          </a>
+        </div>
+        <div class=divider></div>
+        <div class=section>
+          <a href=#>
+            <div class='my-nav-subitem valign-wrapper'>
+              <span class='my-nav-sublabel grey-text'>Report an issue</span>
+            </div>
+          </a>
+          <a href=#>
+            <div class='my-nav-subitem valign-wrapper'>
+              <span class='my-nav-sublabel grey-text'>Help</span>
+            </div>
+          </a>
+        </div>
+        <div class='grey-text nav-footer'>
+          <footer>
+            <small>&copy;2018 Andela <b>&middot;</b> MIT License <b>&middot;</b>
+             GitHub <b>&middot;</b> facebook
+            </small>
+          </footer>
+        </div>
+      </div>
+      <div class='col s12 m10 offset-l2'>
+        <div class=container id=board>
+        </div>
+      </div>
+    </div>
+    <div class='fixed-action-btn modal-trigger'>
+      <a class='btn-floating btn-large red modal-trigger' href=#newpost>
+       <i class='large material-icons'>mode_edit</i>
+      </a>
+    </div>
+    <div id=newpost class='modal modal-fixed-footer'>
+      <div class=modal-content>
+        <header>
+          <div class=valign-wrapper>
+            <img src=../images/pp.jpeg alt='' class='circle responsive-img' width=40 height=40>
+            <span>Usmansbk</span>
+            <i class='material-icons tiny grey-text'>play_arrow</i>
+            <a>Select group</a>
+            <i class='material-icons tiny grey-text'>group_work</i>
+          </div>
+        </header>
+        <div class=input-field>
+          <textarea id=message class=materialize-textarea></textarea>
+          <label for=message>Type message</label>
+        </div>
+      </div>
+      <div class=modal-footer>
+        <a href=# class='modal-action modal-close waves-effect btn-flat'>Cancel</a>
+        <a id=post-btn class='modal-action modal-close waves-effect btn-flat'>Post</a>
+      </div>
+    </div>
+    <ul id=useraction class=dropdown-content>
+      <li><a class='blue-text'>Logout</a></li>
+    </ul>
+    <script src=../js/materialize.js></script>
+    <script src=../js/dashboard.js></script>
+  </body>
+</html>
