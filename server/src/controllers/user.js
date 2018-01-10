@@ -44,10 +44,13 @@ export default class UserController {
           user
         }
       })).catch((error) => {
+			let err = error.errors[0];
+			let { message, path } = err;
+			message = `${path}: ${message}`;
       res.status(400).json({
         status: 'fail',
         data: {
-          message: 'Failed to create account'
+          message
         }
       });
     });
