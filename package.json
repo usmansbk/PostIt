@@ -4,6 +4,7 @@
   "description": "Minimalist social network web app",
   "main": "server/build/bin/www",
   "scripts": {
+    "postinstall": "npm run build",
     "build:server": "sh ./server/scripts/build.sh",
     "build": "npm run build:server",
     "start": "node ./server/build/bin/www",
