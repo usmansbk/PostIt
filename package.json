@@ -4,7 +4,8 @@
   "description": "Minimalist social network web app",
   "main": "server/build/bin/www",
   "scripts": {
-    "build": "sh server/scripts/build.sh",
+    "build:server": "sh ./server/scripts/build.sh",
+    "build": "npm run build:server",
     "start": "node server/build/bin/www",
     "start:dev": "nodemon server/build/bin/www",
     "test": "nyc --reporter=lcov --reporter=text-lcov jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
