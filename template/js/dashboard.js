@@ -5,7 +5,11 @@
       let instance = M.Sidenav.init(elem);
       elem = document.querySelector('.dropdown-trigger');
       instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
+      elem = document.querySelector('.dropdown-trigger2');
+      instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
       elem = document.querySelector('.modal');
+      instance = M.Modal.init(elem);
+      elem = document.querySelector('#newgroup');
       instance = M.Modal.init(elem);
     })();
   });
@@ -43,8 +47,8 @@
     header.append(group);
     cardPanel.append(header);
 
-    let text = document.createElement('span');
-    text.setAttribute('class', 'grey-text text-darken-3');
+    let text = document.createElement('p');
+    text.setAttribute('class', 'grey-text text-darken-3 flow-text');
     text.innerText = message;
     cardPanel.append(text);
     return cardPanel;

@@ -18,10 +18,10 @@
            <input id=search type=text  placeholder=Search class='hide-on-small-only'>
            <ul class=right>
              <li></li>
-             <li><span class='grey-text text-darken-1 flow-text'>Home</span></li>
+             <li><span class='grey-text text-darken-1 flow-text'>Groups</span></li>
              <li class=hide-on-med-and-up id=search-tiny><a href='search.html'><i class='grey-text material-icons'>search</i></a></li>
              <li class=hide><a href=#><i class='grey-text material-icons'>person_add</i></a></li>
-             <li class=hide><a href=#><i class='grey-text material-icons'>group_add</i></a></li>
+             <li><a href=#newgroup class='modal-trigger'><i class='grey-text material-icons'>group_add</i></a></li>
              <li><a class='dropdown-trigger2' data-target='notifications' href=#!><i class='grey-text material-icons'>notifications</i></a></li>
              <li><a href=# class='grey-text dropdown-trigger' data-target=useraction><img id=avatar src=../images/pp.jpeg width=24 height=24 alt='' class='circle responsive-img'></a></li>
            </ul>
@@ -109,7 +109,7 @@
         </div>
       </div>
     </div>
-    <div class='fixed-action-btn modal-trigger'>
+    <div class='hide fixed-action-btn modal-trigger'>
       <a class='btn-floating btn-large red modal-trigger' href=#newpost>
        <i class='large material-icons'>mode_edit</i>
       </a>
@@ -138,9 +138,32 @@
     <ul id=useraction class=dropdown-content>
       <li><a class='blue-text'>Logout</a></li>
     </ul>
-    <ul id=notifications class='dropdown-content col s4'>
+    <ul id=notifications class='dropdown-content'>
       <li><span class='grey-text'>No notifications</span></li>
     </ul>
+    <div id=newgroup class='modal modal-fixed-footer'>
+      <div class=modal-content>
+        <form>
+          <div class=input-field>
+            <input type=text data-length='22' id=groupname type=text>
+            <label for=groupname>Group name</label>
+          </div>
+          <div class=input-field>
+            <input id=groupname data-length='50' type=text>
+            <label for=groupname>Purpose</label>
+          </div>
+          <div class=input-field>
+            <input id=groupname type=text>
+            <label for=groupname>Invites</label>
+            <span class=helper-text>Enter usernames seperated by whitespace</span>
+          </div>
+        </form>
+      </div>
+      <div class=modal-footer>
+        <a href=# class='modal-action modal-close waves-effect btn-flat' id=creategroup-btn>Cancel</a>
+        <a href=# class='modal-action modal-close waves-effect btn-flat' id=creategroup-btn>Create group</a>
+      </div>
+    </div>
     <script src=../js/materialize.js></script>
     <script src=../js/dashboard.js></script>
   </body>
