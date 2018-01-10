@@ -1,9 +1,7 @@
-import bunyan from 'bunyan';
 import { Group, User, Post, Sequelize, sequelize } from '../../db/models';
 import Util from '../helpers';
 
 const { Op } = Sequelize;
-const log = bunyan.createLogger({ name: 'postit-group-controller' });
 
 export default class GroupController {
   static postMessage(req, res) {
@@ -30,7 +28,6 @@ export default class GroupController {
         data: result
       }))
       .catch((error) => {
-        log.info('postMessage()', error);
         res.status(401).json({
           status: 'fail',
           data: {
@@ -53,12 +50,12 @@ export default class GroupController {
     }).then((group) => {
       if (!group) throw new Error();
       return group.getPosts();
-    }).then(posts =>
+    }).then((posts) => {
       res.status(200).json({
         status: 'success',
         data: { posts }
-      })).catch((error) => {
-      log.info('retrieveMessages()', error);
+      })
+    }).catch((error) => {
       res.status(401).json({
         status: 'fail',
         data: {
@@ -92,11 +89,10 @@ export default class GroupController {
         status: 'success',
         data: { result }
       })).catch((error) => {
-      log.info('addUsers', error);
       res.status(401).json({
         status: 'fail',
         data: {
-          message: 'Only admin can add user'
+          message: 'Only group owner can add users'
         }
       });
     });
@@ -117,7 +113,6 @@ export default class GroupController {
           result
         }
       })).catch((error) => {
-      log.info('createGroup()', error);
       res.status(401).json({
         status: 'fail',
         data: {
@@ -126,4 +121,62 @@ export default class GroupController {
       });
     });
   }
+
+  static deleteGroup(req, res) {
+    const { guid } = req.params;
+    const { userId } = req.session;
+
+    Group.findOne({
+      where: {
+        id: guid,
+        CreatorId: userId
+      }
+    }).then((group) => {
+      return group.destroy();
+    }).then(() => {
+      res.status(200).json({
+        status: 'success',
+        message: 'Group deleted'
+      });
+    }).catch((error) => {
+      res.status(400).json({
+        status: 'fail',
+        data: {
+          message: 'Failed to delete group'
+        }
+      });
+    });
+  }
+
+  static removeUser(req, res) {
+    const { uid, guid } = req.query;
+    const { userId } = req.session;
+    let group;
+    console.log(uid, guid, userId);
+    Group.findOne({
+      where: {
+        id: guid,
+        CreatorId: userId 
+      }
+    }).then((associatedGroup) => {
+      if (userId == uid) throw new Error();
+      group = associatedGroup;
+      return User.findById(uid);
+    }).then((user) => {
+      return group.removeMember(user);
+    }).then(() => {
+      res.status(200).json({
+        status: 'success',
+        message: 'User removed'
+      });
+    }).catch((error) => {
+      res.status(400).json({
+        status: 'fail',
+        data: {
+          message: 'Failed to remove user'
+        }
+      });
+    });
+  }
+
 }
