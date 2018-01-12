@@ -8,7 +8,7 @@
     "build:server": "sh ./server/scripts/build.sh",
     "build:client": "webpack --config client/webpack.config.js",
     "build": "npm run build:server && npm run build:client",
-    "start": "node ./server/build/bin/www&",
+    "start": "node ./server/build/bin/www",
     "start:dev": "nodemon ./server/build/bin/www",
     "test": "nyc --reporter=lcov --reporter=text-lcov jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
