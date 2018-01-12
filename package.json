@@ -1,7 +1,7 @@
 {
   "name": "postit",
   "version": "1.0.0",
-  "description": "Minimalist social network web app",
+  "description": "Minimal social network web app",
   "main": "server/build/bin/www",
   "scripts": {
     "postinstall": "npm run build",
@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/usmansbk/PostIt#readme",
   "dependencies": {
-    "babel-core": "^6.26.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
