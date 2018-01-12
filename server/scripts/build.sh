@@ -1,2 +1,2 @@
 rm -rf ./server/build && mkdir ./server/build
-./node_modules/.bin/babel -d ./server/build ./server/source -s
+npx babel ./server/source -d ./server/build
