@@ -6,7 +6,8 @@ import {
   DELETE_POST,
   DELETE_GROUP,
   REMOVE_MEMBER,
-  CLEAR_NOTIFICATION
+  CLEAR_NOTIFICATION,
+  SEARCH_POSTIT
 } from './Action';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   members: [],
   posts: [],
   notifications: [],
+  result: [],
   error: undefined
 };
 
@@ -41,6 +43,11 @@ export default function postItApp(state = initialState, action) {
   case ADD_NOTIFICATION:
     return Object.assign({}, state, {
       notifications: action.payload.notifications,
+      error: action.error
+    })
+  case SEARCH_POSTIT:
+    return Object.assign({}, state, {
+      result: action.payload.result,
       error: action.error
     })
   default: 

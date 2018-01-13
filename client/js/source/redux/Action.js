@@ -9,6 +9,7 @@ export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 export const DELETE_POST = 'DELETE_POST';
 export const REMOVE_MEMBER = 'REMOVE_MEMBER';
 export const DELETE_GROUP = 'DELETE_GROUP';
+export const SEARCH_POSTIT = 'SEARCH_POSTIT';
 
 /*
  * action creators
@@ -89,6 +90,14 @@ export function clearNotification(notifications, error) {
   return {
     type: CLEAR_NOTIFICATION,
     payload: { notifications },
+    error
+  };
+}
+
+export function searchPostit(result, error) {
+  return {
+    type: SEARCH_POSTIT,
+    payload: { result },
     error
   };
 }

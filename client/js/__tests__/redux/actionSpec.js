@@ -97,4 +97,16 @@ describe('actions', () => {
     expect(actions.clearNotification(notifications, null)).toEqual(expectedAction)
   });
 
+  it('should create an action to search postit', () => {
+    const search  = 'username';
+    const expectedAction = {
+      type: actions.SEARCH_POSTIT,
+      payload: {
+       result: search
+      },
+      error: null
+    }
+    expect(actions.searchPostit(search, null)).toEqual(expectedAction)
+  });
+
 });

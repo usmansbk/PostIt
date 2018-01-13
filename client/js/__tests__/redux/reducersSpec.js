@@ -7,7 +7,8 @@ describe('postit reducer', () => {
       posts: [],
       groups: [],
       members: [],
-      notifications: []
+      notifications: [],
+      result: []
     });
   });
 
@@ -82,12 +83,34 @@ describe('postit reducer', () => {
     });
   });
 
-  it('should handle REMOVE_NOTIFICATION', () => {
+  it('should handle CLEAR_NOTIFICATION', () => {
     expect(reducer({}, {
-      type: types.REMOVE_NOTIFICATION,
+      type: types.CLEAR_NOTIFICATION,
       payload: {
       }
     })).toEqual({
+    });
+  });
+
+  it('should handle SEARCH_POSTIT', () => {
+    expect(reducer({}, {
+      type: types.SEARCH_POSTIT,
+      payload: {
+        result: 'results'
+      }
+   })).toEqual({
+     result: 'results'
+   });
+  });
+
+  it('should set error property on failed actions', () => {
+    expect(reducer({}, {
+      type: types.ADD_POST,
+      payload: { posts: '' },
+      error: { message: 'Post failed' }
+    })).toEqual({
+      posts: '',
+      error: { message: 'Post failed' }
     });
   });
 });
