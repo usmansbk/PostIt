@@ -70,6 +70,7 @@
     "jasmine": "^2.8.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.3",
+    "normalizr": "^3.2.4",
     "nyc": "^11.4.1",
     "sass-loader": "^6.0.6"
   },
