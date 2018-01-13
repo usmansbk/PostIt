@@ -8,6 +8,7 @@ describe('postit reducer', () => {
       groups: [],
       members: [],
       notifications: [],
+      sessionStatus: types.SessionStatus.LOGGED_OUT,
       result: []
     });
   });

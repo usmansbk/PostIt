@@ -7,7 +7,9 @@ import {
   DELETE_GROUP,
   REMOVE_MEMBER,
   CLEAR_NOTIFICATION,
-  SEARCH_POSTIT
+  SEARCH_POSTIT,
+  SET_SESSION_STATUS,
+  SessionStatus,
 } from './Action';
 
 const initialState = {
@@ -16,6 +18,7 @@ const initialState = {
   posts: [],
   notifications: [],
   result: [],
+  sessionStatus: SessionStatus.LOGGED_OUT,
   error: undefined
 };
 
@@ -48,6 +51,11 @@ export default function postItApp(state = initialState, action) {
   case SEARCH_POSTIT:
     return Object.assign({}, state, {
       result: action.payload.result,
+      error: action.error
+    })
+  case SET_SESSION_STATUS:
+    return Object.assign({}, state, {
+      sessionStatus: action.payload.sessionStatus,
       error: action.error
     })
   default: 

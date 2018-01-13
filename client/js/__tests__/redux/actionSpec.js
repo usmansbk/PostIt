@@ -109,4 +109,16 @@ describe('actions', () => {
     expect(actions.searchPostit(search, null)).toEqual(expectedAction)
   });
 
+  it('should create an action to change session status', () => {
+    const sessionStatus  = actions.SessionStatus.LOGGED_IN;
+    const expectedAction = {
+      type: actions.SET_SESSION_STATUS,
+      payload: {
+        sessionStatus
+      },
+      error: null
+    }
+    expect(actions.setSessionStatus(sessionStatus,  null)).toEqual(expectedAction)
+  });
+
 });

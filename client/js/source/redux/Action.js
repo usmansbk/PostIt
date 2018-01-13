@@ -10,6 +10,12 @@ export const DELETE_POST = 'DELETE_POST';
 export const REMOVE_MEMBER = 'REMOVE_MEMBER';
 export const DELETE_GROUP = 'DELETE_GROUP';
 export const SEARCH_POSTIT = 'SEARCH_POSTIT';
+export const SET_SESSION_STATUS = 'SET_SESSION_STATUS';
+
+export const SessionStatus = {
+  LOGGED_IN: 'LOGGED_IN',
+  LOGGED_OUT: 'LOGGED_OUT'
+}
 
 /*
  * action creators
@@ -98,6 +104,14 @@ export function searchPostit(result, error) {
   return {
     type: SEARCH_POSTIT,
     payload: { result },
+    error
+  };
+}
+
+export function setSessionStatus(sessionStatus, error) {
+  return {
+    type: SET_SESSION_STATUS,
+    payload: { sessionStatus },
     error
   };
 }
