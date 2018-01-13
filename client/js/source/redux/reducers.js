@@ -13,7 +13,8 @@ const initialState = {
   groups: {},
   members: {},
   posts: {},
-  notifications: []
+  notifications: [],
+  error: undefined
 };
 
 export default function postItApp(state = initialState, action) {
@@ -21,22 +22,26 @@ export default function postItApp(state = initialState, action) {
   case DELETE_POST:
   case ADD_POST:
     return Object.assign({}, state, {
-      posts: action.posts
+      posts: action.payload.posts,
+      error: action.error
     })
   case DELETE_GROUP:
   case ADD_GROUP:
     return Object.assign({}, state, {
-      groups: action.groups
+      groups: action.payload.groups,
+      error: action.error
     })
   case REMOVE_MEMBER:
   case ADD_MEMBER:
     return Object.assign({}, state, {
-      members: action.members
+      members: action.payload.members,
+      error: action.error
     })
   case CLEAR_NOTIFICATION:
   case ADD_NOTIFICATION:
     return Object.assign({}, state, {
-      notifications: action.notifications
+      notifications: action.payload.notifications,
+      error: action.error
     })
   default: 
     return state;
