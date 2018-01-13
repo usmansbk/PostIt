@@ -27,7 +27,7 @@ export default class GroupController {
         status: 'success',
         data: result
       }))
-      .catch((error) => {
+      .catch(() => {
         res.status(401).json({
           status: 'fail',
           data: {
@@ -54,8 +54,8 @@ export default class GroupController {
       res.status(200).json({
         status: 'success',
         data: { posts }
-      })
-    }).catch((error) => {
+      });
+    }).catch(() => {
       res.status(401).json({
         status: 'fail',
         data: {
@@ -88,7 +88,7 @@ export default class GroupController {
       res.status(200).json({
         status: 'success',
         data: { result }
-      })).catch((error) => {
+      })).catch(() => {
       res.status(401).json({
         status: 'fail',
         data: {
@@ -112,7 +112,7 @@ export default class GroupController {
         data: {
           result
         }
-      })).catch((error) => {
+      })).catch(() => {
       res.status(401).json({
         status: 'fail',
         data: {
@@ -131,14 +131,12 @@ export default class GroupController {
         id: guid,
         CreatorId: userId
       }
-    }).then((group) => {
-      return group.destroy();
-    }).then(() => {
+    }).then(group => group.destroy()).then(() => {
       res.status(200).json({
         status: 'success',
         message: 'Group deleted'
       });
-    }).catch((error) => {
+    }).catch(() => {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -152,31 +150,28 @@ export default class GroupController {
     const { uid, guid } = req.query;
     const { userId } = req.session;
     let group;
-    console.log(uid, guid, userId);
     Group.findOne({
       where: {
         id: guid,
-        CreatorId: userId 
+        CreatorId: userId
       }
     }).then((associatedGroup) => {
-      if (userId == uid) throw new Error();
+      if (userId === uid) throw new Error();
       group = associatedGroup;
       return User.findById(uid);
-    }).then((user) => {
-      return group.removeMember(user);
-    }).then(() => {
+    }).then(user => group.removeMember(user)).then(() => {
       res.status(200).json({
         status: 'success',
         message: 'User removed'
       });
-    }).catch((error) => {
-      res.status(400).json({
-        status: 'fail',
-        data: {
-          message: 'Failed to remove user'
-        }
+    })
+      .catch(() => {
+        res.status(400).json({
+          status: 'fail',
+          data: {
+            message: 'Failed to remove user'
+          }
+        });
       });
-    });
   }
-
 }

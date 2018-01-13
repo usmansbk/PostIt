@@ -23,10 +23,9 @@ app.get('/', (req, res) => {
 app.use(router);
 
 app.use((err, req, res, /* next */) => {
-  log.error('Error', err);
   res.status(500).json({
     status: 'error',
     message: 'Internal Server Error'
   });
 });
-export default app
+export default app;

@@ -1,10 +1,11 @@
-import { User, Group, Post, Sequelize } from '../../db/models';
+import { User, Group, Post } from '../../db/models';
 
 export default class UserController {
   /**
-   * @param  req
-   * @param  res
-   */ 
+   * @param  {Object} req
+   * @param  {Object} res
+   * @return {null} -the response object
+   */
   static signIn(req, res) {
     const { username, password } = req.body;
     User.findOne({
@@ -22,7 +23,7 @@ export default class UserController {
           user
         }
       });
-    }).catch((error) => {
+    }).catch(() => {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -33,9 +34,10 @@ export default class UserController {
   }
 
   /**
-   * @param  req
-   * @param  res
-   */ 
+   * @param  {Object} req
+   * @param  {Object} res
+   * @return {null} -the response object
+   */
   static signUp(req, res) {
     User.create(req.body).then(user =>
       res.status(201).json({
@@ -44,9 +46,10 @@ export default class UserController {
           user
         }
       })).catch((error) => {
-			let err = error.errors[0];
-			let { message, path } = err;
-			message = `${path}: ${message}`;
+      const err = error.errors[0];
+      let { message } = err;
+      const { path } = err;
+      message = `${path}: ${message}`;
       res.status(400).json({
         status: 'fail',
         data: {
@@ -57,14 +60,13 @@ export default class UserController {
   }
 
   /**
-   * @param  req
-   * @param  res
-   */ 
+   * @param  {Object} req
+   * @param  {Object} res
+   * @return {null} -the response object
+   */
   static retrieveGroups(req, res) {
     const { userId } = req.session;
-    User.findById(userId).then((user) => {
-      return user.getGroups();
-    }).then((groups) => {
+    User.findById(userId).then(user => user.getGroups()).then((groups) => {
       let message = '', statusCode = 200;
       if (groups.length === 0) {
         message = 'You don\'t belong to any group';
@@ -74,7 +76,7 @@ export default class UserController {
         status: 'success',
         data: { message, groups }
       });
-    }).catch((error) => {
+    }).catch(() => {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -85,14 +87,15 @@ export default class UserController {
   }
 
   /**
-   * @param  req
-   * @param  res
-   */ 
+   * @param  {Object} req
+   * @param  {Object} res
+   * @return {null} -the response object
+   */
   static retrievePosts(req, res) {
     const { userId } = req.session;
     Post.findAll({
       where: {
-        authorId: userId 
+        authorId: userId
       }
     }).then((posts) => {
       let message = '', statusCode = 200;
@@ -104,7 +107,7 @@ export default class UserController {
         status: 'success',
         data: { message, posts }
       });
-    }).catch((error) => {
+    }).catch(() => {
       res.status(404).json({
         status: 'fail',
         data: {
@@ -113,17 +116,19 @@ export default class UserController {
       });
     });
   }
-
+  /**
+   * @param  {Object} req
+   * @param  {Object} res
+   * @return {null} -the response object
+   */
   static deletePost(req, res) {
     const { pid } = req.params;
-    Post.findById(pid).then((post) => {
-      return post.destroy();
-    }).then(() => {
+    Post.findById(pid).then(post => post.destroy()).then(() => {
       res.status(200).json({
         status: 'success',
         message: 'Post deleted'
       });
-    }).catch((error) => {
+    }).catch(() => {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -132,29 +137,34 @@ export default class UserController {
       });
     });
   }
-
+  /**
+   * @param  {Object} req
+   * @param  {Object} res
+   * @return {null} -the response object
+   */
   static leaveGroup(req, res) {
     const { guid } = req.params;
     const { userId } = req.session;
+    let associateGroup;
 
     Group.findById(guid).then((group) => {
-      let creator = group.getCreator();
+      const creator = group.getCreator();
+      associateGroup = group;
       if (creator.id === userId) throw Error();
       return User.findById(userId);
-    }).then((user) => {
-      return group.removeMember(user);
-    }).then(() => {
+    }).then(user => associateGroup.removeMember(user)).then(() => {
       res.status(200).json({
         status: 'success',
         message: 'Left group'
       });
-    }).catch((error) => {
-      res.status(400).json({
-        status: 'fail',
-        data: {
-          message: 'Failed to leave group'
-        }
+    })
+      .catch(() => {
+        res.status(400).json({
+          status: 'fail',
+          data: {
+            message: 'Failed to leave group'
+          }
+        });
       });
-    });
   }
 }

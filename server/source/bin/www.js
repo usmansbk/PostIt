@@ -13,7 +13,5 @@ app.listen(port, () => {
         console.info('Synchronized models to database successfully.');
       });
     })
-    .catch(err => {
-      console.info('Unable to establish database connection.', err);
-    });
+    .catch(err => console.info('Unable to establish database connection.', err));
 });

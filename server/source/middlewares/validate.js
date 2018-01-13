@@ -2,6 +2,9 @@ const isEmpty = /^\s*$/m,
   MAX_NAME_LEN = 22,
   MAX_PURPOSE_LENGTH = 50;
 
+function test(target) {
+  return !target || isEmpty.test(target);
+}
 export default class Validate {
   static createGroup(req, res, next) {
     const { name, purpose } = req.body;
@@ -46,9 +49,4 @@ export default class Validate {
     }
     next();
   }
-
-}
-
-function test(target) {
-  return !target || isEmpty.test(target);
 }
