@@ -104,6 +104,17 @@ describe('postit reducer', () => {
    });
   });
 
+  it('should handle SET_SESSION_STATUS', () => {
+    expect(reducer({}, {
+      type: types.SET_SESSION_STATUS,
+      payload: {
+        sessionStatus: types.SessionStatus.LOGGED_IN 
+      }
+   })).toEqual({
+     sessionStatus: types.SessionStatus.LOGGED_IN 
+   });
+  });
+
   it('should set error property on failed actions', () => {
     expect(reducer({}, {
       type: types.ADD_POST,
