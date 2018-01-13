@@ -10,9 +10,9 @@ import {
 } from './actions';
 
 const initialState = {
-  groups: {},
-  members: {},
-  posts: {},
+  groups: [],
+  members: [],
+  posts: [],
   notifications: [],
   error: undefined
 };

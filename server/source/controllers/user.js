@@ -66,7 +66,7 @@ export default class UserController {
    */
   static retrieveGroups(req, res) {
     const { userId } = req.session;
-    User.findById(userId).then(user => user.getGroups({attributes: { exclude: ["UserGroup"]}})).then((groups) => {
+    User.findById(userId).then(user => user.getGroups()).then((groups) => {
       let message = '', statusCode = 200;
       if (groups.length === 0) {
         message = 'You don\'t belong to any group';
