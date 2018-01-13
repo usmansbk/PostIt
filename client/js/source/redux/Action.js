@@ -41,7 +41,7 @@ export function addGroup(groups, error) {
   return {
     type: ADD_GROUP,
     payload: {
-      posts
+      groups 
     },
     error
   };
@@ -51,7 +51,7 @@ export function deleteGroup(groups, error) {
   return {
     type: DELETE_GROUP,
     payload: {
-      posts
+      groups
     },
     error
   };

@@ -7,7 +7,7 @@ import {
   DELETE_GROUP,
   REMOVE_MEMBER,
   CLEAR_NOTIFICATION
-} from './actions';
+} from './Action';
 
 const initialState = {
   groups: [],

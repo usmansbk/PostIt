@@ -1,0 +1,100 @@
+import * as actions from '../../source/redux/Action';
+
+describe('actions', () => {
+  it('should create an action to add a post', () => {
+    const posts = 'Hello post';
+    const expectedAction = {
+      type: actions.ADD_POST,
+      payload: {
+        posts
+      },
+      error: null
+    }
+    expect(actions.addPost(posts, null)).toEqual(expectedAction)
+  });
+
+  it('should create an action to add a group', () => {
+    const groups  = 'New group';
+    const expectedAction = {
+      type: actions.ADD_GROUP,
+      payload: {
+        groups 
+      },
+      error: null
+    }
+    expect(actions.addGroup(groups, null)).toEqual(expectedAction)
+  });
+
+  it('should create an action to add a member', () => {
+    const members  = 'New member';
+    const expectedAction = {
+      type: actions.ADD_MEMBER,
+      payload: {
+        members 
+      },
+      error: null
+    }
+    expect(actions.addMember(members, null)).toEqual(expectedAction)
+  });
+
+  it('should create an action to remove member', () => {
+    const members  = 'New member';
+    const expectedAction = {
+      type: actions.REMOVE_MEMBER,
+      payload: {
+        members 
+      },
+      error: null
+    }
+    expect(actions.removeMember(members, null)).toEqual(expectedAction)
+  });
+
+  it('should create an action to delete post', () => {
+    const posts  = 'posts';
+    const expectedAction = {
+      type: actions.DELETE_POST,
+      payload: {
+       posts 
+      },
+      error: null
+    }
+    expect(actions.deletePost(posts, null)).toEqual(expectedAction)
+  });
+
+  it('should create an action to delete group', () => {
+    const groups  = 'groups';
+    const expectedAction = {
+      type: actions.DELETE_GROUP,
+      payload: {
+        groups 
+      },
+      error: null
+    }
+    expect(actions.deleteGroup(groups, null)).toEqual(expectedAction)
+  });
+
+  it('should create an action to add notification', () => {
+    const notifications  = 'notifications';
+    const expectedAction = {
+      type: actions.ADD_NOTIFICATION,
+      payload: {
+       notifications 
+      },
+      error: null
+    }
+    expect(actions.addNotification(notifications, null)).toEqual(expectedAction)
+  });
+
+  it('should create an action to clear notification', () => {
+    const notifications  = 'notifications';
+    const expectedAction = {
+      type: actions.CLEAR_NOTIFICATION,
+      payload: {
+       notifications 
+      },
+      error: null
+    }
+    expect(actions.clearNotification(notifications, null)).toEqual(expectedAction)
+  });
+
+});
