@@ -21,11 +21,13 @@ export default class GroupController {
         sequelize.transaction(t =>
           Post.create({ message }, { transaction: t }).then(post =>
             post.setAuthor(user, { transaction: t }).then(() =>
-              group.addPost(post, { transaction: t }).then(() => post)))));
-    }).then(result =>
+              group.addPost(post, { transaction: t })))));
+    }).then(() =>
       res.status(201).json({
         status: 'success',
-        data: result
+        data: {
+          message: 'Message posted'
+        } 
       }))
       .catch(() => {
         res.status(401).json({
@@ -87,7 +89,9 @@ export default class GroupController {
     }).then(result =>
       res.status(200).json({
         status: 'success',
-        data: { result }
+        data: {
+          message: 'Users added'
+        }
       })).catch(() => {
       res.status(401).json({
         status: 'fail',
@@ -110,7 +114,8 @@ export default class GroupController {
       res.status(201).json({
         status: 'success',
         data: {
-          result
+          result,
+          message: 'Group created'
         }
       })).catch(() => {
       res.status(401).json({
@@ -143,6 +148,34 @@ export default class GroupController {
           message: 'Failed to delete group'
         }
       });
+    });
+  }
+
+  static getMembers(req, res) {
+    const { guid } = req.params;
+    const { userId } = req.session;
+    Group.findOne({
+      where: { id: guid },
+      include: [{
+        model: User,
+        as: 'Members',
+        where: { id: userId },
+      }]
+    }).then(group => group.getMembers({ attributes: { exclude: ["password"]}}))
+     .then((members) => {
+       res.status(200).json({
+         status: 'success',
+         data: {
+           members
+         }
+       });
+     }).catch((error) => {
+       res.status(400).json({
+         status: 'failed',
+         data: {
+           message: 'Failed to get members'
+         }
+       });
     });
   }
 

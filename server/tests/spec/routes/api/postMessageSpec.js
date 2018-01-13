@@ -85,9 +85,7 @@ describe('POST:/api/group/<group id>/message', () => {
       it('should return status code 201', (done) => {
         const groupUrl = `${url}/${groupId}${endPoint}`;
         request.post(groupUrl, { form: { message } }, (err, res, body) => {
-          body = JSON.parse(body);
           expect(res.statusCode).toBe(201);
-          expect(body.data.message).toBe(message);
           done();
         });
       });

@@ -20,7 +20,7 @@ export default class UserController {
       res.status(200).json({
         status: 'success',
         data: {
-          user
+          message: 'Logged in'
         }
       });
     }).catch(() => {
@@ -43,7 +43,7 @@ export default class UserController {
       res.status(201).json({
         status: 'success',
         data: {
-          user
+          message: 'Account created'
         }
       })).catch((error) => {
       const err = error.errors[0];
@@ -53,7 +53,7 @@ export default class UserController {
       res.status(400).json({
         status: 'fail',
         data: {
-          message
+          message: 'Failed to create account'
         }
       });
     });
@@ -66,7 +66,7 @@ export default class UserController {
    */
   static retrieveGroups(req, res) {
     const { userId } = req.session;
-    User.findById(userId).then(user => user.getGroups()).then((groups) => {
+    User.findById(userId).then(user => user.getGroups({attributes: { exclude: ["UserGroup"]}})).then((groups) => {
       let message = '', statusCode = 200;
       if (groups.length === 0) {
         message = 'You don\'t belong to any group';
