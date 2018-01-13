@@ -1,0 +1,49 @@
+{
+  groups: {
+    byId: {
+      'groupid': {
+	 id: 'groupid',
+	 name: 'groupname',
+	 purpose: '',
+	 creator: 'userid',
+	 createdAt: ''
+      }
+    },
+    allIds: []
+  },
+  creators: {
+    byId: {
+      'creatorId': {
+        id: 'creatorid',
+        username: 'username',
+	email: 'email@email.com'
+      }
+    },
+    allIds: []
+  },
+  posts: {
+    byId: {
+      "postit": {
+	 id: 'postid',
+	 author: 'userid',
+	 message: 'Hello World!',
+         group: 'groupid',
+	 createdAt: 'Sat Jan 13 14:44'
+      }
+    },
+    allIds: []
+  },
+  members: {
+    byId: {
+      "userid": {
+         id: "userid",
+         username: "username",
+         email: "email@email.com"
+      }
+    },
+    allIds: []
+  },
+  notificationsId: [],
+  currentGroupId: 0,
+  userId: '0'
+}
