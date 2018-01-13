@@ -5,12 +5,13 @@
   "main": "server/build/bin/www",
   "scripts": {
     "postinstall": "npm run build",
+    "build": "npm run build:server",
     "build:server": "sh ./server/scripts/build.sh",
     "build:client": "webpack --config client/webpack.config.js",
-    "build": "npm run build:server",
     "start": "node ./server/build/bin/www",
     "start:dev": "nodemon ./server/build/bin/www",
-    "test": "nyc --reporter=lcov --reporter=text-lcov jasmine JASMINE_CONFIG_PATH=server/tests/spec/support/jasmine.json",
+    "test": "npm run test:server",
+    "test:server": "sh ./server/scripts/test.sh",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -38,7 +39,6 @@
     "express-session": "^1.15.6",
     "extract-text-webpack-plugin": "^2.1.2",
     "morgan": "^1.9.0",
-    "npx": "9.7.1",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
     "react": "^16.2.0",
