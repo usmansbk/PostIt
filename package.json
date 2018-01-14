@@ -7,7 +7,7 @@
     "postinstall": "npm run build",
     "build": "npm run build:server",
     "build:server": "sh server/scripts/build.sh",
-    "build:client": "webpack --config client/webpack.config.js",
+    "build:client": "webpack --config client/webpack.config.js --watch",
     "start": "node server/build/bin/www",
     "start:dev": "nodemon server/build/bin/www",
     "test": "npm run test:server",
