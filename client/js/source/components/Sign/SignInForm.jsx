@@ -1,5 +1,5 @@
-import InputField from './InputField.jsx';
-import Button from './Button.jsx';
+import InputField from '../common/InputField.jsx';
+import Button from '../common/Button.jsx';
 import React from 'react';
 
 export default function SignInForm(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
-import InputField from './InputField.jsx';
-import Button from './Button.jsx';
+import InputField from '../common/InputField.jsx';
+import Button from '../common/Button.jsx';
 
 export default function SignUpForm(props) {
   return (

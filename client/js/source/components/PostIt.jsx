@@ -1,5 +1,5 @@
 import React from 'react';
-import SignPage from './SignPage.jsx'
+import SignPage from './Sign/SignPage.jsx'
 
 export default class PostIt extends React.Component {
   render() {
