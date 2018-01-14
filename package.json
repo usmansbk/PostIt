@@ -38,7 +38,6 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
-    "extract-text-webpack-plugin": "^2.1.2",
     "morgan": "^1.9.0",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
@@ -75,7 +74,8 @@
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.3",
     "nyc": "^11.4.1",
-    "sass-loader": "^6.0.6"
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1"
   },
   "engines": {
     "node": "8.9.3"
