@@ -1,7 +1,8 @@
 import React from 'react';
+import SignPage from './SignPage.jsx'
 
 export default class PostIt extends React.Component {
   render() {
-    return <h1>{this.props.greeting}</h1>;
+    return <SignPage />
   }
 }
