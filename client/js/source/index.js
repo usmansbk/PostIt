@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import PostIt from './components/PostIt';
+import PostIt from './components/PostIt.jsx';
 import postItApp from './redux/Reducers';
 
 const store = createStore(postItApp);
