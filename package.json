@@ -48,8 +48,7 @@
     "redux": "^3.7.2",
     "request": "^2.83.0",
     "sequelize": "^4.28.6",
-    "sequelize-cli": "^3.2.0",
-    "webpack": "^3.10.0"
+    "sequelize-cli": "^3.2.0"
   },
   "nyc": {
     "exclude": [
@@ -76,7 +75,8 @@
     "nodemon": "^1.14.3",
     "nyc": "^11.4.1",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.1"
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0"
   },
   "engines": {
     "node": "8.9.3"

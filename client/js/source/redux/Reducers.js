@@ -10,7 +10,7 @@ import {
   SEARCH_POSTIT,
   SET_SESSION_STATUS,
   SessionStatus,
-} from './Action';
+} from './Actions';
 
 const initialState = {
   groups: [],

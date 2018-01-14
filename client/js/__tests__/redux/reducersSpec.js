@@ -1,5 +1,5 @@
 import reducer from '../../source/redux/Reducers';
-import * as types from '../../source/redux/Action';
+import * as types from '../../source/redux/Actions';
 
 describe('postit reducer', () => {
   it('should return the initial state', () => {

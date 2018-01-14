@@ -7,10 +7,6 @@ module.exports = {
     path: path.resolve(__dirname, 'js')
   },
   devtool: 'source-map',
-  devServer: {
-    contentBase: 'client',
-    watchContentBase: true
-  },
   module: {
     rules: [
       {
