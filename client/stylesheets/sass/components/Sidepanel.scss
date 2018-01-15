@@ -1,0 +1,18 @@
+.my-side-nav {
+  height: 100%;
+  width: inherit;
+  position: fixed;
+	.nav-footer {
+    position: absolute;
+    bottom: 10%;
+    padding-bottom: 4%;
+    padding-left: 8%;
+  }
+}
+
+my-nav-subitem {
+  padding-left: 8%; }
+  .my-nav-subitem .my-nav-sublabel {
+    padding-top: 2%;
+    padding-bottom: 2%; }
+
