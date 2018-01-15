@@ -1,8 +1,7 @@
 import React from 'react';
-import SignPage from './Sign/SignPage.jsx'
+// import SignPage from './sign/SignPage.jsx';
+import Dashboard from './dashboard/Dashboard.jsx';
 
-export default class PostIt extends React.Component {
-  render() {
-    return <SignPage />
-  }
+export default function PostIt (props) {
+    return <Dashboard />
 }
