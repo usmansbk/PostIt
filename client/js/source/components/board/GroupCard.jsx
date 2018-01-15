@@ -1,15 +1,13 @@
 import React from 'react';
-import '../../../../stylesheets/bootstrap.css';
 
 export default function GroupCard(props) {
   return (
     <div className='card'>
-      <div className='card-body'>
-        <h5 className='card-title'>Group Name</h5>
-        <p className='card-text'>Purpose of this group</p>
-        <small className='text-muted'>Created by</small>
-        <div className='card-footer'>
-          <small className='text-muted'>18 members</small>
+        <h5 className=''>{props.name}</h5>
+        <p className=''>{props.purpose}</p>
+        <small className='text-muted'>{props.creator}</small>
+        <div className=''>
+          <small className='text-muted'>{props.member}</small>
         </div>
       </div>
     </div>

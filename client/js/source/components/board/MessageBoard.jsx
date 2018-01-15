@@ -17,7 +17,9 @@ export default class MessageBoard extends React.Component {
     return (
       <div>
         {
-          !this.props.children?notice:this.props.children
+          !this.props.children
+          ?notice
+          :this.props.children
         }
         <div className='fixed-action-btn modal-trigger'>
           <a className='btn-floating btn-large red modal-trigger' href='#newpost'>
