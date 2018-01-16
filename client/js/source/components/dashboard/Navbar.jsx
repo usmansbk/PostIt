@@ -6,8 +6,7 @@ import Logo from '../common/Logo.jsx';
 import Icon from '../common/Icon.jsx';
 import Button from '../common/Button.jsx';
 import UserInfo from '../common/UserInfo.jsx';
-import NotificationHeader from '../common/NotificationHeader.jsx';
-import Avatar from '../common/Avatar.jsx';
+import NotificationBox from '../common/NotificationBox.jsx';
 import M from '../../../materialize';
 import '../../../../stylesheets/sass/components/Navbar.scss';
 
@@ -16,10 +15,10 @@ export default class Navbar extends React.Component {
     super(props);
     this.state = { search: false };
     this.handleClick = this.handleClick.bind(this);
-    this.init = this.init.bind(this);
+    this.dropDownInit = this.dropDownInit.bind(this);
   }
 
-  init() {
+  dropDownInit() {
     let elem = document.querySelector('.notifications');
     let instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
     elem = document.querySelector('.account');
@@ -27,7 +26,7 @@ export default class Navbar extends React.Component {
   }
 
   componentDidMount() {
-    this.init();
+    this.dropDownInit();
   }
 
   handleClick(event) {
@@ -35,7 +34,7 @@ export default class Navbar extends React.Component {
     const name = target.getAttribute('name');
     if (name === 'cancel-search') {
       this.setState({search: false}, () => {
-        this.init();
+        this.dropDownInit();
       });
     } else {
       this.setState({search: true});
@@ -43,13 +42,14 @@ export default class Navbar extends React.Component {
   }
   render() {
     if (this.state.search) {
-      return <div className={this.props.className}><Searchbar onClick={this.handleClick} /></div>
+      return <div className='navbar-fixed nav-wrapper'><Searchbar
+       search={ this.props.search } onClick={this.handleClick} /></div>
     }
     return (
-      <div className={this.props.className} >
+      <div className='navbar-fixed'>
         <nav>
-          <div className={ 'nav-wrapper ' + this.props.color }>
-            <a href='#' className='sidenav-trigger' data-target='slide-out'><Icon>menu</Icon></a>
+          <div className='nav-wrapper white '>
+            <a href='#' className='sidenav-trigger hide-on-med-and-up' data-target='slide-out'><Icon>menu</Icon></a>
             <Logo href='#'>PostIt</Logo>
             <span className='vl grey lighten-1'>.</span>
             <span id='location' className='grey-text' >{this.props.location}</span>
@@ -58,13 +58,13 @@ export default class Navbar extends React.Component {
               <li className='notifications' data-target='notifications'><a><Icon href='#'>notifications</Icon></a></li>
               <li className='account' data-target='account'><a><Icon href='#'>account_circle</Icon></a></li>
             </ul>
-            <Search placeholder='Search PostIt' visibility='right hide-on-small-only' />
-            <Dropdown id='notifications' data={this.props.notifications}>
-              <NotificationHeader /> 
+            <Search placeholder='Search PostIt' visibility='right hide-on-small-only' search={this.props.search} />
+            <Dropdown id='notifications' >
+              <NotificationBox search={ this.props.search }/>
             </Dropdown>
-            <Dropdown id='account' data={this.props.account}>
-              <UserInfo url={this.props.url} />
-              <Button className='center-align' value='Logout'></Button>
+            <Dropdown id='account' >
+              <UserInfo account={ this.props.account } />
+              <Button className='center-align' color='blue' value='Logout'></Button>
             </Dropdown>
           </div>
         </nav>

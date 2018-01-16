@@ -1,14 +1,17 @@
 import React from 'react';
-import Avatar from './Avatar.jsx';
+import Icon from './Icon.jsx';
 import '../../../../stylesheets/sass/components/UserInfo.scss';
 
 export default function UserInfo(props) {
+	const account = props.account;
   return (
     <div id='userinfo' className='row valign-wrapper'>
-      <Avatar id='avatar' url={props.url} className='col s3' />
-      <div className='col s9'>
-        <span>{ props.username || 'Username' }</span><br/>
-        <span>{ props.email || 'Email address' }</span>
+			<div className='col s2'>
+				<Icon className='large'>account_circle</Icon>
+			</div>
+      <div className='col s10'>
+        <span>{ account.username || 'Username' }</span><br/>
+        <span>{ account.email || 'Email address' }</span>
       </div>
     </div>
   );

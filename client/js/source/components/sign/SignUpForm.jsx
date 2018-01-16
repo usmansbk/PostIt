@@ -34,15 +34,15 @@ export default class SignUpForm extends React.Component {
         </InputField>
 
         <InputField id='email' type='email' required='true' label='Email address' className='input-field'/>
-        
+
         <InputField id='password' type='password' required='true' value={this.state.password} label='Password' validate='validate' className='input-field' onChange={this.validatePassword} >
           Password must be 8-32 characters long
         </InputField>
-        
+
         <InputField id='confirm' type='password' required='true' label='Confirm password' className='input-field' onChange={this.validatePassword} value={this.state.fconfirm} />
         { this.state.isInvalid && error }
-        <Button type='submit' className='center-align' value='Sign Up'>send</Button>
-      
+        <Button type='submit' className='center-align' color='blue' value='Sign Up'>send</Button>
+
      </form>
     );
   }

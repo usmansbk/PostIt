@@ -1,6 +1,8 @@
 import React from 'react';
 import Icon from '../common/Icon.jsx';
+import PostCard from './PostCard.jsx';
 import M from '../../../materialize';
+import '../../../../stylesheets/sass/components/MessageBoard.scss';
 
 export default class MessageBoard extends React.Component {
   constructor(props) {
@@ -13,14 +15,15 @@ export default class MessageBoard extends React.Component {
   }
 
   render() {
-    const notice = <h3 className='grey-text text-lighten-1'>This board is empty</h3>;
+    let notice = <h3 className='grey-text text-lighten-1'>This board is empty</h3>;
+		let { posts } = this.props;
+		posts = posts.map((post, index) => {
+      return <PostCard key={index} post={post} />;
+    });
+		console.log(posts);
     return (
-      <div>
-        {
-          !this.props.children
-          ?notice
-          :this.props.children
-        }
+      <div className='row' id='board'>
+        { posts || notice }
         <div className='fixed-action-btn modal-trigger'>
           <a className='btn-floating btn-large red modal-trigger' href='#newpost'>
             <Icon className='large white-text'>mode_edit</Icon>

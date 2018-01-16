@@ -11,8 +11,8 @@ export default function SignInForm(props) {
         <InputField className='input-field' id='password' type='password' name='password' label='Password'>
           <span><a href='#'>Forgot account?</a></span>
         </InputField>
-        
-        <Button className='center-align' value='Sign In'></Button> 
+
+        <Button className='center-align' color='blue' value='Sign In'></Button> 
       </form>
   )
 }
