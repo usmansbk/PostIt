@@ -5,6 +5,17 @@
   margin-left: 1%;
 }
 
+#td-menu {
+  width: 30px;
+}
+
+#td-loc {
+  width: 150px;
+}
+
+#td-logo {
+  max-width: 40px;
+}
 table {
   height: inherit;
 	td, th {
@@ -16,8 +27,13 @@ table {
   };
 }
 
+#avatar, #td-search, #td-notification, #td-menu {
+  cursor: pointer;
+}
+
 #avatar {
 	display: block;
   width: 32px;
   height: 32px;
+  margin-left: 10%;
 }

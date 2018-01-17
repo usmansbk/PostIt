@@ -33,6 +33,21 @@ export default class GroupsBoard extends React.Component {
         </div>
       <div id='newgroup' className='modal'>
         <div className='modal-content'>
+          <form>
+            <div className='input-field'>
+              <input type='text' data-length='22' id='groupname' />
+              <label for='groupname'>Group name</label>
+            </div>
+            <div className='input-field'>
+              <input type='text' data-length='50' id='grouppurpose' />
+              <label for='grouppurpose'>Purpose</label>
+            </div>
+            <div className='input-field'>
+              <input type='text' id='invites' />
+              <label for='grouppurpose'>Invites</label>
+              <span className='helper-text'>Enter usernames seperated by whitespace</span>
+            </div>
+          </form>
         </div>
         <div className='modal-footer'>
           <a className='modal-action modal-close waves-effect btn-flat'>Cancel</a>

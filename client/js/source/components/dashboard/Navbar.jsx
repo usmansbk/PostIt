@@ -47,8 +47,7 @@ export default class Navbar extends React.Component {
       return <div className='navbar-fixed nav-wrapper'><Searchbar
        search={ this.props.search } onClick={this.handleClick} /></div>
     }
-    let loc = this.props.location;
-    if (loc.length >  6) loc = '';
+    const { location } = this.props;
     return (
       <div className='navbar-fixed'>
         <nav>
@@ -56,20 +55,20 @@ export default class Navbar extends React.Component {
             <table>
               <tbody>
 	              <tr>
-			            <td><a className='sidenav-trigger hide-on-large-only' data-target='slide-out'><Icon>menu</Icon></a></td>
-			            <td className='center-align'>
+			            <td id='td-menu'><a className='sidenav-trigger hide-on-large-only' data-target='slide-out'><Icon>menu</Icon></a></td>
+			            <td id='td-logo' className='center-align'>
                     <Logo>PostIt</Logo>
 			            </td>
-                  <td>
-		                <span id='location' className='grey-text text-darken-2'>Notifications</span>
+                  <td id='td-loc'>
+		                <span id='location' className='grey-text text-darken-2 truncate'>{ location }</span>
                   </td>
 			            <td className='hide-on-small-only grey-text'>
 				            <input type='search' placeholder='Search PostIt' className='grey lighten-3 center-align'/>
 			            </td>
-			            <td className='hide-on-med-and-up center-align' onClick={this.handleClick}>
+			            <td id='td-search' className='hide-on-med-and-up center-align' onClick={this.handleClick}>
 				            <Icon>search</Icon>
 			            </td>
-			            <td className='notifications center-align' data-target='notifications'>
+			            <td id='td-notification' className='notifications center-align' data-target='notifications'>
 				            <Icon>notifications</Icon>
 			            </td>
 			            <td className='account' data-target='account' >
