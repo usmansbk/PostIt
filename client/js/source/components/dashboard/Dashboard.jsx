@@ -6,7 +6,10 @@ import PanelItem from '../common/PanelItem.jsx';
 import Footer from '../common/Footer.jsx';
 import MessageBoard from '../board/MessageBoard.jsx';
 import GroupsBoard from '../board/GroupsBoard.jsx';
+import ProfileBoard from '../board/ProfileBoard.jsx';
+import NotificationBoard from '../board/NotificationBoard.jsx';
 import PostCard from '../board/PostCard.jsx';
+import '../../../../stylesheets/sass/components/Dashboard.scss';
 
 export default class Dashboard extends React.Component {
   constructor(props) {
@@ -15,15 +18,14 @@ export default class Dashboard extends React.Component {
 
   render() {
     let view;
-    const { location, posts, groups } = this.props;
-    console.log(posts);
+    const { location, posts, groups, account, notifications } = this.props;
     if (location === 'Group')
        view = <MessageBoard posts={ posts } />
     else if (location === 'Groups')
       view = <GroupsBoard groups={ groups } />
     else if (location === 'Profile')
       view = <ProfileBoard account={ account } posts={ posts } groups={ groups }/>
-    else if (location === 'Notification')
+    else if (location === 'Notifications')
       view = <NotificationBoard notifications={notifications} />
     else
       view = <MessageBoard posts={ posts } />
@@ -36,7 +38,7 @@ export default class Dashboard extends React.Component {
       account={ this.props.account }/>
       <Sidenav />
       <div className='row'>
-        <Sidepanel className='col m2 hide-on-small-only my-side-nav'>
+        <Sidepanel className='col m2 hide-on-med-and-down my-side-nav'>
           <div className='section'>
             <PanelItem icon='home' location={ this.props.location } label='Home' />
             <PanelItem icon='group' location={ this.props.location } label='Groups' />
@@ -50,7 +52,7 @@ export default class Dashboard extends React.Component {
           </div>
           <Footer className='nav-footer' />
         </Sidepanel>
-          <div className='col s12 m9 offset-m3'>
+          <div id='mainboard' className='col s12 m9 offset-m2'>
             { view }
           </div>
       </div>

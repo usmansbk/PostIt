@@ -16,11 +16,10 @@ export default class MessageBoard extends React.Component {
 
   render() {
     let notice = <h3 className='grey-text text-lighten-1'>This board is empty</h3>;
-		let { posts } = this.props;
-		posts = posts.map((post, index) => {
+    let { posts } = this.props;
+    posts = posts.map((post, index) => {
       return <PostCard key={index} post={post} />;
     });
-		console.log(posts);
     return (
       <div className='row' id='board'>
         { posts || notice }

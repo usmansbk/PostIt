@@ -14,7 +14,7 @@ export default class Sidenav extends React.Component {
   render() {
     return (
       <ul id='slide-out' className='sidenav'>
-        <li className='fixed'>
+        <li>
           <a className='sidenav-close grey-text text-darken-1' href='#'>
             <div className='row valign-wrapper'>
               <h5 className='col s10'>PostIt</h5>

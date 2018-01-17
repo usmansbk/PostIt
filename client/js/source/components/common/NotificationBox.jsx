@@ -9,7 +9,7 @@ export default function NotificationHeader(props) {
         <h6>Notifications</h6>
       </div>
       <div className='col s2'>
-        <Icon>notifications</Icon>
+        <Icon>clear_all</Icon>
       </div>
     </div>
   );

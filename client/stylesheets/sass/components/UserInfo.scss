@@ -1,9 +1,10 @@
 #userinfo {
-  margin: 1px;
-  width: 250px;
-}
-
-#avatar {
-  width: 48;
-  height: 48px;
+  cursor: pointer;
+  margin-bottom: 0;
+  #avatar {
+    padding-right: 4px;
+  }
+  #info {
+    padding-left: 4px;
+  }
 }

@@ -1,5 +1,12 @@
-.header {
-  margin-left: 4px;
-  margin-top: 1px;
-  width: 250px;
+.dropdown-content {
+  li {
+    cursor: default !important;
+    &:hover {
+      background-color: inherit !important;
+    };
+    &:focus {
+      background-color: inherit !important;
+    };
+  }
 }
+

@@ -49,12 +49,12 @@ export default class Navbar extends React.Component {
       <div className='navbar-fixed'>
         <nav>
           <div className='nav-wrapper white '>
-            <a href='#' className='sidenav-trigger hide-on-med-and-up' data-target='slide-out'><Icon>menu</Icon></a>
+            <a href='#' className='sidenav-trigger hide-on-large-only' data-target='slide-out'><Icon>menu</Icon></a>
             <Logo href='#'>PostIt</Logo>
             <span className='vl grey lighten-1'>.</span>
             <span id='location' className='grey-text' >{this.props.location}</span>
             <ul className='right'>
-              <li className='hide-on-med-and-up' onClick={this.handleClick}><a><Icon href='#'>search</Icon></a></li>
+              <li className='hide-on-large-only' onClick={this.handleClick}><a><Icon href='#'>search</Icon></a></li>
               <li className='notifications' data-target='notifications'><a><Icon href='#'>notifications</Icon></a></li>
               <li className='account' data-target='account'><a><Icon href='#'>account_circle</Icon></a></li>
             </ul>

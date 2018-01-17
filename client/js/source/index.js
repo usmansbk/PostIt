@@ -16,12 +16,21 @@ const groups = [
   {
     name: 'Group I',
     purpose: 'Test',
+    cardinal: 5,
     creator: {
 			username: "Me"
 		}
   },  {
     name: 'Group II',
+    purpose: 'Tesasdfsdafsklasf;ljsdf;ajf;lasfjl;sjdf;lsjfalkjfa;lsfjs;fjs;lfjlakjt 2',
+    cardinal:2,
+    creator: {
+			username: "You"
+		}
+  }, {
+    name: 'Group II',
     purpose: 'Test 2',
+    cardinal: 10,
     creator: {
 			username: "You"
 		}
@@ -78,11 +87,14 @@ const account = {
 	email: 'email@email'
 }
 
+const notifications = posts;
+
 ReactDOM.render(
   <PostIt
-  location='Home'
+  location='Notifications'
   groups={groups}
   posts={ posts}
-	account={account}
+  account={account}
+  notifications={notifications}
   />,
   app);
