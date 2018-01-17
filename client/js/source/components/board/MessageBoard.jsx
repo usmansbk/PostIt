@@ -2,7 +2,6 @@ import React from 'react';
 import Icon from '../common/Icon.jsx';
 import PostCard from './PostCard.jsx';
 import M from '../../../materialize';
-import '../../../../stylesheets/sass/components/MessageBoard.scss';
 
 export default class MessageBoard extends React.Component {
   constructor(props) {
@@ -10,22 +9,24 @@ export default class MessageBoard extends React.Component {
   }
 
   componentDidMount() {
-      let elem = document.querySelector('.modal');
+      let elem = document.querySelectorAll('.modal');
       let instance = M.Modal.init(elem);
   }
 
   render() {
-    let notice = <h3 className='grey-text text-lighten-1'>This board is empty</h3>;
+    let notice = <h3 className='grey-text text-lighten-1 center-align'>This board is empty</h3>;
     let { posts } = this.props;
+    if (posts) {
     posts = posts.map((post, index) => {
       return <PostCard key={index} post={post} />;
     });
+    }
     return (
-      <div className='row' id='board'>
+      <div className='row'>
         { posts || notice }
         <div className='fixed-action-btn modal-trigger'>
           <a className='btn-floating btn-large red modal-trigger' href='#newpost'>
-            <Icon className='large white-text'>mode_edit</Icon>
+            <Icon className='white-text'>mode_edit</Icon>
           </a>
         </div>
         <div id='newpost' className='modal modal-fixed-footer'>

@@ -10,6 +10,6 @@ export default function PostIt (props) {
       posts={props.posts}
       search={props.search}
       account={props.account}
-      notifications={props.notification}
+      notifications={props.notifications}
     />
 }

@@ -1,13 +1,23 @@
 #location {
-  font-size: 200%;
+  font-weight: 500;
+  font-size: 20px;
   margin-left: 2%;
   margin-left: 1%;
 }
 
-.vl {
-  height: 80%;
-  width: 2px;
-  margin-left: 10px;
-  margin-top: 0px;
-  margin-bottom: 1%;
+table {
+  height: inherit;
+	td, th {
+		padding: 0;
+		border-radius: 0;
+  };
+  tr {
+		border: none;
+  };
+}
+
+#avatar {
+	display: block;
+  width: 32px;
+  height: 32px;
 }

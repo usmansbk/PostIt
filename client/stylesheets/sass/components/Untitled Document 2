@@ -53,31 +53,31 @@ export default class Navbar extends React.Component {
       <div className='navbar-fixed'>
         <nav>
           <div className='nav-wrapper white '>
-            <table>
-              <tbody>
-	              <tr>
-			            <td><a className='sidenav-trigger hide-on-large-only' data-target='slide-out'><Icon>menu</Icon></a></td>
-			            <td className='center-align'>
-                    <Logo>PostIt</Logo>
-			            </td>
-                  <td>
-		                <span id='location' className='grey-text text-darken-2'>Notifications</span>
-                  </td>
-			            <td className='hide-on-small-only grey-text'>
-				            <input type='search' placeholder='Search PostIt' className='grey lighten-3 center-align'/>
-			            </td>
-			            <td className='hide-on-med-and-up center-align' onClick={this.handleClick}>
-				            <Icon>search</Icon>
-			            </td>
-			            <td className='notifications center-align' data-target='notifications'>
-				            <Icon>notifications</Icon>
-			            </td>
-			            <td className='account' data-target='account' >
-				            <img id='avatar' src={url} alt='' className='circle image-responsive' />
-			            </td>
-		            </tr>
-              </tbody>
-            </table>
+<table>
+  <tbody>
+	  <tr>
+			<td className='td-menu'><a className='sidenav-trigger hide-on-large-only' data-target='slide-out'><Icon>menu</Icon></a></td>
+			<td className='left-align td'>
+        <Logo>PostIt</Logo>
+			</td>
+      <td className='left-align loc'>
+			  <span id='location' className='grey-text text-darken-2'>Notifications</span>
+			</td>
+			<td>
+				<input type='search' placeholder='Search PostIt' className='hide-on-small-only' />
+			</td>
+			<td className='hide-on-large-only center-align nav-icon' onClick={this.handleClick}>
+				<Icon>search</Icon>
+			</td>
+			<td className='notifications center-align nav-icon' data-target='notifications'>
+				<Icon>notifications</Icon>
+			</td>
+			<td className='account center-align nav-icon' data-target='account'>
+				<img id='avatar' src={url} alt='' className='circle image-responsive' />
+			</td>
+		</tr>
+  </tbody>
+</table>
             <Dropdown id='notifications' >
               <NotificationBox search={ this.props.search }/>
             </Dropdown>

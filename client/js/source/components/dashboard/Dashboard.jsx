@@ -52,7 +52,7 @@ export default class Dashboard extends React.Component {
           </div>
           <Footer className='nav-footer' />
         </Sidepanel>
-          <div id='mainboard' className='col s12 m9 offset-m2'>
+          <div id='mainboard' className='col s12 m9 offset-m2 container'>
             { view }
           </div>
       </div>

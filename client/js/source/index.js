@@ -91,10 +91,10 @@ const notifications = posts;
 
 ReactDOM.render(
   <PostIt
-  location='Notifications'
-  groups={groups}
-  posts={ posts}
+  location='Profile'
+  groups={undefined}
+  posts={ undefined}
   account={account}
-  notifications={notifications}
+  notifications={null}
   />,
   app);
