@@ -47,7 +47,7 @@ export default class Navbar extends React.Component {
       return <div className='navbar-fixed nav-wrapper'><Searchbar
        search={ this.props.search } onClick={this.handleClick} /></div>
     }
-    const { location } = this.props;
+    const { location, account } = this.props;
     return (
       <div className='navbar-fixed'>
         <nav>
@@ -72,7 +72,7 @@ export default class Navbar extends React.Component {
 				            <Icon>notifications</Icon>
 			            </td>
 			            <td className='account' data-target='account' >
-				            <img id='avatar' src={url} alt='' className='circle image-responsive' />
+				            <img id='avatar' src={account.img} alt='' className='circle image-responsive' />
 			            </td>
 		            </tr>
               </tbody>

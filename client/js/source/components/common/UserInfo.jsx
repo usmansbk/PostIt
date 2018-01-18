@@ -1,14 +1,13 @@
 import React from 'react';
 import Icon from './Icon.jsx';
 
-const url = '../../../../images/default.jpg';
 
 export default function UserInfo(props) {
-	const account = props.account;
+	const { account, img } = props;
   return (
     <div id='userinfo' className='row valign-wrapper'>
 			<div className='col s2'>
-				<img src={url} alt='' className='circle responsive-img' />
+				<img src={img} alt='' className='circle responsive-img' />
       </div>
       <div id='info' className='col s10 grey-text'>
         <p>{ account.username || 'Username' }</p>

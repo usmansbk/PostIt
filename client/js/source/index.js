@@ -17,6 +17,7 @@ const groups = [
     name: 'Group I',
     purpose: 'Test',
     cardinal: 5,
+    img:'../../../../images/default.jpg',
     creator: {
 			username: "Me"
 		}
@@ -24,6 +25,7 @@ const groups = [
     name: 'Group II',
     purpose: 'Tesasdfsdafsklasf;ljsdf;ajf;lasfjl;sjdf;lsjfalkjfa;lsfjs;fjs;lfjlakjt 2',
     cardinal:2,
+    img:'../../../../images/default.jpg',
     creator: {
 			username: "You"
 		}
@@ -31,6 +33,7 @@ const groups = [
     name: 'Group II',
     purpose: 'Test 2',
     cardinal: 10,
+    img:'../../../../images/default.jpg',
     creator: {
 			username: "You"
 		}
@@ -41,7 +44,8 @@ const posts = [
     message: 'Hello Worldlskfasdf;lsadsfadfasdfasdsafdsfasdfasdfsdfafjlsfj;aldsfjaasdfasdfsafsdfasdfsdlfjasdl;sdfasdfsdfadfaasdfassdafd',
     author: {
       name: 'Usmansbk',
-      id: '2'
+      id: '2',
+      img: '../../../../images/default.jpg'
     },
     group: {
       id: '1',
@@ -52,7 +56,8 @@ const posts = [
     message: 'Bye World!',
     author: {
       name: 'Usmansbk',
-      id: '2'
+      id: '2',
+      img: '../../../../images/default.jpg'
     },
     group: {
       id: '1',
@@ -63,7 +68,8 @@ const posts = [
     message: 'Hello Worldlskfasdf;lsadsfadfasdfasdsafdsfasdfasdfsdfafjlsfj;aldsfjaasdfasdfsafsdfasdfsdlfjasdl;sdfasdfsdfadfaasdfassdafd',
     author: {
       name: 'Usmansbk',
-      id: '2'
+      id: '2',
+      img: '../../../../images/default.jpg'
     },
     group: {
       id: '1',
@@ -74,7 +80,8 @@ const posts = [
     message: 'Hello Worldlskfasdf;lsadsfadfasdfasdsafdsfasdfasdfsdfafjlsfj;aldsfjaasdfasdfsafsdfasdfsdlfjasdl;sdfasdfsdfadfaasdfassdafd',
     author: {
       name: 'Usmansbk',
-      id: '2'
+      id: '2',
+      img: '../../../../images/default.jpg'
     },
     group: {
       id: '1',
@@ -85,10 +92,18 @@ const posts = [
 ];
 const account = {
 	username: 'usmansbk',
-	email: 'usmansbk@gmail.com'
+	email: 'usmansbk@gmail.com',
+  img: '../../../../images/default.jpg',
 }
 
-const notifications = posts;
+const notifications = [
+  {
+    name: 'h2o',
+    message: 'Urgent message from VEroModa',
+    duration: '5h',
+    img: '../../../../images/default.jpg',
+  },
+];
 
 ReactDOM.render(
   <PostIt
@@ -96,6 +111,6 @@ ReactDOM.render(
   groups={groups}
   posts={ posts}
   account={account}
-  notifications={posts}
+  notifications={notifications}
   />,
   app);

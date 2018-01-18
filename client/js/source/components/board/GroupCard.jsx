@@ -13,13 +13,12 @@ export default class GroupCard extends React.Component {
   }
 
   render() {
-  const url = '../../../../images/default.jpg'
   const { group } = this.props;
   return (
     <div className='col s12 m6 l3'>
       <div className='card small hoverable'>
         <div className='card-image'>
-          <img src={url} />
+          <img src={group.img} />
         </div>
 	   <div className='card-content'>
         <span className='card-title truncate'>{group.name}</span>

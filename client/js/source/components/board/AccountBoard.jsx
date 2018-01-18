@@ -2,8 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon.jsx';
 
 export default function AccountBoard(props) {
-  const url = '../../../../images/default.jpg';
-  const { username, email } = props.account;
+  const { username, email, img } = props.account;
   const style = {
     fontWeight: 500,
     fontSize: '20px',
@@ -16,7 +15,7 @@ export default function AccountBoard(props) {
   return (
     <div className='card-panel blue-grey lighten-5'>
       <div className='valign-wrapper'>
-        <img src={url} alt='' className='circle' style={s2} />
+        <img src={img} alt='' className='circle' style={s2} />
         <span className='grey-text text-darken-3' style={style} >{username}</span>
       </div>
     </div>

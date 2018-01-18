@@ -1,14 +1,12 @@
 import React from 'react';
 import Icon from '../common/Icon.jsx';
 
-let url = '../../../../images/default.jpg';
-
 export default function PostInfo(props) {
   const { post } = props;
   return (
     <div className='row valign-wrapper'>
 			<div className='col s2'>
-			  <img src={url} alt='' className='circle responsive-img' />
+			  <img src={post.author.img} alt='' className='circle responsive-img' />
       </div>
       <div className='col s10 valign-wrapper'>
         <span> {post.author.name} </span>
