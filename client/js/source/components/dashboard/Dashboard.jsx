@@ -6,6 +6,7 @@ import PanelItem from '../common/PanelItem.jsx';
 import Footer from '../common/Footer.jsx';
 import MessageBoard from '../board/MessageBoard.jsx';
 import GroupsBoard from '../board/GroupsBoard.jsx';
+import GroupBoard from '../board/GroupBoard.jsx';
 import ProfileBoard from '../board/ProfileBoard.jsx';
 import PostCard from '../board/PostCard.jsx';
 import '../../../../stylesheets/sass/components/Dashboard.scss';
@@ -19,7 +20,7 @@ export default class Dashboard extends React.Component {
     let view;
     const { location, posts, groups, account, notifications } = this.props;
     if (location === 'Group')
-       view = <MessageBoard posts={ posts } />
+       view = <GroupBoard posts={ posts } />
     else if (location === 'Groups')
       view = <GroupsBoard groups={ groups } />
     else if (location === 'Profile')

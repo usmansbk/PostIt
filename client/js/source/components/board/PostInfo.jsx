@@ -11,9 +11,9 @@ export default function PostInfo(props) {
       <div className='col s10 valign-wrapper'>
         <span> {post.author.name} </span>
         <Icon>chevron_right</Icon>
-	      <span className='blue-text'><a href='#'>{post.group.name}</a></span>
-	      <Icon className='tiny align'>access_time</Icon>
-        <span className='grey-text right'>1h</span>
+	      <span className='blue-text truncate'><a href='#'>{post.group.name}</a></span>
+	      <Icon className='tiny'>access_time</Icon>
+        <span className='grey-text right'>{post.duration}</span>
       </div>
     </div>
   );

@@ -10,8 +10,6 @@ import NotificationBox from '../common/NotificationBox.jsx';
 import M from '../../../materialize';
 import '../../../../stylesheets/sass/components/Navbar.scss';
 
-let url = '../../../../images/default.jpg';
-
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -68,6 +66,12 @@ export default class Navbar extends React.Component {
 			            <td id='td-search' className='hide-on-med-and-up center-align' onClick={this.handleClick}>
 				            <Icon>search</Icon>
 			            </td>
+                  {
+                    location === 'Group'?
+                    <td id='td-person-add' className='center-align'>
+                      <Icon>person_add</Icon>
+                    </td>:''
+                  }
 			            <td id='td-notification' className='notifications center-align' data-target='notifications'>
 				            <Icon>notifications</Icon>
 			            </td>

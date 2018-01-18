@@ -16,11 +16,27 @@
 }
 
 #notification-item {
-	height: 99px;
-	.col {
-		height: inherit;
-		div {
-			height: 33%;
-		}
-	}
+  cursor: pointer;
+  height: 99px;
+  &:hover {
+    background-color: #eceff1;
+  };
+  .col {
+    height: inherit;
+      #info {
+        padding-top: 20px;
+        padding-left: 10px;
+        div {
+          #name {
+            font-weight: 500;
+          }
+          height: 20px;
+          line-height: 20px;
+          font-size: 12px;
+          i {
+            font-size: 1rem;
+          }
+        }
+      }
+   } 
 }

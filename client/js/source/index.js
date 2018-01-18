@@ -99,7 +99,7 @@ const account = {
 const notifications = [
   {
     name: 'h2o',
-    message: 'Urgent message from VEroModa',
+    message: 'Urgent post from VEroModa',
     duration: '5h',
     img: '../../../../images/default.jpg',
   },
@@ -107,7 +107,7 @@ const notifications = [
 
 ReactDOM.render(
   <PostIt
-  location='Profile'
+  location='Group'
   groups={groups}
   posts={ posts}
   account={account}

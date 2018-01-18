@@ -14,11 +14,16 @@ export default function NotificationItem(props) {
         <img src={notification.img} alt='' className='circle' style={style} />
       </div>
       <div className='col s10 grey-text'>
-        <div className='truncate black-text'>{name}</div>
-        <div className='truncate black-text'>{message}</div>
-        <div className='grey-text valign-wrapper'>
-          <Icon className='tiny blue-text'>access_time</Icon>
-          {duration} ago
+        <div id='info'>
+          <div className='valign-wrapper black-text'>
+            <Icon className='blue-text'>group</Icon>
+            <span id='name'> {name}</span>
+          </div>
+          <div className='truncate black-text'>{message}</div>
+          <div className='grey-text text-darken-1 valign-wrapper'>
+            <Icon className='blue-text'>access_time</Icon>
+            <span>{duration} ago</span>
+          </div>
         </div>
       </div>
     </div>

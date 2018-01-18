@@ -26,7 +26,7 @@ export default class SelectGroups extends React.Component {
           <option value='-1' disabled>{notice}</option>
           {groups || notice}
         </select>
-        <label className='valign-wrapper'>Groups <Icon className='tiny blue-text'>group_work</Icon></label>
+        <label className='valign-wrapper'>Groups <Icon className='tiny blue-text'>group</Icon></label>
       </div>
     );
   }
