@@ -36,15 +36,15 @@ export default class GroupsBoard extends React.Component {
           <form>
             <div className='input-field'>
               <input type='text' data-length='22' id='groupname' />
-              <label for='groupname'>Group name</label>
+              <label htmlFor='groupname'>Group name</label>
             </div>
             <div className='input-field'>
               <input type='text' data-length='50' id='grouppurpose' />
-              <label for='grouppurpose'>Purpose</label>
+              <label htmlFor='grouppurpose'>Purpose</label>
             </div>
             <div className='input-field'>
               <input type='text' id='invites' />
-              <label for='grouppurpose'>Invites</label>
+              <label htmlFor='grouppurpose'>Invites</label>
               <span className='helper-text'>Enter usernames seperated by whitespace</span>
             </div>
           </form>

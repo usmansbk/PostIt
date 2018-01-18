@@ -3,9 +3,14 @@ import M from '../../../materialize';
 import MessageBoard from './MessageBoard.jsx';
 import Icon from '../common/Icon.jsx';
 
-export default function GroupBoard(props) {
-  return (
-		<div>
+export default class GroupBoard extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		<div className='row'>
+		
 		</div>
-  );
+	}
 }

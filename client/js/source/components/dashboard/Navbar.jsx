@@ -22,7 +22,7 @@ export default class Navbar extends React.Component {
 
   dropDownInit() {
     let elem = document.querySelector('.notifications');
-    let instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
+    let instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false, alignment: 'right' });
     elem = document.querySelector('.account');
     instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
   }
@@ -77,12 +77,10 @@ export default class Navbar extends React.Component {
 		            </tr>
               </tbody>
             </table>
-            <Dropdown id='notifications' >
-              <NotificationBox search={ this.props.search }/>
-            </Dropdown>
+            <NotificationBox id='notifications' notifications={this.props.notifications} />
             <Dropdown id='account' >
-              <UserInfo account={ this.props.account } />
-              <Button className='center-align' color='blue' value='Logout'></Button>
+              <a className='grey-text text-darken-2'>Profile</a>
+              <a className='grey-text text-darken-2'>Logout</a>
             </Dropdown>
           </div>
         </nav>

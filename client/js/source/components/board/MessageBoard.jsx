@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../common/Icon.jsx';
+import SelectGroups from '../common/SelectGroups.jsx';
 import PostCard from './PostCard.jsx';
 import M from '../../../materialize';
 
@@ -15,7 +16,7 @@ export default class MessageBoard extends React.Component {
 
   render() {
     let notice = <h3 className='grey-text text-lighten-1 center-align'>This board is empty</h3>;
-    let { posts } = this.props;
+    let { posts, groups } = this.props;
     if (posts) {
     posts = posts.map((post, index) => {
       return <PostCard key={index} post={post} />;
@@ -31,6 +32,7 @@ export default class MessageBoard extends React.Component {
         </div>
         <div id='newpost' className='modal modal-fixed-footer'>
           <div className='modal-content'>
+            <SelectGroups groups={groups} />
             <div className='input-field' id='message'>
               <textarea className='materialize-textarea'></textarea>
               <label htmlFor='message'>Whats new with you</label>

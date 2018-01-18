@@ -5,21 +5,23 @@ const url = '../../../../images/default.jpg';
 
 export default function NotificationItem(props) {
   const { notification } = props;
-  console.log(notification);
+  const { message, duration } = notification;
+  const style = {
+    width: '48px',
+    height: '48px',
+  }
   return (
-    <div className='col s12 m8 offset-m2 16 offset-13'>
-    <div className='card-panel grey lighten-3 z-depth-1'>
-    <div className='row valign-wrapper'>
-      <div className='col s2'>
-        <img src={url} alt='' className='circle responsive-img' />
+    <div className='row card' id='notification-item'>
+      <div className='col s2 valign-wrapper'>
+        <img src={url} alt='' className='circle' style={style} />
       </div>
-      <div className='col s10'>
-        <p className='black-text'>{notification.author.name}</p>
-        <span>Group name</span>
-        <span className='truncate grey-text text-darken-1'>{ notification.message }</span>
+      <div className='col s10 grey-text'>
+        <div className='truncate black-text'>{message}</div>
+        <div className='grey-text valign-wrapper'>
+          <Icon className='tiny blue-text'>access_time</Icon>
+          {duration} ago
+        </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 }

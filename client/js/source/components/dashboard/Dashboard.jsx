@@ -7,7 +7,6 @@ import Footer from '../common/Footer.jsx';
 import MessageBoard from '../board/MessageBoard.jsx';
 import GroupsBoard from '../board/GroupsBoard.jsx';
 import ProfileBoard from '../board/ProfileBoard.jsx';
-import NotificationBoard from '../board/NotificationBoard.jsx';
 import PostCard from '../board/PostCard.jsx';
 import '../../../../stylesheets/sass/components/Dashboard.scss';
 
@@ -25,8 +24,6 @@ export default class Dashboard extends React.Component {
       view = <GroupsBoard groups={ groups } />
     else if (location === 'Profile')
       view = <ProfileBoard account={ account } posts={ posts } groups={ groups }/>
-    else if (location === 'Notifications')
-      view = <NotificationBoard notifications={notifications} />
     else
       view = <MessageBoard posts={ posts } />
 
@@ -43,7 +40,6 @@ export default class Dashboard extends React.Component {
             <PanelItem icon='home' location={ this.props.location } label='Home' />
             <PanelItem icon='group' location={ this.props.location } label='Groups' />
             <PanelItem icon='account_circle' location={ this.props.location } label='Profile' />
-            <PanelItem icon='notifications' location={ this.props.location } label='Notifications' />
           </div>
           <div className='divider'></div>
           <div className='section'>

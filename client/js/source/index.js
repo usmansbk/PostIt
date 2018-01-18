@@ -79,12 +79,13 @@ const posts = [
     group: {
       id: '1',
       name: 'Group Name'
-    }
+    },
+    duration: '5h'
   },
 ];
 const account = {
-	username: 'USMANSbK',
-	email: 'email@email'
+	username: 'usmansbk',
+	email: 'usmansbk@gmail.com'
 }
 
 const notifications = posts;
@@ -92,9 +93,9 @@ const notifications = posts;
 ReactDOM.render(
   <PostIt
   location='Profile'
-  groups={undefined}
-  posts={ undefined}
+  groups={groups}
+  posts={ posts}
   account={account}
-  notifications={null}
+  notifications={posts}
   />,
   app);

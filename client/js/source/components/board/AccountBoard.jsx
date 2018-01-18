@@ -2,12 +2,23 @@ import React from 'react';
 import Icon from '../common/Icon.jsx';
 
 export default function AccountBoard(props) {
+  const url = '../../../../images/default.jpg';
   const { username, email } = props.account;
+  const style = {
+    fontWeight: 500,
+    fontSize: '20px',
+    marginLeft: '4%',
+  };
+  const s2 = {
+    width: '48px',
+    height: '48px'
+  };
   return (
-    <div className='center-align grey-text'>
-      <Icon className='large'>account_circle</Icon>
-      <p className='flow-text'>{username}</p>
-      <p className='flow-text'>{email}</p>
+    <div className='card-panel blue-grey lighten-5'>
+      <div className='valign-wrapper'>
+        <img src={url} alt='' className='circle' style={s2} />
+        <span className='grey-text text-darken-3' style={style} >{username}</span>
+      </div>
     </div>
   );
 }

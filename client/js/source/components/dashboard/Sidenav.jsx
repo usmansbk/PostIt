@@ -26,7 +26,6 @@ export default class Sidenav extends React.Component {
         <li><a><Icon>home</Icon>Home</a></li>
         <li><a><Icon>group</Icon>Groups</a></li>
         <li><a><Icon>account_circle</Icon>Profile</a></li>
-        <li><a><Icon>notifications</Icon>Notifications</a></li>
         <li><div className='divider'></div></li>
         <li><a className='grey-text'>Report an issue</a></li>
         <li><a className='grey-text'>Help</a></li>

@@ -19,21 +19,20 @@ export default class ProfileBoard extends React.Component {
     const { posts, groups, account } = this.props;
     return (
       <div className='row'>
-          <div className='col s12'>
-            <ul id='tabs' className='tabs'>
-              <li className='tab col s4'><a href='#posts'>Posts</a></li>
-              <li className='tab col s4'><a href='#groups'>Groups</a></li>
-              <li className='tab col s4'><a href='#profile_account'>Account</a></li>
-            </ul>
-            <div id='posts' className='col s12'>
-              <MessageBoard posts={posts} />
-            </div>
-            <div id='groups' className='col s12'>
-              <GroupsBoard groups={groups} />
-            </div>
-            <div id='profile_account' className='col s12'>
-              <AccountBoard account={account} />
-            </div>
+        <div className='col s12'>
+          <AccountBoard account={account} />
+        </div>
+        <div className='col s12'>
+          <ul id='tabs' className='tabs'>
+            <li className='tab col s6'><a href='#posts'>Posts</a></li>
+            <li className='tab col s6'><a href='#groups'>Groups</a></li>
+          </ul>
+          <div id='posts' className='col s12'>
+            <MessageBoard posts={posts} />
+          </div>
+          <div id='groups' className='col s12'>
+            <GroupsBoard groups={groups} />
+          </div>
           </div>
       </div>
     );

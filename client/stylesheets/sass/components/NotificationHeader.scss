@@ -1,4 +1,26 @@
-#header {
-  margin: 1px;
-  width: 250px;
+#notifications {
+	p {
+		margin: 0px;
+  };
+  width: 350px;
+	#header {
+    margin: 0px;
+		height: auto;
+		.col {
+			height: 100%;
+		};
+		.material-icon {
+			height: 100%;
+		}
+	};
+}
+
+#notification-item {
+	height: 80px;
+	.col {
+		height: inherit;
+		div {
+			height: 50%;
+		}
+	}
 }

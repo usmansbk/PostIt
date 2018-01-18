@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../../stylesheets/sass/components/Dropdown.scss';
 
 export default function Dropdown(props) {
   let items = React.Children.map(props.children, child => {
