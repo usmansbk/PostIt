@@ -10,7 +10,7 @@ import GroupBoard from '../../containers/GroupBoard';
 import ProfileBoard from '../../containers/ProfileBoard';
 import '../../../../stylesheets/sass/components/Dashboard.scss';
 
-export default function Dashboard({currentLocation}) {
+export default ({currentLocation}) => {
   let view;
   if (currentLocation === 'Group')
      view = <GroupBoard />

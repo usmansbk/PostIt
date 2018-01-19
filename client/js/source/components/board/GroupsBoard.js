@@ -1,7 +1,8 @@
 import React from 'react';
 import GroupCard from './GroupCard';
+import NewGroupModal from './NewGroupModal';
 
-export default function GroupsBoard({groups}) {
+export default ({groups}) => {
   const notice = <h3 className='grey-text text-lighten-1 center-align'>
                  You dont belong to any group
                </h3>;
@@ -12,6 +13,7 @@ export default function GroupsBoard({groups}) {
   return (
     <div className='row'>
       { groupsComponent || notice }
+      <NewGroupModal />
     </div>
   );
 }

@@ -7,6 +7,11 @@ export default class AccountBoardContainer extends React.Component {
   }
 
   render() {
-    return <AccountBoard />
+  	const accountInfo = {
+  		username: 'usmansbk',
+  		email: 'usmansbk@gmail.com',
+  		userAvatar: '../../../../images/default.png'
+  	};
+    return <AccountBoard {...accountInfo} />
   }
 }

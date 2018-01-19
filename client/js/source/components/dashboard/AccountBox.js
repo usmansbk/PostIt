@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function AccountBox({children}) {
+export default ({children}) => {
   let items = React.Children.map(children, child => {
     return <li>{child}</li>
   });

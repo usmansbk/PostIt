@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/PanelItem.scss';
 
-export default function PanelItem({currentLocation, label, icon, className}) {
+export default ({currentLocation, label, icon, className}) => {
   const color = (currentLocation === label) ?
                 'red-text text-lighten-1' : 'grey-text text-darken-3';
   return (

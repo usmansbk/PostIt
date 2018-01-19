@@ -3,7 +3,7 @@ import Icon from '../common/Icon';
 import NotificationItem from './NotificationItem';
 import '../../../../stylesheets/sass/components/NotificationHeader.scss';
 
-export default function NotificationBox({notifications}) {
+export default ({notifications}) => {
   let notificationsComponent;
   if (notifications) {
     notificationsComponent = notifications.map((notification, index) => <NotificationItem key={index} {...notification} />);

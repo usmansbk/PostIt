@@ -7,6 +7,17 @@ export default class MessageBoardContainer extends React.Component {
   }
 
   render() {
-    return <MessageBoard />
+  	const posts = [
+  		{
+  			message: 'Hello World!',
+  			postInfo: {
+  				authorUsername: 'Usmansbk',
+  				groupName: 'JavaScript',
+  				duration: '5',
+  				userAvatar: '../../../../images/default.png'
+  			},
+  		}
+  	];
+    return <MessageBoard posts={posts}/>
   }
 }

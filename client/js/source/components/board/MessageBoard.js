@@ -1,7 +1,7 @@
 import React from 'react';
 import PostCard from './PostCard';
 
-export default function MessageBoard ({posts}) {
+export default ({posts}) => {
   const notice = <h3 className='grey-text text-lighten-1 center-align'>This board is empty</h3>;
   let postsComponent;
   if (posts) {

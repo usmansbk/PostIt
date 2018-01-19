@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default function Searchbar ({onClick}) {
+export default ({onClick}) => {
   return (
     <div className='navbar-fixed nav-wrapper'>
       <nav>

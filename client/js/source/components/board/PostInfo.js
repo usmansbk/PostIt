@@ -1,14 +1,14 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default function PostInfo({authorName, groupName, duration, userAvatar}) {
+export default ({authorUsername, groupName, duration, userAvatar}) => {
   return (
     <div className='row valign-wrapper'>
       <div className='col s2'>
         <img src={userAvatar} alt='' className='circle responsive-img' />
       </div>
       <div className='col s10 valign-wrapper'>
-        <span> {authorName} </span>
+        <span> {authorUsername} </span>
         <Icon className='tiny grey-text'>play_arrow</Icon>
         <span className='blue-text truncate'><a href='#'>{groupName}</a></span>
         <Icon className='tiny'>access_time</Icon>

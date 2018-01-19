@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default function UserInfo({userAvatar, username, email}) {
+export default ({userAvatar, username, email}) => {
   return (
     <div id='userinfo' className='row valign-wrapper'>
       <div className='col s2'>

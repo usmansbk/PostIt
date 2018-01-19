@@ -2,7 +2,7 @@ import InputField from '../common/InputField';
 import Button from '../common/Button';
 import React from 'react';
 
-export default function SignInForm(props) {
+export default () => {
   return (
       <form>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default function AccountBoard({username, email, userAvatar}) {
+export default ({username, email, userAvatar}) => {
   const style = {
     fontWeight: 500,
     fontSize: '20px',

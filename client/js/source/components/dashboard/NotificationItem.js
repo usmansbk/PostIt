@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default function NotificationItem({ message, duration, groupName, groupImage}) {
+export default ({ message, duration, groupName, groupImage}) => {
   const style = {
     width: '48px',
     height: '48px',

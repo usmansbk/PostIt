@@ -7,6 +7,14 @@ export default class NotificationBoxContainer extends React.Component {
   }
 
   render() {
-    return <NotificationBox />
+  	const notifications = [
+  		{
+  			message: 'Urgent message from Veromoda',
+  			duration: '5',
+  			groupName: 'H2o',
+  			groupImage: '../../../../images/group.png'
+  		}
+  	];
+    return <NotificationBox notifications={notifications} />
   }
 }

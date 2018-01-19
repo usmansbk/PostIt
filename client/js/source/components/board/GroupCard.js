@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function GroupCard({ groupImage, groupName, membersCount }) {
+export default ({ groupImage, groupName, membersCount }) => {
   return (
     <div className='col s12 m6 l3'>
       <div className='card small hoverable'>

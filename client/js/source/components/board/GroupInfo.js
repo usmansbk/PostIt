@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon';
 import UserInfo from './UserInfo';
 
-export default function GroupInfo({groupImage, groupName, discription, creator, membersCount}) {
+export default ({groupImage, groupName, discription, creator, membersCount}) => {
   return (
     <div className='row'>
       <div className='col s12'>

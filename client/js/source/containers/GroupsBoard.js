@@ -7,6 +7,13 @@ export default class GroupsBoardContainer extends React.Component {
   }
 
   render() {
-    return <GroupsBoard />
+  	const groups = [
+  		{
+  			groupImage: '../../../../images/group.png',
+  			groupName: 'Demo',
+  			membersCount: '3'
+  		}
+  	];
+    return <GroupsBoard groups={groups} />
   }
 }
