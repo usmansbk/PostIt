@@ -1,8 +1,8 @@
 import React from 'react';
 import M from '../../../materialize';
-import Icon from './Icon';
+import Icon from '../common/Icon';
 
-export default class SelectGroups extends React.Component {
+export default class SelectGroup extends React.Component {
   constructor(props) {
     super(props);
   }

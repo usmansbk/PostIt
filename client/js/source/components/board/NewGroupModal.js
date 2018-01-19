@@ -5,7 +5,7 @@ import Fab from '../common/Fab';
 export default () => {
 	return (
 		<div>
-			<Fab href='#newgroup' color='green' />
+			<Fab href='#newgroup' color='green'>add_circle_outline</Fab>
 			<div id='newgroup' className='modal'>
 				<div className='modal-content'>
 					<form>

@@ -14,7 +14,7 @@ export default class MessageBoardContainer extends React.Component {
   				authorUsername: 'Usmansbk',
   				groupName: 'JavaScript',
   				duration: '5',
-  				userAvatar: '../../../../images/default.png'
+  				userAvatar: '../../../../images/avatar.png'
   			},
   		}
   	];

@@ -7,6 +7,17 @@ export default class GroupBoardContainer extends React.Component {
   }
 
   render() {
-    return <GroupBoard />
+  	const groupInfo = {
+  			groupImage: '../../../../images/group.png',
+  			groupName: 'Test',
+  			discription: 'Hello World',
+  			creator: {
+  				username: 'usmansbk',
+  				userAvatar: '../../../../images/avatar.png',
+  				email: 'usmansbk@gmail.com'
+  			},
+  			membersCount: 5
+  		};
+    return <GroupBoard groupInfo={groupInfo} />
   }
 }

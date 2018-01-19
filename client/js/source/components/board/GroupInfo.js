@@ -18,7 +18,7 @@ export default ({groupImage, groupName, discription, creator, membersCount}) => 
 	  </div>
 	  <div className='card-reveal'>
 	    <span className='card-title grey-text text-darken-4'>
-       Purpose<Icon className='right'>close</Icon>
+       About this group<Icon className='right'>close</Icon>
       </span>
       <p>{discription}</p>
     </div>
