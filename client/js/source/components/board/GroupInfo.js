@@ -9,7 +9,7 @@ export default function GroupInfo({groupImage, groupName, discription, creator, 
 	<div className='card' >
 	  <div className='card-image'>
 	    <img src={groupImage} />
-            <a className='btn-floating halfway-fab waves-effect waves-light red'><Icon className='white-text'>edit</Icon></a>
+      <a className='btn-floating halfway-fab waves-effect waves-light red'><Icon className='white-text'>edit</Icon></a>
 	  </div>
 	  <div className='card-content'>
 	    <span className='card-title activator grey-text text-darken-4'>{groupName}<Icon className='right'>more_vert</Icon></span>

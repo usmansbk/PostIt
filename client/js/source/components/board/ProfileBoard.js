@@ -2,7 +2,7 @@ import React from 'react';
 import M from '../../../materialize';
 import MessageBoard from '../../containers/MessageBoard';
 import GroupsBoard from '../../containers/GroupsBoard';
-import AccountBoard from './AccountBoard';
+import AccountBoard from '../../containers/AccountBoard';
 import '../../../../stylesheets/sass/components/ProfileBoard.scss';
 
 export default class ProfileBoard extends React.Component {
