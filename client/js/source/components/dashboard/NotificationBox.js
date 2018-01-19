@@ -3,7 +3,7 @@ import Icon from '../common/Icon';
 import NotificationItem from './NotificationItem';
 import '../../../../stylesheets/sass/components/NotificationHeader.scss';
 
-export default function NotificationBox({notifications, id}) {
+export default function NotificationBox({notifications}) {
   let notificationsComponent;
   if (notifications) {
     notificationsComponent = notifications.map((notification, index) => <NotificationItem key={index} {...notification} />);
@@ -18,7 +18,7 @@ export default function NotificationBox({notifications, id}) {
       </div>
       <div className='col s2'>
 	     {
-         notifications?<a href='#'><Icon>clear_all</Icon></a>:''
+         notifications && <a href='#'><Icon>clear_all</Icon></a>
 	     }
       </div>
     </div>

@@ -40,12 +40,11 @@ export default class Navbar extends React.Component {
     }
   }
   render() {
-    if (this.state.search) {
-      return <div className='navbar-fixed nav-wrapper'><Searchbar
-       search={ this.props.search } onClick={this.handleClick} /></div>
-    }
     const { location, avatarImage } = this.props;
-    return (
+    return this.state.search ?
+    <Searchbar onClick={this.handleClick} />
+    :
+    (
       <div className='navbar-fixed'>
         <nav>
           <div className='nav-wrapper white '>
@@ -81,7 +80,7 @@ export default class Navbar extends React.Component {
               </tbody>
             </table>
             <NotificationBox />
-            <AccountBox id='account' >
+            <AccountBox>
               <a className='grey-text text-darken-2'>Profile</a>
               <a className='grey-text text-darken-2'>Logout</a>
             </AccountBox>
