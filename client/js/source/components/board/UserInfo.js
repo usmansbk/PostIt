@@ -1,7 +1,6 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-
 export default function UserInfo({userAvatar, username, email}) {
   return (
     <div id='userinfo' className='row valign-wrapper'>

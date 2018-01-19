@@ -17,9 +17,9 @@ export default function NotificationBox({notifications, id}) {
         <span className='black-text'>Notifications</span>
       </div>
       <div className='col s2'>
-	{
-          notifications?<a href='#'><Icon>clear_all</Icon></a>:''
-	}
+	     {
+         notifications?<a href='#'><Icon>clear_all</Icon></a>:''
+	     }
       </div>
     </div>
   );

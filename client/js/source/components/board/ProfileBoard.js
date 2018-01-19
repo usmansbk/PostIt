@@ -33,7 +33,7 @@ export default class ProfileBoard extends React.Component {
           <div id='groups' className='col s12'>
             <GroupsBoard />
           </div>
-          </div>
+        </div>
       </div>
     );
   }

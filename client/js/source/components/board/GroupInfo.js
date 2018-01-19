@@ -15,13 +15,13 @@ export default function GroupInfo({groupImage, groupName, discription, creator, 
 	    <span className='card-title activator grey-text text-darken-4'>{groupName}<Icon className='right'>more_vert</Icon></span>
 	    <UserInfo {...creator} />
 	    <p><a href='#' className='grey-text text-darken-1'>{membersCount} Members</a></p>
-	 </div>
-	 <div className='card-reveal'>
-	   <span className='card-title grey-text text-darken-4'>
-           Purpose<Icon className='right'>close</Icon>
-           </span>
-           <p>{discription}</p>
-        </div>
+	  </div>
+	  <div className='card-reveal'>
+	    <span className='card-title grey-text text-darken-4'>
+       Purpose<Icon className='right'>close</Icon>
+      </span>
+      <p>{discription}</p>
+    </div>
       </div>
     </div>
   </div>
