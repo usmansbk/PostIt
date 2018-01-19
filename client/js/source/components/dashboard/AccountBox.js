@@ -5,7 +5,7 @@ export default function AccountBox({children}) {
     return <li>{child}</li>
   });
   return (
-    <ul className='dropdown-content' id='account'>
+    <ul className='dropdown-content account' id='account'>
         { items }
     </ul>
   );

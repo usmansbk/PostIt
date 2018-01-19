@@ -11,8 +11,6 @@ const DOMbody = document.querySelector('body');
 const app = document.querySelector('#app');
 
 DOMbody.setAttribute('class', 'blue-grey lighten-5');
-
-const avatarImage='../../images/default.png';
 ReactDOM.render(
   <PostIt />,
   app);

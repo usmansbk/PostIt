@@ -1,5 +1,5 @@
 import React from 'react';
-import Searchbar from '../../containers/Searchbar';
+import Searchbar from './Searchbar';
 import NotificationBox from '../../containers/NotificationBox';
 import AccountBox from './AccountBox';
 import Logo from '../common/Logo';
@@ -40,10 +40,8 @@ export default class Navbar extends React.Component {
     }
   }
   render() {
-    const { location, avatarImage } = this.props;
-    return this.state.search ?
-    <Searchbar onClick={this.handleClick} />
-    :
+    const { locationName, avatarImage } = this.props;
+    return this.state.search ? <Searchbar onClick={this.handleClick} /> :
     (
       <div className='navbar-fixed'>
         <nav>
@@ -56,7 +54,7 @@ export default class Navbar extends React.Component {
                     <Logo>PostIt</Logo>
       		        </td>
                   <td id='td-loc'>
-      		          <span id='location' className='grey-text text-darken-2 truncate'>{ location }</span>
+      		          <span id='location' className='grey-text text-darken-2 truncate'>{ locationName }</span>
                   </td>
       		        <td className='hide-on-small-only grey-text'>
       		          <input type='search' placeholder='Search PostIt' className='grey lighten-3 center-align'/>
@@ -64,12 +62,12 @@ export default class Navbar extends React.Component {
       		        <td id='td-search' className='hide-on-med-and-up center-align' onClick={this.handleClick}>
       		          <Icon>search</Icon>
       		        </td>
-                    {
-                      location === 'Group'?
-                        <td id='td-person-add' className='center-align'>
-                          <Icon>person_add</Icon>
-                        </td>:''
-                    }
+                  {
+                    locationName === 'Group' &&
+                      <td id='td-person-add' className='center-align'>
+                        <Icon>person_add</Icon>
+                      </td>
+                  }
       		        <td id='td-notification' className='notifications center-align' data-target='notifications'>
       		          <Icon>notifications</Icon>
       		        </td>

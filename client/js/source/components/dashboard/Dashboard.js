@@ -10,13 +10,13 @@ import GroupBoard from '../../containers/GroupBoard';
 import ProfileBoard from '../../containers/ProfileBoard';
 import '../../../../stylesheets/sass/components/Dashboard.scss';
 
-export default function Dashboard({location}) {
+export default function Dashboard({currentLocation}) {
   let view;
-  if (location === 'Group')
+  if (currentLocation === 'Group')
      view = <GroupBoard />
-  else if (location === 'Groups')
+  else if (currentLocation === 'Groups')
     view = <GroupsBoard />
-  else if (location === 'Profile')
+  else if (currentLocation === 'Profile')
     view = <ProfileBoard />
   else
     view = <MessageBoard />
@@ -28,9 +28,9 @@ export default function Dashboard({location}) {
     <div className='row'>
       <Sidepanel className='col m2 hide-on-med-and-down my-side-nav'>
         <div className='section'>
-          <PanelItem icon='home' location={ location } label='Home' />
-          <PanelItem icon='group' location={ location } label='Groups' />
-          <PanelItem icon='account_circle' location={ location } label='Profile' />
+          <PanelItem icon='home' currentLocation={ currentLocation } label='Home' />
+          <PanelItem icon='group' currentLocation={ currentLocation } label='Groups' />
+          <PanelItem icon='account_circle' currentLocation={ currentLocation } label='Profile' />
         </div>
         <div className='divider'></div>
         <div className='section'>

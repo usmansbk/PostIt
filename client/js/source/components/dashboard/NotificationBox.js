@@ -25,7 +25,7 @@ export default function NotificationBox({notifications}) {
   );
 
   return (
-    <div className='dropdown-content grey lighten-3' id='notification'>
+    <div className='dropdown-content grey lighten-3 notifications' id='notifications'>
       { header }
       { notificationsComponent || notice }
     </div>
