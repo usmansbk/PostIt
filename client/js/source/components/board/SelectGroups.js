@@ -13,7 +13,7 @@ export default class SelectGroups extends React.Component {
   }
 
   render() {
-    let notice = 'You don\'t belong to any group';
+    let notice = "You don't belong to any group";
     let {groups} = this.props;
     let groupsComponent;
     if (groups) {

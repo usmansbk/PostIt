@@ -7,7 +7,7 @@ export default function GroupBoard ({groupInfo}) {
   return (
     <div className='row' >
       <div className='col s12 l4'>
-	<GroupInfo {...groupInfo} />
+	      <GroupInfo {...groupInfo} />
       </div>
       <div className='col s12 l8' >
         <MessageBoard />
