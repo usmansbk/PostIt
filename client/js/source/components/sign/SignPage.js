@@ -1,6 +1,6 @@
 import React from 'react';
-import FormControl from './FormControl.jsx';
-import Footer from '../common/Footer.jsx';
+import FormControl from './FormControl';
+import Footer from '../common/Footer';
 
 export default class SignPage extends React.Component {
   render() {

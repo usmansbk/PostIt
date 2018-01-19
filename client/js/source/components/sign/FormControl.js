@@ -1,6 +1,6 @@
 import React from 'react';
-import SignInForm from './SignInForm.jsx';
-import SignUpForm from './SignUpForm.jsx'; 
+import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm'; 
 
 export default class FormControl extends React.Component {
 
@@ -19,7 +19,7 @@ export default class FormControl extends React.Component {
   }
 
   render() {
- 
+
     const link = <div className='center-align section'>
          <span>
            <a href='#' onClick={this.handleClick}>{

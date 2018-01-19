@@ -1,5 +1,5 @@
-import InputField from '../common/InputField.jsx';
-import Button from '../common/Button.jsx';
+import InputField from '../common/InputField';
+import Button from '../common/Button';
 import React from 'react';
 
 export default function SignInForm(props) {
@@ -12,7 +12,7 @@ export default function SignInForm(props) {
           <span><a href='#'>Forgot account?</a></span>
         </InputField>
 
-        <Button className='center-align' color='blue' value='Sign In'></Button> 
+        <Button className='center-align' color='blue' value='Sign In'></Button>
       </form>
   )
 }

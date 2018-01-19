@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon from '../common/Icon.jsx';
-import Footer from '../common/Footer.jsx';
+import Icon from '../common/Icon';
+import Footer from '../common/Footer';
 import M from '../../../materialize';
 
 export default class Sidenav extends React.Component {

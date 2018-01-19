@@ -1,8 +1,8 @@
 import React from 'react';
 import M from '../../../materialize';
-import MessageBoard from './MessageBoard.jsx';
-import GroupsBoard from './GroupsBoard.jsx';
-import AccountBoard from './AccountBoard.jsx';
+import MessageBoard from '../../containers/MessageBoard';
+import GroupsBoard from '../../containers/GroupsBoard';
+import AccountBoard from '../../AccountBoard';
 import '../../../../stylesheets/sass/components/ProfileBoard.scss';
 
 export default class ProfileBoard extends React.Component {
@@ -16,11 +16,11 @@ export default class ProfileBoard extends React.Component {
   }
 
   render() {
-    const { posts, groups, account } = this.props;
+    const { account } = this.props;
     return (
       <div className='row'>
         <div className='col s12'>
-          <AccountBoard account={account} />
+          <AccountBoard {...account} />
         </div>
         <div className='col s12'>
           <ul id='tabs' className='tabs'>
@@ -28,10 +28,10 @@ export default class ProfileBoard extends React.Component {
             <li className='tab col s6'><a href='#groups'>Groups</a></li>
           </ul>
           <div id='posts' className='col s12'>
-            <MessageBoard posts={posts} />
+            <MessageBoard />
           </div>
           <div id='groups' className='col s12'>
-            <GroupsBoard groups={groups} />
+            <GroupsBoard />
           </div>
           </div>
       </div>

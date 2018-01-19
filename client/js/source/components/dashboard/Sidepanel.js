@@ -1,11 +1,11 @@
 import React from 'react';
 import '../../../../stylesheets/sass/components/Sidepanel.scss';
 
-export default function Sidepanel(props) {
+export default function Sidepanel({className, children}) {
   return (
-   <div className={'my-side-nav ' + props.className}>
+   <div className={'my-side-nav ' + className}>
       {
-        props.children
+        children
       }
     </div>
   );

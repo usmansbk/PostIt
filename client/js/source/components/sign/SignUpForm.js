@@ -1,6 +1,6 @@
 import React from 'react';
-import InputField from '../common/InputField.jsx';
-import Button from '../common/Button.jsx';
+import InputField from '../common/InputField';
+import Button from '../common/Button';
 
 export default class SignUpForm extends React.Component {
 

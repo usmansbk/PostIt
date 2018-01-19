@@ -1,6 +1,6 @@
 import React from 'react';
 import M from '../../../materialize';
-import Icon from './Icon.jsx';
+import Icon from './Icon';
 
 export default class SelectGroups extends React.Component {
   constructor(props) {
@@ -15,16 +15,16 @@ export default class SelectGroups extends React.Component {
   render() {
     let notice = 'You don\'t belong to any group';
     let {groups} = this.props;
-
+    let groupsComponent;
     if (groups) {
       notice = 'Select groups to send post';
-      groups = groups.map((group, index) => <option value='' key={index} data-icon={group.img} className='left'>{group.name}</option>);
+      groupsComponent = groups.map((group, index) => <option defaultValue='' key={index} data-icon={group.img} className='left'>{group.name}</option>);
     }
     return (
       <div className='input-field'>
-        <select className='icons' value={['-1']} multiple>
-          <option value='-1' disabled>{notice}</option>
-          {groups || notice}
+        <select className='icons' defaultValue={['-1']} multiple>
+          <option defaultValue='-1' disabled>{notice}</option>
+          {groupsComponent || notice}
         </select>
         <label className='valign-wrapper'>Groups <Icon className='tiny blue-text'>group</Icon></label>
       </div>
