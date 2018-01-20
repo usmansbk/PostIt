@@ -35,7 +35,7 @@ export default class Navbar extends React.Component {
     const target = event.target;
     const name = target.getAttribute('name');
     if (name === 'cancel-search') {
-      this.setState({searchbar: false}, () => {
+      this.setState({searchbar: false, search: false}, () => {
         this.dropDownInit();
       });
     } else {
@@ -52,7 +52,6 @@ export default class Navbar extends React.Component {
     else {
       this.setState({search: false});
     }
-
 
   }
 

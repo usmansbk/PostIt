@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/SearchItem.scss'
 
-export default ({userAvatar, username}) => {
+export default ({userAvatar, username, isMember}) => {
 	const style = {
 		height: '24px',
 		width: '24px',
