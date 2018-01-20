@@ -8,7 +8,7 @@ export default class NavbarContainer extends React.Component {
 
   render() {
     let locationName = 'Group',
-    avatarImage = '../../../../images/avatar.png'
+    avatarImage = '../../../../images/avatar.jpg'
     return <Navbar locationName={locationName} avatarImage={avatarImage} />
   }
 }

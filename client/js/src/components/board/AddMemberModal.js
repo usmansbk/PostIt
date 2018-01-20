@@ -8,6 +8,7 @@ export default class AddMemberModal extends React.Component {
 
 	render() {
 		return (
+			<div></div>
 		);
 	}
 }

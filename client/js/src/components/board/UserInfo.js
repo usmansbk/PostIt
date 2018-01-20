@@ -4,7 +4,7 @@ import Icon from '../common/Icon';
 export default ({userAvatar, username, email}) => {
   return (
     <div id='userinfo' className='row valign-wrapper'>
-      <div className='col s2'>
+      <div className='col s2 center-align'>
         <img src={userAvatar} alt='' className='circle responsive-img' />
       </div>
       <div id='info' className='col s10 grey-text'>

@@ -13,7 +13,7 @@ export default class GroupBoardContainer extends React.Component {
   			discription: 'Hello World',
   			creator: {
   				username: 'usmansbk',
-  				userAvatar: '../../../../images/avatar.png',
+  				userAvatar: '../../../../images/avatar.jpg',
   				email: 'usmansbk@gmail.com'
   			},
   			membersCount: 5

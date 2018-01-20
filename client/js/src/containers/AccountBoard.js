@@ -10,7 +10,7 @@ export default class AccountBoardContainer extends React.Component {
   	const accountInfo = {
   		username: 'usmansbk',
   		email: 'usmansbk@gmail.com',
-  		userAvatar: '../../../../images/avatar.png'
+  		userAvatar: '../../../../images/avatar.jpg'
   	};
     return <AccountBoard {...accountInfo} />
   }
