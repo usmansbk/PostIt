@@ -1,5 +1,7 @@
 import React from 'react';
 import Searchbar from './Searchbar';
+import Search from './Search';
+import SearchBox from '../../containers/SearchBox';
 import NotificationBox from '../../containers/NotificationBox';
 import AccountBox from './AccountBox';
 import Logo from '../common/Logo';
@@ -12,14 +14,16 @@ import '../../../../stylesheets/sass/components/Navbar.scss';
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { search: false };
+    this.state = { searchbar: false , search: false};
     this.handleClick = this.handleClick.bind(this);
     this.dropDownInit = this.dropDownInit.bind(this);
+    this.openSearchBox = this.openSearchBox.bind(this);
+    this.closeSearchBox = this.closeSearchBox.bind(this);
   }
 
   dropDownInit() {
     let elem = document.querySelector('.notifications');
-    let instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false, alignment: 'right' });
+    let instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false,});
     elem = document.querySelector('.account');
     instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
   }
@@ -32,16 +36,29 @@ export default class Navbar extends React.Component {
     const target = event.target;
     const name = target.getAttribute('name');
     if (name === 'cancel-search') {
-      this.setState({search: false}, () => {
+      this.setState({searchbar: false}, () => {
         this.dropDownInit();
       });
-    } else {
+    } else if (name === 'search') {
       this.setState({search: true});
+    } else {
+      this.setState({searchbar: true});
     }
   }
+
+  openSearchBox(event) {
+    this.setState({search: true});
+  }
+
+  closeSearchBox(event) {
+    const {target} = event;
+    target.value = '';
+    this.setState({search: false});
+  }
+
   render() {
     const { locationName, avatarImage } = this.props;
-    return this.state.search ? <Searchbar onClick={this.handleClick} /> :
+    return this.state.searchbar ? <Searchbar onClick={this.handleClick} /> :
     (
       <div className='navbar-fixed'>
         <nav>
@@ -50,24 +67,21 @@ export default class Navbar extends React.Component {
               <tbody>
       	        <tr>
       		        <td id='td-menu'><a className='sidenav-trigger hide-on-large-only' data-target='slide-out'><Icon>menu</Icon></a></td>
-      		        <td id='td-logo' className='center-align'>
+      		        <td id='td-logo' className='left-align'>
                     <Logo>PostIt</Logo>
       		        </td>
                   <td id='td-loc'>
       		          <span id='location' className='grey-text text-darken-2 truncate'>{ locationName }</span>
                   </td>
-      		        <td className='hide-on-small-only grey-text'>
-      		          <input type='search' placeholder='Search PostIt' className='grey lighten-3 center-align'/>
+      		        <td className='hide-on-small-only grey-text' id='td-search-field'>
+                    <Search onFocus={this.openSearchBox} onBlur={this.closeSearchBox} />
+                    {
+                      this.state.search && <SearchBox />
+                    }
       		        </td>
       		        <td id='td-search' className='hide-on-med-and-up center-align' onClick={this.handleClick}>
       		          <Icon>search</Icon>
       		        </td>
-                  {
-                    locationName === 'Group' &&
-                      <td id='td-person-add' className='center-align'>
-                        <Icon>person_add</Icon>
-                      </td>
-                  }
       		        <td id='td-notification' className='notifications center-align' data-target='notifications'>
       		          <Icon>notifications</Icon>
       		        </td>
