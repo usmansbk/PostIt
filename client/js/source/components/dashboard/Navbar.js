@@ -17,8 +17,7 @@ export default class Navbar extends React.Component {
     this.state = { searchbar: false , search: false};
     this.handleClick = this.handleClick.bind(this);
     this.dropDownInit = this.dropDownInit.bind(this);
-    this.openSearchBox = this.openSearchBox.bind(this);
-    this.closeSearchBox = this.closeSearchBox.bind(this);
+    this.handleSearchBox = this.handleSearchBox.bind(this);
   }
 
   dropDownInit() {
@@ -39,26 +38,33 @@ export default class Navbar extends React.Component {
       this.setState({searchbar: false}, () => {
         this.dropDownInit();
       });
-    } else if (name === 'search') {
-      this.setState({search: true});
     } else {
       this.setState({searchbar: true});
     }
   }
 
-  openSearchBox(event) {
-    this.setState({search: true});
-  }
-
-  closeSearchBox(event) {
+  handleSearchBox(event) {
     const {target} = event;
-    target.value = '';
-    this.setState({search: false});
+    const value = target.value;
+    if (target.value.length > 0) {
+      this.setState({search: true});
+    }
+    else {
+      this.setState({search: false});
+    }
+
+
   }
 
   render() {
     const { locationName, avatarImage } = this.props;
-    return this.state.searchbar ? <Searchbar onClick={this.handleClick} /> :
+    return this.state.searchbar ?
+    (<div>
+      <Searchbar onClick={this.handleClick} onChange={this.handleSearchBox}> 
+        { this.state.search && <SearchBox /> }
+      </Searchbar>
+     </div>
+    ):
     (
       <div className='navbar-fixed'>
         <nav>
@@ -74,10 +80,11 @@ export default class Navbar extends React.Component {
       		          <span id='location' className='grey-text text-darken-2 truncate'>{ locationName }</span>
                   </td>
       		        <td className='hide-on-small-only grey-text' id='td-search-field'>
-                    <Search onFocus={this.openSearchBox} onBlur={this.closeSearchBox} />
+                    <Search onChange={this.handleSearchBox}>
                     {
                       this.state.search && <SearchBox />
                     }
+                    </Search>
       		        </td>
       		        <td id='td-search' className='hide-on-med-and-up center-align' onClick={this.handleClick}>
       		          <Icon>search</Icon>

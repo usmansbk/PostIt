@@ -7,14 +7,17 @@ export default class SearchBoxContainer extends React.Component {
 	}
 
 	render() {
-		const userss = [
+		const users = [
 			{
 				username: 'usmansbk',
-				email: 'usmansbk@gmail.com',
-			}
+				userAvatar: '../../../../images/avatar.png'
+			},			{
+				username: 'usmansbk',
+				userAvatar: '../../../../images/avatar.png'
+			},
 		];
 		return (
-			<SearchBox />
+			<SearchBox users={users} />
 		);
 	}
 }

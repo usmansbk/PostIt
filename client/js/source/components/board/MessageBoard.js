@@ -1,6 +1,7 @@
 import React from 'react';
 import PostCard from './PostCard';
 import NewPostModal from './NewPostModal';
+import M from '../../../materialize';
 
 export default ({posts}) => {
   const notice = <h3 className='grey-text text-lighten-1 center-align'>This board is empty</h3>;
