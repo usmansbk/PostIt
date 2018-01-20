@@ -1,7 +1,7 @@
 import React from 'react';
 import SelectGroup from './SelectGroup';
 
-export default class AddMember extends React.Component {
+export default class AddMemberModal extends React.Component {
 	constructor(props) {
 		super(props);
 	}

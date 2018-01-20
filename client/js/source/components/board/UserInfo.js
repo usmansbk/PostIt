@@ -8,8 +8,8 @@ export default ({userAvatar, username, email}) => {
         <img src={userAvatar} alt='' className='circle responsive-img' />
       </div>
       <div id='info' className='col s10 grey-text'>
-        <p>{ username  }</p>
-        <p>{ email }</p>
+        <p className='grey-text text-darken-1'>{ username  }</p>
+        <p className='grey-text text-darken-1'>{ email }</p>
       </div>
     </div>
   );
