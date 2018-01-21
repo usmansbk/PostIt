@@ -19,7 +19,7 @@ export default ({authorUsername, groupName, duration, userAvatar}) => {
         <img src={userAvatar} alt={authorUsername} className='circle responsive-img' />
       </div>
       <div className='col s10 valign-wrapper' id='post-detail' style={div2}>
-        <span> {authorUsername} </span>
+        <span id='author-username'> {authorUsername} </span>
         <Icon className='tiny grey-text'>play_arrow</Icon>
         <div>
           <span className='blue-text truncate'><a href='#'>{groupName}</a></span>

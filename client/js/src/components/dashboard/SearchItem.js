@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/SearchItem.scss'
 
-export default ({userAvatar, username, isMember}) => {
+export default ({userAvatar, username, isMember, location}) => {
 	const style = {
 		height: '24px',
 		width: '24px',
@@ -24,9 +24,12 @@ export default ({userAvatar, username, isMember}) => {
 					<div className='col s6 valign-wrapper' style={div}>
 						<span className='grey-text text-darken-2'>{username}</span>
 					</div>
-					<div className='col s6'>
-						<Icon className='blue-text right'>person_add</Icon>
-					</div>
+					{
+						(location === 'Group') &&
+						<div className='col s6'>
+							<Icon className='blue-text right'>{ isMember?'done' : 'person_add' }</Icon>
+						</div>
+					}
 				</div>
 			</div>
 		</div>

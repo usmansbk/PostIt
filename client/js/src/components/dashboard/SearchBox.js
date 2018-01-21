@@ -2,7 +2,7 @@ import React from 'react';
 import SearchItem from './SearchItem';
 import '../../../../stylesheets/sass/components/Searchbox.scss';
 
-export default ({users}) => {
+export default ({users, location}) => {
 	let userComponents;
 	const style = {
 		padding: '0px',
@@ -17,7 +17,7 @@ export default ({users}) => {
 	}
 
 	if (users) {
-		userComponents = users.map((user, index) => <SearchItem key={index} {...user} />);
+		userComponents = users.map((user, index) => <SearchItem key={index} location={location} {...user}/>);
 	}
 	return (
 		<div className='search card-panel grey lighten-3' id='search-result' style={style} >
