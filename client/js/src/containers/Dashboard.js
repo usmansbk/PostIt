@@ -7,6 +7,6 @@ export default class DashboardContainer extends React.Component {
   }
 
   render() {
-    return <Dashboard currentLocation={'Home'}/>
+    return <Dashboard currentLocation={'Groups'}/>
   }
 }
