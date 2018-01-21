@@ -33,7 +33,7 @@ export default class GroupInfo extends React.Component {
           	   <span className='card-title activator grey-text text-darken-4'>{groupName}<Icon className='right'>more_vert</Icon></span>
           	   <UserInfo {...creator} />
           	   <p><a href='#members' className='grey-text text-darken-1 modal-trigger'>{membersCount} Members</a></p>
-               <Icon className='black-text'>{ isOwner?'delete':'add' }</Icon>
+               <Icon className='black-text'>{ isOwner?'delete':'clear' }</Icon>
   	         </div>
         	   <div className='card-reveal'>
         	     <span className='card-title grey-text text-darken-4'>

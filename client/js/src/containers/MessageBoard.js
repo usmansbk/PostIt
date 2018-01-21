@@ -13,7 +13,7 @@ export default class MessageBoardContainer extends React.Component {
   			postInfo: {
   				authorUsername: 'Usmansbk',
   				groupName: 'JavaScript',
-  				duration: '5',
+  				duration: '5h',
   				userAvatar: '../../../../images/avatar.jpg'
   			},
   		}

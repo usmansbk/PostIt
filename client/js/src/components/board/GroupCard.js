@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default ({ groupImage, groupName, membersCount }) => {
+export default ({ groupImage, groupName, membersCount, isOwner }) => {
   const card = {
     height: 'auto'
   };
@@ -15,7 +15,9 @@ export default ({ groupImage, groupName, membersCount }) => {
         <div className='card-content'>
           <span className='card-title truncate'>{groupName}</span>
 	        <p className='grey-text text-darken-1'>{membersCount} Members</p>
-          <a href='#'><Icon>delete</Icon></a>
+          <a href='#'><Icon>{
+            isOwner?'delete':'exit_to_app'
+          }</Icon></a>
         </div>
       </div>
     </div>

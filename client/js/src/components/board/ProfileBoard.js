@@ -24,8 +24,8 @@ export default class ProfileBoard extends React.Component {
         </div>
         <div className='col s12'>
           <ul id='tabs' className='tabs'>
-            <li className='tab col s6'><a href='#posts'>Posts</a></li>
-            <li className='tab col s6'><a href='#groups'>Groups</a></li>
+            <li className='tab col s6'><a href='#posts'>My Posts</a></li>
+            <li className='tab col s6'><a href='#groups'>My Groups</a></li>
           </ul>
           <div id='posts' className='col s12'>
             <MessageBoard />
