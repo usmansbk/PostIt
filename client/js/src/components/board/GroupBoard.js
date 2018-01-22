@@ -4,6 +4,7 @@ import GroupInfo from './GroupInfo';
 import Icon from '../common/Icon';
 
 export default ({groupInfo}) => {
+  console.log('Info', groupInfo);
   return (
     <div className='row' >
       <div className='col s12 l4'>

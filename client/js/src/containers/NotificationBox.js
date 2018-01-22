@@ -1,20 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NotificationBox from '../components/dashboard/NotificationBox';
+import { defaultGroupImage } from '../Constants';
+import { getElapsedTime } from '../Util';
 
-export default class NotificationBoxContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
-  render() {
-  	const notifications = [
-  		{
-  			message: 'Urgent message from Veromoda',
-  			duration: '5',
-  			groupName: 'H2o',
-  			groupImage: '../../../../images/group.png'
-  		}
-  	];
-    return <NotificationBox notifications={notifications} />
+const getNotifications = (notifications, groups) => {
+  return notifications.map(notification => {
+    const id = notification.groupId;
+    const duration = getElapsedTime(notification.createdAt);
+    const message = notification.message;
+    const group = groups.byId[id];
+    const groupName = group.groupName;
+    const groupImage = group.groupImage || defaultGroupImage;
+
+    return {
+      message,
+      groupName,
+      groupImage,
+      duration
+    }
+  });
+};
+
+const mapStateToProps = state => {
+  return {
+    notifications: getNotifications(state.notifications, state.groups)
   }
 }
+
+const NotificationBoxContainer = connect(
+  mapStateToProps
+)(NotificationBox)
+
+export default NotificationBoxContainer;

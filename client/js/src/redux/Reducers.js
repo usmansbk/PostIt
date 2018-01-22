@@ -13,13 +13,65 @@ import {
 } from './Actions';
 
 const initialState = {
-  groups: [],
-  members: [],
-  posts: [],
-  notifications: [],
-  result: [],
-  sessionStatus: SessionStatus.LOGGED_OUT,
-  error: undefined
+  posts: {
+    byId: {
+      0: {
+        message: 'Hello',
+        id: 0,
+        groupId: 0,
+        authorId: 0,
+        createdAt: '2018-07-12T22:29:29.901Z',
+      }
+    },
+    id: [0]
+  },
+
+  members: {
+    byId: {
+      0: {
+        username: 'usmansbk',
+        id: 0,
+        email: 'usmansbk@gmail.com',
+        avatar: null
+      },
+    },
+    id: [0]
+
+  },
+
+  groups: {
+    byId: {
+      0: {
+        groupName: 'demo',
+        CreatorId: 0,
+        image: null,
+        members: [0],
+        purpose: 'A test state',
+        createdAt: '2018-07-12T22:29:29.901Z'
+      }
+    },
+    id: [0]
+  },
+
+  notifications: [
+    {
+      message: '3 new messages',
+      createdAt: '2018-07-12T22:30:30.901Z',
+      groupId: 0,
+    }
+  ],
+
+  location: {
+    name: 'Group',
+    id: 0
+  },
+
+  account: {
+    username: 'usmansbk',
+    email: 'usmansbk@gmail.com',
+    avatar: null,
+    id: 0
+  },
 };
 
 export default function postItApp(state = initialState, action) {

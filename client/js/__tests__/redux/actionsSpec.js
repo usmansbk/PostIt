@@ -1,4 +1,4 @@
-import * as actions from '../../source/redux/Actions';
+import * as actions from '../../src/redux/Actions';
 
 describe('actions', () => {
   it('should create an action to add a post', () => {

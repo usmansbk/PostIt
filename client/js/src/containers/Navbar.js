@@ -1,14 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Navbar from '../components/dashboard/Navbar';
+import { defaultAvatar } from '../Constants';
 
-export default class NavbarContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    let locationName = 'Group',
-    avatarImage = '../../../../images/avatar.jpg'
-    return <Navbar locationName={locationName} avatarImage={avatarImage} />
+const mapStateToProps = state => {
+  return {
+    locationName: state.location.name,
+    avatarImage: state.account.avatar || defaultAvatar
   }
 }
+
+const NavbarContainer = connect(
+  mapStateToProps
+)(Navbar)
+
+export default NavbarContainer;

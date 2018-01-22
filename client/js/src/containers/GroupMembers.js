@@ -1,49 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import GroupMembers from '../components/board/GroupMembers';
+import { defaultAvatar } from '../Constants';
 
-export default class GroupMembersContainer extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+const getMembers = (members) => {
+	return members.id.map(id => {
+		const member = members.byId[id];
+		member.userAvatar = member.userAvatar || defaultAvatar;
+		return member;
+	});
+};
 
-	render() {
-		const members = [
-			{
-				userAvatar: '../../../../images/usman.jpg',
-				username: 'usmansbk',
-				email: 'usmansbk@gmail.com'
-			},
-			{
-				userAvatar: '../../../../images/usman.jpg',
-				username: 'usmansbk',
-				email: 'usmansbk@gmail.com'
-			},
-			{
-				userAvatar: '../../../../images/usman.jpg',
-				username: 'usmansbk',
-				email: 'usmansbk@gmail.com'
-			},
-			{
-				userAvatar: '../../../../images/usman.jpg',
-				username: 'usmansbk',
-				email: 'usmansbk@gmail.com'
-			},
-			{
-				userAvatar: '../../../../images/usman.jpg',
-				username: 'usmansbk',
-				email: 'usmansbk@gmail.com'
-			},
-			{
-				userAvatar: '../../../../images/usman.jpg',
-				username: 'usmansbk',
-				email: 'usmansbk@gmail.com'
-			},
-			{
-				userAvatar: '../../../../images/usman.jpg',
-				username: 'usmansbk',
-				email: 'usmansbk@gmail.com'
-			},
-		];
-		return <GroupMembers members={members} />;
-	}
+const mapStateToProps = state => {
+  return {
+    members: getMembers(state.members)
+  }
 }
+
+const GroupMembersContainer = connect(
+  mapStateToProps
+)(GroupMembers)
+
+export default GroupMembersContainer;

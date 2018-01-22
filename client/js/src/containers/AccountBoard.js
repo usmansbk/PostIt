@@ -1,17 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import AccountBoard from '../components/board/AccountBoard';
+import { defaultAvatar } from '../Constants';
 
-export default class AccountBoardContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const getAccount = (account) => {
+  account.avatar = account.avatar || defaultAvatar;
+  return account;
+};
 
-  render() {
-  	const accountInfo = {
-  		username: 'usmansbk',
-  		email: 'usmansbk@gmail.com',
-  		userAvatar: '../../../../images/avatar.jpg'
-  	};
-    return <AccountBoard {...accountInfo} />
+const mapStateToProps = state => {
+  return {
+    accountInfo: getAccount(state.account)
   }
 }
+
+const AccountBoardContainer = connect(
+  mapStateToProps
+)(AccountBoard)
+
+export default AccountBoardContainer;

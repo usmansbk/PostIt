@@ -1,12 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Dashboard from '../components/dashboard/Dashboard';
 
-export default class DashboardContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const getLocation = (name) => {
+	return name;
+};
 
-  render() {
-    return <Dashboard currentLocation={'Profile'}/>
+const mapStateToProps = state => {
+  return {
+    currentLocation: getLocation(state.location.name)
   }
 }
+
+const DashboardContainer = connect(
+  mapStateToProps
+)(Dashboard)
+
+export default DashboardContainer;

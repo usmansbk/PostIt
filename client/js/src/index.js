@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import PostIt from './components/PostIt';
 import postItApp from './redux/Reducers';
@@ -8,9 +9,12 @@ import '../../stylesheets/sass/index.scss';
 
 const store = createStore(postItApp);
 const DOMbody = document.querySelector('body');
-const app = document.querySelector('#app');
 
 DOMbody.setAttribute('class', 'blue-grey lighten-5');
-ReactDOM.render(
-  <PostIt />,
-  app);
+
+render(
+	<Provider store={store}>
+		<PostIt />
+	</Provider>,
+  document.querySelector('#app')
+ );

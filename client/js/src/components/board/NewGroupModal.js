@@ -7,9 +7,14 @@ export default class NewGroupModal extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this._initModal = this._initModal.bind(this);
 	}
 
 	componentDidMount() {
+		this._initModal();
+	}
+
+	_initModal() {
 		let elem = document.querySelector('.modal');
 		let instance = M.Modal.init(elem);
 		elem = document.querySelector('#newgroup');
@@ -31,7 +36,8 @@ export default class NewGroupModal extends React.Component {
 						<a className='modal-action modal-close waves-effect btn-flat'>Cancel</a>
 						<a className='modal-action modal-close waves-effect btn-flat'>Post</a>
 					</div>
-				</div>			</div>
+				</div>
+			</div>
 		);
 	}
 }

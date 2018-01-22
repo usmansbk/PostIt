@@ -9,7 +9,7 @@ export default ({ message, duration, groupName, groupImage}) => {
   return (
     <div className='row card' id='notification-item'>
       <div className='col s2 valign-wrapper'>
-        <img src={groupImage} alt='' className='circle' style={style} />
+        <img src={groupImage} alt={groupName} className='circle' style={style} />
       </div>
       <div className='col s10 grey-text'>
         <div id='info'>
