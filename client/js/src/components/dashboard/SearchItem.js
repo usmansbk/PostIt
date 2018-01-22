@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/SearchItem.scss'
 
-export default ({userAvatar, username, isMember, location}) => {
+export default ({avatar, username, isMember, location}) => {
 	const style = {
 		height: '24px',
 		width: '24px',
@@ -17,7 +17,7 @@ export default ({userAvatar, username, isMember, location}) => {
 	return (
 		<div className='row card-panel' id='search-item' >
 			<div className='col s2 center-align' style={div} >
-				<img src={userAvatar} alt={username} className='circle' style={style} />
+				<img src={avatar} alt={username} className='circle' style={style} />
 			</div>
 			<div className='col s10' style={div}>
 				<div className='row'>

@@ -42,7 +42,7 @@ const initialState = {
   groups: {
     byId: {
       0: {
-        groupName: 'demo',
+        name: 'demo',
         CreatorId: 0,
         image: null,
         members: [0],
@@ -72,6 +72,15 @@ const initialState = {
     avatar: null,
     id: 0
   },
+
+  search: [
+    {
+      username: 'kayode',
+      email: 'kayode@partylawa.com',
+      avatar: null,
+      id: 1,
+    }
+  ]
 };
 
 export default function postItApp(state = initialState, action) {

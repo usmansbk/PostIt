@@ -7,7 +7,7 @@ import Navbar from '../../containers/Navbar';
 import MessageBoard from '../../containers/MessageBoard';
 import GroupsBoard from '../../containers/GroupsBoard';
 import GroupBoard from '../../containers/GroupBoard';
-import ProfileBoard from '../../containers/ProfileBoard';
+import ProfileBoard from '../board/ProfileBoard';
 import '../../../../stylesheets/sass/components/Dashboard.scss';
 
 export default ({currentLocation}) => {

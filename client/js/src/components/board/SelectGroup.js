@@ -18,7 +18,7 @@ export default class SelectGroup extends React.Component {
     let groupsComponent;
     if (groups) {
       notice = 'Select groups to send post';
-      groupsComponent = groups.map((group, index) => <option defaultValue='' key={index} data-icon={group.img} className='left'>{group.name}</option>);
+      groupsComponent = groups.map((group, index) => <option defaultValue='' key={index} data-icon={group.image} className='left'>{group.name}</option>);
     }
     return (
       <div className='input-field'>

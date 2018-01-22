@@ -15,7 +15,7 @@ const getPosts = (posts, members, groups) => {
 
     const postInfo = {};
     postInfo.authorUsername = members.byId[authorId].username;
-    postInfo.groupName = groups.byId[groupId].groupName;
+    postInfo.groupName = groups.byId[groupId].name;
     postInfo.duration = duration;
     postInfo.userAvatar = members.byId[authorId].image || defaultAvatar;
 

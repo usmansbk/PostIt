@@ -20,7 +20,7 @@ export default class ProfileBoard extends React.Component {
     return (
       <div className='row'>
         <div className='col s12'>
-          <AccountBoard {...account} />
+          <AccountBoard />
         </div>
         <div className='col s12'>
           <ul id='tabs' className='tabs'>

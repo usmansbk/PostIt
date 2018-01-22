@@ -6,7 +6,7 @@ import GroupsBoard from '../components/board/GroupsBoard';
 const getGroups = (groups, account) => {
   return groups.id.map(id => {
     const group = groups.byId[id];
-    const groupName = group.groupName;
+    const groupName = group.name;
     let membersCount = group.members.length;
     membersCount += membersCount > 1 ? ' Members' : ' Member';
     const isOwner = (group.CreatorId === account.id);

@@ -11,8 +11,8 @@ const getNotifications = (notifications, groups) => {
     const duration = getElapsedTime(notification.createdAt);
     const message = notification.message;
     const group = groups.byId[id];
-    const groupName = group.groupName;
-    const groupImage = group.groupImage || defaultGroupImage;
+    const groupName = group.name;
+    const groupImage = group.image || defaultGroupImage;
 
     return {
       message,
