@@ -4,11 +4,15 @@ import SearchBox from '../components/dashboard/SearchBox';
 import { defaultAvatar } from '../Constants';
 
 const getUsers = (search, locationId, groups) => {
-	return search.map(user => {
-		const currentGroup = groups.byId[locationId];
-		const isMember = currentGroup.members.indexOf(user.id) !== -1;
+	if (!search) return search;
+	return search.uids.map(id => {
+		const user = search.byId[id];
+		if (locationId) {
+			const currentGroup = groups.byId[locationId];
+			const isMember = currentGroup.members.indexOf(user.id) !== -1;
+			user.isMember = isMember;
+		}
 		user.avatar = user.avatar || defaultAvatar;
-		user.isMember = isMember;
 		return user;
 	});
 };
@@ -16,7 +20,8 @@ const getUsers = (search, locationId, groups) => {
 const mapStateToProps = state => {
   return {
     users: getUsers(state.search, state.location.id, state.groups),
-    location: state.location.name
+    location: state.location.name,
+    isFetching: state.search.isFetching
   }
 }
 

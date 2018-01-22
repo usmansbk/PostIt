@@ -4,7 +4,8 @@ import GroupMembers from '../components/board/GroupMembers';
 import { defaultAvatar } from '../Constants';
 
 const getMembers = (members) => {
-	return members.id.map(id => {
+	if (!members) return members;
+	return members.uids.map(id => {
 		const member = members.byId[id];
 		member.userAvatar = member.userAvatar || defaultAvatar;
 		return member;
@@ -13,7 +14,8 @@ const getMembers = (members) => {
 
 const mapStateToProps = state => {
   return {
-    members: getMembers(state.members)
+    members: getMembers(state.users),
+    isFetching: state.users.isFetching
   }
 }
 
@@ -21,4 +23,4 @@ const GroupMembersContainer = connect(
   mapStateToProps
 )(GroupMembers)
 
-export default GroupMembersContainer;
+export default GroupMembersContainer; 

@@ -97,10 +97,10 @@ describe('postit reducer', () => {
     expect(reducer({}, {
       type: types.SEARCH_POSTIT,
       payload: {
-        result: 'results'
+        search: 'search'
       }
    })).toEqual({
-     result: 'results'
+     search: 'search'
    });
   });
 

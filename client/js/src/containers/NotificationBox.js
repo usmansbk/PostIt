@@ -6,6 +6,7 @@ import { getElapsedTime } from '../Util';
 
 
 const getNotifications = (notifications, groups) => {
+  if (!notifications) return notifications;
   return notifications.map(notification => {
     const id = notification.groupId;
     const duration = getElapsedTime(notification.createdAt);
@@ -33,4 +34,4 @@ const NotificationBoxContainer = connect(
   mapStateToProps
 )(NotificationBox)
 
-export default NotificationBoxContainer;
+export default NotificationBoxContainer; 

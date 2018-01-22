@@ -1,16 +1,16 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default ({ groupImage, groupName, membersCount, isOwner }) => {
+export default ({ groupImage, groupName, membersCount, isOwner, onClick, groupid}) => {
   const card = {
     height: 'auto'
   };
 
   return (
-    <div className='col s12 m6 l3'>
+    <div className='col s12 m6 l3' onClick={onClick} groupid={groupid}>
       <div className='card small hoverable' style={card}>
         <div className='card-image'>
-          <img src={groupImage} />
+          <img src={groupImage} groupid={groupid} />
         </div>
         <div className='card-content'>
           <span className='card-title truncate'>{groupName}</span>

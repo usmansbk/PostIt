@@ -4,7 +4,8 @@ import SelectGroup from '../components/board/SelectGroup';
 import { defaultGroupImage } from '../Constants';
 
 const getGroups = (groups) => {
-	return groups.id.map(id => {
+	if (!groups) return groups;
+	return groups.gids.map(id => {
 		const group = groups.byId[id];
 		group.image = group.image || defaultGroupImage;
 		return group;
@@ -14,6 +15,7 @@ const getGroups = (groups) => {
 const mapStateToProps = state => {
   return {
     groups: getGroups(state.groups),
+    isFetching: state.groups.isFetching
   }
 }
 

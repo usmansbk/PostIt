@@ -5,7 +5,8 @@ import { getElapsedTime } from '../Util';
 import {defaultAvatar} from '../Constants';
 
 const getPosts = (posts, members, groups) => {
-  return posts.id.map(id => {
+  if (!posts) return posts;
+  return posts.pids.map(id => {
     const post = posts.byId[id];
     const authorId = post.authorId;
     const groupId = post.groupId;
@@ -28,7 +29,8 @@ const getPosts = (posts, members, groups) => {
 
 const mapStateToProps = state => {
   return {
-    posts: getPosts(state.posts, state.members, state.groups)
+    posts: getPosts(state.posts, state.users, state.groups),
+    isFetching: state.posts.isFetching
   }
 }
 

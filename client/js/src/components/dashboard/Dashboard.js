@@ -10,7 +10,7 @@ import GroupBoard from '../../containers/GroupBoard';
 import ProfileBoard from '../board/ProfileBoard';
 import '../../../../stylesheets/sass/components/Dashboard.scss';
 
-export default ({currentLocation}) => {
+export default ({currentLocation, onClick}) => {
   let view;
   if (currentLocation === 'Group')
      view = <GroupBoard />
@@ -27,15 +27,10 @@ export default ({currentLocation}) => {
     <Sidenav />
     <div className='row'>
       <Sidepanel className='col m2 hide-on-med-and-down my-side-nav'>
-        <div className='section'>
+        <div className='section' onClick={onClick}>
           <PanelItem icon='home' currentLocation={ currentLocation } label='Home' />
           <PanelItem icon='group' currentLocation={ currentLocation } label='Groups' />
           <PanelItem icon='account_circle' currentLocation={ currentLocation } label='Profile' />
-        </div>
-        <div className='divider'></div>
-        <div className='section'>
-          <PanelItem className='my-nav-subitem' label='Report an issue' />
-          <PanelItem className='my-nav-subitem' label='Help' />
         </div>
         <Footer className='nav-footer' />
       </Sidepanel>

@@ -5,6 +5,7 @@ import GroupBoard from '../components/board/GroupBoard';
 
 const getGroupInfo = (id, groups, users, accountId) => {
   const group = groups.byId[id];
+  if (!group) return group;
   const { name, image, purpose, CreatorId, members} = group;
   const isOwner = (CreatorId === accountId)
   const groupImage = image || defaultGroupImage;
@@ -25,7 +26,7 @@ const getGroupInfo = (id, groups, users, accountId) => {
 
 const mapStateToProps = state => {
   return {
-    groupInfo: getGroupInfo(state.location.id, state.groups, state.members, state.account.id)
+    groupInfo: getGroupInfo(state.location.id, state.groups, state.users, state.account.id)
   }
 }
 
