@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import initialState from './stateSchema';
 import {
   ADD_NOTIFICATION,
   CLEAR_NOTIFICATION,
@@ -13,13 +12,13 @@ import {
   RECEIVE_USERS,
 } from './actionTypes';
 
-function selectedLocation(state = initialState, action) {
+function selectedLocation(state = {}, action) {
   switch (action.type) {
     case SELECT_LOCATION: {
       return action.location;
     }
     default:
-      return state.location;
+      return state;
   }
 }
 
@@ -119,7 +118,7 @@ function search(
   }
 }
 
-function searchResult(state = initialState.search, action) {
+function searchResult(state = {}, action) {
   switch (action.type) {
     case REQUEST_USERS:
     case RECEIVE_USERS:
@@ -131,7 +130,7 @@ function searchResult(state = initialState.search, action) {
   }
 }
 
-function userGroups(state =initialState.groups, action) {
+function userGroups(state = {}, action) {
   switch (action.type) {
     case RECEVIE_GROUPS:
     case REQUEST_GROUPS:
@@ -143,7 +142,7 @@ function userGroups(state =initialState.groups, action) {
   }
 }
 
-function getUsers(state = initialState.users, action) {
+function getUsers(state = {}, action) {
   switch (action.type) {
     case REQUEST_USERS:
     case RECEIVE_USERS:
@@ -155,7 +154,7 @@ function getUsers(state = initialState.users, action) {
   }
 }
 
-function groupPosts(state = initialState.posts, action) {
+function groupPosts(state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
@@ -167,7 +166,7 @@ function groupPosts(state = initialState.posts, action) {
   }
 }
 
-function accountDetails(state = initialState.account, action) {
+function accountDetails(state = {}, action) {
   switch (action.type) {
     case SET_ACCOUNT_DETAILS:
       return Object.assign({}, state, {
@@ -178,7 +177,7 @@ function accountDetails(state = initialState.account, action) {
   }
 }
 
-function notifications(state = initialState.notifications, action) {
+function notifications(state = [], action) {
   switch (action.type) {
     case ADD_NOTIFICATION:
     case CLEAR_NOTIFICATION:

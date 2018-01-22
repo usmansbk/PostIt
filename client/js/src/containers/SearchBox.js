@@ -4,7 +4,7 @@ import SearchBox from '../components/dashboard/SearchBox';
 import { defaultAvatar } from '../Constants';
 
 const getUsers = (search, locationId, groups) => {
-	if (!search) return search;
+	if (Object.keys(search).length === 0) return null;
 	return search.uids.map(id => {
 		const user = search.byId[id];
 		if (locationId) {

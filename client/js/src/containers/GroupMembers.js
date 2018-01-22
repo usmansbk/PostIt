@@ -4,7 +4,7 @@ import GroupMembers from '../components/board/GroupMembers';
 import { defaultAvatar } from '../Constants';
 
 const getMembers = (members) => {
-	if (!members) return members;
+	if (Object.keys(members).length === 0) return null;
 	return members.uids.map(id => {
 		const member = members.byId[id];
 		member.userAvatar = member.userAvatar || defaultAvatar;

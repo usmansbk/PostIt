@@ -5,7 +5,7 @@ import { setLocation } from '../redux/actionTypes';
 import GroupsBoard from '../components/board/GroupsBoard';
 
 const getGroups = (groups, account) => {
-  if (!groups) return groups;
+  if (Object.keys(groups).length === 0) return null;
   return groups.gids.map(id => {
     const groupid = id;
     const group = groups.byId[id];

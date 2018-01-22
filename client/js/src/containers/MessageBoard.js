@@ -5,7 +5,7 @@ import { getElapsedTime } from '../Util';
 import {defaultAvatar} from '../Constants';
 
 const getPosts = (posts, members, groups) => {
-  if (!posts) return posts;
+  if (Object.keys(posts).length === 0) return null;
   return posts.pids.map(id => {
     const post = posts.byId[id];
     const authorId = post.authorId;

@@ -1,6 +1,6 @@
 const initialState = {
   error: '',
-  posts: {
+  posts: {}, /**{
     isFetching: false,
     byId: {
       0: {
@@ -12,9 +12,9 @@ const initialState = {
       }
     },
     pids: [0]
-  },
+  },*/
 
-  users: {
+  users: {}, /**{
     isFetching: false,
     byId: {
       0: {
@@ -26,8 +26,9 @@ const initialState = {
     },
     uids: [0]
 
-  },
-  groups: {
+  },*/
+
+  groups: {}, /**{
     isFetching: false,
     byId: {
       0: {
@@ -40,8 +41,9 @@ const initialState = {
       }
     },
     gids: [0]
-  },
-  search: {
+  },*/
+
+  search: {}, /*{
     isFetching: false,
     byId: {
       0: {
@@ -52,19 +54,18 @@ const initialState = {
         }
     },
     uids: [0]
-  },
+  },*/
 
-  notifications: [
-    {
+  notifications: [], /*[    {
       message: '3 new messages',
       createdAt: '2018-07-12T22:30:30.901Z',
       groupId: 0,
     }
-  ],
+  ],*/
 
   location: {
-    name: 'Profile',
-    id: 0
+    name: 'Home',
+   // id: 0
   },
 
   account: {
