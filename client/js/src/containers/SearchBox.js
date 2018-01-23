@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchBox from '../components/dashboard/SearchBox';
-import { defaultAvatar } from '../Constants';
+import { defaultAvatar } from '../utils/constants';
 
 const getUsers = (search, locationId, groups) => {
 	if (Object.keys(search).length === 0) return null;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GroupMembers from '../components/board/GroupMembers';
-import { defaultAvatar } from '../Constants';
+import { defaultAvatar } from '../utils/constants';
 
 const getMembers = (members) => {
 	if (Object.keys(members).length === 0) return null;

@@ -10,22 +10,8 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onClick: event => {
-			const target = event.target;
-			const name = target.getAttribute('label');
-			const location = {
-				name,
-			};
-			dispatch(setLocation(location));
-		}
-	}
-}
-
 const DashboardContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
 )(Dashboard)
 
 export default DashboardContainer;

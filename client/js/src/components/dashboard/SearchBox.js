@@ -22,6 +22,6 @@ export default ({users, location}) => {
 	return (
 		<div className='search card-panel grey lighten-3' id='search-result' style={style} >
 			{ userComponents }
-			<a href='#'><p className='blue-text center-align' style={p}>More</p></a>
+			{userComponents && <a href='#'><p className='blue-text center-align' style={p}>More</p></a>}
 		</div>);
 }

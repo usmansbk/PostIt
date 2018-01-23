@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { defaultAvatar, defaultGroupImage } from '../Constants';
+import { defaultAvatar, defaultGroupImage } from '../utils/constants';
 import { setLocation } from '../redux/actionTypes';
 import GroupsBoard from '../components/board/GroupsBoard';
 
@@ -32,23 +32,8 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onClick: event => {
-      const target = event.target;
-      const id = target.getAttribute('groupid');
-      const location = {
-        name: 'Group',
-        id
-      }
-      dispatch(setLocation(location))
-    }
-  }
-}
-
 const GroupsBoardContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
 )(GroupsBoard)
 
 export default GroupsBoardContainer;
