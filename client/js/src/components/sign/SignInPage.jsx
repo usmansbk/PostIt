@@ -3,8 +3,10 @@ import { NavLink } from 'react-router-dom';
 import InputField from '../common/InputField';
 import Button from '../common/Button';
 import Footer from '../common/Footer';
+import { setPageTitle } from '../../helpers/utils';
 
 export default ({match}) => {
+  setPageTitle('Sign In | PostIt');
   const footer = {
     position: 'relative',
     bottom: '2%',

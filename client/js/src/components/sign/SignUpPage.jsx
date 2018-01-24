@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import InputField from '../common/InputField';
 import Button from '../common/Button';
 import Footer from '../common/Footer';
+import { setPageTitle } from '../../helpers/utils';
 
 export default class SignUpForm extends React.Component {
 
@@ -27,6 +28,7 @@ export default class SignUpForm extends React.Component {
   }
 
   render() {
+    setPageTitle('Sign Up | PostIt');
     const footer = {
       position: 'relative',
       bottom: '2%',

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NotificationBox from '../components/dashboard/NotificationBox';
-import { defaultGroupImage } from '../utils/constants';
-import { getElapsedTime } from '../utils/utils';
+import { defaultGroupImage } from '../helpers/constants';
+import { getElapsedTime } from '../helpers/utils';
 
 
 const getNotifications = (notifications, groups) => {

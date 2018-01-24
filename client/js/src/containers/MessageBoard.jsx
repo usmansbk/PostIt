@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MessageBoard from '../components/board/MessageBoard';
-import { getElapsedTime } from '../utils/utils';
-import {defaultAvatar} from '../utils/constants';
+import { getElapsedTime } from '../helpers/utils';
+import {defaultAvatar} from '../helpers/constants';
 
 const getPosts = (posts, members, groups) => {
   if (Object.keys(posts).length === 0) return null;

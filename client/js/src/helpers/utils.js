@@ -1,3 +1,8 @@
+export function setPageTitle(newTitle) {
+	const title = document.querySelector('title');
+	title.innerText = newTitle;
+}
+
 export function getElapsedTime(timeString) {
 	const now = new Date().getTime();
 	const start = new Date(timeString).getTime();

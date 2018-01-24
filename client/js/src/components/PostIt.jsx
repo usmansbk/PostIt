@@ -3,7 +3,8 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import Dashboard from '../components/dashboard/Dashboard';
 import SignInPage from './sign/SignInPage';
 import SignUpPage from './sign/SignUpPage';
-import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './helpers/PrivateRoute';
+import PageNotFound from './helpers/PageNotFound';
 
 export default () => {
     return (
@@ -11,14 +12,7 @@ export default () => {
     		<PrivateRoute auth={true} path='/dashboard' component={Dashboard} />
     		<Route path='/signin' component={SignInPage} />
     		<Route path='/signup' component={SignUpPage} />
-    		<Route render={
-    			(props)=> <div>
-	    			<NavLink to='/dashboard'>Dashboard</NavLink><br />
-	    			<NavLink to='/signin'>Sign in</NavLink><br />
-	    			<NavLink to='/signup'>Sign up</NavLink><br />
-    			</div>
-    			}
-    		/>
+    		<Route render={(props)=> <PageNotFound />}/>
     	</Switch>
     )
 }

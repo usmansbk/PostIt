@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SelectGroup from '../components/board/SelectGroup';
-import { defaultGroupImage } from '../utils/constants';
+import { defaultGroupImage } from '../helpers/constants';
 
 const getGroups = (groups) => {
 	if (Object.keys(groups).length === 0) return null;

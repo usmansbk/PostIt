@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import Sidepanel from './Sidepanel';
+import Sidenav from './Sidenav';
 import PanelItem from './PanelItem';
 import Footer from '../common/Footer';
 import Navbar from '../../containers/Navbar';
@@ -8,14 +9,17 @@ import MessageBoard from '../../containers/MessageBoard';
 import GroupsBoard from '../../containers/GroupsBoard';
 import GroupBoard from '../../containers/GroupBoard';
 import ProfileBoard from '../board/ProfileBoard';
+import { setPageTitle } from '../../helpers/utils';
 import '../../../../stylesheets/sass/components/Dashboard.scss';
 
 export default ({match}) => {
+  setPageTitle('PostIt');
   return (
   <div>
     <Navbar />
+    <Sidenav />
     <div className='row'>
-      <Sidepanel className='col m2 hide-on-med-and-down my-side-nav'>
+      <Sidepanel>
         <div className='section'>
           <NavLink exact to={`${match.url}`} activeClassName='red-text text-lighten-1'><PanelItem icon='home' label='Home' /></NavLink>
           <NavLink to={`${match.url}/groups`} activeClassName='red-text text-lighten-1'><PanelItem icon='group' label='Groups' /></NavLink>

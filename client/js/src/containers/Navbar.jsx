@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../components/dashboard/Navbar';
-import { defaultAvatar } from '../utils/constants';
+import { defaultAvatar } from '../helpers/constants';
 
 const mapStateToProps = state => {
   return {

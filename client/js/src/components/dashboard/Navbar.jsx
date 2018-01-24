@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Sidenav from './Sidenav';
 import Searchbar from './Searchbar';
 import Search from './Search';
 import SearchBox from '../../containers/SearchBox';
@@ -82,7 +81,7 @@ export default class Navbar extends React.Component {
                       </a>  
                     </td>
         		        <td id='td-logo' className='left-align'>
-                      <Logo>PostIt</Logo>
+                      <Logo />
         		        </td>
                     <td id='td-loc'>
         		          <span id='location' className='grey-text text-darken-2 truncate'>{ locationName }</span>
@@ -114,7 +113,6 @@ export default class Navbar extends React.Component {
             </div>
           </nav>
         </div>
-        <Sidenav />
       </div>
     );
   }

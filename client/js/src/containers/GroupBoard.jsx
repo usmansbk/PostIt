@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { defaultAvatar, defaultGroupImage } from '../utils/constants';
+import { defaultAvatar, defaultGroupImage } from '../helpers/constants';
 import GroupBoard from '../components/board/GroupBoard';
 
 const getGroupInfo = (id, groups, users, accountId) => {
