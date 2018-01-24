@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/PostInfo.scss'
 
-export default ({authorUsername, groupName, duration, userAvatar, groupId}) => {
+export default ({authorUsername, groupName, duration, userAvatar, groupId, onClick}) => {
 
   const div = {
     width: '100%',
@@ -23,7 +23,7 @@ export default ({authorUsername, groupName, duration, userAvatar, groupId}) => {
         <span id='author-username'> {authorUsername} </span>
         <Icon className='tiny grey-text'>play_arrow</Icon>
         <div>
-          <span className='blue-text truncate'><NavLink to={`/dashboard/groups/${groupId}`}>{groupName}</NavLink></span>
+          <NavLink to={`/dashboard/groups/${groupId}`}><span className='blue-text truncate' onClick={onClick} gid={groupId}>{groupName}</span></NavLink>
         </div>
         <div id='duration-div' style={div}>
           <div className='right valign-wrapper'>

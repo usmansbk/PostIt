@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import initialState from './stateSchema';
 import {
-  ADD_NOTIFICATION,
+  ADD_NOTIFICATION, 
   CLEAR_NOTIFICATION,
   SET_ACCOUNT_DETAILS,
-  SELECT_LOCATION,
+  SELECT_GROUP,
+  SELECT_PAGE,
   REQUEST_POSTS,
   RECEIVE_POSTS,
   REQUEST_GROUPS,
@@ -13,10 +14,20 @@ import {
   RECEIVE_USERS,
 } from './actionTypes';
 
-function selectedLocation(state = initialState.location, action) {
+function selectedPage(state = 'Home', action) {
   switch (action.type) {
-    case SELECT_LOCATION: {
-      return action.location;
+    case  SELECT_PAGE: {
+      return action.page;
+    }
+    default:
+      return state;
+  }
+}
+
+function selectedGroup(state = initialState.group, action) {
+  switch (action.type) {
+    case SELECT_GROUP: {
+      return action.group;
     }
     default:
       return state;
@@ -185,7 +196,8 @@ const rootReducer = combineReducers({
   search: searchResult,
   account: accountDetails,
   notifications: notifications,
-  location: selectedLocation
+  group: selectedGroup,
+  page: selectedPage
 });
 
 export default rootReducer

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { defaultAvatar, defaultGroupImage } from '../helpers/constants';
-import { setLocation } from '../redux/actionTypes';
+import { setPage, setGroup } from '../redux/actionTypes';
 import GroupsBoard from '../components/board/GroupsBoard';
 
 const getGroups = (groups, account) => {
@@ -36,12 +36,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onClick: event => {
       const target= event.currentTarget
-          , id = target.getAttribute('gid')
-          , location = {
-              name: 'Group',
-              id
-            };
-      dispatch(setLocation(location));
+          , id = target.getAttribute('gid');
+      dispatch(setPage('Group'));
+      dispatch(setGroup(id));
     }
   }
 }

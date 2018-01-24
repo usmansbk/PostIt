@@ -8,7 +8,7 @@ const initialState = {
         id: 0,
         groupId: 0,
         authorId: 0,
-        createdAt: '2018-07-12T22:29:29.901Z',
+        createdAt: '2018-01-21T22:29:29.901Z',
       }
     },
     pids: [0]
@@ -37,7 +37,7 @@ const initialState = {
         image: null,
         members: [0],
         purpose: 'A test state',
-        createdAt: '2018-07-12T22:29:29.901Z'
+        createdAt: '2018-01-12T22:29:29.901Z'
       }
     },
     gids: [0]
@@ -50,7 +50,7 @@ const initialState = {
           username: 'kayode',
           email: 'kayode@partylawa.com',
           avatar: null,
-          id: 1,
+          id: 0,
         }
     },
     uids: [0]
@@ -58,15 +58,12 @@ const initialState = {
 
   notifications: [    {
       message: '3 new messages',
-      createdAt: '2018-07-12T22:30:30.901Z',
+      createdAt: '2018-01-12T22:30:30.901Z',
       groupId: 0,
     }
   ],
 
-  location: {
-    name: 'Home',
-    id: 0
-  },
+  group: 0,
 
   account: {
     username: 'usmansbk',

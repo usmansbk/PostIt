@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import Footer from '../common/Footer';
 import { setPageTitle } from '../../helpers/utils';
 
-export default ({match}) => {
+export default ({match, onClick}) => {
   setPageTitle('Sign In | PostIt');
   const footer = {
     position: 'relative',
@@ -31,7 +31,7 @@ export default ({match}) => {
               <span><a href='#'>Forgot account?</a></span>
             </InputField>
 
-            <Button className='center-align' color='blue' value='Sign In'></Button>
+            <Button className='center-align' color='blue' value='Sign In' onClick={onClick}></Button>
           </form>
           <div className='center-align section'>
             <NavLink to='/signup'>Don't have an account?</NavLink>

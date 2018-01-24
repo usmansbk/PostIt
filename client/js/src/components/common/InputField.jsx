@@ -6,7 +6,15 @@ import React from 'react';
 export default (props) => {
   return (<div className={props.className} >
     <label htmlFor={props.id}>{props.label}</label>
-    <input type={props.type} name={props.name} id={props.id} placeholder={props.placeholder} />
+    <input
+    onChange={props.onChange}
+    type={props.type}
+    name={props.name}
+    id={props.id}
+    placeholder={props.placeholder}
+    defaultValue={props.defaultValue}
+    required={props.required}
+    />
     {
       props.children && <span className='helper-text'>{props.children}</span> 
     }

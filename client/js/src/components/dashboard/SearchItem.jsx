@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/SearchItem.scss'
 
-export default ({avatar, username, isMember, location}) => {
+export default ({avatar, username, isMember, page}) => {
 	const style = {
 		height: '24px',
 		width: '24px',
@@ -25,7 +25,7 @@ export default ({avatar, username, isMember, location}) => {
 						<span className='grey-text text-darken-2'>{username}</span>
 					</div>
 					{
-						(location === 'Group') &&
+						(page === 'Group') &&
 						<div className='col s6'>
 							<Icon className='blue-text right'>{ isMember?'done' : 'person_add' }</Icon>
 						</div>

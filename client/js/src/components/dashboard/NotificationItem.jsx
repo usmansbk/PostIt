@@ -1,13 +1,13 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default ({ message, duration, groupName, groupImage}) => {
+export default ({ message, duration, groupName, groupId, groupImage, onClick}) => {
   const style = {
     width: '48px',
     height: '48px',
   }
   return (
-    <div className='row card' id='notification-item'>
+    <div className='row card' id='notification-item' gid={groupId} onClick={onClick}>
       <div className='col s2 valign-wrapper'>
         <img src={groupImage} alt={groupName} className='circle' style={style} />
       </div>

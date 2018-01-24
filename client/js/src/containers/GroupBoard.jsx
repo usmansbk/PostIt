@@ -26,7 +26,7 @@ const getGroupInfo = (id, groups, users, accountId) => {
 
 const mapStateToProps = state => {
   return {
-    groupInfo: getGroupInfo(state.location.id, state.groups, state.users, state.account.id)
+    groupInfo: getGroupInfo(state.group, state.groups, state.users, state.account.id)
   }
 }
 

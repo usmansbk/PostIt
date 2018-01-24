@@ -3,7 +3,8 @@
  */
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
-export const SELECT_LOCATION = 'SELECT_LOCATION';
+export const SELECT_GROUP = 'SELECT_GROUP';
+export const SELECT_PAGE = 'SELECT_PAGE';
 export const SET_ACCOUNT_DETAILS = 'SET_ACCOUNT_DETAILS';
 
 /*
@@ -76,10 +77,17 @@ export function clearNotification(notifications) {
   };
 }
 
-export function setLocation(location) {
+export function setGroup(group) {
   return {
-    type: SELECT_LOCATION,
-    location
+    type: SELECT_GROUP,
+    group
+  }
+}
+
+export function setPage(page) {
+  return {
+    type: SELECT_PAGE,
+    page
   }
 }
 

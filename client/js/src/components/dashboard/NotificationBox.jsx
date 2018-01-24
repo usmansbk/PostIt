@@ -4,10 +4,10 @@ import Icon from '../common/Icon';
 import NotificationItem from './NotificationItem';
 import '../../../../stylesheets/sass/components/NotificationHeader.scss';
 
-export default ({notifications}) => {
+export default ({notifications, onClick}) => {
   let notificationsComponent;
   if (notifications) {
-    notificationsComponent = notifications.map((notification, index) => <NavLink to={`/dashboard/groups/${notification.groupId}`} key={index}><NotificationItem {...notification} /></NavLink>);
+    notificationsComponent = notifications.map((notification, index) => <NavLink to={`/dashboard/groups/${notification.groupId}`} key={index}><NotificationItem onClick={onClick} {...notification} /></NavLink>);
   }
   const notice = (
     <p className='grey-text text-lighten-1 center-align'>All caught up!</p>

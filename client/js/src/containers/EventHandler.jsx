@@ -1,19 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import EventHandler from '../components/helpers/EventHandlersWrapper';
+import { setPage } from '../redux/actionTypes';
 
-const mapDispatchToState = dispatch => {
+const mapStateToProps = state => {
+	return {}
+};
+
+const mapDispatchToProps = dispatch => {
 	return {
 		onClick: event => {
 			const target = event.currentTarget;
-			const locationName = target.getAttribute('label');
-			console.log('Hello from EventHandler', locationName);
+			const name = target.getAttribute('label');
+			dispatch(setPage(name));
 		}
 	}
 }
 
 const EventHandlerContainer = connect(
-	mapDispatchToState
+	mapStateToProps,
+	mapDispatchToProps
 )(EventHandler);
 
 export default EventHandlerContainer;

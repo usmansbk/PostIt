@@ -9,22 +9,41 @@ export default class SignUpForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.validatePassword = this.validatePassword.bind(this);
-    this.state = { password: '', confirm: '', isInvalid: false };
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+      confirm: null,
+      invalidPassword: true,
+      isInvalid: false
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  validatePassword(event) {
-    const value = event.target.value;
-    const id = event.target.id;
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.getAttribute('name');
+
     this.setState({
-      [id]: value
+      [name]: value,
     }, () => {
-      if (this.state.confirm !== this.state.password) {
-        this.setState({isInvalid: true});
-        return;
-      }
-      this.setState({isInvalid: false});
-    });
+      const password = this.state.password;
+      const invalidPassword = (this.state.confirm !== this.state.password) || (password.length < 8 || password.length > 32);
+      const invalidUsernameAndEmail = this.state.username.length === 0 || this.state.email.length === 0;
+      const isInvalid = invalidPassword || invalidUsernameAndEmail;
+      this.setState({
+        isInvalid,
+        invalidPassword
+      });
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state);
   }
 
   render() {
@@ -42,20 +61,20 @@ export default class SignUpForm extends React.Component {
         <div className='row section'>
           <div className='col s12 l6 offset-l3 card'>
           <h5>Create an account</h5>
-            <form>
-              <InputField id='username' type='text' required='true' label='Username' className='input-field'>
+            <form onSubmit={this.handleSubmit}>
+              <InputField id='username' name='username' type='text' required={true} label='Username' className='input-field' onChange={this.handleChange}>
                 Name can only contain letters, numbers and underscore
               </InputField>
 
-              <InputField id='email' type='email' required='true' label='Email address' className='input-field'/>
+              <InputField id='email' name='email' type='email' required={true} label='Email address' className='input-field' onChange={this.handleChange}/>
 
-              <InputField id='password' type='password' required='true' value={this.state.password} label='Password' validate='validate' className='input-field' onChange={this.validatePassword} >
+              <InputField id='password' name='password' type='password' required={true} value={this.state.password} label='Password' validate='validate' className='input-field' onChange={this.handleChange} >
                 Password must be 8-32 characters long
               </InputField>
 
-              <InputField id='confirm' type='password' required='true' label='Confirm password' className='input-field' onChange={this.validatePassword} value={this.state.fconfirm} />
-              { this.state.isInvalid && error }
-              <Button type='submit' className='center-align' color='blue' value='Sign Up'>send</Button>
+              <InputField id='confirm' name='confirm' type='password' required={true} value={this.state.confirm} label='Confirm password' className='input-field' onChange={this.handleChange} />
+              { this.state.invalidPassword && error }
+              <Button type='submit' className='center-align' color='blue' value='Sign Up' disabled={this.state.isInvalid}>send</Button>
             </form>
             <div className='center-align section'>
               <NavLink to='/signin'>Have an account?</NavLink>
@@ -66,7 +85,7 @@ export default class SignUpForm extends React.Component {
         <div style={footer}>
           <Footer className='center-align' />
         </div>
-      </div>
+      </div> 
     );
   }
 }

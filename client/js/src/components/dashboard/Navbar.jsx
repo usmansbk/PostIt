@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import EventHandler from '../../containers/EventHandler';
 import Searchbar from './Searchbar';
 import Search from './Search';
 import SearchBox from '../../containers/SearchBox';
@@ -59,7 +60,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    const { locationName, avatarImage } = this.props;
+    const { page, avatarImage } = this.props;
     return this.state.searchbar ?
     (<div>
       <Searchbar onClick={this.handleClick} onChange={this.handleSearchBox}> 
@@ -84,7 +85,7 @@ export default class Navbar extends React.Component {
                       <Logo />
         		        </td>
                     <td id='td-loc'>
-        		          <span id='location' className='grey-text text-darken-2 truncate'>{ locationName }</span>
+        		          <span id='location' className='grey-text text-darken-2 truncate'>{ page }</span>
                     </td>
         		        <td className='hide-on-small-only grey-text' id='td-search-field'>
                       <Search onChange={this.handleSearchBox}>
@@ -107,8 +108,8 @@ export default class Navbar extends React.Component {
               </table>
               <NotificationBox />
               <AccountBox>
-                <NavLink to='/dashboard/profile'><span className='grey-text text-darken-2'>Profile</span></NavLink>
-                <a className='grey-text text-darken-2'>Logout</a>
+                <NavLink to='/dashboard/profile'><EventHandler className='grey-text text-darken-2' label='Profile'>Profile</EventHandler></NavLink>
+                <NavLink to='/signin'><EventHandler className='grey-text text-darken-2' label='Logout'>Logout</EventHandler></NavLink>
               </AccountBox>
             </div>
           </nav>

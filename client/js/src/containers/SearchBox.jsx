@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import SearchBox from '../components/dashboard/SearchBox';
 import { defaultAvatar } from '../helpers/constants';
 
-const getUsers = (search, locationId, groups) => {
+const getUsers = (search, groupId, groups) => {
 	if (Object.keys(search).length === 0) return null;
 	return search.uids.map(id => {
 		const user = search.byId[id];
-		if (locationId) {
-			const currentGroup = groups.byId[locationId];
-			const isMember = currentGroup.members.indexOf(user.id) !== -1;
-			user.isMember = isMember;
+		if (groupId) {
+			const currentGroup = groups.byId[groupId];
+			user.isMember = currentGroup.members.indexOf(user.id) !== -1;
 		}
 		user.avatar = user.avatar || defaultAvatar;
 		return user;
@@ -19,8 +18,8 @@ const getUsers = (search, locationId, groups) => {
 
 const mapStateToProps = state => {
   return {
-    users: getUsers(state.search, state.location.id, state.groups),
-    location: state.location.name,
+    users: getUsers(state.search, state.group, state.groups),
+    page: state.page,
     isFetching: state.search.isFetching
   }
 }

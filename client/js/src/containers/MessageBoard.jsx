@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import MessageBoard from '../components/board/MessageBoard';
 import { getElapsedTime } from '../helpers/utils';
 import {defaultAvatar} from '../helpers/constants';
+import { setGroup, setPage } from '../redux/actionTypes';
 
 const getPosts = (posts, members, groups) => {
   if (Object.keys(posts).length === 0) return null;
@@ -28,6 +29,17 @@ const getPosts = (posts, members, groups) => {
   });
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onClick: event => {
+      const target = event.target;
+      const id = target.getAttribute('gid');
+      dispatch(setPage('Group'));
+      dispatch(setGroup(id));
+    }
+  }
+}
+
 const mapStateToProps = state => {
   return {
     posts: getPosts(state.posts, state.users, state.groups),
@@ -36,7 +48,8 @@ const mapStateToProps = state => {
 }
 
 const MessageBoardContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(MessageBoard)
 
 export default MessageBoardContainer;
