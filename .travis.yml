@@ -15,7 +15,7 @@ services:
   - postgresql
 before_script:
   - psql -c 'CREATE DATABASE postit_test;' -U postgres
-  - "npm run start &"
+  - "npm run start"
 after_success:
   - npm run coveralls
   - codeclimate-test-reporter < coverage/lcov.info

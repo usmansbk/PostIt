@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import initialState from './stateSchema';
 import {
   ADD_NOTIFICATION,
   CLEAR_NOTIFICATION,
@@ -12,7 +13,7 @@ import {
   RECEIVE_USERS,
 } from './actionTypes';
 
-function selectedLocation(state = {}, action) {
+function selectedLocation(state = initialState.location, action) {
   switch (action.type) {
     case SELECT_LOCATION: {
       return action.location;
@@ -118,74 +119,62 @@ function search(
   }
 }
 
-function searchResult(state = {}, action) {
+function searchResult(state = initialState.search, action) {
   switch (action.type) {
     case REQUEST_USERS:
     case RECEIVE_USERS:
-      return Object.assign({}, state, {
-        search: search(state[action.search], action)
-      });
+      return Object.assign({}, state, search(state, action));
     default:
       return state;
   }
 }
 
-function userGroups(state = {}, action) {
+function userGroups(state = initialState.groups, action) {
   switch (action.type) {
     case RECEVIE_GROUPS:
     case REQUEST_GROUPS:
-      return Object.assign({}, state, {
-        [action.groups]: groups(state[action.groups], action)
-      });
+      return Object.assign({}, state, groups(groups, action));
     default:
       return state;
   }
 }
 
-function getUsers(state = {}, action) {
+function getUsers(state = initialState.users, action) {
   switch (action.type) {
     case REQUEST_USERS:
     case RECEIVE_USERS:
-      return Object.assign({}, state, {
-        [action.users]: users(state[action.users], action)
-      });
+      return Object.assign({}, state, users(state, action));
     default:
       return state;
   }
 }
 
-function groupPosts(state = {}, action) {
+function groupPosts(state = initialState.posts, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
-      return Object.assign({}, state, {
-        posts: posts(state.posts, action)
-      });
+      return Object.assign({}, state, posts(state, action));
     default:
       return state;
   }
 }
 
-function accountDetails(state = {}, action) {
+function accountDetails(state = initialState.account, action) {
   switch (action.type) {
     case SET_ACCOUNT_DETAILS:
-      return Object.assign({}, state, {
-        account: action.action
-      });
+      return Object.assign({}, state, action.action);
     default:
       return state;
   }
 }
 
-function notifications(state = [], action) {
+function notifications(state = initialState.notifications, action) {
   switch (action.type) {
     case ADD_NOTIFICATION:
     case CLEAR_NOTIFICATION:
-      return Object.assign({}, state, {
-        notifications: action.notifications
-      });
+      return Object.assign({}, state, action.notifications);
     default:
-      return state;
+      return state; 
   }
 }
 

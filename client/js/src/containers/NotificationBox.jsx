@@ -19,7 +19,8 @@ const getNotifications = (notifications, groups) => {
       message,
       groupName,
       groupImage,
-      duration
+      duration,
+      groupId: id
     }
   });
 };

@@ -10,7 +10,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
       },
@@ -19,5 +19,8 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader' ],
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   }
 };
