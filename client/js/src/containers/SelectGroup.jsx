@@ -4,7 +4,6 @@ import SelectGroup from '../components/board/SelectGroup';
 import { defaultGroupImage } from '../helpers/constants';
 
 const getGroups = (groups) => {
-	if (Object.keys(groups).length === 0) return null;
 	return groups.gids.map(id => {
 		const group = groups.byId[id];
 		group.image = group.image || defaultGroupImage;

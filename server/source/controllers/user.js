@@ -20,7 +20,8 @@ export default class UserController {
       res.status(200).json({
         status: 'success',
         data: {
-          message: 'Logged in'
+          message: 'Logged in',
+          user
         }
       });
     }).catch(() => {
@@ -39,17 +40,21 @@ export default class UserController {
    * @return {null} -the response object
    */
   static signUp(req, res) {
-    User.create(req.body).then(user =>
+    User.create(req.body).then(user => {
+      const username = user.get('username')
+          , email = user.get('email')
+          , id = user.id;
+      const ret = {
+        username, email, id
+      }
       res.status(201).json({
         status: 'success',
         data: {
-          message: 'Account created'
+          message: 'Account created',
+          user: ret,
         }
-      })).catch((error) => {
-      const err = error.errors[0];
-      let { message } = err;
-      const { path } = err;
-      message = `${path}: ${message}`;
+      })
+    }).catch(() => {
       res.status(400).json({
         status: 'fail',
         data: {

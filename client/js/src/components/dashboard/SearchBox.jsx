@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchItem from './SearchItem';
+import Loader from '../common/Loader';
 import '../../../../stylesheets/sass/components/Searchbox.scss';
 
 export default ({users, page}) => {
@@ -21,6 +22,9 @@ export default ({users, page}) => {
 	}
 	return (
 		<div className='search card-panel grey lighten-3' id='search-result' style={style} >
+			<div className='center-align'>
+				<Loader />
+			</div>
 			{ userComponents }
 			{userComponents && <a href='#'><p className='blue-text center-align' style={p}>More</p></a>}
 		</div>);

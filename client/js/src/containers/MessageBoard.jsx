@@ -6,7 +6,6 @@ import {defaultAvatar} from '../helpers/constants';
 import { setGroup, setPage } from '../redux/actionTypes';
 
 const getPosts = (posts, members, groups) => {
-  if (Object.keys(posts).length === 0) return null;
   return posts.pids.map(id => {
     const post = posts.byId[id];
     const authorId = post.authorId;

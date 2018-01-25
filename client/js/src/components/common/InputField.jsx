@@ -14,6 +14,7 @@ export default (props) => {
     placeholder={props.placeholder}
     defaultValue={props.defaultValue}
     required={props.required}
+    value={props.value}
     />
     {
       props.children && <span className='helper-text'>{props.children}</span> 

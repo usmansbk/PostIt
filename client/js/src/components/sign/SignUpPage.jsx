@@ -1,9 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import InputField from '../common/InputField';
 import Button from '../common/Button';
 import Footer from '../common/Footer';
+import Loader from '../common/Loader';
 import { setPageTitle } from '../../helpers/utils';
+import { Status } from '../../redux/actionTypes';
 
 export default class SignUpForm extends React.Component {
 
@@ -13,13 +15,12 @@ export default class SignUpForm extends React.Component {
       username: '',
       email: '',
       password: '',
-      confirm: null,
+      confirm: ' ',
       invalidPassword: true,
-      isInvalid: false
+      isInvalid: true
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -43,7 +44,7 @@ export default class SignUpForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
+    this.props.handleSubmit(this.state);
   }
 
   render() {
@@ -54,7 +55,18 @@ export default class SignUpForm extends React.Component {
       width: '100%'
     };
 
-   const error = <p className='red-text'>Password doesn't match</p>
+    const { status } = this.props;
+    if (status === Status.SIGNED_UP)
+      return <Redirect to='/dashboard' />
+    const loader =  <div className='center-align section'>
+                      <Loader />
+                    </div>
+    const failed = <p className='red-text center-align'>Failed to create account</p>
+
+    const showLoader = (status === Status.SIGNING_UP) && loader;
+    const showError = (status === Status.SIGNUP_FAILED) && failed;
+
+    const error = <p className='red-text'>Password doesn't match</p>
     return (
       <div>
       <div className='container'>
@@ -74,7 +86,9 @@ export default class SignUpForm extends React.Component {
 
               <InputField id='confirm' name='confirm' type='password' required={true} value={this.state.confirm} label='Confirm password' className='input-field' onChange={this.handleChange} />
               { this.state.invalidPassword && error }
-              <Button type='submit' className='center-align' color='blue' value='Sign Up' disabled={this.state.isInvalid}>send</Button>
+              <Button type='submit'className='center-align' color='blue' value='Sign Up' disabled={this.state.isInvalid}>send</Button>
+              { showLoader }
+              { showError  }
             </form>
             <div className='center-align section'>
               <NavLink to='/signin'>Have an account?</NavLink>

@@ -1,17 +1,18 @@
 import React from 'react';
 import PostCard from './PostCard';
 import NewPostModal from './NewPostModal';
+import Loader from '../common/Loader';
 import M from '../../../materialize';
 
-export default ({posts, onClick}) => {
+export default ({posts, isFetching, onClick}) => {
   const notice = <h3 className='grey-text text-lighten-1 center-align'>This board is empty</h3>;
-  let postsComponent;
-  if (posts) {
-    postsComponent = posts.map((post, index) => <PostCard key={index} onClick={onClick} { ...post} />);
-  }
+  let postsComponent = posts.map((post, index) => <PostCard key={index} onClick={onClick} { ...post} />);
   return (
     <div className='row'>
-      { postsComponent || notice }
+      <div className='center-align'>
+        { isFetching && <Loader /> }
+      </div>
+        { posts.length > 0 ? postsComponent : notice }
       <NewPostModal />
     </div>
   );

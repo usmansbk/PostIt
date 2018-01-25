@@ -5,12 +5,10 @@ import { setPage, setGroup } from '../redux/actionTypes';
 import GroupsBoard from '../components/board/GroupsBoard';
 
 const getGroups = (groups, account) => {
-  if (Object.keys(groups).length === 0) return null;
   return groups.gids.map(id => {
     const groupid = id;
     const group = groups.byId[id];
     const groupName = group.name;
-    const isFetching = groups.isFetching
     let membersCount = group.members.length;
     membersCount += membersCount > 1 ? ' Members' : ' Member';
     const isOwner = (group.CreatorId === account.id);

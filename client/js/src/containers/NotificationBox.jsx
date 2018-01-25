@@ -7,7 +7,6 @@ import { setPage, setGroup } from '../redux/actionTypes';
 
 
 const getNotifications = (notifications, groups) => {
-  if (notifications.length === 0) return null;
   return notifications.map(notification => {
     const id = notification.groupId;
     const duration = getElapsedTime(notification.createdAt);

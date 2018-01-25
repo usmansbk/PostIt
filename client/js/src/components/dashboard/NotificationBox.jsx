@@ -5,10 +5,8 @@ import NotificationItem from './NotificationItem';
 import '../../../../stylesheets/sass/components/NotificationHeader.scss';
 
 export default ({notifications, onClick}) => {
-  let notificationsComponent;
-  if (notifications) {
-    notificationsComponent = notifications.map((notification, index) => <NavLink to={`/dashboard/groups/${notification.groupId}`} key={index}><NotificationItem onClick={onClick} {...notification} /></NavLink>);
-  }
+  const length = notifications.length;
+  let notificationsComponent = notifications.map((notification, index) => <NavLink to={`/dashboard/groups/${notification.groupId}`} key={index}><NotificationItem onClick={onClick} {...notification} /></NavLink>);
   const notice = (
     <p className='grey-text text-lighten-1 center-align'>All caught up!</p>
   );
@@ -19,7 +17,7 @@ export default ({notifications, onClick}) => {
       </div>
       <div className='col s2'>
 	     {
-         notifications && <a href='#'><Icon>clear_all</Icon></a>
+         length > 0 && <a href='#'><Icon>clear_all</Icon></a>
 	     }
       </div>
     </div>
@@ -28,7 +26,7 @@ export default ({notifications, onClick}) => {
   return (
     <div className='dropdown-content grey lighten-3 notifications' id='notifications'>
       { header }
-      { notificationsComponent || notice }
+      { length > 0 ? notificationsComponent : notice }
     </div>
   );
 }

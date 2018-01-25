@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
 import Dashboard from '../components/dashboard/Dashboard';
-import SignInPage from './sign/SignInPage';
-import SignUpPage from './sign/SignUpPage';
+import SignInPage from '../containers/SignInPage';
+import SignUpPage from '../containers/SignUpPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import PageNotFound from './helpers/PageNotFound';
 

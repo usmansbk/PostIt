@@ -20,6 +20,11 @@
       ".scss$": "identity-obj-proxy"
     }
   },
+  "nodemonConfig": {
+    "ignore": [
+      "client/*"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/usmansbk/PostIt.git"
@@ -43,6 +48,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "form-urlencoded": "^2.0.4",
     "morgan": "^1.9.0",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
@@ -51,6 +57,7 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "request": "^2.83.0",
     "sequelize": "^4.28.6",
     "sequelize-cli": "^3.2.0"
@@ -79,8 +86,10 @@
     "jest": "^22.0.6",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.3",
+    "normalizr": "^3.2.4",
     "nyc": "^11.4.1",
     "react-test-renderer": "^16.2.0",
+    "redux-logger": "^3.0.6",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0"
