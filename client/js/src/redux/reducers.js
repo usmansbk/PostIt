@@ -50,14 +50,14 @@ function groups(
   state = {
     isFetching: false,
     byId: {},
-    gids: []
+    ids: []
   }, action) {
   switch (action.type) {
     case RECEIVE_GROUPS:
       return Object.assign({}, state, {
         isFetching: false,
-        byId: action.byId,
-        gids: action.gids
+        byId: action.groups.byId,
+        ids: action.groups.ids
       });
     case REQUEST_GROUPS:
       return Object.assign({}, state, {
@@ -72,7 +72,7 @@ function posts(
   state = {
     isFetching: false,
     byId: {},
-    pids: []
+    ids: []
   },
   action
 ) {
@@ -84,8 +84,8 @@ function posts(
     case RECEIVE_POSTS:
       return Object.assign({}, state, {
         isFetching: false,
-        byId: action.posts,
-        pids: action.pids
+        byId: action.posts.byId,
+        ids: action.posts.ids
       })
     default:
       return state;
@@ -96,7 +96,7 @@ function users (
   state = {
     isFetching: false,
     byId: {},
-    uids: []
+    ids: []
   },
   action
 ) {
@@ -105,7 +105,7 @@ function users (
       return Object.assign({}, state, {
         isFetching: false,
         byId: action.users,
-        uids: action.uids
+        ids: action.ids
       });
     case REQUEST_USERS:
       return Object.assign({}, state, {
@@ -120,7 +120,7 @@ function search(
   state = {
     isFetching: false,
     byId: {},
-    uids: []
+    ids: []
   },
   action
 ) {
@@ -129,7 +129,7 @@ function search(
       return Object.assign({}, state, {
         isFetching: false,
         byId: action.users,
-        uids: action.uids
+        ids: action.ids
       });
     case REQUEST_USERS:
       return Object.assign({}, state, {

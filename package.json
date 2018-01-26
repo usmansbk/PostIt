@@ -86,7 +86,6 @@
     "jest": "^22.0.6",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.3",
-    "normalizr": "^3.2.4",
     "nyc": "^11.4.1",
     "react-test-renderer": "^16.2.0",
     "redux-logger": "^3.0.6",

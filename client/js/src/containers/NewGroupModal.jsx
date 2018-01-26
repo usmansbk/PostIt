@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createGroup, Status, setStatus } from '../redux/asyncActions';
+import { createGroup } from '../redux/asyncActions';
 import NewGroupModal from '../components/board/NewGroupModal';
 
 const mapStateToProps = state => {

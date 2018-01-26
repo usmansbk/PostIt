@@ -19,9 +19,6 @@ export default ({accountInfo}) => {
   return (
     <div style={style}>
       <UserInfo {...accountInfo} />
-      <input type='file' id='upload-photo' style={inputStyle} />
-      <a href='#'><Icon title='Change profile picture' className='grey-text text-darken-1' onClick={uploadPhoto}>add_a_photo</Icon></a>
-      <a href='#'><Icon title='Remove profile picture' className='grey-text text-darken-1'>remove_circle</Icon></a>
     </div>
   );
 }

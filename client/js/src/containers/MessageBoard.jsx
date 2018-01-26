@@ -6,7 +6,7 @@ import {defaultAvatar} from '../helpers/constants';
 import { setGroup, setPage } from '../redux/actionTypes';
 
 const getPosts = (posts, members, groups) => {
-  return posts.pids.map(id => {
+  return posts.ids.map(id => {
     const post = posts.byId[id];
     const authorId = post.authorId;
     const groupId = post.groupId;
@@ -15,10 +15,10 @@ const getPosts = (posts, members, groups) => {
     const duration = getElapsedTime(createdAt);
 
     const postInfo = {};
-    postInfo.authorUsername = members.byId[authorId].username;
+  /*  postInfo.authorUsername = members.byId[authorId].username;
     postInfo.groupName = groups.byId[groupId].name;
     postInfo.duration = duration;
-    postInfo.userAvatar = members.byId[authorId].image || defaultAvatar;
+    postInfo.userAvatar = members.byId[authorId].image || defaultAvatar;*/
     postInfo.groupId = post.groupId;
 
     return {

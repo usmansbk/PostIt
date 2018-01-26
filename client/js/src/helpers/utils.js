@@ -1,4 +1,4 @@
- export function setPageTitle(newTitle) {
+export function setPageTitle(newTitle) {
 	const title = document.querySelector('title');
 	title.innerText = newTitle;
 }
@@ -33,3 +33,21 @@ export function getElapsedTime(timeString) {
 
 	return time;
 }
+
+/**
+ * Simplifies the JSON data according to schema for Redux.
+ */
+export function simplify(jsonArray) {
+	const schema = {
+		isFetching: false,
+		byId: {},
+		ids: []
+	}
+	const simple = Object.assign({}, schema);
+	jsonArray.forEach(obj => {
+		simple.byId[obj.id] = obj;
+		simple.ids.push(obj.id);
+	})
+	return simple;
+}
+

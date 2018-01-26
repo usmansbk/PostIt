@@ -13,16 +13,21 @@ export default class SelectGroup extends React.Component {
   }
 
   render() {
-    let notice = "You don't belong to any group";
-    let {groups} = this.props;
-    let groupsComponent;
-    if (groups) {
-      notice = 'Select groups to send post';
-      groupsComponent = groups.map((group, index) => <option defaultValue='' key={index} data-icon={group.image} className='left'>{group.name}</option>);
-    }
+    let notice = 'Select groups to send post'; ;
+    let {groups, onChange} = this.props;
+    if (groups.ids.length === 0) notice = "You don't belong to any group";
+    let groupsComponent = groups.ids.map(gid => {
+      const group = groups.byId[gid];
+      return <option
+        value={gid}
+        key={gid}
+        className='left'>
+      {group.name}
+      </option>
+    });
     return (
       <div className='input-field'>
-        <select className='icons' defaultValue={['-1']} multiple>
+        <select className='icons' name='gid' defaultValue='-1' onChange={onChange} >
           <option defaultValue='-1' disabled>{notice}</option>
           {groupsComponent || notice}
         </select>

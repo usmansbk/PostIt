@@ -13,7 +13,6 @@ const getNotifications = (notifications, groups) => {
     const message = notification.message;
     const group = groups.byId[id];
     const groupName = group.name;
-    const groupImage = group.image || defaultGroupImage;
 
     return {
       message,

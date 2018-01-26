@@ -9,16 +9,16 @@ const getGroupInfo = (id, groups, users, accountId) => {
   const { name, image, purpose, CreatorId, members} = group;
   const isOwner = (CreatorId === accountId)
   const groupImage = image || defaultGroupImage;
-  let membersCount = members.length;
+ // let membersCount = members.length;
+  let membersCount = 0;
   membersCount += membersCount > 1 ? ' Members': ' Member';
   const creator = users.byId[CreatorId];
-  creator.avatar = creator.avatar || defaultAvatar;
+  //creator.avatar = defaultAvatar;
 
   return {
     groupName: name,
     isOwner,
     membersCount,
-    groupImage,
     discription: purpose,
     creator
   }

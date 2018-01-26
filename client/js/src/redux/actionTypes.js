@@ -32,10 +32,14 @@ export const Status = {
   CREATING_GROUP: 'CREATING_GROUP',
   GROUP_CREATED: 'GROUP_CREATED',
   CREATE_GROUP_FAILED: 'CREATE_GROUP_FAILED',
-  FAILED_TO_FETCH_GROUPS: 'FAILED_TO_FETCH_GROUPS'
+  FAILED_TO_FETCH_GROUPS: 'FAILED_TO_FETCH_GROUPS',
+  POSTING_MESSAGE: 'POSTING_MESSAGE',
+  MESSAGE_POSTED: 'MESSAGE_POSTED',
+  FAILED_TO_POST_MESSAGE: 'FAILED_TO_POST_MESSAGE',
+  FETCHED_POSTS: 'FETCHED_POSTS'
 };
 
-export const GroupsFilter = {
+export const Filter = {
   ALL: 'ALL',
   OWNER: 'OWNER'
 }
@@ -75,17 +79,17 @@ export function receiveUsers(users) {
   }
 }
 
-export function requestPosts(gid) {
+export function requestPosts(filter) {
   return {
     type: REQUEST_POSTS,
-    gid
+    filter
   }
 }
 
 export function receivePosts(posts) {
   return {
     type: RECEIVE_POSTS,
-    posts: posts
+    posts
   }
 }
 

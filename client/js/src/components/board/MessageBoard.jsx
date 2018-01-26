@@ -1,6 +1,6 @@
 import React from 'react';
 import PostCard from './PostCard';
-import NewPostModal from './NewPostModal';
+import NewPostModal from '../../containers/NewPostModal';
 import Loader from '../common/Loader';
 import M from '../../../materialize';
 

@@ -41,7 +41,7 @@ export default class NewGroupModal extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		this.props.handleSubmit(this.state, this.instance);
+		this.props.handleSubmit(this.state);
 	}
 
 	_initModal() {
@@ -71,8 +71,8 @@ export default class NewGroupModal extends React.Component {
 						<a className='modal-action modal-close waves-effect btn-flat'>Cancel</a>
 						<button type='submit'
 						form='new-group-modal'
-						className={ 'modal-action blue white-text waves-effect waves-light btn ' + (this.state.name === ''?'disabled':'')} >
-						  Post
+						className={ 'modal-action blue white-text waves-effect waves-light btn ' + (this.state.name.trim() === ''?'disabled':'')} >
+						  Create
 						</button>
 					</div>
 				</div>

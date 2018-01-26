@@ -1,10 +1,13 @@
 import formurlencoded from 'form-urlencoded';
 import fetch from 'isomorphic-fetch';
+import { simplify } from '../helpers/utils';
 
 import {
-	GroupsFilter,
+	Filter,
 	requestGroups,
-	recieveGroups,
+	receiveGroups,
+	requestPosts,
+	receivePosts,
 	setAccountDetails,
 	setErrorMessage,
 	setStatus,
@@ -21,7 +24,6 @@ function postForm(url, json) {
 		headers: new Headers({
 			'Content-Type': 'application/x-www-form-urlencoded',
 		}),
-		cache: 'default',
 		body: form,
 		credentials: 'include'
 	})
@@ -30,12 +32,11 @@ function postForm(url, json) {
 function get(url) {
 	return fetch (url, {
 		method: 'GET',
-		cache: 'default',
 		credentials: 'include'
 	})
 }
 
-function fetchGroups(filter) {
+export function fetchGroups(filter) {
 	return function (dispatch) {
 		dispatch(requestGroups(filter));
 		get(`${url}/user/groups`)
@@ -48,11 +49,59 @@ function fetchGroups(filter) {
 		})
 		.then(json => {
 			const { groups } = json.data;
-			console.log(groups);
+			const simplified = simplify(groups);
+			console.log(simplified);
+			dispatch(receiveGroups(simplified));
 		})
 		.catch(error => {
 			console.error('Error', error);
 			dispatch(setStatus(Status.FAILED_TO_FETCH_GROUPS));
+		})
+	}
+}
+
+export function fetchPosts(filter) {
+	return function (dispatch) {
+		dispatch(requestPosts(filter));
+		get(`${url}/group/${filter}/messages`)
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				throw new Error('Failed to retrieve posts');
+			}
+		})
+		.then(json => {
+			const { posts } = json.data;
+			const simplified = simplify(posts);
+			dispatch(receivePosts(simplified));
+		})
+		.catch(error => {
+			console.error('Error', error);
+			dispatch(setStatus(Status.FETCHED_POSTS));
+		})
+	}
+}
+
+export function postMessage(data) {
+	const id = data.gid;
+	return function (dispatch) {
+		dispatch(setStatus(Status.POSTING_MESSAGE));
+		postForm(`${url}/group/${data.gid}/message`, data)
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				throw new Error('Failed to post message');
+			}
+		})
+		.then(json => {
+			dispatch(setStatus(Status.MESSAGE_POSTED));
+			dispatch(fetchPosts(id));
+		})
+		.catch(error => {
+			console.log('Error', error);
+			dispatch(setStatus(Status.FAILED_TO_POST_MESSAGE));
 		})
 	}
 }
@@ -71,7 +120,7 @@ export function createGroup(data) {
 		.then(json => {
 			const { result } = json.data;
 			dispatch(setStatus(Status.GROUP_CREATED));
-			dispatch(fetchGroups(GroupsFilter.ALL));
+			dispatch(fetchGroups(Filter.ALL));
 		})
 		.catch(error => {
 			dispatch(setStatus(Status.CREATE_GROUP_FAILED));
