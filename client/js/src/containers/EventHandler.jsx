@@ -17,6 +17,11 @@ const mapDispatchToProps = dispatch => {
 			switch (name) {
 				case 'Groups':
 					dispatch(fetchGroups(Filter.ALL))
+				case 'Posts':
+					dispatch(fetchPosts(Filter.ALL))
+				case 'Profile':
+					dispatch(fetchPosts(Filter.OWN))
+					dispatch(fetchGroups(Filter.OWN))
 			}
 		}
 	}
