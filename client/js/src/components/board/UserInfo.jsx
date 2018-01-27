@@ -1,15 +1,12 @@
 import React from 'react';
 import Icon from '../common/Icon';
 
-export default ({avatar, username, email}) => {
+export default ({username, email}) => {
   return (
     <div id='userinfo' className='row valign-wrapper'>
-      <div className='col s2 center-align'>
-        <img src={avatar} alt={username} className='circle responsive-img' />
-      </div>
-      <div id='info' className='col s10 grey-text'>
-        <p className='grey-text text-darken-1'>{ username  }</p>
-        <p className='grey-text text-darken-1'>{ email }</p>
+      <div id='info' className='col s12 grey-text valign-wrapper'>
+        <Icon>account_box</Icon>
+        <span className='grey-text text-darken-1'>{ username } </span>
       </div>
     </div>
   );

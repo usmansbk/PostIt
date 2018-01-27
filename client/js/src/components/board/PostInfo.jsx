@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/PostInfo.scss'
 
-export default ({authorUsername, groupName, duration, userAvatar, groupId, onClick}) => {
+export default ({authorUsername, groupName, duration, groupId, onClick}) => {
 
   const div = {
     width: '100%',
@@ -16,10 +16,7 @@ export default ({authorUsername, groupName, duration, userAvatar, groupId, onCli
 
   return (
     <div className='row valign-wrapper' id='post-info'>
-      <div className='col s2'>
-        <img src={userAvatar} alt={authorUsername} className='circle responsive-img' />
-      </div>
-      <div className='col s10 valign-wrapper' id='post-detail' style={div2}>
+      <div className='col s12 valign-wrapper' id='post-detail' style={div2}>
         <span id='author-username'> {authorUsername} </span>
         <Icon className='tiny grey-text'>play_arrow</Icon>
         <div>

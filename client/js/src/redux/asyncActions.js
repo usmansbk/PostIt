@@ -1,6 +1,6 @@
 import formurlencoded from 'form-urlencoded';
 import fetch from 'isomorphic-fetch';
-import { simplify } from '../helpers/utils';
+import { normalizeGroup, simplify } from './stateSchema';
 
 import {
 	Filter,
@@ -8,6 +8,7 @@ import {
 	receiveGroups,
 	requestPosts,
 	receivePosts,
+	receiveUsers,
 	setAccountDetails,
 	setErrorMessage,
 	setStatus,
@@ -49,9 +50,12 @@ export function fetchGroups(filter) {
 		})
 		.then(json => {
 			const { groups } = json.data;
-			const simplified = simplify(groups);
-			console.log(simplified);
-			dispatch(receiveGroups(simplified));
+			const normalizedGroups = normalizeGroup(groups);
+			const simpleGroups = simplify.groups(normalizedGroups);
+			const users = simplify.users(normalizedGroups.entities.users);
+			console.log(users);
+			dispatch(receiveUsers(users));
+			dispatch(receiveGroups(simpleGroups));
 		})
 		.catch(error => {
 			console.error('Error', error);
@@ -73,7 +77,7 @@ export function fetchPosts(filter) {
 		})
 		.then(json => {
 			const { posts } = json.data;
-			const simplified = simplify(posts);
+			const simplified = simplify.posts(posts);
 			dispatch(receivePosts(simplified));
 		})
 		.catch(error => {

@@ -28,16 +28,11 @@ export default class GroupInfo extends React.Component {
         <div className='col s12'>
   	       <div className='card' >
   	         <div className='card-content'>
-          	   <span className='card-title activator grey-text text-darken-4'>{groupName}<Icon className='right'>more_vert</Icon></span>
-          	   <UserInfo {...creator} />
-          	   <p><a href='#members' className='grey-text text-darken-1 modal-trigger'>{membersCount}</a></p>
+          	    <span className='card-title grey-text text-darken-4'>{groupName}</span>
+                <p>{discription}</p>
+          	    <UserInfo {...creator} />
+          	    <p><a href='#members' className='blue-text text-darken-1 modal-trigger'>{membersCount}</a></p>
   	         </div>
-        	   <div className='card-reveal'>
-        	     <span className='card-title grey-text text-darken-4'>
-                About this group<Icon className='right'>close</Icon>
-               </span>
-              <p>{discription}</p>
-            </div>
           </div>
         </div>
         <MembersCard />

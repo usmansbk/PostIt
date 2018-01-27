@@ -4,7 +4,7 @@ export default (props) => {
   return (
     <i id={props.id}
     title={props.title}
-    className={props.className + ' grey-text material-icons'}
+    className={'material-icons ' + props.className }
     name={props.name}
     onClick={props.onClick}
     data-target={props['data-target']}

@@ -6,10 +6,10 @@ import Icon from '../common/Icon';
 export default ({groupInfo}) => {
   return (
     <div className='row' >
-      <div className='col s12 l4'>
+      <div className='col s12'>
 	      <GroupInfo {...groupInfo} />
       </div>
-      <div className='col s12 l8' >
+      <div className='col s12' >
         <MessageBoard />
       </div>
     </div>

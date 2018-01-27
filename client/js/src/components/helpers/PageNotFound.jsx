@@ -24,7 +24,7 @@ export default () => {
 					<div className='nav-wrapper white' style={style}>
 						<Logo className='dont-hide' />
 						<NavLink to='/signup'><span className='blue-text'>Sign Up</span></NavLink>
-						<NavLink to='/signin'><span className='blue-text right'>Log in to PostIt</span></NavLink>
+						<NavLink to='/'><span className='blue-text right'>Log in to PostIt</span></NavLink>
 					</div>
 				</nav>
 			</div>

@@ -91,7 +91,7 @@ export default class SignUpForm extends React.Component {
               { showError  }
             </form>
             <div className='center-align section'>
-              <NavLink to='/signin'>Have an account?</NavLink>
+              <NavLink to='/'>Have an account?</NavLink>
             </div>
           </div>
         </div>

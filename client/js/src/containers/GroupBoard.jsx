@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { defaultAvatar, defaultGroupImage } from '../helpers/constants';
 import GroupBoard from '../components/board/GroupBoard';
 
 const getGroupInfo = (id, groups, users, accountId) => {
@@ -8,12 +7,9 @@ const getGroupInfo = (id, groups, users, accountId) => {
   if (!group) return group;
   const { name, image, purpose, CreatorId, members} = group;
   const isOwner = (CreatorId === accountId)
-  const groupImage = image || defaultGroupImage;
- // let membersCount = members.length;
-  let membersCount = 0;
+  let membersCount = group.Members.length;
   membersCount += membersCount > 1 ? ' Members': ' Member';
   const creator = users.byId[CreatorId];
-  //creator.avatar = defaultAvatar;
 
   return {
     groupName: name,

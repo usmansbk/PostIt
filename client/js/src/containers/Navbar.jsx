@@ -6,7 +6,7 @@ import { defaultAvatar } from '../helpers/constants';
 const mapStateToProps = state => {
   return {
     page: state.page,
-    avatarImage: state.account.avatar || defaultAvatar
+    username: state.account.username
   }
 }
 

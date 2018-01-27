@@ -49,7 +49,7 @@ export default class SignInPage extends React.Component {
     const loader =  <div className='center-align section'>
                       <Loader />
                     </div>
-    const error = <p className='red-text center-align'>Failed to sign in. Check username/password</p>
+    const error = <p className='red-text center-align'>Invalid username/password</p>
 
     const showLoader = (status === Status.SIGNING_IN) && loader;
     const showError = (status === Status.SIGNIN_FAILED) && error;

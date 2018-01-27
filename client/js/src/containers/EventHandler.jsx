@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import EventHandler from '../components/helpers/EventHandlersWrapper';
 import { setPage, Filter } from '../redux/actionTypes';
-import { fetchGroups } from '../redux/asyncActions';
+import { fetchGroups, fetchPosts } from '../redux/asyncActions';
 
 const mapStateToProps = state => {
 	return {}
@@ -17,11 +17,6 @@ const mapDispatchToProps = dispatch => {
 			switch (name) {
 				case 'Groups':
 					dispatch(fetchGroups(Filter.ALL))
-				case 'Posts':
-					dispatch(fetchPosts(Filter.ALL))
-				case 'Profile':
-					dispatch(fetchPosts(Filter.OWN))
-					dispatch(fetchGroups(Filter.OWN))
 			}
 		}
 	}

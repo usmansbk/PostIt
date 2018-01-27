@@ -27,11 +27,6 @@ export default () => {
           <EventHandler label='Groups' className='valign-wrapper'><Icon>group</Icon><span className='sidenav-item'>Groups</span></EventHandler>
         </NavLink>
       </li>
-      <li>
-        <NavLink to='/dashboard/profile' activeClassName='red-text text-lighten-1'>
-          <EventHandler label='Profile' className='valign-wrapper'><Icon>account_circle</Icon><span className='sidenav-item'>Profile</span></EventHandler>
-        </NavLink>
-      </li>
       <li><Footer className='center-align'/></li>
     </ul>
   );

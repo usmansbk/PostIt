@@ -1,26 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { defaultAvatar, defaultGroupImage } from '../helpers/constants';
 import { setPage, setGroup } from '../redux/actionTypes';
+import { fetchPosts } from '../redux/asyncActions';
 import GroupsBoard from '../components/board/GroupsBoard';
 
-const getGroups = (groups, account) => {
+const getGroups = (groups, users) => {
   return groups.ids.map(id => {
-    const groupid = id;
-    const group = groups.byId[id];
-    const groupName = group.name;
-    const isOwner = (group.CreatorId === account.id);
+    const groupid = id
+        , group = groups.byId[id]
+        , groupName = group.name
+        , author = users.byId[group.Creator].username
+        , membersCount = group.Members.length;
     return {
       groupName,
-      isOwner,
-      groupid
+      author,
+      groupid,
+      membersCount
     };
   });
 };
 
 const mapStateToProps = state => {
   return {
-    groups: getGroups(state.groups, state.account),
+    groups: getGroups(state.groups, state.users),
     isFetching: state.groups.isFetching
   }
 }
@@ -32,6 +34,7 @@ const mapDispatchToProps = dispatch => {
           , id = target.getAttribute('gid');
       dispatch(setPage('Group'));
       dispatch(setGroup(id));
+      dispatch(fetchPosts(id));
     }
   }
 }

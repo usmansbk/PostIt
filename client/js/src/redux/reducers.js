@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 // import initialState from './stateSchema';
 import {
-  ADD_NOTIFICATION, 
-  CLEAR_NOTIFICATION,
   SET_ERROR_MESSAGE,
   SET_ACCOUNT_DETAILS,
   SET_STATUS,
@@ -68,6 +66,28 @@ function groups(
   }
 }
 
+function users (
+  state = {
+    isFetching: false,
+    byId: {},
+    ids: []
+  }, action) {
+  switch (action.type) {
+    case RECEIVE_USERS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        byId: action.users.byId,
+        ids: action.users.ids
+      });
+    case REQUEST_USERS:
+      return Object.assign({}, state, {
+        isFetching: action.filter
+      });
+    default:
+      return state;
+  }
+}
+
 function posts(
   state = {
     isFetching: false,
@@ -92,29 +112,6 @@ function posts(
   }
 }
 
-function users (
-  state = {
-    isFetching: false,
-    byId: {},
-    ids: []
-  },
-  action
-) {
-  switch (action.type) {
-    case RECEIVE_USERS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        byId: action.users,
-        ids: action.ids
-      });
-    case REQUEST_USERS:
-      return Object.assign({}, state, {
-        isFetching: true
-      });
-    default:
-      return state;
-  }
-}
 
 function search(
   state = {
@@ -158,23 +155,12 @@ function updateStatus(state = Status.SIGNED_OUT, action) {
   }
 }
 
-function notifications(state = [], action) {
-  switch (action.type) {
-    case ADD_NOTIFICATION:
-    case CLEAR_NOTIFICATION:
-      return Object.assign({}, state, action.notifications);
-    default:
-      return state; 
-  }
-}
-
 const rootReducer = combineReducers({
   posts,
   users,
   groups,
   account,
   search,
-  notifications,
   error,
   group: selectedGroup,
   page: selectedPage,

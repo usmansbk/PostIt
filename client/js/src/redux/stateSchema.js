@@ -1,76 +1,54 @@
-const initialState = {
-  error: '',
-  posts: {
-    isFetching: false,
-    byId: {
-      0: {
-        message: 'Hello',
-        id: 0,
-        groupId: 0,
-        authorId: 0,
-        createdAt: '2018-01-21T22:29:29.901Z',
-      }
-    },
-    pids: [0]
-  },
+const { normalize, schema } = require('normalizr');
 
-  users: {
-    isFetching: false,
-    byId: {
-      0: {
-        username: 'usmansbk',
-        id: 0,
-        email: 'usmansbk@gmail.com',
-        avatar: null
-      },
-    },
-    uids: [0]
+function simplifyGroups(data) {
 
-  },
+  const state = {};
+  const { result } = data;
+  const { group } = data.entities;
 
-  groups: {
-    isFetching: false,
-    byId: {
-      0: {
-        name: 'demo',
-        CreatorId: 0,
-        image: null,
-        members: [0],
-        purpose: 'A test state',
-        createdAt: '2018-01-12T22:29:29.901Z'
-      }
-    },
-    gids: [0]
-  },
+  state.byId = Object.assign({}, group);
+  state.ids = [...result];
+  return state;
+}
 
-  search: {
-    isFetching: false,
-    byId: {
-      0: {
-          username: 'kayode',
-          email: 'kayode@partylawa.com',
-          avatar: null,
-          id: 0,
-        }
-    },
-    uids: [0]
-  },
+function posts(data) {
+  const state = {};
+  const byId  = {};
+  const ids   = [];
+  data.forEach(post => {
+    const id = post.id;
+    byId[id] = post;
+    ids.push(id);
+  });
+  state.byId = byId;
+  state.ids  = ids;
+  return state;
+}
 
-  notifications: [    {
-      message: '3 new messages',
-      createdAt: '2018-01-12T22:30:30.901Z',
-      groupId: 0,
-    }
-  ],
+function users(data) {
+  const state = {};
+  state.byId = data;
+  state.ids = [];
+  for (let key in data) {
+    state.ids.push(key);
+  }
+  return state;
+}
 
-  group: 0,
+export const simplify = {};
 
-  account: {
-    username: 'usmansbk',
-    email: 'usmansbk@gmail.com',
-    avatar: null,
-    id: 0
-  },
+simplify.groups = simplifyGroups;
+simplify.users = users;
+simplify.posts = posts;
 
-};
-export default initialState;
+export function normalizeGroup(response) {
+  const user = new schema.Entity('users');
+  const members = [ user ]
+  const group = new schema.Entity('group', {
+    Creator: user,
+    Members: members
+  });
+  const groups = [ group ];
+  const result = normalize(response, groups);
+  return result
+}

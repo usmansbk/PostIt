@@ -4,7 +4,6 @@ import EventHandler from '../../containers/EventHandler';
 import Searchbar from './Searchbar';
 import Search from './Search';
 import SearchBox from '../../containers/SearchBox';
-import NotificationBox from '../../containers/NotificationBox';
 import AccountBox from './AccountBox';
 import Logo from '../common/Logo';
 import Icon from '../common/Icon';
@@ -23,10 +22,8 @@ export default class Navbar extends React.Component {
   }
 
   jsInit() {
-    let elem = document.querySelector('.notifications');
-    let instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false,});
-    elem = document.querySelector('.account');
-    instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
+    let elem = document.querySelector('.account');
+    let instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
     elem = document.querySelector('.sidenav');
     instance = M.Sidenav.init(elem)
   }
@@ -60,7 +57,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    const { page, avatarImage } = this.props;
+    const { page, avatarImage, username } = this.props;
     return this.state.searchbar ?
     (<div>
       <Searchbar onClick={this.handleClick} onChange={this.handleSearchBox}> 
@@ -73,42 +70,25 @@ export default class Navbar extends React.Component {
         <div className='navbar-fixed'>
           <nav>
             <div className='nav-wrapper white '>
-              <table>
-                <tbody>
-        	        <tr>
-        		        <td id='td-menu'>
-                      <a href='#' className='sidenav-trigger hide-on-large-only' data-target='slide-out'>
-                        <Icon>menu</Icon>
-                      </a>  
-                    </td>
-        		        <td id='td-logo' className='left-align'>
-                      <Logo />
-        		        </td>
-                    <td id='td-loc'>
-        		          <span id='location' className='grey-text text-darken-2 truncate'>{ page }</span>
-                    </td>
-        		        <td className='hide-on-small-only grey-text' id='td-search-field'>
-                      <Search onChange={this.handleSearchBox}>
-                      {
-                        this.state.search && <SearchBox />
-                      }
-                      </Search>
-        		        </td>
-        		        <td id='td-search' className='hide-on-med-and-up center-align' onClick={this.handleClick}>
-        		          <Icon>search</Icon>
-        		        </td>
-        		        <td id='td-notification' className='notifications center-align' data-target='notifications'>
-        		          <Icon>notifications</Icon>
-        		        </td>
-        		        <td className='account' data-target='account' >
-        		          <img id='avatar' src={avatarImage} alt='' className='circle image-responsive' />
-        		        </td>
-        		      </tr>
-                </tbody>
-              </table>
-              <NotificationBox />
-              <AccountBox>
-                <NavLink to='/dashboard/profile'><EventHandler className='grey-text text-darken-2' label='Profile'>Profile</EventHandler></NavLink>
+                <a href='#' className='sidenav-trigger hide-on-large-only' data-target='slide-out'>
+                  <Icon className='grey-text text-darken-2'>menu</Icon>
+                </a>  
+                <Logo />
+  		          <span id='location' className='grey-text text-darken-2'>{ page }</span>
+
+                <div className='nav-display right'>
+                  <div className='nav-display hide-on-med-and-down nav-item'>
+                    <Search id='search' onChange={this.handleSearchBox}>
+                    {
+                      this.state.search && <SearchBox />
+                    }
+                    </Search>
+                  </div>
+    		          <Icon onClick={this.handleClick} className='nav-display nav-item hide-on-med-and-up'>search</Icon>
+                  <a href='#' className='account' data-target='account'><Icon className='nav-display nav-item blue-text'>account_circle</Icon></a>
+                  <span className='nav-display nav-item grey-text text-darken-2'>{username}</span>
+                </div>
+                <AccountBox>
                 <NavLink to='/signin'><EventHandler className='grey-text text-darken-2' label='Logout'>Logout</EventHandler></NavLink>
               </AccountBox>
             </div>

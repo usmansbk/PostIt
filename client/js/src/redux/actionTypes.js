@@ -1,8 +1,6 @@
 /*
  * User interaction action types
  */
-export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
-export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 export const SELECT_GROUP = 'SELECT_GROUP';
 export const SELECT_PAGE = 'SELECT_PAGE';
 export const SET_ACCOUNT_DETAILS = 'SET_ACCOUNT_DETAILS';
@@ -94,19 +92,6 @@ export function receivePosts(posts) {
 }
 
 // User Interaction
-export function addNotification(notifications) {
-  return {
-    type: ADD_NOTIFICATION,
-    notifications
-  };
-}
-
-export function clearNotification(notifications) {
-  return {
-    type: CLEAR_NOTIFICATION,
-    notifications
-  };
-}
 
 export function setGroup(group) {
   return {

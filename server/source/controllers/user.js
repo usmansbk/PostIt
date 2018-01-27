@@ -71,7 +71,17 @@ export default class UserController {
    */
   static retrieveGroups(req, res) {
     const { userId } = req.session;
-    User.findById(userId).then(user => user.getGroups()).then((groups) => {
+    User.findById(userId).then(user => user.getGroups({
+      include: [{
+        model: User,
+        as: 'Creator',
+        attributes: ['username', 'email', 'id', 'createdAt']
+      }, {
+        model: User,
+        as: 'Members',
+        attributes: ['username', 'email', 'id', 'createdAt']
+      }]
+    })).then((groups) => {
 
       let message = '', statusCode = 200;
       if (groups.length === 0) {

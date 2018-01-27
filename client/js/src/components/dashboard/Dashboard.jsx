@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch, Redirect } from 'react-router-dom';
 import Sidepanel from './Sidepanel';
 import Sidenav from './Sidenav';
 import PanelItem from './PanelItem';
@@ -23,7 +23,6 @@ export default ({match}) => {
         <div className='section'>
           <NavLink exact to={`${match.url}`} activeClassName='red-text text-lighten-1'><PanelItem icon='home' label='Home' /></NavLink>
           <NavLink to={`${match.url}/groups`} activeClassName='red-text text-lighten-1'><PanelItem icon='group' label='Groups' /></NavLink>
-          <NavLink to={`${match.url}/profile`} activeClassName='red-text text-lighten-1'><PanelItem icon='account_circle' label='Profile' /></NavLink>
         </div>
         <Footer className='nav-footer' />
       </Sidepanel>
@@ -32,7 +31,7 @@ export default ({match}) => {
           <Route exact={true} path={`${match.url}`} component={MessageBoard} />
           <Route exact={true} path={`${match.url}/groups/:id`} component={GroupBoard} />
           <Route exact={true} path={`${match.url}/groups`} component={GroupsBoard} />
-          <Route exact={true} path={`${match.url}/profile`} component={ProfileBoard} />
+          <Route render={(props) => <Redirect to='/notfound' />} />
         </Switch>
       </div>
     </div>
