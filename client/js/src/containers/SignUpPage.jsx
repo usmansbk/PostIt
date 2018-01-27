@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { signUp } from '../redux/asyncActions';
 import SignUpPage from '../components/sign/SignUpPage';
 
@@ -22,4 +23,4 @@ const SignUpPageContainer = connect(
 	mapDispatchToProps,
 )(SignUpPage);
 
-export default SignUpPageContainer;
+export default withRouter(SignUpPageContainer);

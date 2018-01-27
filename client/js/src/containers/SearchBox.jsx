@@ -8,9 +8,8 @@ const getUsers = (search, groupId, groups) => {
 		const user = search.byId[id];
 		if (groupId) {
 			const currentGroup = groups.byId[groupId];
-			user.isMember = currentGroup.members.indexOf(user.id) !== -1;
+			user.isMember = currentGroup.Members.indexOf(user.id) !== -1;
 		}
-		user.avatar = user.avatar || defaultAvatar;
 		return user;
 	});
 };

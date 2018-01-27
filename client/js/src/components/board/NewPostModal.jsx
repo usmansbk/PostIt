@@ -54,14 +54,20 @@ export default class NewPostModal extends React.Component {
 	    const loader =  <div className='center-align section'>
                   			<Loader />
               			</div>
+        const message = <div className='center-align'>
+        					<p className='red-text text-lighten-1'>
+        						Failed to post message
+        					</p>
+        				</div>
 
-		const showLoader = status === Status.POSTING_MESSAGE && loader;
+		const failed = Status.FAILED_TO_POST_MESSSAGE
+		    , posting = (status === Status.POSTING_MESSAGE);
 		return (
 			<div>
 				<Fab href='#newpost' color='red'onClick={this.clearFields} >mode_edit</Fab>
 				<div id='newpost' className='modal modal-fixed-footer'>
-					{ showLoader }
 					<div className='modal-content'>
+						{ posting && loader }
 						<form id='new-post-modal' onSubmit={this.handleSubmit}>
 							<SelectGroup groups={groups} onChange={this.handleSelect} />
 							<div className='input-field' id='message'>

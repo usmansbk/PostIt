@@ -1,17 +1,20 @@
 const { normalize, schema } = require('normalizr');
 
-function simplifyGroups(data) {
-
-  const state = {};
+function simplify_groups(data) {
+  const state      = {};
   const { result } = data;
-  const { group } = data.entities;
+  const { groups }  = data.entities;
 
-  state.byId = Object.assign({}, group);
-  state.ids = [...result];
+  state.byId = Object.assign({}, groups);
+  state.ids  = [...result];
   return state;
 }
 
-function posts(data) {
+/*
+ * Server returns a flat array response when request for only posts of a given group.
+ * This function goes ahead and simplifies it.
+ */
+function simplify_messages(data) {
   const state = {};
   const byId  = {};
   const ids   = [];
@@ -25,30 +28,60 @@ function posts(data) {
   return state;
 }
 
-function users(data) {
+function simplify_generic(data) {
   const state = {};
-  state.byId = data;
-  state.ids = [];
+  state.byId  = data;
+  state.ids   = [];
   for (let key in data) {
     state.ids.push(key);
   }
   return state;
 }
 
+function simplify_account(response) {
+  const id = response.result;
+  const data = response.entities.user[id];
+  const state = {};
+  state.username = data.username;
+  state.email = data.email;
+  state.createdAt = data.createdAt;
+  state.id = data.id;
+  return state;
+}
+ 
+
 export const simplify = {};
 
-simplify.groups = simplifyGroups;
-simplify.users = users;
-simplify.posts = posts;
+simplify.account = simplify_account;
+simplify.groups = simplify_groups;
+simplify.groupsEntity = simplify_generic;
+simplify.users  = simplify_generic;
+simplify.posts   = simplify_generic;
+simplify.messages = simplify_messages;
 
-export function normalizeGroup(response) {
-  const user = new schema.Entity('users');
-  const members = [ user ]
-  const group = new schema.Entity('group', {
-    Creator: user,
-    Members: members
+
+const user_entity = new schema.Entity('users');
+const post_entity = new schema.Entity('posts', {
+  author: user_entity
+});
+const posts_entity   = [ post_entity ]
+const members_entity = [ user_entity ];
+const group_entity   = new schema.Entity('groups', {
+  Creator: user_entity,
+  Posts: posts_entity,
+  Members: members_entity
+});
+const groups_schema = [ group_entity ];
+
+export function normalizeUser(response) {
+  const user = new schema.Entity('user', {
+    Groups: groups_schema
   });
-  const groups = [ group ];
-  const result = normalize(response, groups);
+  const result = normalize(response, user);
+  return result;
+}
+
+export function normalizeGroups(response) {
+  const result = normalize(response, groups_schema);
   return result
 }

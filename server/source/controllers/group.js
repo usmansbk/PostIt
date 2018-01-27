@@ -80,7 +80,7 @@ export default class GroupController {
         where: { id: userId },
       }]
     }).then((group) => {
-      if (!group) throw new Error();
+      if (!group) throw new Error("User doesn't belong to group");
       return User.findAll({
         where: {
           [Op.or]: usersQueryList

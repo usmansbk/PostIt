@@ -9,7 +9,7 @@ const getGroups = (groups, users) => {
     const groupid = id
         , group = groups.byId[id]
         , groupName = group.name
-        , author = users.byId[group.Creator].username
+        , author = users.byId[group.CreatorId].username
         , membersCount = group.Members.length;
     return {
       groupName,

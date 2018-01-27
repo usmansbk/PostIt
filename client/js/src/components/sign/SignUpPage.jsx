@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import InputField from '../common/InputField';
 import Button from '../common/Button';
 import Footer from '../common/Footer';
@@ -15,7 +16,7 @@ export default class SignUpForm extends React.Component {
       username: '',
       email: '',
       password: '',
-      confirm: ' ',
+      confirm: '',
       invalidPassword: true,
       isInvalid: true
     };
@@ -32,7 +33,7 @@ export default class SignUpForm extends React.Component {
       [name]: value,
     }, () => {
       const password = this.state.password;
-      const invalidPassword = (this.state.confirm !== this.state.password) || (password.length < 8 || password.length > 32);
+      const invalidPassword = (password.length < 8 || password.length > 32) || (this.state.confirm !== this.state.password);
       const invalidUsernameAndEmail = this.state.username.length === 0 || this.state.email.length === 0;
       const isInvalid = invalidPassword || invalidUsernameAndEmail;
       this.setState({
@@ -47,6 +48,12 @@ export default class SignUpForm extends React.Component {
     this.props.handleSubmit(this.state);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { status } = nextProps;
+    if (status === Status.SIGNED_UP)
+      store.dispatch(push('/dashboard'));
+  }
+
   render() {
     setPageTitle('Sign Up | PostIt');
     const footer = {
@@ -56,8 +63,6 @@ export default class SignUpForm extends React.Component {
     };
 
     const { status } = this.props;
-    if (status === Status.SIGNED_UP)
-      return <Redirect to='/dashboard' />
     const loader =  <div className='center-align section'>
                       <Loader />
                     </div>

@@ -5,14 +5,18 @@ import { getElapsedTime } from '../helpers/utils';
 import {defaultAvatar} from '../helpers/constants';
 import { setGroup, setPage } from '../redux/actionTypes';
 
-const getPosts = (posts, members, groups) => {
-  return posts.ids.map(id => {
-    const post = posts.byId[id];
-    const authorId = post.authorId;
-    const groupId = post.groupId;
-    const message = post.message;
-    const createdAt = post.createdAt;
-    const duration = getElapsedTime(createdAt);
+const getPosts = (posts, members, groups, page, group) => {
+  return posts.ids.filter(id => {
+    const groupId = posts.byId[id].groupId;
+    const result = (page === 'Home') || (+group === groupId);
+    return result;
+  }).reverse().map(id => {
+    const post = posts.byId[id]
+        , groupId = post.groupId
+        , authorId = post.authorId
+        , message = post.message
+        , createdAt = post.createdAt
+        , duration = getElapsedTime(createdAt);
 
     const postInfo = {};
     postInfo.authorUsername = members.byId[authorId].username;
@@ -40,7 +44,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    posts: getPosts(state.posts, state.users, state.groups),
+    posts: getPosts(state.posts, state.users, state.groups, state.page, state.group),
     isFetching: state.posts.isFetching
   }
 }

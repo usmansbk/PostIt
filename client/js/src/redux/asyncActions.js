@@ -1,6 +1,6 @@
 import formurlencoded from 'form-urlencoded';
 import fetch from 'isomorphic-fetch';
-import { normalizeGroup, simplify } from './stateSchema';
+import { normalizeGroups, normalizeUser, simplify } from './stateSchema';
 
 import {
 	Filter,
@@ -16,7 +16,7 @@ import {
 } from './actionTypes';
 
 const port = 8888;
-const url = `http://localhost:${port}/api`;
+const url  = `http://localhost:${port}/api`;
 
 function postForm(url, json) {
 	const form = formurlencoded(json);
@@ -37,6 +37,24 @@ function get(url) {
 	})
 }
 
+export function fetchUsers(filter) {
+	return function (dispatch) {
+		dispatch(requestUsers(filter));
+		get(`${url}/user?username=${filter}`)
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return Promise.reject();
+			}
+		})
+		.then(json => {
+
+		})
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
+	}
+}
+
 export function fetchGroups(filter) {
 	return function (dispatch) {
 		dispatch(requestGroups(filter));
@@ -45,45 +63,67 @@ export function fetchGroups(filter) {
 			if (response.ok) {
 				return response.json();
 			} else {
-				throw new Error('Failed to retrieve groups');
+				return Promise.reject()
 			}
 		})
 		.then(json => {
-			const { groups } = json.data;
-			const normalizedGroups = normalizeGroup(groups);
-			const simpleGroups = simplify.groups(normalizedGroups);
-			const users = simplify.users(normalizedGroups.entities.users);
-			console.log(users);
-			dispatch(receiveUsers(users));
-			dispatch(receiveGroups(simpleGroups));
+			const { groups } = json.data
+			    , normalizedGroups = normalizeGroups(groups)
+			    , simplifiedGroups = simplify.groups(normalizedGroups)
+			    , simplifiedUsers  = simplify.users(normalizedGroups.entities.users);
+			dispatch(receiveUsers(simplifiedUsers));
+			dispatch(receiveGroups(simplifiedGroups));
 		})
-		.catch(error => {
-			console.error('Error', error);
-			dispatch(setStatus(Status.FAILED_TO_FETCH_GROUPS));
-		})
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
 	}
 }
 
-export function fetchPosts(filter) {
-	return function (dispatch) {
+export function fetchAll(filter) {
+	return function(dispatch) {
 		dispatch(requestPosts(filter));
-		get(`${url}/group/${filter}/messages`)
+		dispatch(requestGroups(filter));
+		get(`${url}/user`)
 		.then(response => {
 			if (response.ok) {
 				return response.json();
 			} else {
-				throw new Error('Failed to retrieve posts');
+				return Promise.reject();
 			}
 		})
 		.then(json => {
-			const { posts } = json.data;
-			const simplified = simplify.posts(posts);
+			const { user }   = json.data
+			    , normalized = normalizeUser(user)
+			    , simplifiedAccount = simplify.account(normalized)
+			    , simplifiedGroups  = simplify.groupsEntity(normalized.entities.groups)
+			    , simplifiedUsers   = simplify.users(normalized.entities.users)
+			    , simplifiedPosts   = simplify.posts(normalized.entities.posts);
+			dispatch(setAccountDetails(simplifiedAccount));
+			dispatch(receiveUsers(simplifiedUsers));
+			dispatch(receiveGroups(simplifiedGroups));
+			dispatch(receivePosts(simplifiedPosts));
+		})
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
+	}
+}
+
+export function fetchPosts(filter) {
+	const postUrl = `${url}/group/${filter}/messages`;
+	return function (dispatch) {
+		dispatch(requestPosts(filter));
+		get(postUrl)
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return Promise.reject();
+			}
+		})
+		.then(json => {
+			const { posts }  = json.data;
+			const simplified = simplify.messages(posts);
 			dispatch(receivePosts(simplified));
 		})
-		.catch(error => {
-			console.error('Error', error);
-			dispatch(setStatus(Status.FETCHED_POSTS));
-		})
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
 	}
 }
 
@@ -96,17 +136,14 @@ export function postMessage(data) {
 			if (response.ok) {
 				return response.json();
 			} else {
-				throw new Error('Failed to post message');
+				return Promise.reject();
 			}
 		})
 		.then(json => {
 			dispatch(setStatus(Status.MESSAGE_POSTED));
 			dispatch(fetchPosts(id));
 		})
-		.catch(error => {
-			console.log('Error', error);
-			dispatch(setStatus(Status.FAILED_TO_POST_MESSAGE));
-		})
+		.catch(error =>	dispatch(setStatus(Status.FAILED_TO_POST_MESSAGE)))
 	}
 }
 
@@ -118,7 +155,7 @@ export function createGroup(data) {
 			if (response.ok) {
 				return response.json();
 			} else {
-				throw new Error('Failed to create group');
+				return Promise.reject();
 			}
 		})
 		.then(json => {
@@ -126,9 +163,7 @@ export function createGroup(data) {
 			dispatch(setStatus(Status.GROUP_CREATED));
 			dispatch(fetchGroups(Filter.ALL));
 		})
-		.catch(error => {
-			dispatch(setStatus(Status.CREATE_GROUP_FAILED));
-		});
+		.catch(error => dispatch(setErrorMessage(Status.CREATE_GROUP_FAILED)));
 	}
 }
 
@@ -139,18 +174,12 @@ export function signUp(data) {
 		.then(response => {
 			if (response.ok){
 				dispatch(setStatus(Status.SIGNED_UP))
+				dispatch(fetchAll(Filter.ALL))
 			} else {
-				throw new Error('Sign up failed');
+				return Promise.reject();
 			}
-			return response.json();
 		})
-		.then(json =>	{
-			const { user } = json.data;
-			dispatch(setAccountDetails(user));
-		})
-		.catch(error => {
-			dispatch(setStatus(Status.SIGNUP_FAILED))
-		});
+		.catch(error => dispatch(setStatus(Status.SIGNUP_FAILED)));
 	}
 }
 
@@ -161,16 +190,11 @@ export function signIn(data) {
 		.then(response => {
 			if (response.ok) {
 				dispatch(setStatus(Status.SIGNED_IN));
+				dispatch(fetchAll(Filter.ALL));
 			} else {
-				throw new Error('Sign in failed');
+				return Promise.reject();
 			}
-			return response.json();
-		}, error => console.error('Error:', error))
-		.then(json => {
-			const {user} = json.data;
-			dispatch(setAccountDetails(user));
-		}).catch(error => {
-			dispatch(setStatus(Status.SIGNIN_FAILED))
-		});
+		})
+		.catch(error => dispatch(setStatus(Status.SIGNIN_FAILED, Status)));
 	}
 }

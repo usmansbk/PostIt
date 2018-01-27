@@ -17,6 +17,7 @@ router.post('/api/user/signin', UserController.signIn);
 router.get('/api/user/groups', Route.isAuthenticated, UserController.retrieveGroups);
 router.get('/api/user/posts', Route.isAuthenticated, UserController.retrievePosts);
 router.delete('/api/user/post/:pid', Route.isAuthenticated, UserController.deletePost);
+router.get('/api/user', Route.isAuthenticated, UserController.fetchAll);
 
 router.post('/api/group/', Validate.createGroup, GroupController.createGroup);
 router.post('/api/group/:guid/message', Validate.postMessage, GroupController.postMessage);

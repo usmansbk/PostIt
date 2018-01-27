@@ -21,8 +21,8 @@ export default ({match}) => {
     <div className='row'>
       <Sidepanel>
         <div className='section'>
-          <NavLink exact to={`${match.url}`} activeClassName='red-text text-lighten-1'><PanelItem icon='home' label='Home' /></NavLink>
-          <NavLink to={`${match.url}/groups`} activeClassName='red-text text-lighten-1'><PanelItem icon='group' label='Groups' /></NavLink>
+          <NavLink exact to={`${match.url}`} activeClassName='red-text text-lighten-1'><PanelItem icon='home' label='Home' className='grey-text'/></NavLink>
+          <NavLink to={`${match.url}/groups`} activeClassName='red-text text-lighten-1'><PanelItem icon='group' label='Groups' className='grey-text'/></NavLink>
         </div>
         <Footer className='nav-footer' />
       </Sidepanel>

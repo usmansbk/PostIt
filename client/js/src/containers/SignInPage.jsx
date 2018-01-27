@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { signIn } from '../redux/asyncActions';
 import SignInPage from '../components/sign/SignInPage';
 
@@ -22,4 +23,4 @@ const SignInPageContainer = connect(
 	mapDispatchToProps,
 )(SignInPage);
 
-export default SignInPageContainer;
+export default withRouter(SignInPageContainer);

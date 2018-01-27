@@ -28,7 +28,7 @@ export default class SelectGroup extends React.Component {
     return (
       <div className='input-field'>
         <select className='icons' name='gid' defaultValue='-1' onChange={onChange} >
-          <option defaultValue='-1' disabled>{notice}</option>
+          <option value='-1' disabled>{notice}</option>
           {groupsComponent || notice}
         </select>
         <label className='valign-wrapper'>Groups <Icon className='tiny blue-text'>group</Icon></label>

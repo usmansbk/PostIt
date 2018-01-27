@@ -57,7 +57,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    const { page, avatarImage, username } = this.props;
+    const { page, username } = this.props;
     return this.state.searchbar ?
     (<div>
       <Searchbar onClick={this.handleClick} onChange={this.handleSearchBox}> 
@@ -89,7 +89,7 @@ export default class Navbar extends React.Component {
                   <span className='nav-display nav-item grey-text text-darken-2'>{username}</span>
                 </div>
                 <AccountBox>
-                <NavLink to='/signin'><EventHandler className='grey-text text-darken-2' label='Logout'>Logout</EventHandler></NavLink>
+                <NavLink to='/'><EventHandler className='grey-text text-darken-2' label='Logout'>Logout</EventHandler></NavLink>
               </AccountBox>
             </div>
           </nav>

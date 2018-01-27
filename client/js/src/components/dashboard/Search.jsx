@@ -6,10 +6,10 @@ export default ({onFocus, onChange, children, id}) => {
 	};
 
 	return (
-		<div className='search'
+		<div className='search hide-on-med-and-down'
       		 data-target='search-result' style={style} id={id}>
       		<input type='search' placeholder='Search PostIt'
-      		 className='grey lighten-3' name='search' onChange={onChange} autoComplete='off' />
+      		 className='grey lighten-3 hide-on-med-and-down' name='search' onChange={onChange} autoComplete='off' />
       		{children}
 		</div>
 	);

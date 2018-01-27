@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-// import initialState from './stateSchema';
+import { routerReducer } from 'react-router-redux';
 import {
   SET_ERROR_MESSAGE,
   SET_ACCOUNT_DETAILS,
@@ -12,6 +12,8 @@ import {
   RECEIVE_GROUPS,
   REQUEST_USERS,
   RECEIVE_USERS,
+  REQUEST_SEARCH,
+  RECEIVE_SEARCH,
   Status
 } from './actionTypes';
 
@@ -24,7 +26,7 @@ function error(state = null, action) {
   }
 }
 
-function selectedPage(state = 'Home', action) {
+function page(state = 'Home', action) {
   switch (action.type) {
     case  SELECT_PAGE: {
       return action.page;
@@ -34,7 +36,7 @@ function selectedPage(state = 'Home', action) {
   }
 }
 
-function selectedGroup(state = {}, action) {
+function group(state = null, action) {
   switch (action.type) {
     case SELECT_GROUP: {
       return action.group;
@@ -42,6 +44,20 @@ function selectedGroup(state = {}, action) {
     default:
       return state;
   }
+}
+
+function _add(prevState, newState) {
+  return Object.assign({}, prevState, newState);
+}
+
+function _updateList(prevList, newList) {
+  const copy = [...prevList];
+  newList.forEach(item => {
+    if (prevList.indexOf(+item) === -1) {
+      copy.push(+item);
+    }
+  });
+  return copy;
 }
 
 function groups(
@@ -54,8 +70,8 @@ function groups(
     case RECEIVE_GROUPS:
       return Object.assign({}, state, {
         isFetching: false,
-        byId: action.groups.byId,
-        ids: action.groups.ids
+        byId: _add(state.byId, action.groups.byId),
+        ids: _updateList(state.ids, action.groups.ids)
       });
     case REQUEST_GROUPS:
       return Object.assign({}, state, {
@@ -76,8 +92,8 @@ function users (
     case RECEIVE_USERS:
       return Object.assign({}, state, {
         isFetching: false,
-        byId: action.users.byId,
-        ids: action.users.ids
+        byId: _add(state.byId, action.users.byId),
+        ids: _updateList(state.ids, action.users.ids)
       });
     case REQUEST_USERS:
       return Object.assign({}, state, {
@@ -104,8 +120,8 @@ function posts(
     case RECEIVE_POSTS:
       return Object.assign({}, state, {
         isFetching: false,
-        byId: action.posts.byId,
-        ids: action.posts.ids
+        byId: _add(state.byId, action.posts.byId),
+        ids: _updateList(state.ids, action.posts.ids)
       })
     default:
       return state;
@@ -122,13 +138,13 @@ function search(
   action
 ) {
   switch (action.type) {
-    case RECEIVE_USERS:
+    case RECEIVE_SEARCH:
       return Object.assign({}, state, {
         isFetching: false,
-        byId: action.users,
-        ids: action.ids
+        byId: action.users.byId,
+        ids: action.users.ids
       });
-    case REQUEST_USERS:
+    case REQUEST_SEARCH:
       return Object.assign({}, state, {
         isFetching: true
       })
@@ -146,7 +162,7 @@ function account(state = {}, action) {
   }
 }
 
-function updateStatus(state = Status.SIGNED_OUT, action) {
+function status(state = Status.CLEAR, action) {
   switch (action.type) {
     case SET_STATUS:
       return action.status;
@@ -155,16 +171,16 @@ function updateStatus(state = Status.SIGNED_OUT, action) {
   }
 }
 
-const rootReducer = combineReducers({
+const reducers = {
   posts,
   users,
   groups,
   account,
   search,
   error,
-  group: selectedGroup,
-  page: selectedPage,
-  status: updateStatus,
-});
+  group,
+  page,
+  status
+};
 
-export default rootReducer
+export default reducers;

@@ -21,7 +21,6 @@ export default class UserController {
         status: 'success',
         data: {
           message: 'Logged in',
-          user
         }
       });
     }).catch(() => {
@@ -40,18 +39,12 @@ export default class UserController {
    * @return {null} -the response object
    */
   static signUp(req, res) {
-    User.create(req.body).then(user => {
-      const username = user.get('username')
-          , email = user.get('email')
-          , id = user.id;
-      const ret = {
-        username, email, id
-      }
+    User.create(req.body).then((user) => {
+      req.session.userId = user.id;
       res.status(201).json({
         status: 'success',
         data: {
           message: 'Account created',
-          user: ret,
         }
       })
     }).catch(() => {
@@ -62,6 +55,59 @@ export default class UserController {
         }
       });
     });
+  }
+  static fetchAll(req, res) {
+    const { userId } = req.session;
+    User.findOne({
+      where: { id: userId },
+      attributes: ['username', 'email', 'createdAt', 'id'],
+      include: [{
+        model: Group,
+        as: 'Groups',
+        through: {
+          where: { UserId: userId },
+        },
+        include: [
+          {
+            model: User,
+            as: 'Creator',
+            attributes: ['username', 'email', 'createdAt', 'id']
+          },
+          {
+              model: User,
+              as: 'Members',
+              attributes: ['username', 'email', 'createdAt', 'id']
+          },
+          {
+            model: Post,
+            as: 'Posts',
+            include: [{
+              model: User,
+              as: 'author',
+              attributes: ['username', 'email', 'id', 'createdAt']
+            }]
+          }
+        ]
+      }]
+    }).then((user) => {
+      if (!user) throw new Error("Unable to fetch user data");
+      res.status(200).json({
+        status: 'success',
+        data: {
+          message: 'Fetch all data',
+          user
+        }
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(401).json({
+        status: 'fail',
+        data: {
+          message: 'Failed to fetch all data'
+        }
+      })
+    })
   }
 
   /**
