@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import MessageBoard from '../components/board/MessageBoard';
 import { getElapsedTime } from '../helpers/utils';
 import {defaultAvatar} from '../helpers/constants';
@@ -54,4 +55,4 @@ const MessageBoardContainer = connect(
   mapDispatchToProps
 )(MessageBoard)
 
-export default MessageBoardContainer;
+export default withRouter(MessageBoardContainer);

@@ -15,9 +15,9 @@ function simplify_groups(data) {
  * This function goes ahead and simplifies it.
  */
 function simplify_messages(data) {
-  const state = {};
-  const byId  = {};
-  const ids   = [];
+  const state = {}
+      , byId  = {}
+      , ids   = [];
   data.forEach(post => {
     const id = post.id;
     byId[id] = post;
@@ -39,9 +39,9 @@ function simplify_generic(data) {
 }
 
 function simplify_account(response) {
-  const id = response.result;
-  const data = response.entities.user[id];
-  const state = {};
+  const id = response.result
+      , data = response.entities.user[id]
+      , state = {};
   state.username = data.username;
   state.email = data.email;
   state.createdAt = data.createdAt;
@@ -60,18 +60,18 @@ simplify.posts   = simplify_generic;
 simplify.messages = simplify_messages;
 
 
-const user_entity = new schema.Entity('users');
-const post_entity = new schema.Entity('posts', {
-  author: user_entity
-});
-const posts_entity   = [ post_entity ]
-const members_entity = [ user_entity ];
-const group_entity   = new schema.Entity('groups', {
-  Creator: user_entity,
-  Posts: posts_entity,
-  Members: members_entity
-});
-const groups_schema = [ group_entity ];
+const user_entity = new schema.Entity('users')
+    , post_entity = new schema.Entity('posts', {
+        author: user_entity
+      })
+    , posts_entity   = [ post_entity ]
+    , members_entity = [ user_entity ]
+    , group_entity   = new schema.Entity('groups', {
+        Creator: user_entity,
+        Posts: posts_entity,
+        Members: members_entity
+      })
+    ,groups_schema = [ group_entity ];
 
 export function normalizeUser(response) {
   const user = new schema.Entity('user', {
