@@ -5,7 +5,7 @@ import PrivateRoute from '../components/helpers/PrivateRoute';
 import { Status } from '../redux/actionTypes';
 
 function isAuthenticated(status) {
-	return status === Status.LOGGED_IN || Status.LOGGEG_OUT;
+	return status === Status.LOGGED_IN || Status.LOGGED_OUT;
 }
 
 const mapStateToProps = state => {
