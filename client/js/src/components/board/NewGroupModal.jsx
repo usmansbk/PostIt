@@ -66,10 +66,10 @@ export default class NewGroupModal extends React.Component {
 					{ failed && message }
 					<div className='modal-content'>
 						<form id='new-group-modal' onSubmit={this.handleSubmit}>
-							<InputField className='input-field' id='groupname' name='name' label='Group name' value={this.state.name} onChange={this.handleChange}>
+							<InputField className='input-field' type='text' id='groupname' name='name' label='Group name' value={this.state.name} onChange={this.handleChange}>
 							  Group name should not exceed 22 characters
 							</InputField>
-							<InputField className='input-field' id='discription' name='purpose' label='Discription' value={this.state.purpose} onChange={this.handleChange}>
+							<InputField className='input-field' type='text' id='discription' name='purpose' label='Discription' value={this.state.purpose} onChange={this.handleChange}>
 							  Discription should not exceed 50 characters
 							</InputField>
 						</form>

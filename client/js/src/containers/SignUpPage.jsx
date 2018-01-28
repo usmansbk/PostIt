@@ -9,7 +9,7 @@ function signingUp(status) {
 	return (status === Status.SIGNING_UP);
 }
 
-function isFailed(status) {
+function hasFailed(status) {
 	return (status === Status.SIGNUP_FAILED);
 }
 
@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 	return {
 		status: state.status,
 		signingUp: signingUp(state.status),
-		failed: isFailed(state.status)
+		failed: hasFailed(state.status)
 	}
 }
 

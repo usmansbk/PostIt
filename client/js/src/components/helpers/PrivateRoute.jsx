@@ -8,7 +8,10 @@ export default class PrivateRoute extends React.Component {
 
 	render() {
 		const {auth, component: Component, ...rest} = this.props;
-		if (auth) return <Route {...rest} render={ props => <Component {...props} /> } />;
+		if (auth) {
+			return <Route {...rest} render={ props => <Component {...props} />}
+			 />
+		}
 		return <Route {...rest} render={ props => <Redirect to='/' /> } />
 	}
 }

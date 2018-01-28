@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default () =>
-	<div className='preloader-wrapper small active'>
+export default function Loader(props) {
+	return (<div className='preloader-wrapper small active'>
 		<div className='spinner-layer spinner-green-only'>
 			<div className='circle-clipper left'>
 				<div className='circle' />
@@ -13,4 +13,5 @@ export default () =>
 				<div className='circle' />
 			</div>
 		</div>
-	</div>
+	</div>);
+}

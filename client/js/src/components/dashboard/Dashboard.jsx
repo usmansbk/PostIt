@@ -6,7 +6,6 @@ import Navbar from '../../containers/Navbar';
 import MessageBoard from '../../containers/MessageBoard';
 import GroupsBoard from '../../containers/GroupsBoard';
 import GroupBoard from '../../containers/GroupBoard';
-import ProfileBoard from '../board/ProfileBoard';
 import Icon from '../common/Icon';
 import { setPageTitle } from '../../helpers/utils';
 import '../../../../stylesheets/sass/components/Dashboard.scss';

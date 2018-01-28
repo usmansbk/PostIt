@@ -5,7 +5,7 @@ import { signIn } from '../redux/asyncActions';
 import { Status } from '../redux/actionTypes';
 import SignInPage from '../components/sign/SignInPage';
 
-function isFailed(status) {
+function hasFailed(status) {
 	return (status === Status.SIGNIN_FAILED);
 }
 
@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 	return {
 		status: state.status,
 		signingIn: signingIn(state.status),
-		failed: isFailed(state.status)
+		failed: hasFailed(state.status)
 	}
 }
 
