@@ -1,7 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Icon from '../common/Icon';
 import Footer from '../common/Footer';
-import PanelItem from './PanelItem';
 
 export default () => {
   return (
@@ -16,10 +16,10 @@ export default () => {
       </li>
       <li><div className='divider'></div></li>
       <li>
-        <Icon>home</Icon><span className='sidenav-item'>Home</span>
+        <NavLink exact to='/dashboard' activeClassName='red-text text-lighten-1'><Icon>home</Icon><span className='sidenav-item'>Home</span></NavLink>
       </li>
       <li>
-        <Icon>group</Icon><span className='sidenav-item'>Groups</span>
+        <NavLink to='/dashboard/groups' activeClassName='red-text text-lighten-1'><Icon>group</Icon><span className='sidenav-item'>Groups</span></NavLink>
       </li>
       <li><Footer className='center-align'/></li>
     </ul>

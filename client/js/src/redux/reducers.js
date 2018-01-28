@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
 import {
   SET_ERROR_MESSAGE,
   SET_ACCOUNT_DETAILS,

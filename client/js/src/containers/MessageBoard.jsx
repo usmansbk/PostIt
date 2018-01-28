@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import MessageBoard from '../components/board/MessageBoard';
 import { getElapsedTime } from '../helpers/utils';
-import {defaultAvatar} from '../helpers/constants';
 import { setGroup, setPage } from '../redux/actionTypes';
 
 const getPosts = (posts, members, groups, page, group) => {

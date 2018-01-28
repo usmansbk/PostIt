@@ -5,19 +5,16 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { createLogger } from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import createBrowserHistory from 'history/createBrowserHistory';
 import reducers from './redux/reducers';
-import '../../stylesheets/materialize.css';
-import '../../stylesheets/sass/index.scss';
-
 import Dashboard from './components/dashboard/Dashboard';
 import SignInPage from './containers/SignInPage';
 import SignUpPage from './containers/SignUpPage';
 import PrivateRoute from './components/helpers/PrivateRoute';
 import PageNotFound from './components/helpers/PageNotFound';
+import '../../stylesheets/materialize.css';
+import '../../stylesheets/sass/index.scss';
 
 const loggerMiddleware = createLogger();
-const history = createBrowserHistory();
 const store = createStore(
 	combineReducers({ ...reducers }),
 	applyMiddleware(
@@ -27,7 +24,7 @@ const store = createStore(
 );
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter history={history}>
+		<BrowserRouter>
 			<div>
 	    		<Route exact path='/' component={SignInPage} />
 	    		<Route path='/signup' component={SignUpPage} />

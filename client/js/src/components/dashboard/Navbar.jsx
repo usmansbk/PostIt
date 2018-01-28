@@ -1,10 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import EventHandler from '../../containers/EventHandler';
 import Searchbar from './Searchbar';
-import Search from './Search';
 import SearchBox from '../../containers/SearchBox';
-import AccountBox from './AccountBox';
 import Logo from '../common/Logo';
 import Icon from '../common/Icon';
 import Button from '../common/Button';
@@ -78,19 +75,27 @@ export default class Navbar extends React.Component {
 
                 <div className='nav-display right'>
                   <div className='nav-display hide-on-med-and-down nav-item'>
-                    <Search id='search' onChange={this.handleSearchBox}>
-                    {
-                      this.state.search && <SearchBox />
-                    }
-                    </Search>
+                    <div className='search hide-on-med-and-down'
+                      data-target='search-result' id='search'
+                      style={
+                        {
+                          width:'500px'
+                        }
+                      }>
+                      <input type='search' placeholder='Search PostIt'
+                       className='grey lighten-3 hide-on-med-and-down' name='search' onChange={this.handleSearchBox} autoComplete='off' />
+                      {
+                        this.state.search && <SearchBox />
+                      }
+                    </div>
                   </div>
     		          <Icon onClick={this.handleClick} className='nav-display nav-item hide-on-med-and-up'>search</Icon>
                   <a href='#' className='account' data-target='account'><Icon className='nav-display nav-item blue-text'>account_circle</Icon></a>
                   <span className='nav-display nav-item grey-text text-darken-2'>{username}</span>
                 </div>
-                <AccountBox>
-                <NavLink to='/'><EventHandler className='grey-text text-darken-2' label='Logout'>Logout</EventHandler></NavLink>
-              </AccountBox>
+                <ul className='dropdown-content account' id='account'>
+                  <li><NavLink to='/'>Logout</NavLink></li>
+                </ul>
             </div>
           </nav>
         </div>

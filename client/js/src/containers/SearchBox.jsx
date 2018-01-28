@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchBox from '../components/dashboard/SearchBox';
-import { defaultAvatar } from '../helpers/constants';
 
 const getUsers = (search, groupId, groups) => {
 	return search.ids.map(id => {

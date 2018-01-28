@@ -5,3 +5,27 @@
 .sidenav-item {
 	padding-left: 20px;
 }
+
+.my-nav-item {
+  padding: 5%;
+  margin-left: 2%;
+  .my-nav-label {
+    margin-left: 10%;
+  };
+  &:hover {
+    background-color: #cfd8dc;
+    cursor: pointer;
+  }
+}
+
+.my-side-nav {
+  height: 100%;
+  width: inherit;
+  position: fixed;
+  .nav-footer {
+    position: absolute;
+    bottom: 10%;
+    padding-bottom: 4%;
+    padding-left: 8%;
+  }
+}

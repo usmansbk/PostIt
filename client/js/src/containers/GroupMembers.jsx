@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GroupMembers from '../components/board/GroupMembers';
-import { defaultAvatar } from '../helpers/constants';
 
 const getMembers = (groups, users, groupId) => {
 	const group = groups.byId[groupId];
