@@ -14,11 +14,11 @@ export default class Navbar extends React.Component {
     super(props);
     this.state = { searchbar: false , search: false};
     this.handleClick = this.handleClick.bind(this);
-    this.jsInit = this.jsInit.bind(this);
+    this.materializeInit = this.materializeInit.bind(this);
     this.handleSearchBox = this.handleSearchBox.bind(this);
   }
 
-  jsInit() {
+  materializeInit() {
     let elem = document.querySelector('.account');
     let instance = M.Dropdown.init(elem, { coverTrigger: false, constrainWidth: false });
     elem = document.querySelector('.sidenav');
@@ -26,7 +26,7 @@ export default class Navbar extends React.Component {
   }
 
   componentDidMount() {
-    this.jsInit();
+    this.materializeInit();
   }
 
   handleClick(event) {
@@ -34,7 +34,7 @@ export default class Navbar extends React.Component {
     const name = target.getAttribute('name');
     if (name === 'cancel-search') {
       this.setState({searchbar: false, search: false}, () => {
-        this.jsInit();
+        this.materializeInit();
       });
     } else {
       this.setState({searchbar: true});
@@ -52,6 +52,11 @@ export default class Navbar extends React.Component {
     }
 
   }
+  componentWillReceiveProps(nextProps) {
+    const { history } = nextProps;
+    this.props._navigate(history);
+  }
+
 
   render() {
     const { page, username } = this.props;
@@ -89,7 +94,7 @@ export default class Navbar extends React.Component {
                       }
                     </div>
                   </div>
-    		          <Icon onClick={this.handleClick} className='nav-display nav-item hide-on-med-and-up'>search</Icon>
+    		          <Icon onClick={this.handleClick} className='nav-display nav-item hide-on-med-and-up grey-text text-darken-1'>search</Icon>
                   <a href='#' className='account' data-target='account'><Icon className='nav-display nav-item blue-text'>account_circle</Icon></a>
                   <span className='nav-display nav-item grey-text text-darken-2'>{username}</span>
                 </div>

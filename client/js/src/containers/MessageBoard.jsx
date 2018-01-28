@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Status } from '../redux/actionTypes';
 import MessageBoard from '../components/board/MessageBoard';
 import { getElapsedTime } from '../helpers/utils';
-import { setGroup, setPage } from '../redux/actionTypes';
+
+function isErrored(error) {
+  return error === Status.FAILED_TO_FETCH;
+}
 
 const getPosts = (posts, members, groups, page, group) => {
   return posts.ids.filter(id => {
     const groupId = posts.byId[id].groupId;
-    const result = (page === 'Home') || (+group === groupId);
+    const result = (page === 'Home') || (page === 'Group' && (+group === groupId));
     return result;
   }).reverse().map(id => {
     const post = posts.byId[id]
@@ -31,27 +35,16 @@ const getPosts = (posts, members, groups, page, group) => {
   });
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onClick: event => {
-      const target = event.target;
-      const id = target.getAttribute('gid');
-      dispatch(setPage('Group'));
-      dispatch(setGroup(id));
-    },
-  }
-}
-
 const mapStateToProps = state => {
   return {
     posts: getPosts(state.posts, state.users, state.groups, state.page, state.group),
-    isFetching: state.posts.isFetching
+    isFetching: state.posts.isFetching,
+    error: isErrored(state.error)
   }
 }
 
 const MessageBoardContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
 )(MessageBoard)
 
 export default withRouter(MessageBoardContainer);

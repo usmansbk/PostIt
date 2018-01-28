@@ -5,7 +5,6 @@ import Button from '../common/Button';
 import Footer from '../common/Footer';
 import Loader from '../common/Loader';
 import { setPageTitle } from '../../helpers/utils';
-import { Status } from '../../redux/actionTypes';
 
 export default class SignInPage extends React.Component {
 
@@ -36,8 +35,7 @@ export default class SignInPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const {status, history} = nextProps;
-    if (status === Status.SIGNED_IN)
-      history.push('/dashboard');
+    this.props.handleSignIn(history, status);
   }
 
   render() {
@@ -48,15 +46,15 @@ export default class SignInPage extends React.Component {
       width: '100%'
     };
 
-    const { status } = this.props;
+    const { signingIn, failed } = this.props;
     
     const loader =  <div className='center-align section'>
                       <Loader />
                     </div>
     const error = <p className='red-text center-align'>Invalid username/password</p>
 
-    const showLoader = (status === Status.SIGNING_IN) && loader;
-    const showError = (status === Status.SIGNIN_FAILED) && error;
+    const showLoader = signingIn && loader;
+    const showError = failed && error;
 
     return (
       <div>

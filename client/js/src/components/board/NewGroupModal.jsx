@@ -3,7 +3,6 @@ import M from '../../../materialize';
 import InputField from '../common/InputField';
 import Fab from '../common/Fab';
 import Loader from '../common/Loader';
-import { Status } from '../../redux/actionTypes';
 
 export default class NewGroupModal extends React.Component {
 
@@ -50,21 +49,29 @@ export default class NewGroupModal extends React.Component {
 	}
 
 	render() {
-		const { status } = this.props;
+		const { failed, creating } = this.props;
 	    const loader =  <div className='center-align section'>
 	                      <Loader />
 	                    </div>
-
-		const showLoader = status === Status.CREATING_GROUP && loader;
+        const message = <div className='center-align'>
+        					<p className='red-text text-lighten-1'>
+        						Failed to create group
+        					</p>
+        				</div>
 		return (
 			<div>
 				<Fab href='#newgroup' color='green' onClick={this.clearFields}>add_circle_outline</Fab>
 				<div id='newgroup' className='modal'>
-					{ showLoader }
+					{ creating && loader }
+					{ failed && message }
 					<div className='modal-content'>
 						<form id='new-group-modal' onSubmit={this.handleSubmit}>
-							<InputField id='groupname' name='name' label='Group name' value={this.state.name} onChange={this.handleChange} />
-							<InputField id='discription' name='purpose' label='Discription' value={this.state.purpose} onChange={this.handleChange} />
+							<InputField className='input-field' id='groupname' name='name' label='Group name' value={this.state.name} onChange={this.handleChange}>
+							  Group name should not exceed 22 characters
+							</InputField>
+							<InputField className='input-field' id='discription' name='purpose' label='Discription' value={this.state.purpose} onChange={this.handleChange}>
+							  Discription should not exceed 50 characters
+							</InputField>
 						</form>
 					</div>
 					<div className='modal-footer'>

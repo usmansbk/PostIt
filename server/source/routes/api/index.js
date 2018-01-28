@@ -5,13 +5,6 @@ import { GroupController, UserController } from '../../controllers';
 const router = express.Router();
 
 router.use('/api/group/', Route.isAuthenticated);
-
-router.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "http://localhost:8080");
-	res.header('Access-Control-Allow-Credentials', 'true');
-	next();
-});
-
 router.post('/api/user/signup', UserController.signUp);
 router.post('/api/user/signin', UserController.signIn);
 router.get('/api/user/groups', Route.isAuthenticated, UserController.retrieveGroups);

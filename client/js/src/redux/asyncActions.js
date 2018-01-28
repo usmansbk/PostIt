@@ -12,6 +12,7 @@ import {
 	setAccountDetails,
 	setErrorMessage,
 	setStatus,
+	setSession,
 	Status
 } from './actionTypes';
 
@@ -143,7 +144,7 @@ export function postMessage(data) {
 			dispatch(setStatus(Status.MESSAGE_POSTED));
 			dispatch(fetchPosts(id));
 		})
-		.catch(error =>	dispatch(setStatus(Status.FAILED_TO_POST_MESSAGE)))
+		.catch(error =>	dispatch(setErrorMessage(Status.FAILED_TO_POST_MESSAGE)))
 	}
 }
 
@@ -173,6 +174,7 @@ export function signUp(data) {
 		postForm(`${url}/user/signup`, data)
 		.then(response => {
 			if (response.ok){
+				dispatch(setSession(Status.LOGGED_IN))
 				dispatch(setStatus(Status.SIGNED_UP))
 				dispatch(fetchAll(Filter.ALL))
 			} else {
@@ -189,6 +191,7 @@ export function signIn(data) {
 		postForm(`${url}/user/signin`, data)
 		.then(response => {
 			if (response.ok) {
+				dispatch(setSession(Status.LOGGED_IN));
 				dispatch(setStatus(Status.SIGNED_IN));
 				dispatch(fetchAll(Filter.ALL));
 			} else {

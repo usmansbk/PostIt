@@ -2,7 +2,6 @@ import React from 'react';
 import Fab from '../common/Fab';
 import Loader from '../common/Loader';
 import SelectGroup from './SelectGroup';
-import { Status } from '../../redux/actionTypes';
 
 export default class NewPostModal extends React.Component {
 	constructor(props) {
@@ -50,24 +49,25 @@ export default class NewPostModal extends React.Component {
 	}
 
 	render() {
-		const { groups, status } = this.props;
+		const { groups, posting, failed } = this.props;
 	    const loader =  <div className='center-align section'>
                   			<Loader />
               			</div>
         const message = <div className='center-align'>
         					<p className='red-text text-lighten-1'>
-        						Failed to post message
+        						Post failed
         					</p>
         				</div>
 
-		const failed = Status.FAILED_TO_POST_MESSSAGE
-		    , posting = (status === Status.POSTING_MESSAGE);
+       	const isInvalid = (this.state.message.trim() === '' || this.state.gid === '');
+
 		return (
 			<div>
 				<Fab href='#newpost' color='red'onClick={this.clearFields} >mode_edit</Fab>
 				<div id='newpost' className='modal modal-fixed-footer'>
 					<div className='modal-content'>
 						{ posting && loader }
+						{ failed && message }
 						<form id='new-post-modal' onSubmit={this.handleSubmit}>
 							<SelectGroup groups={groups} onChange={this.handleSelect} />
 							<div className='input-field' id='message'>
@@ -81,7 +81,7 @@ export default class NewPostModal extends React.Component {
 						<button 
 						type='submit'
 						form='new-post-modal'
-						className={'modal-action waves-effect btn blue white-text ' + (this.state.message.trim() === '' ?'disabled':'')}>
+						className={'modal-action waves-effect btn blue white-text ' + (isInvalid ? 'disabled' : '')}>
 						Post
 						</button>
 					</div>

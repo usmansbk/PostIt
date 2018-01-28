@@ -3,7 +3,7 @@ const helpers = require('../../helpers');
 const db = require('../../../../db/models'),
   j = request.jar(),
   { sequelize } = db;
-
+ 
 request = request.defaults({ jar: j });
 const port = process.env.PORT || 8888;
 const baseUrl = `http://localhost:${port}/api/`,
@@ -40,7 +40,7 @@ describe('POST:/api/group/<group id>/user', () => {
     describe('Unauthenticated access to route', () => {
       it('should return status code 403', (done) => {
         const users = registeredUsers.join('');
-        request.post(url, { form: { invites: users } }, (err, res) => {
+        request.post(`${url}`, { form: { invites: users } }, (err, res) => {
           expect(res.statusCode).toBe(403);
           done();
         });

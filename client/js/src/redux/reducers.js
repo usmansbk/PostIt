@@ -3,6 +3,7 @@ import {
   SET_ERROR_MESSAGE,
   SET_ACCOUNT_DETAILS,
   SET_STATUS,
+  SET_SESSION,
   SELECT_GROUP,
   SELECT_PAGE,
   REQUEST_POSTS,
@@ -170,6 +171,14 @@ function status(state = Status.CLEAR, action) {
   }
 }
 
+function session(state = Status.LOGGED_OUT, action) {
+  switch(action.type) {
+    case SET_SESSION:
+      return action.session;
+    default:
+      return state;
+  }
+}
 const reducers = {
   posts,
   users,
@@ -179,7 +188,8 @@ const reducers = {
   error,
   group,
   page,
-  status
+  status,
+  session
 };
 
 export default reducers;

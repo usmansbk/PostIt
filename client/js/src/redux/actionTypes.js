@@ -6,6 +6,7 @@ export const SELECT_PAGE = 'SELECT_PAGE';
 export const SET_ACCOUNT_DETAILS = 'SET_ACCOUNT_DETAILS';
 export const CREATING_ACCOUNT = 'CREATING_ACCOUNT';
 export const SET_STATUS = 'SET_STATUS';
+export const SET_SESSION = 'SET_SESSION';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 
 /*
@@ -21,6 +22,8 @@ export const REQUEST_SEARCH = 'REQUEST_SEARCH';
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH';
 
 export const Status = {
+  LOGGED_IN: 'LOGGED_IN',
+  LOGGED_OUT: 'LOGGED_OUT',
   SIGNING_UP: 'SIGNING_UP',
   SIGNING_IN: 'SIGNING_IN',
   SIGNED_UP: 'SIGNED_UP',
@@ -115,6 +118,13 @@ export function setAccountDetails(account) {
   return {
     type: SET_ACCOUNT_DETAILS,
     account
+  }
+}
+
+export function setSession(session) {
+  return {
+    type: SET_SESSION,
+    session
   }
 }
 

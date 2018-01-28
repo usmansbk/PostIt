@@ -27,21 +27,8 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onClick: event => {
-      const target= event.currentTarget
-          , id = target.getAttribute('gid');
-      dispatch(setPage('Group'));
-      dispatch(setGroup(id));
-      dispatch(fetchPosts(id));
-    }
-  }
-}
-
 const GroupsBoardContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
 )(GroupsBoard)
 
 export default GroupsBoardContainer;
