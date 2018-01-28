@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => {
       const id = target.getAttribute('gid');
       dispatch(setPage('Group'));
       dispatch(setGroup(id));
-    }
+    },
   }
 }
 

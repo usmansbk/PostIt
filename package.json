@@ -91,7 +91,6 @@
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.3",
     "nyc": "^11.4.1",
-    "react-router-redux": "^5.0.0-alpha.9",
     "react-test-renderer": "^16.2.0",
     "redux-logger": "^3.0.6",
     "sass-loader": "^6.0.6",

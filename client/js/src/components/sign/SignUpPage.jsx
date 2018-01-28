@@ -1,6 +1,5 @@
 import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
-import { push } from 'react-router-redux';
+import { NavLink } from 'react-router-dom';
 import InputField from '../common/InputField';
 import Button from '../common/Button';
 import Footer from '../common/Footer';
@@ -49,9 +48,9 @@ export default class SignUpForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { status } = nextProps;
+    const { status, history } = nextProps;
     if (status === Status.SIGNED_UP)
-      store.dispatch(push('/dashboard'));
+      history.push('/dashboard')
   }
 
   render() {

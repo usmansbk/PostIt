@@ -1,8 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import Icon from '../common/Icon';
 import Footer from '../common/Footer';
-import EventHandler from '../../containers/EventHandler';
 import PanelItem from './PanelItem';
 
 export default () => {
@@ -18,14 +16,10 @@ export default () => {
       </li>
       <li><div className='divider'></div></li>
       <li>
-        <NavLink exact to='/dashboard' activeClassName='red-text text-lighten-1'>
-          <EventHandler label='Home' className='valign-wrapper'><Icon>home</Icon><span className='sidenav-item'>Home</span></EventHandler>
-        </NavLink>
+        <Icon>home</Icon><span className='sidenav-item'>Home</span>
       </li>
       <li>
-        <NavLink to='/dashboard/groups' activeClassName='red-text text-lighten-1'>
-          <EventHandler label='Groups' className='valign-wrapper'><Icon>group</Icon><span className='sidenav-item'>Groups</span></EventHandler>
-        </NavLink>
+        <Icon>group</Icon><span className='sidenav-item'>Groups</span>
       </li>
       <li><Footer className='center-align'/></li>
     </ul>

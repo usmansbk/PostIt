@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunkMiddleware from 'redux-thunk';
-import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
-import { Route } from 'react-router-dom';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { createLogger } from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createBrowserHistory from 'history/createBrowserHistory';
 import reducers from './redux/reducers';
 import '../../stylesheets/materialize.css';
 import '../../stylesheets/sass/index.scss';
@@ -18,32 +17,24 @@ import PrivateRoute from './components/helpers/PrivateRoute';
 import PageNotFound from './components/helpers/PageNotFound';
 
 const loggerMiddleware = createLogger();
-
-const history = createHistory()
-    , middleware = routerMiddleware(history);
-
+const history = createBrowserHistory();
 const store = createStore(
-	combineReducers({
-		...reducers,
-		router: routerReducer
-	}),
+	combineReducers({ ...reducers }),
 	applyMiddleware(
-		middleware,
 		thunkMiddleware,
 		loggerMiddleware
 	)
 );
-
 ReactDOM.render(
 	<Provider store={store}>
-		<ConnectedRouter history={history}>
+		<BrowserRouter history={history}>
 			<div>
 	    		<Route exact path='/' component={SignInPage} />
 	    		<Route path='/signup' component={SignUpPage} />
 	    		<PrivateRoute auth={true} path='/dashboard' component={Dashboard} />
 	    		<Route path='/notfound' render={ props => <PageNotFound />} />
     		</div>
-		</ConnectedRouter>
+		</BrowserRouter>
 	</Provider>,
   document.querySelector('#root')
  );

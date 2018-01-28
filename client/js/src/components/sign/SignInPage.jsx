@@ -1,13 +1,11 @@
 import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
-import { push } from 'react-router-redux';
 import InputField from '../common/InputField';
 import Button from '../common/Button';
 import Footer from '../common/Footer';
 import Loader from '../common/Loader';
 import { setPageTitle } from '../../helpers/utils';
 import { Status } from '../../redux/actionTypes';
-import store from '../../index';
 
 export default class SignInPage extends React.Component {
 
@@ -37,9 +35,9 @@ export default class SignInPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {status} = nextProps;
+    const {status, history} = nextProps;
     if (status === Status.SIGNED_IN)
-      store.dispatch(push('/dashboard'));
+      history.push('/dashboard');
   }
 
   render() {
