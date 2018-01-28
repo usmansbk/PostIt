@@ -1,4 +1,6 @@
-import { User, Group, Post } from '../../db/models';
+import { User, Group, Post, Sequelize } from '../../db/models';
+
+const { Op } = Sequelize;
 
 export default class UserController {
   /**
@@ -229,5 +231,38 @@ export default class UserController {
           }
         });
       });
+  }
+  
+  /**
+   * @param  {Object} req
+   * @param  {Object} res
+   * @return {null} -the response object
+   */
+  static findUser(req, res) {
+    const { username } = req.query;
+    User.findAll({
+      attributes: ['username', 'id', 'email', 'createdAt'],
+      where: {
+        username: {
+          [Op.iLike]: `%${username}%`,
+        }
+      }
+    }).then((users) => {
+      res.status(200).json({
+        status: 'success',
+        data: {
+          message: 'Result found',
+          users
+        }
+      })
+    }).catch((error) => {
+      console.log(error);
+      res.status(400).json({
+        status: 'fail',
+        data: {
+          message: 'Search failed'
+        }
+      })
+    })
   }
 }
