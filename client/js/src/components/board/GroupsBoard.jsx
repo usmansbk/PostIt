@@ -5,7 +5,7 @@ import NewGroupModal from '../../containers/NewGroupModal';
 
 export default ({ groups }) => {
   const notice = <h3 className='grey-text text-lighten-1 center-align'>
-                 {"You don't belong to any group"}
+                  Create a group and add users
                </h3>;
   let groupsComponent = groups.map((group, index) => <NavLink to={`/dashboard/groups/${group.groupid}`} key={index}><GroupCard {...group} /></NavLink>);
 
