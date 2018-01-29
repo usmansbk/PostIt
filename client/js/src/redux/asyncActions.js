@@ -47,7 +47,6 @@ export function addUserTo(gid, invites) {
 		    , form = {
 		    	invites 
 		    };
-		console.log(form);
 		dispatch(setStatus(Status.ADD_USER));
 		postForm(groupUrl, form)
 		.then(response => {
@@ -58,10 +57,7 @@ export function addUserTo(gid, invites) {
 				return Promise.reject();
 			}
 		})
-		.catch(error => {
-			console.log(error);
-			dispatch(setErrorMessage(Status.FAILED_TO_ADD_USER));
-		})
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_ADD_USER)))
 	}
 }
 

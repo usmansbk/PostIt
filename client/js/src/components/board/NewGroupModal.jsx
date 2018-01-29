@@ -22,6 +22,16 @@ export default class NewGroupModal extends React.Component {
 		this._initModal();
 	}
 
+	componentWillReceiveProps({failed, isCreated, ...rest}) {
+		if (isCreated) {
+			M.toast({html: 'Group created!', classes: 'rounded'});
+			this.instance.close();
+		}
+		if (failed) {
+			M.toast({html: 'Failed to create group', classes: 'rounded'})
+		}
+	}
+
 	handleChange(event) {
 		const { target } = event;
 		const name = target.name;
@@ -45,7 +55,7 @@ export default class NewGroupModal extends React.Component {
 
 	_initModal() {
 		let elem = document.querySelector('#newgroup');
-		let instance = M.Modal.init(elem);
+		this.instance = M.Modal.init(elem);
 	}
 
 	render() {
@@ -53,17 +63,11 @@ export default class NewGroupModal extends React.Component {
 	    const loader =  <div className='center-align section'>
 	                      <Loader />
 	                    </div>
-        const message = <div className='center-align'>
-        					<p className='red-text text-lighten-1'>
-        						Failed to create group
-        					</p>
-        				</div>
 		return (
 			<div>
 				<Fab href='#newgroup' color='green' onClick={this.clearFields}>add_circle_outline</Fab>
 				<div id='newgroup' className='modal'>
 					{ creating && loader }
-					{ failed && message }
 					<div className='modal-content'>
 						<form id='new-group-modal' onSubmit={this.handleSubmit}>
 							<InputField className='input-field' type='text' id='groupname' name='name' label='Group name' value={this.state.name} onChange={this.handleChange}>

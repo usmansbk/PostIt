@@ -2,6 +2,7 @@ import React from 'react';
 import Fab from '../common/Fab';
 import Loader from '../common/Loader';
 import SelectGroup from './SelectGroup';
+import M from '../../../materialize'
 
 export default class NewPostModal extends React.Component {
 	constructor(props) {
@@ -40,7 +41,18 @@ export default class NewPostModal extends React.Component {
 		let elem = document.querySelector('.modal');
 		let instance = M.Modal.init(elem);
 		elem = document.querySelector('#newpost');
-		instance = M.Modal.init(elem);
+		this.instance = M.Modal.init(elem);
+	}
+
+	componentWillReceiveProps({isPosted, failed, ...rest}) {
+		if (isPosted) {
+			this.instance.close();
+			M.toast({html: 'Message Posted!', classes: 'rounded'})
+		}
+		if (failed) {
+			this.instance.close();
+			M.toast({html: 'Posting failed!', classes: 'rounded'})
+		}
 	}
 
 	handleSubmit(event) {
@@ -53,11 +65,6 @@ export default class NewPostModal extends React.Component {
 	    const loader =  <div className='center-align section'>
                   			<Loader />
               			</div>
-        const message = <div className='center-align'>
-        					<p className='red-text text-lighten-1'>
-        						Post failed
-        					</p>
-        				</div>
 
        	const isInvalid = (this.state.message.trim() === '' || this.state.gid === '');
 
@@ -67,7 +74,6 @@ export default class NewPostModal extends React.Component {
 				<div id='newpost' className='modal modal-fixed-footer'>
 					<div className='modal-content'>
 						{ posting && loader }
-						{ failed && message }
 						<form id='new-post-modal' onSubmit={this.handleSubmit}>
 							<SelectGroup groups={groups} onChange={this.handleSelect} />
 							<div className='input-field' id='message'>

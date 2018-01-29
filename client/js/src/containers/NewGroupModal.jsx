@@ -4,6 +4,9 @@ import { createGroup } from '../redux/asyncActions';
 import { Status } from '../redux/actionTypes';
 import NewGroupModal from '../components/board/NewGroupModal';
 
+function isCreated(status) {
+	return status === Status.GROUP_CREATED;
+}
 function hasFailed(error) {
 	return error === Status.CREATE_GROUP_FAILED;
 }
@@ -15,7 +18,8 @@ function isCreating(status, error) {
 const mapStateToProps = state => {
 	return {
 		failed: hasFailed(state.error),
-		creating: isCreating(state.status, state.error)
+		creating: isCreating(state.status, state.error),
+		isCreated: isCreated(state.status)
 	}
 }
 

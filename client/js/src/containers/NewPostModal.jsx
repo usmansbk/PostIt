@@ -4,6 +4,9 @@ import { postMessage } from '../redux/asyncActions';
 import NewPostModal from '../components/board/NewPostModal';
 import { Status } from '../redux/actionTypes';
 
+function isPosted(status) {
+	return status === Status.MESSAGE_POSTED;
+}
 function hasFailed(err) {
 	return err === Status.FAILED_TO_POST_MESSAGE;
 }
@@ -16,6 +19,7 @@ const mapStateToProps = state => {
 	return {
 		posting: isPosting(state.status, state.error),
 		failed: hasFailed(state.error),
+		isPosted: isPosted(state.status),
 		groups: state.groups
 	}
 }
