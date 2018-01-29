@@ -99,7 +99,7 @@ export default class Navbar extends React.Component {
                   <span className='nav-display nav-item grey-text text-darken-2'>{username}</span>
                 </div>
                 <ul className='dropdown-content account' id='account'>
-                  <li><NavLink to='/'>Logout</NavLink></li>
+                  <li><NavLink to='/signin'>Logout</NavLink></li>
                 </ul>
             </div>
           </nav>
