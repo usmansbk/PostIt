@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Status } from '../redux/actionTypes';
+import { addUserTo } from '../redux/asyncActions';
 import SearchBox from '../components/dashboard/SearchBox';
 
 function hasFailed(error) {
@@ -28,18 +29,32 @@ const getUsers = (search, groupId, groups, adminId) => {
 	});
 };
 
+const mapDispatchToProps = dispatch => {
+	return {
+		handleAddOrRemove: (event) => {
+			const { target } = event
+				, gid = target.getAttribute('gid')
+			    , username = target.getAttribute('username');
+			console.log(gid, username);
+			dispatch(addUserTo(gid, username));
+		}
+	}
+}
+
 const mapStateToProps = state => {
   return {
     users: getUsers(state.search, state.group, state.groups, state.account.id),
     page: state.page,
     isFetching: state.search.isFetching,
     failed: hasFailed(state.error),
-    found: isFound(state.status)
+    found: isFound(state.status),
+    gid: state.group
   }
 }
 
 const SearchBoxContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SearchBox)
 
 export default SearchBoxContainer;

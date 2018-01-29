@@ -3,7 +3,7 @@ import SearchItem from './SearchItem';
 import Loader from '../common/Loader';
 import '../../../../stylesheets/sass/components/Searchbox.scss';
 
-export default ({users, page, isFetching, failed, found}) => {
+export default ({users, page, isFetching, failed, found, handleAddOrRemove, gid}) => {
 	const style = {
 		padding: '0px',
 		margin: '0px',
@@ -15,10 +15,9 @@ export default ({users, page, isFetching, failed, found}) => {
 		height: '20px',
 		lineHeight: '20px',
 	}
-	const userComponents = users.map((user, index) => <SearchItem key={index} page={page} {...user}/>);
+	const userComponents = users.map((user, index) => <SearchItem gid={gid} onClick={handleAddOrRemove} key={index} page={page} {...user}/>);
 
-    const isNotFound = !found && !failed
-        , shouldShowLoader = isFetching && isNotFound
+    const shouldShowLoader = isFetching && !found
 	    , shouldAskMore = found && !shouldShowLoader;
 
 	const askMore = <a href='#'><p className='blue-text center-align' style={p}>More</p></a>
@@ -29,7 +28,7 @@ export default ({users, page, isFetching, failed, found}) => {
 	return (
 		<div className='search card-panel grey lighten-3' id='search-result' style={style} >
 			{ userComponents }
-			{ isNotFound && notFound }
+			{ !found && notFound }
 			{ shouldShowLoader && showLoader }
 			{ shouldAskMore && askMore }
 			{ failed && hasFailed }

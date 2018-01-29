@@ -41,20 +41,19 @@ function get(url) {
 	})
 }
 
-function postUrl(url) {
-	return fetch (url, {
-		method: 'POST',
-		credentials: 'include'
-	})
-}
-
-export function addUserTo(url) {
+export function addUserTo(gid, invites) {
 	return function (dispatch) {
+		const groupUrl = `${url}/group/${gid}/user`
+		    , form = {
+		    	invites 
+		    };
+		console.log(form);
 		dispatch(setStatus(Status.ADD_USER));
-		postUrl(url)
+		postForm(groupUrl, form)
 		.then(response => {
 			if (response.ok) {
 				dispatch(setStatus(Status.USER_ADDED));
+				dispatch(fetchGroups(gid));
 			} else {
 				return Promise.reject();
 			}
