@@ -1,6 +1,6 @@
 import formurlencoded from 'form-urlencoded';
 import fetch from 'isomorphic-fetch';
-import { normalizeGroups, normalizeUser, simplify } from './stateSchema';
+import { normalizeGroups, normalizeUser, normalizeUsers, simplify } from './stateSchema';
 
 import {
 	Filter,
@@ -8,7 +8,9 @@ import {
 	receiveGroups,
 	requestPosts,
 	receivePosts,
+	requestUsers,
 	receiveUsers,
+	receiveSearch,
 	setAccountDetails,
 	setErrorMessage,
 	setStatus,
@@ -40,8 +42,9 @@ function get(url) {
 
 export function fetchUsers(filter) {
 	return function (dispatch) {
+		dispatch(requestSearch(filter));
 		dispatch(requestUsers(filter));
-		get(`${url}/user?username=${filter}`)
+		get(`${url}/user/find?username=${filter}`)
 		.then(response => {
 			if (response.ok) {
 				return response.json();
@@ -50,7 +53,10 @@ export function fetchUsers(filter) {
 			}
 		})
 		.then(json => {
-
+			const { users } = json.data
+			    , normalizedUsers = normalizeUsers(users)
+			    , simplifiedUsers = simplify.users(normalized.entities.users);
+			dispatch(receiveSearch(simplifiedUsers));
 		})
 		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
 	}

@@ -100,6 +100,19 @@ export function receivePosts(posts) {
   }
 }
 
+export function requestSearch(filter) {
+  return {
+    type: REQUEST_SEARCH,
+    filter
+  }
+}
+
+export function receiveSearch(search) {
+  return {
+    type: RECEIVE_SEARCH,
+    search
+  }
+}
 // User Interaction
 
 export function setGroup(group) {

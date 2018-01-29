@@ -71,17 +71,20 @@ const user_entity = new schema.Entity('users')
         Posts: posts_entity,
         Members: members_entity
       })
-    ,groups_schema = [ group_entity ];
+    ,groups_schema = [ group_entity ]
+    ,users_schema = [ user_entity ];
 
 export function normalizeUser(response) {
   const user = new schema.Entity('user', {
     Groups: groups_schema
   });
-  const result = normalize(response, user);
-  return result;
+  return normalize(response, user);
 }
 
 export function normalizeGroups(response) {
-  const result = normalize(response, groups_schema);
-  return result
+  return normalize(response, groups_schema);
+}
+
+export function normalizeUsers(response) {
+  return normalize(response, users_schema);
 }
