@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../components/dashboard/Navbar';
 import { setGroup, setPage } from '../redux/actionTypes';
-import { fetchUsers } from '../redux/asyncActions';
+import { fetchUsers, addUserTo } from '../redux/asyncActions';
 
 const mapStateToProps = state => {
   return {
@@ -17,12 +17,16 @@ const mapDispatchToProps = dispatch => {
 	    _navigate: (history) => {
 	      const { pathname } = history.location;
 	      let page = 'Home';
-	      const groupRegex = /\/dashboard\/groups\/(\d)/.exec(pathname);
+	      const groupRegex = /^\/dashboard\/groups?\/(\d)(\/user)?$/.exec(pathname);
 		  if (pathname === '/dashboard/groups') {
 	      	page = 'Groups';
 	      } else if (groupRegex) {
 	      	page = 'Group';
-	      	const id = groupRegex[1];
+	      	const id = groupRegex[1]
+	      	    , subject = groupRegex[2];
+	      	if (subject === '/user'){
+	      		dispatch(addUserTo(groupRegex[0]));
+	      	}
 	      	dispatch(setGroup(+id));
 	      }
 	      dispatch(setPage(page));

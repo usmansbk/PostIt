@@ -28,8 +28,6 @@ export default ({users, page, isFetching, failed, found}) => {
 
 	return (
 		<div className='search card-panel grey lighten-3' id='search-result' style={style} >
-			<div className='center-align'>
-			</div>
 			{ userComponents }
 			{ isNotFound && notFound }
 			{ shouldShowLoader && showLoader }

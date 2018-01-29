@@ -41,6 +41,31 @@ function get(url) {
 	})
 }
 
+function postUrl(url) {
+	return fetch (url, {
+		method: 'POST',
+		credentials: 'include'
+	})
+}
+
+export function addUserTo(url) {
+	return function (dispatch) {
+		dispatch(setStatus(Status.ADD_USER));
+		postUrl(url)
+		.then(response => {
+			if (response.ok) {
+				dispatch(setStatus(Status.USER_ADDED));
+			} else {
+				return Promise.reject();
+			}
+		})
+		.catch(error => {
+			console.log(error);
+			dispatch(setErrorMessage(Status.FAILED_TO_ADD_USER));
+		})
+	}
+}
+
 export function fetchUsers(filter) {
 	return function (dispatch) {
 		dispatch(requestSearch(filter));
@@ -63,10 +88,7 @@ export function fetchUsers(filter) {
 			else
 				dispatch(setStatus(Status.SEARCH_NOT_FOUND));
 		})
-		.catch(error => {
-			console.log(error);
-			dispatch(setErrorMessage(Status.SEARCH_FAILED))
-		})
+		.catch(error =>	dispatch(setErrorMessage(Status.SEARCH_FAILED)))
 	}
 }
 
