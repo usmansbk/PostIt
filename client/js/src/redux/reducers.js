@@ -141,8 +141,8 @@ function search(
     case RECEIVE_SEARCH:
       return Object.assign({}, state, {
         isFetching: false,
-        byId: action.users.byId,
-        ids: action.users.ids
+        byId: action.search.byId,
+        ids: action.search.ids
       });
     case REQUEST_SEARCH:
       return Object.assign({}, state, {

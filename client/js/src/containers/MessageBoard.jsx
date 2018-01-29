@@ -6,7 +6,7 @@ import MessageBoard from '../components/board/MessageBoard';
 import { getElapsedTime } from '../helpers/utils';
 
 function isErrored(error) {
-  return error === Status.FAILED_TO_FETCH;
+  return error === Status.FAILED_TO_FETCH_POSTS;
 }
 
 const getPosts = (posts, members, groups, page, group) => {

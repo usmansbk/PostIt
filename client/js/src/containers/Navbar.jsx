@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../components/dashboard/Navbar';
 import { setGroup, setPage } from '../redux/actionTypes';
+import { fetchUsers } from '../redux/asyncActions';
 
 const mapStateToProps = state => {
   return {
@@ -25,6 +26,9 @@ const mapDispatchToProps = dispatch => {
 	      	dispatch(setGroup(+id));
 	      }
 	      dispatch(setPage(page));
+	    },
+	    _search: (value) => {
+	    	dispatch(fetchUsers(value));
 	    }
 	}
 }

@@ -40,17 +40,17 @@ export default class Navbar extends React.Component {
       this.setState({searchbar: true});
     }
   }
-
+ 
   handleSearchBox(event) {
     const {target} = event;
     const value = target.value;
     if (target.value.length > 0) {
       this.setState({search: true});
+      this.props._search(value);
     }
     else {
       this.setState({search: false});
     }
-
   }
   componentWillReceiveProps(nextProps) {
     const { history } = nextProps;

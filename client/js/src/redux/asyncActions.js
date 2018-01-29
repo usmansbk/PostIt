@@ -10,6 +10,7 @@ import {
 	receivePosts,
 	requestUsers,
 	receiveUsers,
+	requestSearch,
 	receiveSearch,
 	setAccountDetails,
 	setErrorMessage,
@@ -55,10 +56,14 @@ export function fetchUsers(filter) {
 		.then(json => {
 			const { users } = json.data
 			    , normalizedUsers = normalizeUsers(users)
-			    , simplifiedUsers = simplify.users(normalized.entities.users);
+			    , simplifiedUsers = simplify.users(normalizedUsers.entities.users);
 			dispatch(receiveSearch(simplifiedUsers));
+			dispatch(setStatus(Status.SEARCH_FOUND));
 		})
-		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
+		.catch(error => {
+			console.log(error);
+			dispatch(setErrorMessage(Status.SEARCH_FAILED))
+		})
 	}
 }
 
@@ -81,7 +86,7 @@ export function fetchGroups(filter) {
 			dispatch(receiveUsers(simplifiedUsers));
 			dispatch(receiveGroups(simplifiedGroups));
 		})
-		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_GROUPS)))
 	}
 }
 
@@ -109,7 +114,7 @@ export function fetchAll(filter) {
 			dispatch(receiveGroups(simplifiedGroups));
 			dispatch(receivePosts(simplifiedPosts));
 		})
-		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_ALL)))
 	}
 }
 
@@ -130,7 +135,7 @@ export function fetchPosts(filter) {
 			const simplified = simplify.messages(posts);
 			dispatch(receivePosts(simplified));
 		})
-		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH)))
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_POSTS)))
 	}
 }
 
