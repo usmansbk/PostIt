@@ -15,18 +15,25 @@ export default ({users, page, isFetching, failed, found}) => {
 		height: '20px',
 		lineHeight: '20px',
 	}
-	const message = <p className='center-align grey-text'>{ failed ? 'Search failed' : 'Search not found' }</p>
-	const askMore = !(isFetching || failed || found) && <a href='#'><p className='blue-text center-align' style={p}>More</p></a>;
-	const showLoader = (isFetching && !(failed || found)) && <div className='center-align'><Loader /></div>;
 	const userComponents = users.map((user, index) => <SearchItem key={index} page={page} {...user}/>);
+
+    const isNotFound = !found && !failed
+        , shouldShowLoader = isFetching && isNotFound
+	    , shouldAskMore = found && !shouldShowLoader;
+
+	const askMore = <a href='#'><p className='blue-text center-align' style={p}>More</p></a>
+	    , notFound = <p className='grey-text center-align'>User not found</p>
+	    , hasFailed = <p className='grey-text center-align'>Search failed</p>
+	    , showLoader = <div className='center-align'><Loader /></div>;
 
 	return (
 		<div className='search card-panel grey lighten-3' id='search-result' style={style} >
 			<div className='center-align'>
 			</div>
 			{ userComponents }
-			{ showLoader }
-			{ askMore }
-			{ (failed || found) && message }
+			{ isNotFound && notFound }
+			{ shouldShowLoader && showLoader }
+			{ shouldAskMore && askMore }
+			{ failed && hasFailed }
 		</div>);
 }

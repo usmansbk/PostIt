@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/SearchItem.scss'
 
-export default ({ username, isMember, page}) => {
+export default ({ username, isMember, page, canAdmin}) => {
 	const style = {
 		height: '24px',
 		width: '24px',
@@ -23,7 +23,7 @@ export default ({ username, isMember, page}) => {
 						<span className='grey-text text-darken-2'>{username}</span>
 					</div>
 					{
-						(page === 'Group') &&
+						(page === 'Group' && canAdmin) &&
 						<div className='col s6'>
 							<Icon className='blue-text right'>{ isMember?'done' : 'person_add' }</Icon>
 						</div>

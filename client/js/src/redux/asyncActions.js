@@ -58,7 +58,10 @@ export function fetchUsers(filter) {
 			    , normalizedUsers = normalizeUsers(users)
 			    , simplifiedUsers = simplify.users(normalizedUsers.entities.users);
 			dispatch(receiveSearch(simplifiedUsers));
-			dispatch(setStatus(Status.SEARCH_FOUND));
+			if (simplifiedUsers.ids.length > 0)
+				dispatch(setStatus(Status.SEARCH_FOUND));
+			else
+				dispatch(setStatus(Status.SEARCH_NOT_FOUND));
 		})
 		.catch(error => {
 			console.log(error);
