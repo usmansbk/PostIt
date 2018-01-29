@@ -52,6 +52,7 @@ export default class Navbar extends React.Component {
       this.setState({search: false});
     }
   }
+
   componentWillReceiveProps(nextProps) {
     const { history } = nextProps;
     this.props._navigate(history);
@@ -90,7 +91,7 @@ export default class Navbar extends React.Component {
                       <input type='search' placeholder='Search PostIt'
                        className='grey lighten-3 hide-on-med-and-down' name='search' onChange={this.handleSearchBox} autoComplete='off' />
                       {
-                        this.state.search && <SearchBox />
+                        this.state.search && <SearchBox/>
                       }
                     </div>
                   </div>
