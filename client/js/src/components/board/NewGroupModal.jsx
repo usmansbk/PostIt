@@ -29,6 +29,7 @@ export default class NewGroupModal extends React.Component {
 		}
 		if (failed) {
 			M.toast({html: 'Failed to create group', classes: 'rounded'})
+			this.instance.close();
 		}
 	}
 

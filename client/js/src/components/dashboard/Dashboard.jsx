@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
+import { Route, Switch, Redirect, NavLink} from 'react-router-dom';
 import Sidenav from './Sidenav';
 import Footer from '../common/Footer';
 import Navbar from '../../containers/Navbar';
@@ -24,7 +24,7 @@ export default ({match}) => {
               <span className='my-nav-label'>Home</span>
             </div>
         </NavLink>
-        <NavLink to={`${match.url}/groups`} activeClassName='red-text text-lighten-1'>
+        <NavLink to={`${match.url}groups`} activeClassName='red-text text-lighten-1'>
             <div className='my-nav-item valign-wrapper'>
               <span><Icon>group</Icon></span>
               <span className='my-nav-label'>Groups</span>
@@ -34,10 +34,9 @@ export default ({match}) => {
       </div>
       <div id='mainboard' className='col s12 m9 offset-m2'>
         <Switch>
-          <Route exact={true} path={`${match.url}`} component={MessageBoard} />
-          <Route exact={true} path={`${match.url}/groups/:id`} component={GroupBoard} />
-          <Route exact={true} path={`${match.url}/groups`} component={GroupsBoard} />
-          <Route render={(props) => <Redirect to='/notfound' />} />
+          <Route exact path={`${match.url}`} component={MessageBoard} />
+          <Route exact path={`${match.url}groups`} component={GroupsBoard} />
+          <Route exact path={`${match.url}groups/:id`} component={GroupBoard} />
         </Switch>
       </div>
     </div>

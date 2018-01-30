@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { signIn } from '../redux/asyncActions';
 import { Status } from '../redux/actionTypes';
 import SignInPage from '../components/sign/SignInPage';
@@ -15,9 +15,9 @@ function signingIn(status) {
 
 const mapStateToProps = state => {
 	return {
-		status: state.status,
-		signingIn: signingIn(state.status),
-		failed: hasFailed(state.status)
+		status: state.session,
+		signingIn: signingIn(state.session),
+		failed: hasFailed(state.session)
 	}
 }
 
@@ -26,9 +26,9 @@ const mapDispatchToProps = dispatch => {
 		handleSubmit: form => {
 			dispatch(signIn(form));
 		},
-		handleSignIn: (history, status) => {	
-		    if (status === Status.SIGNED_IN)
-		      history.push('/dashboard');
+		handleSignin: (history, status) => {
+			if (status === Status.SIGNED_IN)
+      			history.push('/');
 		}
 	}
 }

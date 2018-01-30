@@ -68,7 +68,7 @@ export default class SignUpForm extends React.Component {
     const showLoader = signingUp && loader;
     const showError = failed && message;
 
-    const error = <p className='red-text'>Password doesn't match</p>
+    const error = <p className='red-text'>Passwords don't match</p>
     return (
       <div>
       <div className='container'>
@@ -93,7 +93,7 @@ export default class SignUpForm extends React.Component {
               { showError  }
             </form>
             <div className='center-align section'>
-              <NavLink to='/'>Have an account?</NavLink>
+              <NavLink to='/signin'>Have an account?</NavLink>
             </div>
           </div>
         </div>

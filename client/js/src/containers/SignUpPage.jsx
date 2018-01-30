@@ -15,9 +15,9 @@ function hasFailed(status) {
 
 const mapStateToProps = state => {
 	return {
-		status: state.status,
-		signingUp: signingUp(state.status),
-		failed: hasFailed(state.status)
+		status: state.session,
+		signingUp: signingUp(state.session),
+		failed: hasFailed(state.session)
 	}
 }
 
@@ -27,8 +27,8 @@ const mapDispatchToProps = dispatch => {
 			dispatch(signUp(form));
 		},
 		handleSignup: (history, status) => {
-			if (status === Status.SIGNED_UP)
-      			history.push('/dashboard');
+			if (status === Status.SIGNED_IN)
+      			history.push('/');
 		}
 	}
 }

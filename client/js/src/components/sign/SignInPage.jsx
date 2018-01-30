@@ -34,8 +34,8 @@ export default class SignInPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {status, history} = nextProps;
-    this.props.handleSignIn(history, status);
+    const { history, status } = nextProps;
+     this.props.handleSignin(history, status);
   }
 
   render() {
@@ -46,7 +46,7 @@ export default class SignInPage extends React.Component {
       width: '100%'
     };
 
-    const { signingIn, failed } = this.props;
+    const { signingIn, failed, signedIn } = this.props;
     
     const loader =  <div className='center-align section'>
                       <Loader />

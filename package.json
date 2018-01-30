@@ -10,6 +10,7 @@
     "build:client": "webpack --config client/webpack.config.js --watch",
     "start": "node server/build/bin/www",
     "server:dev": "nodemon server/build/bin/www",
+    "client:dev": "webpack-dev-server --config client/webpack.config.js --open",
     "test": "npm run test:server",
     "test:server": "sh server/scripts/test.sh",
     "test:client": "jest -u",
@@ -63,7 +64,8 @@
     "redux-thunk": "^2.2.0",
     "request": "^2.83.0",
     "sequelize": "^4.28.6",
-    "sequelize-cli": "^3.2.0"
+    "sequelize-cli": "^3.2.0",
+    "webpack-dev-server": "^2.11.1"
   },
   "nyc": {
     "exclude": [

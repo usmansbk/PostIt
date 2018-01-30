@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { setPage, setGroup } from '../redux/actionTypes';
 import { fetchPosts } from '../redux/asyncActions';
 import GroupsBoard from '../components/board/GroupsBoard';
@@ -31,4 +32,4 @@ const GroupsBoardContainer = connect(
   mapStateToProps,
 )(GroupsBoard)
 
-export default GroupsBoardContainer;
+export default withRouter(GroupsBoardContainer);

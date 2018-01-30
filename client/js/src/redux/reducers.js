@@ -171,7 +171,7 @@ function status(state = Status.CLEAR, action) {
   }
 }
 
-function session(state = Status.LOGGED_OUT, action) {
+function session(state = Status.SIGNED_OUT, action) {
   switch(action.type) {
     case SET_SESSION:
       return action.session;

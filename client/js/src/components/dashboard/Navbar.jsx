@@ -1,11 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import Searchbar from './Searchbar';
 import SearchBox from '../../containers/SearchBox';
 import Logo from '../common/Logo';
 import Icon from '../common/Icon';
 import Button from '../common/Button';
 import UserInfo from '../board/UserInfo';
+import Logout from '../../containers/Logout';
 import M from '../../../materialize';
 import '../../../../stylesheets/sass/components/Navbar.scss';
 
@@ -100,7 +100,7 @@ export default class Navbar extends React.Component {
                   <span className='nav-display nav-item grey-text text-darken-2'>{username}</span>
                 </div>
                 <ul className='dropdown-content account' id='account'>
-                  <li><NavLink to='/signin'>Logout</NavLink></li>
+                  <li><Logout /></li>
                 </ul>
             </div>
           </nav>

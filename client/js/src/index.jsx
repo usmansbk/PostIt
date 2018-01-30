@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { createLogger } from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import reducers from './redux/reducers';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard from './containers/Dashboard';
 import SignInPage from './containers/SignInPage';
 import SignUpPage from './containers/SignUpPage';
 import PrivateRoute from './containers/Auth';
@@ -26,10 +26,9 @@ ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<div>
-	    		<Route exact path='/' component={SignInPage} />
+	    		<Route path='/' component={Dashboard} />
+	    		<Route path='/signin' component={SignInPage} />
 	    		<Route path='/signup' component={SignUpPage} />
-	    		<PrivateRoute path='/dashboard' component={Dashboard} />
-	    		<Route path='/notfound' render={ props => <PageNotFound />} />
     		</div>
 		</BrowserRouter>
 	</Provider>,

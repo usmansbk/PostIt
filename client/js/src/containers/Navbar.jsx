@@ -17,8 +17,8 @@ const mapDispatchToProps = dispatch => {
 	    _navigate: (history) => {
 	      const { pathname } = history.location;
 	      let page = 'Home';
-	      const groupRegex = /^\/dashboard\/groups\/(\d)$/.exec(pathname);
-		  if (pathname === '/dashboard/groups') {
+	      const groupRegex = /^\/groups\/(\d)$/.exec(pathname);
+		  if (pathname === '/groups') {
 	      	page = 'Groups';
 	      } else if (groupRegex) {
 	      	page = 'Group';

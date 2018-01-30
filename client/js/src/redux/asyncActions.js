@@ -201,34 +201,32 @@ export function createGroup(data) {
 
 export function signUp(data) {
 	return function (dispatch) {
-		dispatch(setStatus(Status.SIGNING_UP));
+		dispatch(setSession(Status.SIGNING_UP));
 		postForm(`${url}/user/signup`, data)
 		.then(response => {
 			if (response.ok){
-				dispatch(setSession(Status.LOGGED_IN))
-				dispatch(setStatus(Status.SIGNED_UP))
+				dispatch(setSession(Status.SIGNED_IN))
 				dispatch(fetchAll(Filter.ALL))
 			} else {
 				return Promise.reject();
 			}
 		})
-		.catch(error => dispatch(setStatus(Status.SIGNUP_FAILED)));
+		.catch(error => dispatch(setSession(Status.SIGNUP_FAILED)));
 	}
 }
 
 export function signIn(data) {
 	return function (dispatch) {
-		dispatch(setStatus(Status.SIGNING_IN));
+		dispatch(setSession(Status.SIGNING_IN));
 		postForm(`${url}/user/signin`, data)
 		.then(response => {
 			if (response.ok) {
-				dispatch(setSession(Status.LOGGED_IN));
-				dispatch(setStatus(Status.SIGNED_IN));
+				dispatch(setSession(Status.SIGNED_IN));
 				dispatch(fetchAll(Filter.ALL));
 			} else {
 				return Promise.reject();
 			}
 		})
-		.catch(error => dispatch(setStatus(Status.SIGNIN_FAILED, Status)));
+		.catch(error => dispatch(setSession(Status.SIGNIN_FAILED, Status)));
 	}
 }

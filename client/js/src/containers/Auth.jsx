@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PrivateRoute from '../components/helpers/PrivateRoute';
 import { Status } from '../redux/actionTypes';
 
 function isAuthenticated(status) {
-	return status === Status.LOGGED_IN || Status.LOGGED_OUT;
+	return status === Status.SIGNED_IN;
 }
 
 const mapStateToProps = state => {
@@ -17,4 +16,4 @@ const PrivateRouteContainer = connect(
 	mapStateToProps,
 )(PrivateRoute);
 
-export default withRouter(PrivateRouteContainer);
+export default PrivateRouteContainer;
