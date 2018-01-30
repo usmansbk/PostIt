@@ -208,12 +208,12 @@ export function signUp(data) {
 		postForm(`${url}/user/signup`, data)
 		.then(response => {
 			if (response.ok){
-				dispatch(setSession(Status.SIGNED_IN))
+				dispatch(setSession(Status.SIGNED_UP))
 			} else {
 				return Promise.reject();
 			}
 		})
-		.then(() => dispatch(fetchAll(Filter.ALL)))
+		.then(() => dispatch(signIn(data)))
 		.catch(error => dispatch(setSession(Status.SIGNUP_FAILED)));
 	}
 }
