@@ -32,4 +32,4 @@ const GroupsBoardContainer = connect(
   mapStateToProps,
 )(GroupsBoard)
 
-export default withRouter(GroupsBoardContainer);
+export default (GroupsBoardContainer);

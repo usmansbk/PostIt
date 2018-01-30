@@ -52,17 +52,18 @@ export function addUserTo(gid, invites) {
 		.then(response => {
 			if (response.ok) {
 				dispatch(setStatus(Status.USER_ADDED));
-				dispatch(fetchGroups(gid));
 			} else {
 				return Promise.reject();
 			}
 		})
+		.then(() => dispatch(fetchGroups(gid)))
 		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_ADD_USER)))
 	}
 }
 
 export function fetchUsers(filter) {
 	return function (dispatch) {
+		let simplifiedUsers;
 		dispatch(requestSearch(filter));
 		dispatch(requestUsers(filter));
 		get(`${url}/user/find?username=${filter}`)
@@ -75,9 +76,11 @@ export function fetchUsers(filter) {
 		})
 		.then(json => {
 			const { users } = json.data
-			    , normalizedUsers = normalizeUsers(users)
-			    , simplifiedUsers = simplify.users(normalizedUsers.entities.users);
+			    , normalizedUsers = normalizeUsers(users);
+			simplifiedUsers = simplify.users(normalizedUsers.entities.users);
 			dispatch(receiveSearch(simplifiedUsers));
+		})
+		.then(() => {
 			if (simplifiedUsers.ids.length > 0)
 				dispatch(setStatus(Status.SEARCH_FOUND));
 			else
@@ -89,6 +92,7 @@ export function fetchUsers(filter) {
 
 export function fetchGroups(filter) {
 	return function (dispatch) {
+		let simplifiedGroups;
 		dispatch(requestGroups(filter));
 		get(`${url}/user/groups`)
 		.then(response => {
@@ -100,18 +104,24 @@ export function fetchGroups(filter) {
 		})
 		.then(json => {
 			const { groups } = json.data
-			    , normalizedGroups = normalizeGroups(groups)
-			    , simplifiedGroups = simplify.groups(normalizedGroups)
-			    , simplifiedUsers  = simplify.users(normalizedGroups.entities.users);
+			    , normalizedGroups = normalizeGroups(groups);
+			simplifiedGroups = simplify.groups(normalizedGroups);
+			const simplifiedUsers  = simplify.users(normalizedGroups.entities.users);
 			dispatch(receiveUsers(simplifiedUsers));
-			dispatch(receiveGroups(simplifiedGroups));
+			
 		})
+		.then(() => dispatch(receiveGroups(simplifiedGroups)))
 		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_GROUPS)))
 	}
 }
 
 export function fetchAll(filter) {
 	return function(dispatch) {
+		let simplifiedAccount
+		  , simplifiedUsers
+		  , simplifiedGroups
+		  , simplifiedPosts;
+
 		dispatch(requestPosts(filter));
 		dispatch(requestGroups(filter));
 		get(`${url}/user`)
@@ -124,16 +134,16 @@ export function fetchAll(filter) {
 		})
 		.then(json => {
 			const { user }   = json.data
-			    , normalized = normalizeUser(user)
-			    , simplifiedAccount = simplify.account(normalized)
-			    , simplifiedGroups  = simplify.groupsEntity(normalized.entities.groups)
-			    , simplifiedUsers   = simplify.users(normalized.entities.users)
-			    , simplifiedPosts   = simplify.posts(normalized.entities.posts);
-			dispatch(setAccountDetails(simplifiedAccount));
-			dispatch(receiveUsers(simplifiedUsers));
-			dispatch(receiveGroups(simplifiedGroups));
-			dispatch(receivePosts(simplifiedPosts));
+			    , normalized = normalizeUser(user);
+			simplifiedAccount = simplify.account(normalized)
+			simplifiedGroups  = simplify.groupsEntity(normalized.entities.groups)
+			simplifiedUsers   = simplify.users(normalized.entities.users)
+			simplifiedPosts   = simplify.posts(normalized.entities.posts);
 		})
+		.then(() => dispatch(setAccountDetails(simplifiedAccount)))
+		.then(() => dispatch(receiveUsers(simplifiedUsers)))
+		.then(() => dispatch(receiveGroups(simplifiedGroups)))
+		.then(() => dispatch(receivePosts(simplifiedPosts)))
 		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_ALL)))
 	}
 }
@@ -166,15 +176,12 @@ export function postMessage(data) {
 		postForm(`${url}/group/${data.gid}/message`, data)
 		.then(response => {
 			if (response.ok) {
-				return response.json();
+				dispatch(setStatus(Status.MESSAGE_POSTED));
 			} else {
 				return Promise.reject();
 			}
 		})
-		.then(json => {
-			dispatch(setStatus(Status.MESSAGE_POSTED));
-			dispatch(fetchPosts(id));
-		})
+		.then(() => dispatch(fetchPosts(id)))
 		.catch(error =>	dispatch(setErrorMessage(Status.FAILED_TO_POST_MESSAGE)))
 	}
 }
@@ -185,16 +192,12 @@ export function createGroup(data) {
 		postForm(`${url}/group`, data)
 		.then(response => {
 			if (response.ok) {
-				return response.json();
+				dispatch(setStatus(Status.GROUP_CREATED))
 			} else {
 				return Promise.reject();
 			}
 		})
-		.then(json => {
-			const { result } = json.data;
-			dispatch(setStatus(Status.GROUP_CREATED));
-			dispatch(fetchGroups(Filter.ALL));
-		})
+		.then(() => dispatch(fetchGroups(Filter.ALL)))
 		.catch(error => dispatch(setErrorMessage(Status.CREATE_GROUP_FAILED)));
 	}
 }
@@ -206,11 +209,11 @@ export function signUp(data) {
 		.then(response => {
 			if (response.ok){
 				dispatch(setSession(Status.SIGNED_IN))
-				dispatch(fetchAll(Filter.ALL))
 			} else {
 				return Promise.reject();
 			}
 		})
+		.then(() => dispatch(fetchAll(Filter.ALL)))
 		.catch(error => dispatch(setSession(Status.SIGNUP_FAILED)));
 	}
 }
@@ -222,11 +225,10 @@ export function signIn(data) {
 		.then(response => {
 			if (response.ok) {
 				dispatch(setSession(Status.SIGNED_IN));
-				dispatch(fetchAll(Filter.ALL));
 			} else {
 				return Promise.reject();
 			}
-		})
+		}).then(() => dispatch(fetchAll(Filter.ALL)))
 		.catch(error => dispatch(setSession(Status.SIGNIN_FAILED, Status)));
 	}
 }

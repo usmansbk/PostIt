@@ -1,26 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { predicate } from '../helpers/utils';
 import { postMessage } from '../redux/asyncActions';
 import NewPostModal from '../components/board/NewPostModal';
 import { Status } from '../redux/actionTypes';
 
-function isPosted(status) {
-	return status === Status.MESSAGE_POSTED;
-}
-function hasFailed(err) {
-	return err === Status.FAILED_TO_POST_MESSAGE;
-}
+const getGroups = (groups) => groups.ids.map(id => groups.byId[id]);
 
-function isPosting(status, err) {
-	return (status === Status.POSTING_MESSAGE) && !hasFailed(err);
-}
+const isPosted = (state) => predicate(state.status, Status.MESSAGE_POSTED, state);
+
+const hasFailed = (state) => predicate(state.error, Status.FAILED_TO_POST_MESSAGE, state);
+
+const isPosting = (status, state) => (status === Status.POSTING_MESSAGE) && !hasFailed(state);
 
 const mapStateToProps = state => {
 	return {
-		posting: isPosting(state.status, state.error),
-		failed: hasFailed(state.error),
-		isPosted: isPosted(state.status),
-		groups: state.groups
+		posting: isPosting(state.status, state),
+		failed: hasFailed(state),
+		isPosted: isPosted(state),
+		groups: getGroups(state.groups)
 	}
 }
 
@@ -37,4 +36,4 @@ const NewPostModalContainer = connect(
 	mapDispatchToProps,
 )(NewPostModal);
 
-export default NewPostModalContainer;
+export default withRouter(NewPostModalContainer);

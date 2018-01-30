@@ -10,6 +10,7 @@ export default class NewPostModal extends React.Component {
 		this.state = {
 			gid: '',
 			message: '',
+			groups: []
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.clearFields = this.clearFields.bind(this);
@@ -37,6 +38,13 @@ export default class NewPostModal extends React.Component {
 		})
 	}
 
+	componentWillMount() {
+		const { groups } = this.props;
+		this.setState({
+			groups
+		})
+	}
+
 	componentDidMount() {
 		let elem = document.querySelector('.modal');
 		let instance = M.Modal.init(elem);
@@ -44,7 +52,11 @@ export default class NewPostModal extends React.Component {
 		this.instance = M.Modal.init(elem);
 	}
 
-	componentWillReceiveProps({isPosted, failed, ...rest}) {
+	componentWillReceiveProps(nexProps) {
+		const { isPosted, failed, groups } = nexProps;
+		this.setState({
+			groups
+		});
 		if (isPosted) {
 			this.instance.close();
 			M.toast({html: 'Message Posted!', classes: 'rounded'})
@@ -61,7 +73,7 @@ export default class NewPostModal extends React.Component {
 	}
 
 	render() {
-		const { groups, posting, failed } = this.props;
+		const {posting, failed } = this.props;
 	    const loader =  <div className='center-align section'>
                   			<Loader />
               			</div>
@@ -75,7 +87,7 @@ export default class NewPostModal extends React.Component {
 					<div className='modal-content'>
 						{ posting && loader }
 						<form id='new-post-modal' onSubmit={this.handleSubmit}>
-							<SelectGroup groups={groups} onChange={this.handleSelect} />
+							<SelectGroup groups={this.state.groups} onChange={this.handleSelect} />
 							<div className='input-field' id='message'>
 								<textarea className='materialize-textarea' name='message' id='message' value={this.state.message} onChange={this.handleChange} />
 								<label htmlFor='message'>Whats new with you</label>

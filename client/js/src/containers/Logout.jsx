@@ -18,8 +18,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		handleLogout: history => {
 			dispatch(setSession(Status.SIGNED_OUT));
-			console.log(history);
-			history.push('/signin')
+			history.push('/')
 		}
 	}
 }

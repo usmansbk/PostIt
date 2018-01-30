@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Status } from '../redux/actionTypes';
 import MessageBoard from '../components/board/MessageBoard';
+import { predicate } from '../helpers/utils';
 import { getElapsedTime } from '../helpers/utils';
 
-function isErrored(error) {
-  return error === Status.FAILED_TO_FETCH_POSTS;
-}
+const isErrored = (state) => predicate(state.error, Status.FAILED_TO_FETCH_POSTS, state);
 
 const getPosts = (posts, members, groups, page, group) => {
   return posts.ids.filter(id => {
@@ -39,7 +38,7 @@ const mapStateToProps = state => {
   return {
     posts: getPosts(state.posts, state.users, state.groups, state.page, state.group),
     isFetching: state.posts.isFetching,
-    error: isErrored(state.error)
+    error: isErrored(state)
   }
 }
 
@@ -47,4 +46,4 @@ const MessageBoardContainer = connect(
   mapStateToProps,
 )(MessageBoard)
 
-export default withRouter(MessageBoardContainer);
+export default (MessageBoardContainer);

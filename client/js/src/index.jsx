@@ -26,9 +26,9 @@ ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<div>
-	    		<Route path='/' component={Dashboard} />
-	    		<Route path='/signin' component={SignInPage} />
+	    		<Route exact path='/' component={SignInPage} />
 	    		<Route path='/signup' component={SignUpPage} />
+	    		<Route path='/dashboard' component={Dashboard} />
     		</div>
 		</BrowserRouter>
 	</Provider>,
