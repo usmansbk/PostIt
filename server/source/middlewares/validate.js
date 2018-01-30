@@ -8,9 +8,7 @@ function test(target) {
 export default class Validate {
   static createGroup(req, res, next) {
     const { name, purpose } = req.body;
-    if (!name || isEmpty.test(name) ||
-        name.length > MAX_NAME_LEN ||
-        (purpose && purpose.length > MAX_PURPOSE_LENGTH)) {
+    if (!name || isEmpty.test(name)) {
       res.status(400).json({
         status: 'fail',
         data: {

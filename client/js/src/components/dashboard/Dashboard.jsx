@@ -13,11 +13,20 @@ import '../../../../stylesheets/sass/components/Dashboard.scss';
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.__Auth = this.__Auth.bind(this);
+  }
+
+  __Auth(props) {
+    const { history, isLoggedIn } = props;
+    this.props.isAuthenticated(history, isLoggedIn);
+  }
+
+  componentWillMount() {
+    this.__Auth(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { history, isLoggedIn } = nextProps;
-    this.props.isAuthenticated(history, isLoggedIn);
+    this.__Auth(nextProps);
   }
 
   render() {

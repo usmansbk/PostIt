@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => {
 		},
 		handleSignup: (history, status) => {
 			if (status === Status.SIGNED_IN)
-      			history.push('/dashboard');
+      			history.replace('/dashboard');
 		}
 	}
 }

@@ -81,45 +81,6 @@ describe('POST:/api/group', () => {
         });
       });
 
-      describe('name longer than 22 characters', () => {
-        it('should return status code 400', (done) => {
-          const form = {
-            name: '1111111111111111111111122',
-            purpose: 'How to live with humans'
-          };
-          request.post(url, { form }, (err, res) => {
-            expect(res.statusCode).toBe(400);
-            done();
-          });
-        });
-      });
-
-      describe('purpose longer than  50 characters', () => {
-        it('should return status code 400', (done) => {
-          const form = {
-            name: 'Tokyo Ghoul',
-            purpose: '11111111111111111111111111111111111111111111111111150'
-          };
-          request.post(url, { form }, (err, res) => {
-            expect(res.statusCode).toBe(400);
-            done();
-          });
-        });
-      });
-
-      describe('name less than 23 characters and purpose not greater than 50 characters', () => {
-        it('should return status code 201', (done) => {
-          const form = {
-            name: 'Tokyo Ghoul',
-            purpose: 'How to live with humans'
-          };
-          request.post(url, { form }, (err, res) => {
-            expect(res.statusCode).toBe(201);
-            done();
-          });
-        });
-      });
-
       describe('name identical to another group', () => {
         it('should return status code 201', (done) => {
           const form = {

@@ -9,7 +9,6 @@ import reducers from './redux/reducers';
 import Dashboard from './containers/Dashboard';
 import SignInPage from './containers/SignInPage';
 import SignUpPage from './containers/SignUpPage';
-import PrivateRoute from './containers/Auth';
 import PageNotFound from './components/helpers/PageNotFound';
 import '../../stylesheets/materialize.css';
 import '../../stylesheets/sass/index.scss';
@@ -27,7 +26,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<div>
 	    		<Route exact path='/' component={SignInPage} />
-	    		<Route path='/signup' component={SignUpPage} />
+	    		<Route exact path='/signup' component={SignUpPage} />
 	    		<Route path='/dashboard' component={Dashboard} />
     		</div>
 		</BrowserRouter>

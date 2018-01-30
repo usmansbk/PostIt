@@ -42,7 +42,6 @@ export default class UserController {
    */
   static signUp(req, res) {
     User.create(req.body).then((user) => {
-      req.session.userId = user.id;
       res.status(201).json({
         status: 'success',
         data: {

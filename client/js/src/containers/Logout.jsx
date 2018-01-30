@@ -10,15 +10,15 @@ function isLoggedIn(status) {
 
 const mapStateToProps = state => {
 	return {
-		session: isLoggedIn(state.session)
+		session: isLoggedIn(state.session),
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		handleLogout: history => {
+		handleLogout: (history) => {
 			dispatch(setSession(Status.SIGNED_OUT));
-			history.push('/')
+			history.replace('/')
 		}
 	}
 }

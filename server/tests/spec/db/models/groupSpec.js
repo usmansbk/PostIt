@@ -55,25 +55,6 @@ describe('Group database model', () => {
       });
     });
 
-    it('name longer than 22 characters', (done) => {
-      Group.create({
-        name: 'Vaaaaaaaaaaaaaaaalid Name',
-      }).catch((error) => {
-        expect(error.value).toBeFalsy();
-        done();
-      });
-    });
-
-    it('purpose longer than 50 characters', (done) => {
-      Group.create({
-        name: 'Valid Name',
-        purpose: '0123456789-0123456789-0123456789-0123456789-0123456789-'
-      }).catch((error) => {
-        expect(error.value).toBeFalsy();
-        done();
-      });
-    });
-
     it('null purpose value', (done) => {
       Group.create({ name: 'Valid Name', purpose: null }).then((newGroup) => {
         expect(newGroup).toBeTruthy();

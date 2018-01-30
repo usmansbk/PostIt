@@ -18,7 +18,7 @@ const mapDispatchToProps = state => {
 	return {
 		isAuthenticated: (history, isLoggedIn) => {
 			if (!isLoggedIn) {
-				history.push('/');
+				history.replace('/');
 			}
 		}
 	}
