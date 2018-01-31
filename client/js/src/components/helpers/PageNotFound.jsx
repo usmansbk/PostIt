@@ -4,7 +4,9 @@ import Logo from '../common/Logo';
 import Footer from '../common/Footer';
 import { setPageTitle } from '../../helpers/utils';
 
-export default () => {
+export default ({location}) => {
+	console.log(location);
+	const { from } = location.state || { from : { pathname: '/' } };
 	setPageTitle('Page not found | PostIt');
 	const footer = {
 		position: 'absolute',
@@ -34,7 +36,7 @@ export default () => {
 				<h6>The link you followed may be broken</h6>
 			</div>
 			<div className='section center-align'>
-				<br /><NavLink to='/dashboard'>Dev-Dashboard</NavLink>
+				<br /><NavLink to={from}>Back to previous page</NavLink>
 			</div>
 			<div style={footer}>
 				<Footer className='center-align' />

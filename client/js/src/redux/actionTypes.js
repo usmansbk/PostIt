@@ -9,6 +9,9 @@ export const SET_STATUS = 'SET_STATUS';
 export const SET_SESSION = 'SET_SESSION';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const REMOVE_GROUP = 'REMOVE_GROUP';
+export const DELETE_POSTS = 'DELETE_POSTS';
+
 /*
  * Network interaction action types
  */
@@ -48,6 +51,9 @@ export const Status = {
   FAILED_TO_FETCH_USERS: 'FAILED_TO_FETCH_USERS',
   FAILED_TO_FETCH_GROUPS: 'FAILED_TO_FETCH_GROUPS',
   FAILED_TO_FETCH_POSTS: 'FAILED_TO_FETCH_POSTS',
+  DELETING_GROUP: 'DELETING_GROUP',
+  GROUP_DELETED: 'GROUP_DELETED',
+  FAILED_TO_DELETE_GROUP: 'FAILED_TO_DELETE_GROUP',
   CLEAR: '',
 };
 
@@ -158,5 +164,19 @@ export function setStatus(status) {
 export function logout() {
   return {
     type: USER_LOGOUT
+  }
+}
+
+export function removeGroup(id) {
+  return {
+    type: REMOVE_GROUP,
+    id
+  }
+}
+
+export function deleteGroupPosts(id) {
+  return {
+    type: DELETE_POSTS,
+    id
   }
 }

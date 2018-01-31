@@ -16,13 +16,15 @@ const mapDispatchToProps = dispatch => {
 	return {
 	    _navigate: (history) => {
 	      const { pathname } = history.location;
-	      const groupRegex = /^\/dashboard\/groups(\/(\d))?$/.exec(pathname);
+	      const groupRegex = /^\/dashboard\/groups(\/(\d{0,}))?$/.exec(pathname);
 	      let page = 'Home';
 	      if (groupRegex) {
 	      	page = 'Groups';
 	      	const id = groupRegex[2]
-	      	if (id) page = 'Group';
-	      	dispatch(setGroup(+id));
+	      	if (id) {
+	      		page = 'Group';
+	      		dispatch(setGroup(+id));
+	      	}
 	      }
 	      dispatch(setPage(page));
 	    },

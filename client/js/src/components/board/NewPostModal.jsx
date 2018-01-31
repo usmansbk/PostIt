@@ -54,7 +54,6 @@ export default class NewPostModal extends React.Component {
 
 	componentWillReceiveProps(nexProps) {
 		const { isPosted, failed, groups } = nexProps;
-		console.log(isPosted, failed);
 		this.setState({
 			groups
 		});

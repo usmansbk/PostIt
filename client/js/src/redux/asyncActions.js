@@ -4,6 +4,7 @@ import { normalizeGroups, normalizeUser, normalizeUsers, simplify } from './stat
 
 import {
 	Filter,
+	deleteGroupPosts,
 	requestGroups,
 	receiveGroups,
 	requestPosts,
@@ -12,6 +13,7 @@ import {
 	receiveUsers,
 	requestSearch,
 	receiveSearch,
+	removeGroup,
 	setAccountDetails,
 	setErrorMessage,
 	setStatus,
@@ -30,6 +32,13 @@ function postForm(url, json) {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		}),
 		body: form,
+		credentials: 'include'
+	})
+}
+
+function deleteUrl(url) {
+	return fetch(url, {
+		method: 'DELETE',
 		credentials: 'include'
 	})
 }
@@ -108,7 +117,6 @@ export function fetchGroups(filter) {
 			simplifiedGroups = simplify.groups(normalizedGroups);
 			const simplifiedUsers  = simplify.users(normalizedGroups.entities.users);
 			dispatch(receiveUsers(simplifiedUsers));
-			
 		})
 		.then(() => dispatch(receiveGroups(simplifiedGroups)))
 		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_GROUPS)))
@@ -199,6 +207,23 @@ export function createGroup(data) {
 		})
 		.then(() => dispatch(fetchGroups(Filter.ALL)))
 		.catch(error => dispatch(setErrorMessage(Status.CREATE_GROUP_FAILED)));
+	}
+}
+
+export function deleteGroup(id) {
+	return function (dispatch) {
+		dispatch(setStatus(Status.DELETING_GROUP));
+		deleteUrl(`${url}/group/${id}`)
+		.then(response => {
+			if (response.ok)
+				dispatch(setStatus(Status.GROUP_DELETED));
+			else return Promise.reject();
+		})
+		.then(() => dispatch(deleteGroupPosts(id)))
+		.then(() => dispatch(removeGroup(id)))
+		.catch(error => {
+			console.log(error);
+			dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP))});
 	}
 }
 

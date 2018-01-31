@@ -1,14 +1,13 @@
-const isEmpty = /^\s*$/m,
-  MAX_NAME_LEN = 22,
-  MAX_PURPOSE_LENGTH = 50;
+const isEmpty = (str) => str.trim().length === 0;
 
-function test(target) {
-  return !target || isEmpty.test(target);
+function isInvalid(target) {
+  return !target || isEmpty(target);
 }
+
 export default class Validate {
   static createGroup(req, res, next) {
     const { name, purpose } = req.body;
-    if (!name || isEmpty.test(name)) {
+    if (!name || isEmpty(name)) {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -22,7 +21,7 @@ export default class Validate {
 
   static addUsers(req, res, next) {
     const { invites } = req.body;
-    if (test(invites)) {
+    if (isInvalid(invites)) {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -36,7 +35,7 @@ export default class Validate {
 
   static postMessage(req, res, next) {
     const { message } = req.body;
-    if (test(message)) {
+    if (isInvalid(message)) {
       res.status(400).json({
         status: 'fail',
         data: {

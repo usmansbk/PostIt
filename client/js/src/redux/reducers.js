@@ -15,6 +15,8 @@ import {
   REQUEST_SEARCH,
   RECEIVE_SEARCH,
   USER_LOGOUT,
+  REMOVE_GROUP,
+  DELETE_POSTS,
   Status
 } from './actionTypes';
 
@@ -61,6 +63,31 @@ function _updateList(prevList, newList) {
   return copy;
 }
 
+function _remove(prevState, id) {
+  const copy = Object.assign({}, prevState);
+  delete copy[id];
+  return copy; 
+}
+
+function _removeId(list, id) {
+  const index = list.indexOf(+id);
+  const newList = list.slice(0, index).concat(list.slice(index+1));
+  return newList;
+}
+
+function _removeByGroupId(prevState, id) {
+  const byId = {};
+  const ids = [];
+  for (let key in prevState) {
+    let post = prevState[key];
+    if (post.groupId !== +id) {
+      byId[key] = post;
+      ids.push(post.id);
+    }
+  }
+  return { byId, ids };
+}
+
 function groups(
   state = {
     isFetching: false,
@@ -77,7 +104,13 @@ function groups(
     case REQUEST_GROUPS:
       return Object.assign({}, state, {
         isFetching: action.filter
-      })
+      });
+    case REMOVE_GROUP: {
+      return Object.assign({}, state, {
+        byId: _remove(state.byId, action.id),
+        ids: _removeId(state.ids, action.id)
+      });
+    }
     default:
       return state;
   }
@@ -124,6 +157,13 @@ function posts(
         byId: _add(state.byId, action.posts.byId),
         ids: _updateList(state.ids, action.posts.ids)
       })
+    case DELETE_POSTS: {
+      const result = _removeByGroupId(state.byId, action.id);
+      return Object.assign({}, state, {
+        byId: result.byId,
+        ids:  result.ids
+      })
+    }
     default:
       return state;
   }

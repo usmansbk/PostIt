@@ -38,13 +38,13 @@ export default class Dashboard extends React.Component {
       <Sidenav />
       <div className='row'>
         <div className='col m2 hide-on-med-and-down my-side-nav '>
-          <NavLink exact to={`${match.url}`} activeClassName='red-text text-lighten-1'>
+          <NavLink exact to={`${match.url}`} activeClassName='blue-text text-darken-4'>
               <div className='my-nav-item valign-wrapper'>
                 <span><Icon>home</Icon></span>
                 <span className='my-nav-label'>Home</span>
               </div>
           </NavLink>
-          <NavLink to={`${match.url}/groups`} activeClassName='red-text text-lighten-1'>
+          <NavLink to={`${match.url}/groups`} activeClassName='blue-text text-darken-4'>
               <div className='my-nav-item valign-wrapper'>
                 <span><Icon>group</Icon></span>
                 <span className='my-nav-label'>Groups</span>
