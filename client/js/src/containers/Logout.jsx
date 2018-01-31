@@ -4,9 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { setSession, Status, logout } from '../redux/actionTypes';
 import Logout from '../components/dashboard/Logout';
 
-function isLoggedIn(status) {
-  return status === Status.SIGNED_OUT;
-}
+const isLoggedIn = status => status === Status.SIGNED_OUT
 
 const mapStateToProps = state => {
   return {

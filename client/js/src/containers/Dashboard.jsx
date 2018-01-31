@@ -4,9 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Status } from '../redux/actionTypes';
 import Dashboard from '../components/dashboard/Dashboard';
 
-function isLoggedIn(session) {
-  return session === Status.SIGNED_IN
-}
+const isLoggedIn =session => session === Status.SIGNED_IN
 
 const mapStateToProps = state => {
   return {

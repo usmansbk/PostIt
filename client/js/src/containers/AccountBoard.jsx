@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AccountBoard from '../components/board/AccountBoard';
 
-const getAccount = (account) => {
-  return account;
-};
+const getAccount = account => account;
 
 const mapStateToProps = state => {
   return {

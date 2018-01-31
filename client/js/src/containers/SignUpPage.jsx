@@ -5,13 +5,9 @@ import { signUp } from '../redux/asyncActions';
 import { Status } from '../redux/actionTypes';
 import SignUpPage from '../components/sign/SignUpPage';
 
-function signingUp(status) {
-  return (status === Status.SIGNING_UP);
-}
+const signingUp = status => (status === Status.SIGNING_UP)
 
-function hasFailed(status) {
-  return (status === Status.SIGNUP_FAILED);
-}
+const hasFailed = status => (status === Status.SIGNUP_FAILED)
 
 const mapStateToProps = state => {
   return {
