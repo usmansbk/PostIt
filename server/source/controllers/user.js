@@ -212,9 +212,8 @@ export default class UserController {
     let associateGroup;
 
     Group.findById(guid).then((group) => {
-      const creator = group.getCreator();
       associateGroup = group;
-      if (creator.id === userId) throw Error();
+      if (group.CreatorId === userId) throw Error('Owner cant create zombie group');
       return User.findById(userId);
     }).then(user => associateGroup.removeMember(user)).then(() => {
       res.status(200).json({
@@ -222,7 +221,7 @@ export default class UserController {
         message: 'Left group'
       });
     })
-      .catch(() => {
+      .catch((error) => {
         res.status(400).json({
           status: 'fail',
           data: {
