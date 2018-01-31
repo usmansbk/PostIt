@@ -1,8 +1,8 @@
 import moment from 'moment';
 
-export function predicate(status, target, state) {
+export function predicate(key, status, target, state) {
 	const result = status === target;
-	if (result) state.status = '';
+	if (result) state[key] = '';
 	return result;
 }
 

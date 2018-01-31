@@ -6,7 +6,7 @@ import MessageBoard from '../components/board/MessageBoard';
 import { predicate } from '../helpers/utils';
 import { getElapsedTime } from '../helpers/utils';
 
-const isErrored = (state) => predicate(state.error, Status.FAILED_TO_FETCH_POSTS, state);
+const isErrored = (state) => predicate('error', state.error, Status.FAILED_TO_FETCH_POSTS, state);
 
 const getPosts = (posts, members, groups, page, group) => {
   return posts.ids.filter(id => {

@@ -5,11 +5,11 @@ import { createGroup } from '../redux/asyncActions';
 import { Status } from '../redux/actionTypes';
 import NewGroupModal from '../components/board/NewGroupModal';
 
-const isCreated = (state) => predicate(state.status, Status.GROUP_CREATED, state);
+const isCreated = (state) => predicate('status', state.status, Status.GROUP_CREATED, state);
 
-const hasFailed = (state) => predicate(state.error, Status.CREATE_GROUP_FAILED, state);
+const hasFailed = (state) => predicate('error', state.error, Status.CREATE_GROUP_FAILED, state);
 
-const isCreating = (status, state) => (status === Status.CREATING_GROUP) && !hasFailed(state);
+const isCreating = (status, state) => (status === Status.CREATING_GROUP);
 
 const mapStateToProps = state => {
 	return {

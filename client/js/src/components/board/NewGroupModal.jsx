@@ -68,7 +68,7 @@ export default class NewGroupModal extends React.Component {
 			<div>
 				<Fab href='#newgroup' color='green' onClick={this.clearFields}>add_circle_outline</Fab>
 				<div id='newgroup' className='modal'>
-					{ creating && loader }
+					{ (creating && !failed) && loader }
 					<div className='modal-content'>
 						<form id='new-group-modal' onSubmit={this.handleSubmit}>
 							<InputField className='input-field' type='text' id='groupname' name='name' label='Group name' value={this.state.name} onChange={this.handleChange}>

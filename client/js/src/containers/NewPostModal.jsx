@@ -8,11 +8,11 @@ import { Status } from '../redux/actionTypes';
 
 const getGroups = (groups) => groups.ids.map(id => groups.byId[id]);
 
-const isPosted = (state) => predicate(state.status, Status.MESSAGE_POSTED, state);
+const isPosted = (state) => predicate('status', state.status, Status.MESSAGE_POSTED, state);
 
-const hasFailed = (state) => predicate(state.error, Status.FAILED_TO_POST_MESSAGE, state);
+const hasFailed = (state) => predicate('error', state.error, Status.FAILED_TO_POST_MESSAGE, state);
 
-const isPosting = (status, state) => (status === Status.POSTING_MESSAGE) && !hasFailed(state);
+const isPosting = (status, state) => (status === Status.POSTING_MESSAGE);
 
 const mapStateToProps = state => {
 	return {

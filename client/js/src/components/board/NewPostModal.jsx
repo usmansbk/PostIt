@@ -54,6 +54,7 @@ export default class NewPostModal extends React.Component {
 
 	componentWillReceiveProps(nexProps) {
 		const { isPosted, failed, groups } = nexProps;
+		console.log(isPosted, failed);
 		this.setState({
 			groups
 		});
@@ -85,7 +86,7 @@ export default class NewPostModal extends React.Component {
 				<Fab href='#newpost' color='red'onClick={this.clearFields} >mode_edit</Fab>
 				<div id='newpost' className='modal modal-fixed-footer'>
 					<div className='modal-content'>
-						{ posting && loader }
+						{ (posting && !failed) && loader }
 						<form id='new-post-modal' onSubmit={this.handleSubmit}>
 							<SelectGroup groups={this.state.groups} onChange={this.handleSelect} />
 							<div className='input-field' id='message'>
