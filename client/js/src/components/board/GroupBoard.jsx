@@ -1,7 +1,6 @@
 import React from 'react';
 import MessageBoard from '../../containers/MessageBoard';
 import GroupInfo from './GroupInfo';
-import Icon from '../common/Icon';
 
 export default ({groupInfo}) => {
   return (
