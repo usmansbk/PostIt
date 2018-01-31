@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setPage, setGroup } from '../redux/actionTypes';
+import { predicate } from '../helpers/utils';
+import { setPage, setGroup, Status } from '../redux/actionTypes';
 import { deleteGroup } from '../redux/asyncActions';
 import GroupsBoard from '../components/board/GroupsBoard';
+
+const isDeleted = (state) => predicate('status', state.status, Status.GROUP_DELETED, state);
+
+const hasFailed = (state) => predicate('error', state.error, Status.FAILED_TO_DELETE_GROUP, state);
 
 const getGroups = (groups, users, adminId) => {
   return groups.ids.map(id => {
@@ -29,9 +34,19 @@ const mapDispatchToProps = dispatch => {
       event.preventDefault();
       const { target } = event
           , id = target.getAttribute('id')
+          , action = target.getAttribute('jsaction')
           , name = target.getAttribute('name')
-          , answer = confirm(`Are you sure you want to close ${name}?`);
-      if (answer) dispatch(deleteGroup(id))
+          , answer = confirm(`Are you sure you want to ${action=='CLOSE'?'delete':'leave'} ${name}?`);
+      if (answer) {
+        switch (action) {
+          case 'CLOSE':
+            dispatch(deleteGroup(id))
+            break;
+          case 'LEAVE':
+            console.log('Leave group', action, id);
+            break;
+        }
+      }
     }
   }
 }
@@ -39,7 +54,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     groups: getGroups(state.groups, state.users, state.account.id),
-    isFetching: state.groups.isFetching
+    isFetching: state.groups.isFetching,
+    deleted: isDeleted(state),
+    failed: hasFailed(state)
   }
 }
 

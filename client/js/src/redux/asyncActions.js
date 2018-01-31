@@ -215,15 +215,12 @@ export function deleteGroup(id) {
 		dispatch(setStatus(Status.DELETING_GROUP));
 		deleteUrl(`${url}/group/${id}`)
 		.then(response => {
-			if (response.ok)
-				dispatch(setStatus(Status.GROUP_DELETED));
-			else return Promise.reject();
+			if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
+			else Promise.reject();
 		})
 		.then(() => dispatch(deleteGroupPosts(id)))
 		.then(() => dispatch(removeGroup(id)))
-		.catch(error => {
-			console.log(error);
-			dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP))});
+		.catch(error => dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP)));
 	}
 }
 
