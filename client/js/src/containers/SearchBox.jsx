@@ -14,31 +14,31 @@ const addFailed = (state) => predicate('error', state.error, Status.FAILED_TO_AD
 const isFound = (state) => predicate('status', state.status, Status.SEARCH_FOUND, state);
 
 const getUsers = (search, groupId, groups, adminId) => {
-	return search.ids.filter(id => +id !== adminId).map(id => {
-		const user = search.byId[id];
-		let cloneUser;
-		if (groupId) {
-			const currentGroup = groups.byId[groupId];
-			const isMember = currentGroup.Members.indexOf(user.id) !== -1;
-			const canAdmin = currentGroup.CreatorId === adminId;
-			cloneUser = Object.assign({}, user, {
-				isMember,
-				canAdmin
-			})
-		}
-		return cloneUser || user;
-	});
+  return search.ids.filter(id => +id !== adminId).map(id => {
+    const user = search.byId[id];
+    let cloneUser;
+    if (groupId) {
+      const currentGroup = groups.byId[groupId];
+      const isMember = currentGroup.Members.indexOf(user.id) !== -1;
+      const canAdmin = currentGroup.CreatorId === adminId;
+      cloneUser = Object.assign({}, user, {
+        isMember,
+        canAdmin
+      })
+    }
+    return cloneUser || user;
+  });
 };
 
 const mapDispatchToProps = dispatch => {
-	return {
-		handleAddOrRemove: (event) => {
-			const { target } = event
-				, gid = target.getAttribute('gid')
-			    , username = target.getAttribute('username');
-			dispatch(addUserTo(gid, username));
-		}
-	}
+  return {
+    handleAddOrRemove: (event) => {
+      const { target } = event
+        , gid = target.getAttribute('gid')
+          , username = target.getAttribute('username');
+      dispatch(addUserTo(gid, username));
+    }
+  }
 }
 
 const mapStateToProps = state => {

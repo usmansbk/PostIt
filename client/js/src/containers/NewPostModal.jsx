@@ -15,25 +15,25 @@ const hasFailed = (state) => predicate('error', state.error, Status.FAILED_TO_PO
 const isPosting = (status, state) => (status === Status.POSTING_MESSAGE);
 
 const mapStateToProps = state => {
-	return {
-		posting: isPosting(state.status, state),
-		failed: hasFailed(state),
-		isPosted: isPosted(state),
-		groups: getGroups(state.groups)
-	}
+  return {
+    posting: isPosting(state.status, state),
+    failed: hasFailed(state),
+    isPosted: isPosted(state),
+    groups: getGroups(state.groups)
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-	return {
-		handleSubmit: form => {
-			dispatch(postMessage(form));
-		}
-	}
+  return {
+    handleSubmit: form => {
+      dispatch(postMessage(form));
+    }
+  }
 }
 
 const NewPostModalContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(NewPostModal);
 
 export default withRouter(NewPostModalContainer);

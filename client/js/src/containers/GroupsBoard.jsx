@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { predicate } from '../helpers/utils';
 import { setPage, setGroup, Status } from '../redux/actionTypes';
-import { deleteGroup } from '../redux/asyncActions';
+import { deleteGroup, leaveGroup } from '../redux/asyncActions';
 import GroupsBoard from '../components/board/GroupsBoard';
 
 const isDeleted = (state) => predicate('status', state.status, Status.GROUP_DELETED, state);
@@ -43,7 +43,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(deleteGroup(id))
             break;
           case 'LEAVE':
-            console.log('Leave group', action, id);
+            dispatch(leaveGroup(id))
             break;
         }
       }

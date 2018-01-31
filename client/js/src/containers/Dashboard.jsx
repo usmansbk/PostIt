@@ -5,23 +5,23 @@ import { Status } from '../redux/actionTypes';
 import Dashboard from '../components/dashboard/Dashboard';
 
 function isLoggedIn(session) {
-	return session === Status.SIGNED_IN
+  return session === Status.SIGNED_IN
 }
 
 const mapStateToProps = state => {
   return {
-  	isLoggedIn: isLoggedIn(state.session)
+    isLoggedIn: isLoggedIn(state.session)
   }
 }
 
 const mapDispatchToProps = state => {
-	return {
-		isAuthenticated: (history, isLoggedIn) => {
-			if (!isLoggedIn) {
-				history.replace('/');
-			}
-		}
-	}
+  return {
+    isAuthenticated: (history, isLoggedIn) => {
+      if (!isLoggedIn) {
+        history.replace('/');
+      }
+    }
+  }
 }
 
 const DashboardContainer = connect(

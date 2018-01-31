@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import GroupMembers from '../components/board/GroupMembers';
 
 const getMembers = (groups, users, groupId) => {
-	const group = groups.byId[groupId];
-	return group.Members.map(id => {
-		const member = users.byId[id];
-		return member;
-	});
+  const group = groups.byId[groupId];
+  return group.Members.map(id => {
+    const member = users.byId[id];
+    return member;
+  });
 };
 
 const mapStateToProps = state => {

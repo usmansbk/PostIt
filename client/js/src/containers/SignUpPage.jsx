@@ -6,36 +6,36 @@ import { Status } from '../redux/actionTypes';
 import SignUpPage from '../components/sign/SignUpPage';
 
 function signingUp(status) {
-	return (status === Status.SIGNING_UP);
+  return (status === Status.SIGNING_UP);
 }
 
 function hasFailed(status) {
-	return (status === Status.SIGNUP_FAILED);
+  return (status === Status.SIGNUP_FAILED);
 }
 
 const mapStateToProps = state => {
-	return {
-		status: state.session,
-		signingUp: signingUp(state.session),
-		failed: hasFailed(state.session)
-	}
+  return {
+    status: state.session,
+    signingUp: signingUp(state.session),
+    failed: hasFailed(state.session)
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-	return {
-		handleSubmit: form => {
-			dispatch(signUp(form));
-		},
-		handleSignup: (history, status) => {
-			if (status === Status.SIGNED_IN)
-      			history.replace('/dashboard');
-		}
-	}
+  return {
+    handleSubmit: form => {
+      dispatch(signUp(form));
+    },
+    handleSignup: (history, status) => {
+      if (status === Status.SIGNED_IN)
+            history.replace('/dashboard');
+    }
+  }
 }
 
 const SignUpPageContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(SignUpPage);
 
 export default withRouter(SignUpPageContainer);

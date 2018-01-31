@@ -1,18 +1,16 @@
 import moment from 'moment';
 
 export function predicate(key, status, target, state) {
-	const result = status === target;
-	if (result) state[key] = '';
-	return result;
+  const result = status === target;
+  if (result) state[key] = '';
+  return result;
 }
 
 export function setPageTitle(newTitle) {
-	const title = document.querySelector('title');
-	title.innerText = newTitle;
+  const title = document.querySelector('title');
+  title.innerText = newTitle;
 }
 
 export function getElapsedTime(timeString) {
-	return moment(timeString).fromNow();
+  return moment(timeString).fromNow();
 }
-
-// console.log(getElapsedTime('2018-01-29T14:14:24.079Z'))

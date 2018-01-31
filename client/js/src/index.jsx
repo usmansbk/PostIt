@@ -15,23 +15,23 @@ import '../../stylesheets/sass/index.scss';
 
 const loggerMiddleware = createLogger();
 const store = createStore(
-	postIt,
-	applyMiddleware(
-		thunkMiddleware,
-		loggerMiddleware
-	)
+  postIt,
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  )
 );
 ReactDOM.render(
-	<Provider store={store}>
-		<BrowserRouter>
-			<Switch>
-	    		<Route exact path='/' component={SignInPage} />
-	    		<Route exact path='/signup' component={SignUpPage} />
-	    		<Route path='/dashboard' component={Dashboard} />
-	    		<Route component={PageNotFound} />
-    		</Switch>
-		</BrowserRouter>
-	</Provider>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+          <Route exact path='/' component={SignInPage} />
+          <Route exact path='/signup' component={SignUpPage} />
+          <Route path='/dashboard' component={Dashboard} />
+          <Route component={PageNotFound} />
+        </Switch>
+    </BrowserRouter>
+  </Provider>,
   document.querySelector('#root')
  );
 

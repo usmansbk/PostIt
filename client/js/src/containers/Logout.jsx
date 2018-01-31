@@ -5,27 +5,27 @@ import { setSession, Status, logout } from '../redux/actionTypes';
 import Logout from '../components/dashboard/Logout';
 
 function isLoggedIn(status) {
-	return status === Status.SIGNED_OUT;
+  return status === Status.SIGNED_OUT;
 }
 
 const mapStateToProps = state => {
-	return {
-		session: isLoggedIn(state.session),
-	}
+  return {
+    session: isLoggedIn(state.session),
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-	return {
-		handleLogout: (history) => {
-			dispatch(setSession(Status.SIGNED_OUT));
-			dispatch(logout());
-			history.replace('/')
-		}
-	}
+  return {
+    handleLogout: (history) => {
+      dispatch(setSession(Status.SIGNED_OUT));
+      dispatch(logout());
+      history.replace('/')
+    }
+  }
 }
 const LogoutContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Logout);
 
 export default withRouter(LogoutContainer);

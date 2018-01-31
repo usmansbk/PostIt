@@ -12,24 +12,24 @@ const hasFailed = (state) => predicate('error', state.error, Status.CREATE_GROUP
 const isCreating = (status, state) => (status === Status.CREATING_GROUP);
 
 const mapStateToProps = state => {
-	return {
-		failed: hasFailed(state),
-		creating: isCreating(state.status, state),
-		isCreated: isCreated(state)
-	}
+  return {
+    failed: hasFailed(state),
+    creating: isCreating(state.status, state),
+    isCreated: isCreated(state)
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-	return {
-		handleSubmit: form => {
-			dispatch(createGroup(form));
-		}
-	}
+  return {
+    handleSubmit: form => {
+      dispatch(createGroup(form));
+    }
+  }
 }
 
 const NewGroupModalContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(NewGroupModal);
 
 export default NewGroupModalContainer;
