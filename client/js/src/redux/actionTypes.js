@@ -8,7 +8,7 @@ export const CREATING_ACCOUNT = 'CREATING_ACCOUNT';
 export const SET_STATUS = 'SET_STATUS';
 export const SET_SESSION = 'SET_SESSION';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
-
+export const USER_LOGOUT = 'USER_LOGOUT';
 /*
  * Network interaction action types
  */
@@ -152,5 +152,11 @@ export function setStatus(status) {
   return {
     type: SET_STATUS,
     status
+  }
+}
+
+export function logout() {
+  return {
+    type: USER_LOGOUT
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setSession, Status } from '../redux/actionTypes';
+import { setSession, Status, logout } from '../redux/actionTypes';
 import Logout from '../components/dashboard/Logout';
 
 function isLoggedIn(status) {
@@ -18,6 +18,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		handleLogout: (history) => {
 			dispatch(setSession(Status.SIGNED_OUT));
+			dispatch(logout());
 			history.replace('/')
 		}
 	}

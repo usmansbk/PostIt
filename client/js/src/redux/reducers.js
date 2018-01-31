@@ -14,6 +14,7 @@ import {
   RECEIVE_USERS,
   REQUEST_SEARCH,
   RECEIVE_SEARCH,
+  USER_LOGOUT,
   Status
 } from './actionTypes';
 
@@ -192,4 +193,14 @@ const reducers = {
   session
 };
 
-export default reducers;
+
+const postIt = combineReducers({ ...reducers });
+let state;
+const rootReducers = (state, action) => {
+  if (action.type === USER_LOGOUT) {
+    state  = undefined
+  }
+
+  return postIt(state, action)
+}
+export default rootReducers;

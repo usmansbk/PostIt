@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { createLogger } from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import reducers from './redux/reducers';
+import postIt from './redux/reducers';
 import Dashboard from './containers/Dashboard';
 import SignInPage from './containers/SignInPage';
 import SignUpPage from './containers/SignUpPage';
@@ -15,7 +15,7 @@ import '../../stylesheets/sass/index.scss';
 
 const loggerMiddleware = createLogger();
 const store = createStore(
-	combineReducers({ ...reducers }),
+	postIt,
 	applyMiddleware(
 		thunkMiddleware,
 		loggerMiddleware
