@@ -14,6 +14,7 @@ import {
     requestSearch,
     receiveSearch,
     removeGroup,
+    removeUser,
     setAccountDetails,
     setErrorMessage,
     setStatus,
@@ -87,7 +88,10 @@ export function requestRemoveUser(uid, guid) {
         })
         .then(() => dispatch(removeUser(uid, guid)))
         .then(() => dispatch(setStatus(Status.USER_REMOVED)))
-        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_REMOVE_USER)))
+        .catch(error => {
+            console.log(error)
+            dispatch(setErrorMessage(Status.FAILED_TO_REMOVE_USER))
+        })
     }
 }
 

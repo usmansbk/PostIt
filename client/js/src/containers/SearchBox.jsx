@@ -5,13 +5,11 @@ import { Status } from '../redux/actionTypes';
 import { addUserTo } from '../redux/asyncActions';
 import SearchBox from '../components/dashboard/SearchBox';
 
-const hasFailed = (state) => predicate('error', state.error, Status.SEARCH_FAILED, state);
-
-const isAdded = (state) => predicate('status', state.status, Status.USER_ADDED, state);
-
-const addFailed = (state) => predicate('error', state.error, Status.FAILED_TO_ADD_USER, state);
-
-const isFound = (state) => predicate('status', state.status, Status.SEARCH_FOUND, state);
+const addUser = state => predicate('status', state.status, Status.ADD_USER, state);
+const hasFailed = state => predicate('error', state.error, Status.SEARCH_FAILED, state);
+const isAdded = state => predicate('status', state.status, Status.USER_ADDED, state);
+const addFailed = state => predicate('error', state.error, Status.FAILED_TO_ADD_USER, state);
+const isFound = state => predicate('status', state.status, Status.SEARCH_FOUND, state);
 
 const getUsers = (search, groupId, groups, adminId) => {
   return search.ids.filter(id => +id !== adminId).map(id => {
@@ -40,12 +38,13 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-
+ 
 const mapStateToProps = state => {
   return {
     users: getUsers(state.search, state.group, state.groups, state.account.id),
     page: state.page,
     isFetching: state.search.isFetching,
+    add: addUser(state),
     failed: hasFailed(state),
     found: isFound(state),
     added: isAdded(state),

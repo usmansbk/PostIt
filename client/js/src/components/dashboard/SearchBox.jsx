@@ -28,7 +28,7 @@ export default class Searchbox extends React.Component {
   }
 
   render() {
-      const {users, page, isFetching, failed, found, gid} = this.props;
+      const {users, page, isFetching, failed, found, gid, add, addFailed} = this.props;
     const style = {
       padding: '0px',
       margin: '0px',
@@ -40,7 +40,7 @@ export default class Searchbox extends React.Component {
       height: '20px',
       lineHeight: '20px',
     }
-    const userComponents = users.map((user, index) => <SearchItem gid={gid} onClick={this.handleClick} key={index} page={page} {...user}/>);
+    const userComponents = users.map((user, index) => <SearchItem add={add} failed={addFailed} gid={gid} onClick={this.handleClick} key={index} page={page} {...user}/>);
 
       const shouldShowLoader = isFetching && !found;
 
