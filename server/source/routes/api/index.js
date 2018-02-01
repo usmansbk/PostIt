@@ -20,7 +20,7 @@ router.get('/api/group/:guid/users', GroupController.getMembers);
 router.get('/api/group/:guid/messages', GroupController.retrieveMessages);
 router.delete('/api/group/:guid', GroupController.deleteGroup);
 router.patch('/api/group/', GroupController.updateModel);
-router.patch('/api/group?', GroupController.removeUser);
+router.patch('/api/group/:guid/remove?', GroupController.removeUser);
 router.patch('/api/group/:guid', Route.isAuthenticated, UserController.leaveGroup);
 
 router.all('*', (req, res) => {

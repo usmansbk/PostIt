@@ -110,7 +110,7 @@ export function requestUpdateGroup(form) {
 
 export function requestRemoveUser(uid, guid) {
     return function (dispatch) {
-        const url = `/api/group?uid=${uid}&guid=${guid}`;
+        const url = `/api/group/${guid}/remove?uid=${uid}`;
         leaveUrl(url)
         .then(response => {
             if (response.ok) {

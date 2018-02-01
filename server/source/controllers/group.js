@@ -206,7 +206,8 @@ export default class GroupController {
   }
 
   static removeUser(req, res) {
-    const { uid, guid } = req.query;
+    const { uid } = req.query;
+    const { guid } = req.params;
     const { userId } = req.session;
     let group;
     Group.findOne({
@@ -228,6 +229,7 @@ export default class GroupController {
       })
     })
     .catch((error) => {
+      console.log(error);
       res.status(400).json({
         status: 'fail',
         data: {
