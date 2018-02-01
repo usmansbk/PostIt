@@ -1,5 +1,6 @@
 import express from 'express';
 import http from 'http';
+import socketIo from 'socket.io'
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
@@ -30,5 +31,11 @@ app.use((err, req, res, /* next */) => {
 });
 
 const server = http.createServer(app)
+
+const io = socketIo(server);
+
+io.on('connection', socket => {
+  console.log('a user connected');
+});
 
 export default server;
