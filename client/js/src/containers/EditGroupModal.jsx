@@ -7,20 +7,20 @@ import EditGroupModal from '../components/board/EditGroupModal';
 
 const isUpdated = (state) => predicate('status', state.status, Status.GROUP_UPDATED, state);
 
-const hasFailed = (state) => predicate('error', state.error, Status.UPDATE_GROUP_FAILED, state);
+const hasFailed = (state) => predicate('error', state.error, Status.FAILED_TO_UPDATE_GROUP, state);
 
 const isUpdating = (status, state) => (status === Status.UPDATING_GROUP);
 
 function get(key, groups, id) {
   const group = groups.byId[id];
   return group[key];
-}
+} 
 
 const mapStateToProps = state => {
   return {
     failed: hasFailed(state),
-    creating: isUpdating(state.status, state),
-    isCreated: isUpdated(state),
+    updating: isUpdating(state.status, state),
+    isUpdated: isUpdated(state),
     groupName: get('name', state.groups, state.group),
     id: state.group,
     discription: get('purpose', state.groups, state.group)

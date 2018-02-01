@@ -11,15 +11,15 @@ export default ({member, isAdmin, onClick, failedToRemove, removeUser, ...rest})
       </div>
       <div className='col s4'>
       {
-        !member.isAdmin &&
-        <a
-        href='#'
-        onClick={onClick}
-        uid={member.id}
-        guid={member.guid}>
-        <Icon
-        className='right red-text text-lighten-1'
-        title='Remove user'>clear</Icon></a>
+        isAdmin && !member.isAdmin &&
+          <a
+          href='#'
+          onClick={onClick}
+          uid={member.id}
+          guid={member.guid}>
+          <Icon
+          className='right red-text text-lighten-1'
+          title='Remove user'>clear</Icon></a>
       }
       </div>
     </div>)

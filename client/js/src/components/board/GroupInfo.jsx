@@ -27,7 +27,7 @@ export default class GroupInfo extends React.Component {
       fontWeight: '500',
       marginTop: '0px',
     };
-    const {groupName, discription, creator, membersCount} = this.props;
+    const {groupName, discription, creator, membersCount, isOwner} = this.props;
     return (
       <div className='row'>
         <div className='col s12'>
@@ -38,7 +38,7 @@ export default class GroupInfo extends React.Component {
           	    <UserInfo {...creator} />
                 <div className='section'>
                   <p className='valign-wrapper' style={{paddingTop: '0.5rem'}}><Icon className='tiny'>group_work</Icon><a href='#members' className='blue-text text-darken-1 modal-trigger'>{membersCount}</a></p>
-                  <EditGroupModal />
+                  { isOwner && <EditGroupModal /> }
                 </div>
   	         </div>
           </div>

@@ -5,15 +5,19 @@ import { requestRemoveUser } from '../redux/asyncActions';
 import { Status } from '../redux/actionTypes';
 import GroupMembers from '../components/board/GroupMembers';
 
+const isAdmin = (groups, guid, adminId) => {
+  const group = groups.byId[guid];
+  return +group.CreatorId === +adminId
+}
 const isRemoved = state => predicate('status', state.status, Status.USER_REMOVED, state);
 const hasFailed = state => predicate('error', state.error, Status.FAILED_TO_REMOVE_USER, state);
 const isRemoving= state => predicate('status', state.status, Status.REMOVING_USER, state);
 
-const getMembers = (groups, users, groupId, adminId) => {
+const getMembers = (groups, users, groupId, accountId) => {
   const group = groups.byId[groupId];
   return group.Members.map(id => {
     const member = users.byId[id];
-    const isAdmin = adminId === member.id;
+    const isAdmin = member.id === accountId
     return Object.assign({}, member, { guid: groupId, isAdmin });
   });
 };
@@ -33,10 +37,11 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     members: getMembers(state.groups, state.users, state.group, state.account.id),
+    isAdmin: isAdmin(state.groups, state.group, state.account.id),
     removedUser: isRemoved(state),
     failedToRemove: hasFailed(state),
     removeUser: isRemoving(state),
-    isFetching: state.users.isFetching
+    isFetching: state.users.isFetching,
   }
 }
 

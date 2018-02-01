@@ -103,7 +103,7 @@ export function requestUpdateGroup(form) {
         .then(() => dispatch(fetchAll(Filter.ALL)))
         .catch(error => {
             console.log(error)
-            dispatch(setErrorMessage(setStatus(Status.FAILED_TO_UPDATE_GROUP)))
+            dispatch(setErrorMessage(Status.FAILED_TO_UPDATE_GROUP))
         })
     }
 }

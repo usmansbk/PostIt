@@ -25,8 +25,8 @@ export default class EditGroupModal extends React.Component {
     this._initModal();
   }
 
-  componentWillReceiveProps({failed, isCreated, groupName, discription, ...rest}) {
-    if (isCreated) {
+  componentWillReceiveProps({failed, isUpdated, groupName, discription, ...rest}) {
+    if (isUpdated) {
       M.toast({html: 'Group updated!', classes: 'rounded'});
       this.instance.close();
     }
@@ -70,7 +70,7 @@ export default class EditGroupModal extends React.Component {
   }
 
   render() {
-    const { failed, creating } = this.props;
+    const { failed, updating } = this.props;
       const loader =  <div className='center-align section'>
                         <Loader />
                       </div>
@@ -84,7 +84,7 @@ export default class EditGroupModal extends React.Component {
         <Icon className='red-text text-lighten-1 right'>edit</Icon>
         </a>
         <div id='editgroup' className='modal'>
-          { (creating && !failed) && loader }
+          { (updating && !failed) && loader }
           <div className='modal-content'>
             <form id='new-group-modal' onSubmit={this.handleSubmit}>
               <InputField type='text' id='newname' name='name' label='Group name' value={this.state.name} onChange={this.handleChange} />
