@@ -16,7 +16,6 @@ export default class GroupController {
         where: { id: userId },
       }]
     }).then((group) => {
-      if (!group) throw new Error();
       return User.findById(userId).then(user =>
         sequelize.transaction(t =>
           Post.create({ message }, { transaction: t }).then(post =>
@@ -50,7 +49,6 @@ export default class GroupController {
         where: { id: userId },
       }]
     }).then((group) => {
-      if (!group) throw new Error();
       return group.getPosts();
     }).then((posts) => {
       res.status(200).json({
@@ -80,7 +78,6 @@ export default class GroupController {
         where: { id: userId },
       }]
     }).then((group) => {
-      if (!group) throw new Error("User doesn't belong to group");
       return User.findAll({
         where: {
           [Op.or]: usersQueryList
@@ -179,6 +176,35 @@ export default class GroupController {
     });
   }
 
+  static updateModel(req, res) {
+    const { id, name, purpose } = req.body;
+    const { userId } = req.session;
+    Group.findOne({
+      where: {
+        id,
+        CreatorId: userId
+      }
+    }).then(group => {
+      group.name = name;
+      group.purpose = purpose;
+      return group.save({ fields: ['name', 'purpose']})
+    }).then(() => {
+      res.status(200).json({
+        status: 'success',
+        data: {
+          message: 'Group info updated'
+        }
+      })
+    }).catch(error => {
+      res.status(400).json({
+        status: 'fail',
+        data: {
+          message: 'Failed to update group info'
+        }
+      })
+    })
+  }
+
   static removeUser(req, res) {
     const { uid, guid } = req.query;
     const { userId } = req.session;
@@ -202,7 +228,6 @@ export default class GroupController {
       })
     })
     .catch((error) => {
-      console.log(error);
       res.status(400).json({
         status: 'fail',
         data: {
