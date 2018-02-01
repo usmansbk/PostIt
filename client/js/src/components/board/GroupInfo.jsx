@@ -3,7 +3,7 @@ import Icon from '../common/Icon';
 import UserInfo from './UserInfo';
 import M from '../../../materialize';
 import MembersCard from '../../containers/GroupMembers';
-import EditGroupModal from './EditGroupModal';
+import EditGroupModal from '../../containers/EditGroupModal';
 
 export default class GroupInfo extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ export default class GroupInfo extends React.Component {
           	    <UserInfo {...creator} />
                 <div className='section'>
                   <p className='valign-wrapper' style={{paddingTop: '0.5rem'}}><Icon className='tiny'>group_work</Icon><a href='#members' className='blue-text text-darken-1 modal-trigger'>{membersCount}</a></p>
-                  <EditGroupModal groupName={groupName} discription={discription} />
+                  <EditGroupModal />
                 </div>
   	         </div>
           </div>

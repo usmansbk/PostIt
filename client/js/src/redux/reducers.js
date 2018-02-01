@@ -15,6 +15,7 @@ import {
   REQUEST_SEARCH,
   RECEIVE_SEARCH,
   USER_LOGOUT,
+  UPDATE_GROUP,
   REMOVE_GROUP,
   DELETE_POSTS,
   REMOVE_USER,
@@ -112,6 +113,7 @@ function groups(
   }, action) {
   switch (action.type) {
     case RECEIVE_GROUPS:
+    case UPDATE_GROUP:
       return Object.assign({}, state, {
         isFetching: false,
         byId: _add(state.byId, action.groups.byId),

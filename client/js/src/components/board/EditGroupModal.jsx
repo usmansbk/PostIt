@@ -11,7 +11,8 @@ export default class EditGroupModal extends React.Component {
     super(props);
     this.state = {
       name: props.groupName,
-      purpose: props.discription
+      purpose: props.discription,
+      id: props.id
     };
     this._initModal = this._initModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,10 +45,11 @@ export default class EditGroupModal extends React.Component {
   reset() {
     this.setState({
       name: this.props.groupName,
-      purpose: this.props.discription
+      purpose: this.props.discription,
+      id: this.props.id
     })
   }
-  
+
   handleChange(event) {
     const { target } = event;
     const name = target.name;
@@ -59,7 +61,7 @@ export default class EditGroupModal extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.handleSubmit(this.state);
+    this.props.handleUpdate(this.state);
   }
 
   _initModal() {

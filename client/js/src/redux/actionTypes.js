@@ -43,6 +43,10 @@ export const Status = {
   CREATING_GROUP: 'CREATING_GROUP',
   GROUP_CREATED: 'GROUP_CREATED',
   CREATE_GROUP_FAILED: 'CREATE_GROUP_FAILED',
+  UPDATE_GROUP: 'UPDATE_GROUP',
+  GROUP_UPDATED: 'GROUP_UPDATED',
+  UPDATING_GROUP: 'UPDATING_GROUP',
+  FAILED_TO_UPDATE_GROUP: 'UPDATE_GROUP_FAILED',
   POSTING_MESSAGE: 'POSTING_MESSAGE',
   MESSAGE_POSTED: 'MESSAGE_POSTED',
   FAILED_TO_POST_MESSAGE: 'FAILED_TO_POST_MESSAGE',
@@ -189,6 +193,13 @@ export function removeUser(uid, guid) {
 export function deleteGroupPosts(id) {
   return {
     type: DELETE_POSTS,
+    id
+  }
+}
+
+export function updateGroup(id) {
+  return {
+    type: UPDATE_GROUP,
     id
   }
 }

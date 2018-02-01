@@ -34,6 +34,18 @@ function postForm(url, json) {
     })
 }
 
+function patchForm(url, json) {
+    const form = formurlencoded(json);
+    return fetch(url, {
+        method: 'PATCH',
+        headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+        body: form,
+        credentials: 'include'
+    })
+}
+
 function deleteUrl(url) {
     return fetch(url, {
         method: 'DELETE',
@@ -55,6 +67,7 @@ function get(url) {
     })
 }
 
+
 export function addUserTo(gid, invites) {
     return function (dispatch) {
         const groupUrl = `/api/group/${gid}/user`
@@ -72,6 +85,26 @@ export function addUserTo(gid, invites) {
         })
         .then(() => dispatch(fetchGroups(gid)))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_ADD_USER)))
+    }
+}
+
+export function requestUpdateGroup(form) {
+    return function (dispatch) {
+        const url = `/api/group/`
+        dispatch(setStatus(Status.UPDATE_GROUP));
+        patchForm(url, form)
+        .then(response => {
+            if (response.ok) {
+                dispatch(setStatus(Status.GROUP_UPDATED))
+            } else {
+                return Promise.reject();
+            }
+        })
+        .then(() => dispatch(fetchAll(Filter.ALL)))
+        .catch(error => {
+            console.log(error)
+            dispatch(setErrorMessage(setStatus(Status.FAILED_TO_UPDATE_GROUP)))
+        })
     }
 }
 
