@@ -1,9 +1,9 @@
-import app from '../server';
+import server from '../server';
 import { sequelize } from '../../db/models';
 
 const port = process.env.PORT || 8888;
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.info(`Server started at port ${port}`);
   sequelize
     .authenticate()

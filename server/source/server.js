@@ -1,4 +1,5 @@
 import express from 'express';
+import http from 'http';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
@@ -27,4 +28,7 @@ app.use((err, req, res, /* next */) => {
     message: 'Internal Server Error'
   });
 });
-export default app;
+
+const server = http.createServer(app)
+
+export default server;
