@@ -1,20 +1,26 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: path.join(__dirname, 'js/src/index.jsx'),
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'js')
+    path: path.resolve(__dirname, 'js'),
+    publicPath: path.resolve(__dirname, '/js/')
   },
   devtool: 'source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, './')
+    contentBase: path.resolve(__dirname, './'),
+    publicPath: path.resolve(__dirname, '/js/'),
+    proxy: {
+      '/api/*': 'http://localhost:8888',
+    },
+    hotOnly: true
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
         use: ['babel-loader']
       },
       {
@@ -25,5 +31,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };

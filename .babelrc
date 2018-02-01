@@ -2,7 +2,10 @@
   "presets": ["env", "stage-0", "react"],
   "env": {
     "test": {
-      "plugins": ["istanbul", "transform-object-rest-spread"]
+      "plugins": [
+        "istanbul",
+        "transform-object-rest-spread"
+      ]
     }
   }
 }

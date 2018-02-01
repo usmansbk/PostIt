@@ -21,9 +21,6 @@ import {
     Status
 } from './actionTypes';
 
-const port = 8888;
-const url  = `http://localhost:${port}/api`;
-
 function postForm(url, json) {
     const form = formurlencoded(json);
     return fetch(url, {
@@ -59,7 +56,7 @@ function get(url) {
 
 export function addUserTo(gid, invites) {
     return function (dispatch) {
-        const groupUrl = `${url}/group/${gid}/user`
+        const groupUrl = `/api/group/${gid}/user`
             , form = {
                 invites 
             };
@@ -82,7 +79,7 @@ export function fetchUsers(filter) {
         let simplifiedUsers;
         dispatch(requestSearch(filter));
         dispatch(requestUsers(filter));
-        get(`${url}/user/find?username=${filter}`)
+        get(`/api/user/find?username=${filter}`)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -110,7 +107,7 @@ export function fetchGroups(filter) {
     return function (dispatch) {
         let simplifiedGroups;
         dispatch(requestGroups(filter));
-        get(`${url}/user/groups`)
+        get(`/api/user/groups`)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -139,7 +136,7 @@ export function fetchAll(filter) {
 
         dispatch(requestPosts(filter));
         dispatch(requestGroups(filter));
-        get(`${url}/user`)
+        get(`/api/user`)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -164,7 +161,7 @@ export function fetchAll(filter) {
 }
 
 export function fetchPosts(filter) {
-    const postUrl = `${url}/group/${filter}/messages`;
+    const postUrl = `/api/group/${filter}/messages`;
     return function (dispatch) {
         dispatch(requestPosts(filter));
         get(postUrl)
@@ -188,7 +185,7 @@ export function postMessage(data) {
     const id = data.gid;
     return function (dispatch) {
         dispatch(setStatus(Status.POSTING_MESSAGE));
-        postForm(`${url}/group/${data.gid}/message`, data)
+        postForm(`/api/group/${data.gid}/message`, data)
         .then(response => {
             if (response.ok) {
                 dispatch(setStatus(Status.MESSAGE_POSTED));
@@ -204,7 +201,7 @@ export function postMessage(data) {
 export function createGroup(data) {
     return function (dispatch) {
         dispatch(setStatus(Status.CREATING_GROUP));
-        postForm(`${url}/group`, data)
+        postForm(`/api/group`, data)
         .then(response => {
             if (response.ok) {
                 dispatch(setStatus(Status.GROUP_CREATED))
@@ -220,7 +217,7 @@ export function createGroup(data) {
 export function deleteGroup(id) {
     return function (dispatch) {
         dispatch(setStatus(Status.DELETING_GROUP));
-        deleteUrl(`${url}/group/${id}`)
+        deleteUrl(`/api/group/${id}`)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
             else return Promise.reject();
@@ -234,7 +231,7 @@ export function deleteGroup(id) {
 export function leaveGroup(id) {
     return function (dispatch) {
         dispatch(setStatus(Status.DELETING_GROUP));
-        leaveUrl(`${url}/group`)
+        leaveUrl(`/api/group/${id}`)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
             else return Promise.reject();
@@ -248,7 +245,7 @@ export function leaveGroup(id) {
 export function signUp(data) {
     return function (dispatch) {
         dispatch(setSession(Status.SIGNING_UP));
-        postForm(`${url}/user/signup`, data)
+        postForm(`/api/user/signup`, data)
         .then(response => {
             if (response.ok){
                 dispatch(setSession(Status.SIGNED_UP))
@@ -264,7 +261,7 @@ export function signUp(data) {
 export function signIn(data) {
     return function (dispatch) {
         dispatch(setSession(Status.SIGNING_IN));
-        postForm(`${url}/user/signin`, data)
+        postForm(`/api/user/signin`, data)
         .then(response => {
             if (response.ok) {
                 dispatch(setSession(Status.SIGNED_IN));
