@@ -26,6 +26,7 @@ export default class GroupInfo extends React.Component {
     const style = {
       fontWeight: '500',
       marginTop: '0px',
+      marginBottom: '0px'
     };
     const {groupName, discription, creator, membersCount, isOwner} = this.props;
     return (

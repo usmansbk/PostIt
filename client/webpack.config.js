@@ -10,6 +10,7 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
+    host: '0.0.0.0',
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, './'),
     publicPath: path.resolve(__dirname, '/js/'),
