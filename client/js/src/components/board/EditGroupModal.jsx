@@ -96,7 +96,7 @@ export default class EditGroupModal extends React.Component {
             <button type='submit'
             form='new-group-modal'
             className={ 'modal-action blue white-text waves-effect waves-light btn ' + (this.hasNotChanged()?'disabled':'')} >
-              Create
+              Save
             </button>
           </div>
         </div>
