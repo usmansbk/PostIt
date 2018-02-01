@@ -74,6 +74,23 @@ export function addUserTo(gid, invites) {
     }
 }
 
+export function requestRemoveUser(uid, guid) {
+    return function (dispatch) {
+        const url = `/api/group?uid=${uid}&guid=${guid}`;
+        leaveUrl(url)
+        .then(response => {
+            if (response.ok) {
+                dispatch(setStatus(Status.REMOVING_USER))
+            } else {
+                return Promise.reject();
+            }
+        })
+        .then(() => dispatch(removeUser(uid, guid)))
+        .then(() => dispatch(setStatus(Status.USER_REMOVED)))
+        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_REMOVE_USER)))
+    }
+}
+
 export function fetchUsers(filter) {
     return function (dispatch) {
         let simplifiedUsers;

@@ -17,6 +17,7 @@ import {
   USER_LOGOUT,
   REMOVE_GROUP,
   DELETE_POSTS,
+  REMOVE_USER,
   Status
 } from './actionTypes';
 
@@ -88,6 +89,21 @@ function _removeByGroupId(prevState, id) {
   return { byId, ids };
 }
 
+function _removeFromGroup(groups, action) {
+  const { uid, guid } = action;
+  const group = groups[guid];
+  const members = group.Members;
+  const index = members.indexOf(+uid);
+  const newList = members.slice(0, index).concat(members.slice(index + 1));
+  const updatedGroup = Object.assign({}, group, {
+    Members: newList
+  });
+  const updatedGroups = Object.assign({}, groups, {
+    [guid]: updatedGroup
+  })
+  return updatedGroups;
+}
+
 function groups(
   state = {
     isFetching: false,
@@ -110,6 +126,11 @@ function groups(
         byId: _remove(state.byId, action.id),
         ids: _removeId(state.ids, action.id)
       });
+    }
+    case REMOVE_USER: {
+      return Object.assign({}, state, {
+        byId: _removeFromGroup(state.byId, action),
+      })
     }
     default:
       return state;

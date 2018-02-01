@@ -1,0 +1,14 @@
+.member-list-item {
+  vertical-align: middle;
+  i {
+    line-height: 2;
+  };
+  margin: 0 !important;
+  height: 100%;
+  div {
+    height: 100%;
+  }
+  &:hover {
+    background-color: #cfd8dc
+  }
+}

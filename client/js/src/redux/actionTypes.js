@@ -10,6 +10,7 @@ export const SET_SESSION = 'SET_SESSION';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const REMOVE_GROUP = 'REMOVE_GROUP';
+export const REMOVE_USER = 'REMOVE_USER';
 export const DELETE_POSTS = 'DELETE_POSTS';
 
 /*
@@ -54,6 +55,9 @@ export const Status = {
   DELETING_GROUP: 'DELETING_GROUP',
   GROUP_DELETED: 'GROUP_DELETED',
   FAILED_TO_DELETE_GROUP: 'FAILED_TO_DELETE_GROUP',
+  REMOVING_USER: 'REMOVING_USER',
+  USER_REMOVED: 'USER_REMOVED',
+  FAILED_TO_REMOVE_USER: 'FAILED_TO_REMOVE_USER',
   CLEAR: '',
 };
 
@@ -171,6 +175,14 @@ export function removeGroup(id) {
   return {
     type: REMOVE_GROUP,
     id
+  }
+}
+
+export function removeUser(uid, guid) {
+  return {
+    type: REMOVE_USER,
+    uid,
+    guid
   }
 }
 

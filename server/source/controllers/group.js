@@ -186,25 +186,29 @@ export default class GroupController {
     Group.findOne({
       where: {
         id: guid,
-        CreatorId: userId
+        CreatorId: {
+          [Op.ne]: uid,
+          [Op.eq]: userId
+        }
       }
-    }).then((associatedGroup) => {
-      if (userId === uid) throw new Error();
-      group = associatedGroup;
-      return User.findById(uid);
-    }).then(user => group.removeMember(user)).then(() => {
+    }).then((associatedGroup) => User.findById(uid).then(user => associatedGroup.removeMember(user)))
+    .then(result => {
       res.status(200).json({
         status: 'success',
-        message: 'User removed'
-      });
+        data: {
+          message: 'User removed from group',
+          numbersRemoved: result
+        }
+      })
     })
-      .catch(() => {
-        res.status(400).json({
-          status: 'fail',
-          data: {
-            message: 'Failed to remove user'
-          }
-        });
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({
+        status: 'fail',
+        data: {
+          message: 'Failed to remove user'
+        }
       });
+    });
   }
 }

@@ -23,7 +23,8 @@ export default class GroupInfo extends React.Component {
 
   render() {
     const style = {
-      fontWeight: '500'
+      fontWeight: '500',
+      marginTop: '0px',
     };
     const {groupName, discription, creator, membersCount} = this.props;
     return (
@@ -31,10 +32,10 @@ export default class GroupInfo extends React.Component {
         <div className='col s12'>
   	       <div className='card' >
   	         <div className='card-content'>
-          	    <span className='card-title grey-text text-darken-4' style={style}>{groupName}</span>
+          	    <h3 className='grey-text text-darken-4' style={style}>{groupName}</h3>
                 <p>{discription}</p>
           	    <UserInfo {...creator} />
-          	    <p className='valign-wrapper'><Icon className='tiny'>group_work</Icon><a href='#members' className='blue-text text-darken-1 modal-trigger'>{membersCount}</a></p>
+          	    <p className='valign-wrapper' style={{paddingTop: '0.5rem'}}><Icon className='tiny'>group_work</Icon><a href='#members' className='blue-text text-darken-1 modal-trigger'>{membersCount}</a></p>
   	         </div>
           </div>
         </div>
