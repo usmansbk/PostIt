@@ -30,8 +30,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleUpdate: form => {
-      dispatch(updateGroup(form));
-      console.log('Update', form);
+      dispatch(requestUpdateGroup(form));
     }
   }
 }
