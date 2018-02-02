@@ -265,7 +265,7 @@ export function leaveGroup(id) {
         })
         .then(() => dispatch(deleteGroupPosts(id)))
         .then(() => dispatch(removeGroup(id)))
-        .then(() => socket.emit(Status.LEFT_GROUP, { id }))
+        .then(() => socket.emit(Status.GROUP_DELETED, { id }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP)));
     }
 }
