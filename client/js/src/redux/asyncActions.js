@@ -1,7 +1,7 @@
 import formurlencoded from 'form-urlencoded';
 import fetch from 'isomorphic-fetch';
+import io from 'socket.io-client';
 import { normalizeGroups, normalizeUser, normalizeUsers, simplify } from './stateSchema';
-
 import {
     Filter,
     deleteGroupPosts,
@@ -21,6 +21,9 @@ import {
     setSession,
     Status
 } from './actionTypes';
+
+const END_POINT = process.env.SOCKET_URL || 'http:\/\/localhost:8888';
+export const socket = io(END_POINT);
 
 function postForm(url, json) {
     const form = formurlencoded(json);
@@ -77,13 +80,12 @@ export function addUserTo(gid, invites) {
         dispatch(setStatus(Status.ADD_USER));
         postForm(groupUrl, form)
         .then(response => {
-            if (response.ok) {
-                dispatch(setStatus(Status.USER_ADDED));
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) dispatch(setStatus(Status.USER_ADDED));
+            else return Promise.reject();
         })
         .then(() => dispatch(fetchGroups(gid)))
+        .then(() => emitUserAdded({gid, invites}))
+        .then(() => socket.emit(Status.USER_ADDED, { gid, invites }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_ADD_USER)))
     }
 }
@@ -94,17 +96,11 @@ export function requestUpdateGroup(form) {
         dispatch(setStatus(Status.UPDATE_GROUP));
         patchForm(url, form)
         .then(response => {
-            if (response.ok) {
-                dispatch(setStatus(Status.GROUP_UPDATED))
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) dispatch(setStatus(Status.GROUP_UPDATED))
+            else return Promise.reject();
         })
         .then(() => dispatch(fetchAll(Filter.ALL)))
-        .catch(error => {
-            console.log(error)
-            dispatch(setErrorMessage(Status.FAILED_TO_UPDATE_GROUP))
-        })
+        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_UPDATE_GROUP)))
     }
 }
 
@@ -113,18 +109,13 @@ export function requestRemoveUser(uid, guid) {
         const url = `/api/group/${guid}/remove?uid=${uid}`;
         leaveUrl(url)
         .then(response => {
-            if (response.ok) {
-                dispatch(setStatus(Status.REMOVING_USER))
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) dispatch(setStatus(Status.REMOVING_USER))
+            else return Promise.reject();
         })
         .then(() => dispatch(removeUser(uid, guid)))
         .then(() => dispatch(setStatus(Status.USER_REMOVED)))
-        .catch(error => {
-            console.log(error)
-            dispatch(setErrorMessage(Status.FAILED_TO_REMOVE_USER))
-        })
+        .then(() => socket.emit(Status.USER_REMOVED, { uid, guid }))
+        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_REMOVE_USER)))
     }
 }
 
@@ -135,11 +126,8 @@ export function fetchUsers(filter) {
         dispatch(requestUsers(filter));
         get(`/api/user/find?username=${filter}`)
         .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) return response.json();
+            else return Promise.reject();
         })
         .then(json => {
             const { users } = json.data
@@ -148,10 +136,8 @@ export function fetchUsers(filter) {
             dispatch(receiveSearch(simplifiedUsers));
         })
         .then(() => {
-            if (simplifiedUsers.ids.length > 0)
-                dispatch(setStatus(Status.SEARCH_FOUND));
-            else
-                dispatch(setStatus(Status.SEARCH_NOT_FOUND));
+            if (simplifiedUsers.ids.length > 0) dispatch(setStatus(Status.SEARCH_FOUND));
+            else dispatch(setStatus(Status.SEARCH_NOT_FOUND));
         })
         .catch(error => dispatch(setErrorMessage(Status.SEARCH_FAILED)))
     }
@@ -163,11 +149,8 @@ export function fetchGroups(filter) {
         dispatch(requestGroups(filter));
         get(`/api/user/groups`)
         .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                return Promise.reject()
-            }
+            if (response.ok) return response.json();
+            else return Promise.reject()
         })
         .then(json => {
             const { groups } = json.data
@@ -192,11 +175,8 @@ export function fetchAll(filter) {
         dispatch(requestGroups(filter));
         get(`/api/user`)
         .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) return response.json();
+            else return Promise.reject();
         })
         .then(json => {
             const { user }   = json.data
@@ -220,11 +200,8 @@ export function fetchPosts(filter) {
         dispatch(requestPosts(filter));
         get(postUrl)
         .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) return response.json();
+            else return Promise.reject();
         })
         .then(json => {
             const { posts }  = json.data;
@@ -241,13 +218,11 @@ export function postMessage(data) {
         dispatch(setStatus(Status.POSTING_MESSAGE));
         postForm(`/api/group/${data.gid}/message`, data)
         .then(response => {
-            if (response.ok) {
-                dispatch(setStatus(Status.MESSAGE_POSTED));
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) dispatch(setStatus(Status.MESSAGE_POSTED));
+            else return Promise.reject();
         })
         .then(() => dispatch(fetchPosts(id)))
+        .then(() => socket.emit(Status.MESSAGE_POSTED, { id }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_POST_MESSAGE)))
     }
 }
@@ -257,11 +232,8 @@ export function createGroup(data) {
         dispatch(setStatus(Status.CREATING_GROUP));
         postForm(`/api/group`, data)
         .then(response => {
-            if (response.ok) {
-                dispatch(setStatus(Status.GROUP_CREATED))
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) dispatch(setStatus(Status.GROUP_CREATED))
+            else return Promise.reject();
         })
         .then(() => dispatch(fetchGroups(Filter.ALL)))
         .catch(error => dispatch(setErrorMessage(Status.CREATE_GROUP_FAILED)));
@@ -278,6 +250,7 @@ export function deleteGroup(id) {
         })
         .then(() => dispatch(deleteGroupPosts(id)))
         .then(() => dispatch(removeGroup(id)))
+        .then(() => socket.emit(Status.GROUP_DELETED, { id }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP)));
     }
 }
@@ -292,6 +265,7 @@ export function leaveGroup(id) {
         })
         .then(() => dispatch(deleteGroupPosts(id)))
         .then(() => dispatch(removeGroup(id)))
+        .then(() => socket.emit(Status.LEFT_GROUP, { id }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP)));
     }
 }
@@ -301,11 +275,8 @@ export function signUp(data) {
         dispatch(setSession(Status.SIGNING_UP));
         postForm(`/api/user/signup`, data)
         .then(response => {
-            if (response.ok){
-                dispatch(setSession(Status.SIGNED_UP))
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) dispatch(setSession(Status.SIGNED_UP))
+            else return Promise.reject();
         })
         .then(() => dispatch(signIn(data)))
         .catch(error => dispatch(setSession(Status.SIGNUP_FAILED)));
@@ -317,11 +288,8 @@ export function signIn(data) {
         dispatch(setSession(Status.SIGNING_IN));
         postForm(`/api/user/signin`, data)
         .then(response => {
-            if (response.ok) {
-                dispatch(setSession(Status.SIGNED_IN));
-            } else {
-                return Promise.reject();
-            }
+            if (response.ok) dispatch(setSession(Status.SIGNED_IN));
+            else return Promise.reject();
         }).then(() => dispatch(fetchAll(Filter.ALL)))
         .catch(error => dispatch(setSession(Status.SIGNIN_FAILED, Status)));
     }
