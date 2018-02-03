@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, 'js/src/index.jsx'),
@@ -41,5 +42,10 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-  ]
+    new CompressionPlugin({
+      test: /\.js/,
+      asset: '[path].gz[query]',
+
+    })
+]
 };

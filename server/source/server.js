@@ -18,6 +18,11 @@ app.use(session({
   cookie: {}
 }));
 
+app.get('*.js', (req, res, next) => {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
 app.use(express.static(path.join(__dirname, '../../client')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/index.html'))
