@@ -18,7 +18,7 @@ app.use(session({
   cookie: {}
 }));
 
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
   res.json(appInfo);
 });
 
