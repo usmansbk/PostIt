@@ -25,7 +25,7 @@ router.patch('/api/group/', GroupController.updateModel);
 router.patch('/api/group/:guid/remove?', GroupController.removeUser);
 router.patch('/api/group/:guid', Route.isAuthenticated, UserController.leaveGroup);
 
-router.all('*', (req, res) => {
+router.all('/api/*', (req, res) => {
   res.status(405).json({
     status: 'fail',
     data: {

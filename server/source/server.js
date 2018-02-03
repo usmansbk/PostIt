@@ -22,6 +22,10 @@ app.use(express.static(path.join(__dirname, '../../client')));
 
 app.use(apiRouter);
 
+app.use('*', (res, req) => {
+  res.status(404).send('Page Not Found')
+})
+
 app.use((err, req, res, /* next */) => {
   res.status(500).json({
     status: 'error',
