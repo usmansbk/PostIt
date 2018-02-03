@@ -15,7 +15,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, './'),
     publicPath: path.resolve(__dirname, '/js/'),
     proxy: {
-      '/api/*': 'http://localhost:8888',
+      '/api/*': 'http://localhost:5000',
     }
   },
   module: {

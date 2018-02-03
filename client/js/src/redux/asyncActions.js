@@ -24,7 +24,7 @@ import {
     login
 } from './actionTypes';
 
-const END_POINT = process.env.SOCKET_URL || 'http://localhost:8888';
+const END_POINT = 'http://localhost:5000';
 export const socket = io(END_POINT);
 
 const inGroup = (id) => {
