@@ -5,6 +5,7 @@ import socketIo from 'socket.io'
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import favicon from 'serve-favicon';
 import apiRouter from './routes/api';
 import Actions from './helpers/actions';
 
@@ -18,11 +19,7 @@ app.use(session({
   cookie: {}
 }));
 
-app.get('*.js', (req, res, next) => {
-  req.url = req.url + '.gz';
-  res.set('Content-Encoding', 'gzip');
-  next();
-});
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 app.use(express.static(path.join(__dirname, '../../client')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/index.html'))
@@ -35,6 +32,12 @@ app.use((err, req, res, /* next */) => {
     status: 'error',
     message: 'Internal Server Error'
   });
+});
+
+app.get('*.js', (req, res, next) => {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
 });
 
 const server = http.createServer(app)
