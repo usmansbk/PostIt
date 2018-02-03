@@ -1,5 +1,6 @@
 import express from 'express';
 import http from 'http';
+import path from 'path';
 import socketIo from 'socket.io'
 import session from 'express-session';
 import bodyParser from 'body-parser';
@@ -18,8 +19,9 @@ app.use(session({
   cookie: {}
 }));
 
+app.use(express.static(path.join(__dirname, '../../client')));
 app.get('/', (req, res) => {
-  res.json(appInfo);
+  res.sendFile(path.join(__dirname, '../../client/index.html'))
 });
 
 app.use(router);
