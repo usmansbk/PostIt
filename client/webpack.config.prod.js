@@ -9,16 +9,6 @@ module.exports = {
     path: path.resolve(__dirname, 'js'),
     publicPath: path.resolve(__dirname, '/js/')
   },
-  devtool: 'source-map',
-  devServer: {
-    host: '0.0.0.0',
-    historyApiFallback: true,
-    contentBase: path.resolve(__dirname, './'),
-    publicPath: path.resolve(__dirname, '/js/'),
-    proxy: {
-      '/api/*': 'http://localhost:8888',
-    }
-  },
   module: {
     rules: [
       {
@@ -45,7 +35,6 @@ module.exports = {
     new CompressionPlugin({
       test: /\.js/,
       asset: '[path].gz[query]',
-
     })
 ]
 };
