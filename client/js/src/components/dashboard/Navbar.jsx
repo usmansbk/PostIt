@@ -95,7 +95,7 @@ export default class Navbar extends React.Component {
                       }
                     </div>
                   </div>
-    		          <Icon onClick={this.handleClick} className='nav-display nav-item hide-on-med-and-up grey-text text-darken-1'>search</Icon>
+    		          <Icon onClick={this.handleClick} className='nav-display nav-item show-on-med-and-down grey-text text-darken-1'>search</Icon>
                   <a href='#' className='account' data-target='account'><Icon className='nav-display nav-item blue-text'>account_circle</Icon></a>
                   <span className='nav-display nav-item grey-text text-darken-2'>{username}</span>
                 </div>

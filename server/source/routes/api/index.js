@@ -25,12 +25,7 @@ router.patch('/api/group/:guid/remove?', GroupController.removeUser);
 router.patch('/api/group/:guid', Route.isAuthenticated, UserController.leaveGroup);
 
 router.all('*', (req, res) => {
-  res.status(405).json({
-    status: 'fail',
-    data: {
-      message: 'Bad url'
-    }
-  });
+  res.redirect('/');
 });
 
 export default router;

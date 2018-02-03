@@ -26,7 +26,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
           <Route exact path='/' component={SignInPage} />
-          <Route exact path='/signup' component={SignUpPage} />
+          <Route path='/signup' component={SignUpPage} />
           <Route path='/dashboard' component={Dashboard} />
           <Route component={PageNotFound} />
         </Switch>
