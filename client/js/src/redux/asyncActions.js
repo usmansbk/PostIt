@@ -20,7 +20,8 @@ import {
     setErrorMessage,
     setStatus,
     setSession,
-    Status
+    Status,
+    login
 } from './actionTypes';
 
 const END_POINT = process.env.SOCKET_URL || 'http://localhost:8888';
@@ -50,8 +51,10 @@ socket.on(Status.GROUP_DELETED, (data) => {
     }
 });
 socket.on(Status.USER_REMOVED, (data) => {
-    if (inGroup(data.gid))
-        store.dispatch(removeUser(data))
+    const { gid, uid } = data;
+    if (inGroup(gid)) {
+        store.dispatch(removeUser(uid, gid))
+    }
 });
 socket.on(Status.USER_ADDED, (data) => {
     const { id, invites } = data;
@@ -298,6 +301,7 @@ export function leaveGroup(id) {
             if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
             else return Promise.reject();
         })
+        .then(() => dispatch(removeGroup(id)))
         .then(() => socket.emit(Status.USER_REMOVED, { gid: id, uid: store.getState().account.id }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP)));
     }
@@ -323,7 +327,9 @@ export function signIn(data) {
         .then(response => {
             if (response.ok) dispatch(setSession(Status.SIGNED_IN));
             else return Promise.reject();
-        }).then(() => dispatch(fetchAll(Filter.ALL)))
+        })
+        .then(() => dispatch(login()))
+        .then(() => dispatch(fetchAll(Filter.ALL)))
         .catch(error => dispatch(setSession(Status.SIGNIN_FAILED, Status)));
     }
 }

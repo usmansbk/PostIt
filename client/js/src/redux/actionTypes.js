@@ -9,6 +9,7 @@ export const SET_STATUS = 'SET_STATUS';
 export const SET_SESSION = 'SET_SESSION';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const USER_LOGIN = 'USER_LOGIN';
 export const REMOVE_GROUP = 'REMOVE_GROUP';
 export const REMOVE_USER = 'REMOVE_USER';
 export const DELETE_POSTS = 'DELETE_POSTS';
@@ -173,6 +174,12 @@ export function setStatus(status) {
 export function logout() {
   return {
     type: USER_LOGOUT
+  }
+}
+
+export function login() {
+  return {
+    type: USER_LOGIN
   }
 }
 
