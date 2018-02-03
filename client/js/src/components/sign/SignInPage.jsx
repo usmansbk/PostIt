@@ -5,6 +5,7 @@ import Button from '../common/Button';
 import Footer from '../common/Footer';
 import Loader from '../common/Loader';
 import { setPageTitle } from '../../helpers/utils';
+import { Status } from '../../redux/actionTypes';
 
 export default class SignInPage extends React.Component {
 
@@ -16,6 +17,13 @@ export default class SignInPage extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    const { status, history } = this.props;
+    if (status === Status.SIGNED_IN) {
+      history.replace('/dashboard');
+    }
   }
 
   handleChange(event) {

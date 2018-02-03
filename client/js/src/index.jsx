@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import postIt from './redux/reducers';
+import { saveState, loadState } from './helpers/persistState';
 import Dashboard from './containers/Dashboard';
 import SignInPage from './containers/SignInPage';
 import SignUpPage from './containers/SignUpPage';
@@ -14,13 +15,20 @@ import '../../stylesheets/materialize.css';
 import '../../stylesheets/sass/index.scss';
 
 const loggerMiddleware = createLogger();
+const persistedState = loadState();
 const store = createStore(
   postIt,
+  persistedState,
   applyMiddleware(
     thunkMiddleware,
     loggerMiddleware
   )
 );
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

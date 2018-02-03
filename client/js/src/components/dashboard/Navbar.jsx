@@ -29,6 +29,11 @@ export default class Navbar extends React.Component {
     this.materializeInit();
   }
 
+  componentWillMount() {
+    const { history } = this.props;
+    this.props._navigate(history);
+  }
+
   handleClick(event) {
     const target = event.target;
     const name = target.getAttribute('name');

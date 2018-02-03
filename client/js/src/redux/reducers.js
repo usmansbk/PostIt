@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { loadState } from '../helpers/persistState';
 import {
   SET_ERROR_MESSAGE,
   SET_ACCOUNT_DETAILS,
@@ -263,7 +264,7 @@ const rootReducers = (state, action) => {
   if (action.type === USER_LOGOUT) {
     state  = undefined
   }
-
+  
   return postIt(state, action)
 }
 export default rootReducers;
