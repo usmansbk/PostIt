@@ -36,5 +36,5 @@ module.exports = {
       test: /\.js/,
       asset: '[path].gz[query]',
     })
-]
+  ]
 };
