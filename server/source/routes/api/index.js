@@ -1,9 +1,11 @@
 import express from 'express';
+import appInfo from '../../helpers/info';
 import { Route, Validate } from '../../middlewares';
 import { GroupController, UserController } from '../../controllers';
 
 const router = express.Router();
 
+router.use('/api/', (req, res) => res.send(appInfo))
 router.use('/api/group/', Route.isAuthenticated);
 router.post('/api/user/signup', UserController.signUp);
 router.post('/api/user/signin', UserController.signIn);

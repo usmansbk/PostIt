@@ -5,8 +5,7 @@ import socketIo from 'socket.io'
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import router from './routes/api';
-import appInfo from './helpers/info';
+import apiRouter from './routes/api';
 import Actions from './helpers/actions';
 
 const app = express();
@@ -21,7 +20,7 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, '../../client')));
 
-app.use(router);
+app.use(apiRouter);
 
 app.use((err, req, res, /* next */) => {
   res.status(500).json({
