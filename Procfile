@@ -1,2 +1,2 @@
-server: node ./server/build/bin/www
-web: npm run client:dev
+web: node ./server/build/bin/www
+client: npm run client:dev
