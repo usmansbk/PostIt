@@ -16,8 +16,7 @@ module.exports = {
     publicPath: path.resolve(__dirname, '/js/'),
     proxy: {
       '/api/*': 'http://localhost:8888',
-    },
-    hotOnly: true
+    }
   },
   module: {
     rules: [
