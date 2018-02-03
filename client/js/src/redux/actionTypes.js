@@ -12,6 +12,7 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 export const REMOVE_GROUP = 'REMOVE_GROUP';
 export const REMOVE_USER = 'REMOVE_USER';
 export const DELETE_POSTS = 'DELETE_POSTS';
+export const UPDATE_GROUP = 'UPDATE_GROUP';
 
 /*
  * Network interaction action types
@@ -43,7 +44,6 @@ export const Status = {
   CREATING_GROUP: 'CREATING_GROUP',
   GROUP_CREATED: 'GROUP_CREATED',
   CREATE_GROUP_FAILED: 'CREATE_GROUP_FAILED',
-  UPDATE_GROUP: 'UPDATE_GROUP',
   GROUP_UPDATED: 'GROUP_UPDATED',
   UPDATING_GROUP: 'UPDATING_GROUP',
   FAILED_TO_UPDATE_GROUP: 'FAILED_TO_UPDATE_GROUP',
@@ -62,6 +62,7 @@ export const Status = {
   REMOVING_USER: 'REMOVING_USER',
   USER_REMOVED: 'USER_REMOVED',
   FAILED_TO_REMOVE_USER: 'FAILED_TO_REMOVE_USER',
+  LEFT_GROUP: 'LEFT_GROUP',
   CLEAR: '',
 };
 
@@ -182,11 +183,11 @@ export function removeGroup(id) {
   }
 }
 
-export function removeUser(uid, guid) {
+export function removeUser(uid, gid) {
   return {
     type: REMOVE_USER,
     uid,
-    guid
+    gid
   }
 }
 

@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import router from './routes/api';
 import appInfo from './helpers/info';
+import Actions from './helpers/actions';
 
 const app = express();
 const logger = morgan('dev');
@@ -17,7 +18,7 @@ app.use(session({
   cookie: {}
 }));
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.json(appInfo);
 });
 
@@ -35,9 +36,13 @@ const server = http.createServer(app)
 const io = socketIo(server);
 
 io.on('connection', socket => {
-  console.log('a user connected');
-  socket.on('disconnect', () => console.log('client disconnected'))
-  socket.on('MESSAGE_POSTED', (data) => console.log(data))
+  console.log('a client connected');
+  socket.on('disconnect', () => console.log('client disconnected'));
+  socket.on(Actions.MESSAGE_POSTED, (data) => io.sockets.emit(Actions.MESSAGE_POSTED, data));
+  socket.on(Actions.GROUP_DELETED, (data) =>  io.sockets.emit(Actions.GROUP_DELETED, data));
+  socket.on(Actions.GROUP_UPDATED, (data) => io.sockets.emit(Actions.GROUP_UPDATED, data));
+  socket.on(Actions.USER_REMOVED, (data) => io.sockets.emit(Actions.USER_REMOVED, data));
+  socket.on(Actions.USER_ADDED, (data) => io.sockets.emit(Actions.USER_ADDED, data));
 });
 
 export default server;

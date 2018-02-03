@@ -29,9 +29,12 @@ function simplify_messages(data) {
 }
 
 function simplify_generic(data) {
-  const state = {};
-  state.byId  = data;
-  state.ids   = [];
+  const state = {
+    byId: {},
+    ids: []
+  };
+  if (data)
+    state.byId  = data;
   for (let key in data) {
     state.ids.push(key);
   }

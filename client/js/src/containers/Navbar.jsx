@@ -18,15 +18,17 @@ const mapDispatchToProps = dispatch => {
         const { pathname } = history.location;
         const groupRegex = /^\/dashboard\/groups(\/(\d{0,}))?$/.exec(pathname);
         let page = 'Home';
+        let gid = null;
         if (groupRegex) {
           page = 'Groups';
           const id = groupRegex[2]
           if (id) {
             page = 'Group';
-            dispatch(setGroup(+id));
+            gid = +id;
           }
         }
         dispatch(setPage(page));
+        dispatch(setGroup(gid));
       },
       _search: (value) => {
         dispatch(fetchUsers(value));

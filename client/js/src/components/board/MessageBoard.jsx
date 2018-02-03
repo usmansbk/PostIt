@@ -19,11 +19,11 @@ export default class MessageBoard extends React.Component {
     const {posts, isFetching, error} = this.props;
     const notice = <h3 className='grey-text text-lighten-1 center-align'>This board is empty</h3>;
     let postComponents = posts.map((post, index) => <PostCard key={index} { ...post} />);
-    const showLoader = isFetching && <Loader />;
+    const showLoader = (isFetching && !error);
     return (
       <div className='row'>
         <div className='center-align'>
-          { showLoader }
+          { showLoader && <Loader />}
         </div>
           { posts.length > 0 ? postComponents : notice }
         <NewPostModal />

@@ -1,6 +1,7 @@
 import formurlencoded from 'form-urlencoded';
 import fetch from 'isomorphic-fetch';
 import io from 'socket.io-client';
+import store from '../index';
 import { normalizeGroups, normalizeUser, normalizeUsers, simplify } from './stateSchema';
 import {
     Filter,
@@ -22,8 +23,43 @@ import {
     Status
 } from './actionTypes';
 
-const END_POINT = process.env.SOCKET_URL || 'http:\/\/localhost:8888';
+const END_POINT = process.env.SOCKET_URL || 'http://localhost:8888';
 export const socket = io(END_POINT);
+
+const inGroup = (id) => {
+    const state = store.getState();
+    const myGroups = state.groups;
+    const inGroup = myGroups.byId[id];
+    return inGroup;
+}
+
+socket.on(Status.MESSAGE_POSTED, (data) => {
+    const { id } = data;
+    if (inGroup(id))
+        store.dispatch(fetchPosts(id))
+});
+socket.on(Status.GROUP_UPDATED, (data) => {
+    if (inGroup(data.id))
+        store.dispatch(fetchGroups(Filter.ALL))
+});
+socket.on(Status.GROUP_DELETED, (data) => {
+    const { id } = data;
+    if (inGroup(id)) {
+        store.dispatch(deleteGroupPosts(id));
+        store.dispatch(removeGroup(id));
+    }
+});
+socket.on(Status.USER_REMOVED, (data) => {
+    if (inGroup(data.gid))
+        store.dispatch(removeUser(data))
+});
+socket.on(Status.USER_ADDED, (data) => {
+    const { id, invites } = data;
+    if ((invites === store.getState().account.username) || inGroup(id)) {
+        store.dispatch(fetchGroups(Filter.ALL));
+        store.dispatch(fetchPosts(id));
+    }
+})
 
 function postForm(url, json) {
     const form = formurlencoded(json);
@@ -83,9 +119,7 @@ export function addUserTo(gid, invites) {
             if (response.ok) dispatch(setStatus(Status.USER_ADDED));
             else return Promise.reject();
         })
-        .then(() => dispatch(fetchGroups(gid)))
-        .then(() => emitUserAdded({gid, invites}))
-        .then(() => socket.emit(Status.USER_ADDED, { gid, invites }))
+        .then(() => socket.emit(Status.USER_ADDED, { id: gid, invites }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_ADD_USER)))
     }
 }
@@ -93,28 +127,26 @@ export function addUserTo(gid, invites) {
 export function requestUpdateGroup(form) {
     return function (dispatch) {
         const url = `/api/group/`
-        dispatch(setStatus(Status.UPDATE_GROUP));
+        dispatch(setStatus(Status.UPDATING_GROUP));
         patchForm(url, form)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.GROUP_UPDATED))
             else return Promise.reject();
         })
-        .then(() => dispatch(fetchAll(Filter.ALL)))
+        .then(() => socket.emit(Status.GROUP_UPDATED, { id: store.getState().group }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_UPDATE_GROUP)))
     }
 }
 
-export function requestRemoveUser(uid, guid) {
+export function requestRemoveUser(uid, gid) {
     return function (dispatch) {
-        const url = `/api/group/${guid}/remove?uid=${uid}`;
+        const url = `/api/group/${gid}/remove?uid=${uid}`;
         leaveUrl(url)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.REMOVING_USER))
             else return Promise.reject();
         })
-        .then(() => dispatch(removeUser(uid, guid)))
-        .then(() => dispatch(setStatus(Status.USER_REMOVED)))
-        .then(() => socket.emit(Status.USER_REMOVED, { uid, guid }))
+        .then(() => socket.emit(Status.USER_REMOVED, { uid, gid }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_REMOVE_USER)))
     }
 }
@@ -208,7 +240,10 @@ export function fetchPosts(filter) {
             const simplified = simplify.messages(posts);
             dispatch(receivePosts(simplified));
         })
-        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_POSTS)))
+        .catch(error => {
+            console.log(error);
+            dispatch(setErrorMessage(Status.FAILED_TO_FETCH_POSTS))
+        })
     }
 }
 
@@ -216,14 +251,16 @@ export function postMessage(data) {
     const id = data.gid;
     return function (dispatch) {
         dispatch(setStatus(Status.POSTING_MESSAGE));
-        postForm(`/api/group/${data.gid}/message`, data)
+        postForm(`/api/group/${id}/message`, data)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.MESSAGE_POSTED));
             else return Promise.reject();
         })
-        .then(() => dispatch(fetchPosts(id)))
         .then(() => socket.emit(Status.MESSAGE_POSTED, { id }))
-        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_POST_MESSAGE)))
+        .catch(error => {
+            console.log(error)
+            dispatch(setErrorMessage(Status.FAILED_TO_POST_MESSAGE))
+        })
     }
 }
 
@@ -248,8 +285,6 @@ export function deleteGroup(id) {
             if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
             else return Promise.reject();
         })
-        .then(() => dispatch(deleteGroupPosts(id)))
-        .then(() => dispatch(removeGroup(id)))
         .then(() => socket.emit(Status.GROUP_DELETED, { id }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP)));
     }
@@ -263,9 +298,7 @@ export function leaveGroup(id) {
             if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
             else return Promise.reject();
         })
-        .then(() => dispatch(deleteGroupPosts(id)))
-        .then(() => dispatch(removeGroup(id)))
-        .then(() => socket.emit(Status.GROUP_DELETED, { id }))
+        .then(() => socket.emit(Status.USER_REMOVED, { gid: id, uid: store.getState().account.id }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP)));
     }
 }

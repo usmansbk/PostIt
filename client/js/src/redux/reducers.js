@@ -91,8 +91,8 @@ function _removeByGroupId(prevState, id) {
 }
 
 function _removeFromGroup(groups, action) {
-  const { uid, guid } = action;
-  const group = groups[guid];
+  const { uid, gid } = action;
+  const group = groups[gid];
   const members = group.Members;
   const index = members.indexOf(+uid);
   const newList = members.slice(0, index).concat(members.slice(index + 1));
@@ -100,7 +100,7 @@ function _removeFromGroup(groups, action) {
     Members: newList
   });
   const updatedGroups = Object.assign({}, groups, {
-    [guid]: updatedGroup
+    [gid]: updatedGroup
   })
   return updatedGroups;
 }
@@ -191,7 +191,6 @@ function posts(
       return state;
   }
 }
-
 
 function search(
   state = {
