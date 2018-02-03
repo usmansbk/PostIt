@@ -4,10 +4,10 @@
   "description": "Minimal social network web app",
   "main": "server/build/bin/www",
   "scripts": {
-    "postinstall": "npm run build",
+    "postinstall": "npm run build & npm run build:client",
     "build": "npm run build:server",
     "build:server": "sh server/scripts/build.sh",
-    "build:client": "webpack --config client/webpack.config.js --watch",
+    "build:client": "webpack --config client/webpack.config.js",
     "start": "node server/build/bin/www",
     "server:dev": "nodemon server/build/bin/www",
     "client:dev": "webpack-dev-server --config client/webpack.config.js",
