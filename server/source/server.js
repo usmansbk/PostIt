@@ -19,7 +19,7 @@ app.use(session({
   cookie: {}
 }));
 
-app.use(favicon(path.join(__dirname, 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '../../client/favicon.ico')));
 app.use(express.static(path.join(__dirname, '../../client')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/index.html'))
