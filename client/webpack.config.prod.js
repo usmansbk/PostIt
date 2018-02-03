@@ -16,8 +16,7 @@ module.exports = {
     publicPath: path.resolve(__dirname, '/js/'),
     proxy: {
       '/api/*': 'http://localhost:8888',
-    },
-    hotOnly: true
+    }
   },
   module: {
     rules: [
@@ -35,6 +34,12 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
   ]
 };
