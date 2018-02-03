@@ -73,7 +73,6 @@ function postForm(url, json) {
         }),
         body: form,
         credentials: 'include',
-        cache: 'no-store'
     })
 }
 
@@ -86,7 +85,6 @@ function patchForm(url, json) {
         }),
         body: form,
         credentials: 'include',
-        cache: 'no-store'
     })
 }
 
@@ -94,7 +92,6 @@ function deleteUrl(url) {
     return fetch(url, {
         method: 'DELETE',
         credentials: 'include',
-        cache: 'no-store'
     })
 }
 
@@ -102,7 +99,6 @@ function leaveUrl(url) {
     return fetch(url, {
         method: 'PATCH',
         credentials: 'include',
-        cache: 'no-store'
     })
 }
 
@@ -110,7 +106,6 @@ function get(url) {
     return fetch (url, {
         method: 'GET',
         credentials: 'include',
-        cache: 'no-store'
     })
 }
 
