@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, '../../client')));
 
 app.use(apiRouter);
 
-app.use('*', (res, req) => {
+app.use('*', (req, res) => {
   res.status(404).send('Page Not Found')
 })
 
