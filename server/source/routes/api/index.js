@@ -5,7 +5,6 @@ import { GroupController, UserController } from '../../controllers';
 
 const router = express.Router();
 
-router.use('/api/', (req, res) => res.send(appInfo))
 router.use('/api/group/', Route.isAuthenticated);
 router.post('/api/user/signup', UserController.signUp);
 router.post('/api/user/signin', UserController.signIn);
@@ -25,7 +24,7 @@ router.patch('/api/group/', GroupController.updateModel);
 router.patch('/api/group/:guid/remove?', GroupController.removeUser);
 router.patch('/api/group/:guid', Route.isAuthenticated, UserController.leaveGroup);
 
-router.all('/api/*', (req, res) => {
+router.all('*', (req, res) => {
   res.status(405).json({
     status: 'fail',
     data: {

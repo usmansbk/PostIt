@@ -24,7 +24,7 @@ import {
     login
 } from './actionTypes';
 
-const END_POINT = 'http://localhost:5000';
+const END_POINT = process.env.SOCKET_URL || 'http://localhost:8888';
 export const socket = io(END_POINT);
 
 const inGroup = (id) => {
@@ -72,7 +72,8 @@ function postForm(url, json) {
             'Content-Type': 'application/x-www-form-urlencoded',
         }),
         body: form,
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store'
     })
 }
 
@@ -84,28 +85,32 @@ function patchForm(url, json) {
             'Content-Type': 'application/x-www-form-urlencoded',
         }),
         body: form,
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store'
     })
 }
 
 function deleteUrl(url) {
     return fetch(url, {
         method: 'DELETE',
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store'
     })
 }
 
 function leaveUrl(url) {
     return fetch(url, {
         method: 'PATCH',
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store'
     })
 }
 
 function get(url) {
     return fetch (url, {
         method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store'
     })
 }
 
@@ -225,7 +230,10 @@ export function fetchAll(filter) {
         .then(() => dispatch(receiveUsers(simplifiedUsers)))
         .then(() => dispatch(receiveGroups(simplifiedGroups)))
         .then(() => dispatch(receivePosts(simplifiedPosts)))
-        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_ALL)))
+        .catch(error => {
+            console.log(error);
+            dispatch(setErrorMessage(Status.FAILED_TO_FETCH_ALL))
+        })
     }
 }
 
