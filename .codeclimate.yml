@@ -1,5 +1,6 @@
 exclude_patterns:
  - '**/tests/'
+ - '**/__tests__/'
  - '**/db'
  - '**/scripts'
  - 'template/'

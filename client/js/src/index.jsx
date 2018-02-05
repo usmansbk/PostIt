@@ -16,22 +16,17 @@ import '../../stylesheets/sass/index.scss';
 
 const loggerMiddleware = createLogger();
 const persistedState = loadState();
-const devStore = createStore(
+
+const middlewares = [
+  thunkMiddleware,
+]
+process.env.NODE_ENV && middlewares.push(loggerMiddleware);
+
+const store = createStore(
   postIt,
   persistedState,
-  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-  )
+  applyMiddleware(...middlewares)
 );
-
-const prodStore = createStore(
-  postIt,
-  persistedState,
-  applyMiddleware(thunkMiddleware)
-);
-
-const store = process.env.NODE_ENV ? prodStore : devStore;
 
 store.subscribe(() => {
   saveState(store.getState());
