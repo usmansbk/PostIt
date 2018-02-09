@@ -24,7 +24,7 @@ import {
   Status
 } from './actionTypes';
 
-function error(state = null, action) {
+export function error(state = null, action) {
   switch (action.type) {
     case SET_ERROR_MESSAGE:
       return action.error
@@ -33,7 +33,7 @@ function error(state = null, action) {
   }
 }
 
-function page(state = 'Home', action) {
+export function page(state = 'Home', action) {
   switch (action.type) {
     case  SELECT_PAGE: {
       return action.page;
@@ -43,7 +43,7 @@ function page(state = 'Home', action) {
   }
 }
 
-function group(state = null, action) {
+export function group(state = null, action) {
   switch (action.type) {
     case SELECT_GROUP: {
       return action.group;
@@ -53,11 +53,11 @@ function group(state = null, action) {
   }
 }
 
-function _add(prevState, newState) {
+export function _add(prevState, newState) {
   return Object.assign({}, prevState, newState);
 }
 
-function _updateList(prevList, newList) {
+export function _updateList(prevList, newList) {
   const copy = [...prevList];
   newList.forEach(item => {
     if (prevList.indexOf(+item) === -1) {
@@ -67,19 +67,19 @@ function _updateList(prevList, newList) {
   return copy;
 }
 
-function _remove(prevState, id) {
+export function _remove(prevState, id) {
   const copy = Object.assign({}, prevState);
   delete copy[id];
   return copy; 
 }
 
-function _removeId(list, id) {
+export function _removeId(list, id) {
   const index = list.indexOf(+id);
   const newList = list.slice(0, index).concat(list.slice(index+1));
   return newList;
 }
 
-function _removeByGroupId(prevState, id) {
+export function _removeByGroupId(prevState, id) {
   const byId = {};
   const ids = [];
   for (let key in prevState) {
@@ -92,7 +92,7 @@ function _removeByGroupId(prevState, id) {
   return { byId, ids };
 }
 
-function _removeFromGroup(groups, action) {
+export function _removeFromGroup(groups, action) {
   const { uid, gid } = action;
   const group = groups[gid];
   const members = group.Members;
@@ -107,7 +107,7 @@ function _removeFromGroup(groups, action) {
   return updatedGroups;
 }
 
-function groups(
+export function groups(
   state = {
     isFetching: false,
     byId: {},
@@ -141,7 +141,7 @@ function groups(
   }
 }
 
-function users (
+export function users (
   state = {
     isFetching: false,
     byId: {},
@@ -163,7 +163,7 @@ function users (
   }
 }
 
-function posts(
+export function posts(
   state = {
     isFetching: false,
     byId: {},
@@ -194,7 +194,7 @@ function posts(
   }
 }
 
-function search(
+export function search(
   state = {
     isFetching: false,
     byId: {},
@@ -218,7 +218,7 @@ function search(
   }
 }
 
-function account(state = {}, action) {
+export function account(state = {}, action) {
   switch (action.type) {
     case SET_ACCOUNT_DETAILS:
       return action.account;
@@ -227,7 +227,7 @@ function account(state = {}, action) {
   }
 }
 
-function status(state = Status.CLEAR, action) {
+export function status(state = Status.CLEAR, action) {
   switch (action.type) {
     case SET_STATUS:
       return action.status;
@@ -236,7 +236,7 @@ function status(state = Status.CLEAR, action) {
   }
 }
 
-function session(state = Status.SIGNED_OUT, action) {
+export function session(state = Status.SIGNED_OUT, action) {
   switch(action.type) {
     case SET_SESSION:
       return action.session;

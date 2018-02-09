@@ -14,12 +14,12 @@
     "build:client:prod": "webpack --config client/webpack.config.prod.js",
     "test": "npm run test:server",
     "test:server": "sh server/scripts/test.sh",
-    "test:client": "jest -u",
+    "test:client": "jest",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "jest": {
     "moduleNameMapper": {
-      ".scss$": "identity-obj-proxy"
+      ".s?css$": "identity-obj-proxy"
     }
   },
   "nodemonConfig": {
@@ -94,6 +94,7 @@
     "eslint": "^4.14.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "fetch-mock": "^6.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jasmine": "^2.8.0",
     "jest": "^22.0.6",
@@ -102,6 +103,7 @@
     "nyc": "^11.4.1",
     "react-test-renderer": "^16.2.0",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0"

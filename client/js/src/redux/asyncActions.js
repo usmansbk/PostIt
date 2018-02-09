@@ -1,7 +1,7 @@
 import formurlencoded from 'form-urlencoded';
 import fetch from 'isomorphic-fetch';
 import io from 'socket.io-client';
-import store from '../index';
+import store from '../PostIt';
 import { normalizeGroups, normalizeUser, normalizeUsers, simplify } from './stateSchema';
 import {
     Filter,
@@ -26,7 +26,7 @@ import {
 
 const PORT = process.env.PORT || 8888;
 const END_POINT = `http://localhost:${PORT}`;
-export const socket = io(END_POINT);
+const socket = io(END_POINT);
 
 const inGroup = (id) => {
     const state = store.getState();
@@ -327,9 +327,9 @@ export function signUp(data) {
 export function signIn(data) {
     return function (dispatch) {
         dispatch(setSession(Status.SIGNING_IN));
-        postForm(`/api/user/signin`, data)
+        return postForm(`/api/user/signin`, data)
         .then(response => {
-            if (response.ok) dispatch(setSession(Status.SIGNED_IN));
+            if (response.ok) return dispatch(setSession(Status.SIGNED_IN));
             else return Promise.reject();
         })
         .then(() => dispatch(login()))
