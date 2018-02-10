@@ -76,13 +76,31 @@ export default class SignInPage extends React.Component {
             <div className='divider'></div>
             <h5>Welcome</h5>
             <form onSubmit={this.handleSubmit}>
-              <InputField className='input-field' id='username' type='text' name='username' label='Username' onChange={this.handleChange} value={this.state.username} />
+              <InputField
+              className='input-field'
+              id='username'
+              type='text'
+              name='username'
+              label='Username'
+              onChange={this.handleChange}
+              value={this.state.username} />
 
-              <InputField className='input-field' id='password' type='password' name='password' label='Password' onChange={this.handleChange} value={this.state.password} >
+              <InputField
+              className='input-field'
+              id='password'
+              type='password'
+              name='password'
+              label='Password'
+              onChange={this.handleChange}
+              value={this.state.password} >
                 <span><a href='#'>Forgot account?</a></span>
               </InputField>
 
-              <Button type='submit' className='center-align' color='blue' value='Sign In'></Button>
+              <Button
+              type='submit'
+              className='center-align'
+              color='blue'
+              value='Sign In'></Button>
               { showLoader }
               { showError }
             </form>

@@ -14,11 +14,11 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-          <Route exact path='/' component={SignInPage} />
-          <Route path='/signup' component={SignUpPage} />
-          <Route path='/dashboard' component={Dashboard} />
-          <Route component={PageNotFound} />
-        </Switch>
+         <Route exact path='/' component={SignInPage} />
+         <Route path='/signup' component={SignUpPage} />
+         <Route path='/dashboard' component={Dashboard} />
+        <Route component={PageNotFound} />
+      </Switch>
     </BrowserRouter>
   </Provider>,
   document.querySelector('#root')
