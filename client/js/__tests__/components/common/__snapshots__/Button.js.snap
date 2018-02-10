@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="btn waves-effect waves-light undefined undefined"
+    type={undefined}
+  />
+</div>
+`;

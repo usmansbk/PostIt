@@ -5,12 +5,14 @@ import socketIo from 'socket.io'
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import bunyan from 'bunyan';
 import favicon from 'serve-favicon';
 import apiRouter from './routes/api';
 import Actions from './helpers/actions';
 
 const app = express();
 const logger = morgan('dev');
+export const log = bunyan.createLogger({ name: 'PostIt-Server' });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger);
@@ -28,6 +30,7 @@ app.get('/', (req, res) => {
 app.use(apiRouter);
 
 app.use((err, req, res, /* next */) => {
+  log.info(err);
   res.status(500).json({
     status: 'error',
     message: 'Internal Server Error'
@@ -45,8 +48,8 @@ const server = http.createServer(app)
 const io = socketIo(server);
 
 io.on('connection', socket => {
-  console.log('a client connected');
-  socket.on('disconnect', () => console.log('client disconnected'));
+  log.info('a client connected');
+  socket.on('disconnect', () => log.info('client disconnected'));
   socket.on(Actions.MESSAGE_POSTED, (data) => io.sockets.emit(Actions.MESSAGE_POSTED, data));
   socket.on(Actions.GROUP_DELETED, (data) =>  io.sockets.emit(Actions.GROUP_DELETED, data));
   socket.on(Actions.GROUP_UPDATED, (data) => io.sockets.emit(Actions.GROUP_UPDATED, data));
