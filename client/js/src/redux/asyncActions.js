@@ -1,6 +1,6 @@
 import formurlencoded from 'form-urlencoded';
-import fetch from 'isomorphic-fetch';
 import io from 'socket.io-client';
+import 'isomorphic-fetch';
 import store from '../PostIt';
 import { normalizeGroups, normalizeUser, normalizeUsers, simplify } from './stateSchema';
 import {
@@ -112,13 +112,13 @@ function get(url) {
 
 
 export function addUserTo(gid, invites) {
-    return function (dispatch) {
+    return (dispatch) => {
         const groupUrl = `/api/group/${gid}/user`
             , form = {
                 invites 
             };
         dispatch(setStatus(Status.ADD_USER));
-        postForm(groupUrl, form)
+        return postForm(groupUrl, form)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.USER_ADDED));
             else return Promise.reject();
@@ -129,10 +129,10 @@ export function addUserTo(gid, invites) {
 }
 
 export function requestUpdateGroup(form) {
-    return function (dispatch) {
+    return (dispatch) => {
         const url = `/api/group/`
         dispatch(setStatus(Status.UPDATING_GROUP));
-        patchForm(url, form)
+        return patchForm(url, form)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.GROUP_UPDATED))
             else return Promise.reject();
@@ -143,9 +143,9 @@ export function requestUpdateGroup(form) {
 }
 
 export function requestRemoveUser(uid, gid) {
-    return function (dispatch) {
+    return (dispatch) => {
         const url = `/api/group/${gid}/remove?uid=${uid}`;
-        leaveUrl(url)
+        return leaveUrl(url)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.REMOVING_USER))
             else return Promise.reject();
@@ -156,11 +156,11 @@ export function requestRemoveUser(uid, gid) {
 }
 
 export function fetchUsers(filter) {
-    return function (dispatch) {
+    return (dispatch) => {
         let simplifiedUsers;
         dispatch(requestSearch(filter));
         dispatch(requestUsers(filter));
-        get(`/api/user/find?username=${filter}`)
+        return get(`/api/user/find?username=${filter}`)
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject();
@@ -180,10 +180,10 @@ export function fetchUsers(filter) {
 }
 
 export function fetchGroups(filter) {
-    return function (dispatch) {
+    return (dispatch) => {
         let simplifiedGroups;
         dispatch(requestGroups(filter));
-        get(`/api/user/groups`)
+        return get(`/api/user/groups`)
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject()
@@ -201,7 +201,7 @@ export function fetchGroups(filter) {
 }
 
 export function fetchAll(filter) {
-    return function(dispatch) {
+    return (dispatch) => {
         let simplifiedAccount
           , simplifiedUsers
           , simplifiedGroups
@@ -209,7 +209,7 @@ export function fetchAll(filter) {
 
         dispatch(requestPosts(filter));
         dispatch(requestGroups(filter));
-        get(`/api/user`)
+        return get(`/api/user`)
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject();
@@ -226,18 +226,15 @@ export function fetchAll(filter) {
         .then(() => dispatch(receiveUsers(simplifiedUsers)))
         .then(() => dispatch(receiveGroups(simplifiedGroups)))
         .then(() => dispatch(receivePosts(simplifiedPosts)))
-        .catch(error => {
-            console.log(error);
-            dispatch(setErrorMessage(Status.FAILED_TO_FETCH_ALL))
-        })
+        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_ALL)))
     }
 }
 
 export function fetchPosts(filter) {
     const postUrl = `/api/group/${filter}/messages`;
-    return function (dispatch) {
+    return (dispatch) => {
         dispatch(requestPosts(filter));
-        get(postUrl)
+        return get(postUrl)
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject();
@@ -256,9 +253,9 @@ export function fetchPosts(filter) {
 
 export function postMessage(data) {
     const id = data.gid;
-    return function (dispatch) {
+    return (dispatch) => {
         dispatch(setStatus(Status.POSTING_MESSAGE));
-        postForm(`/api/group/${id}/message`, data)
+        return postForm(`/api/group/${id}/message`, data)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.MESSAGE_POSTED));
             else return Promise.reject();
@@ -272,9 +269,9 @@ export function postMessage(data) {
 }
 
 export function createGroup(data) {
-    return function (dispatch) {
+    return (dispatch) => {
         dispatch(setStatus(Status.CREATING_GROUP));
-        postForm(`/api/group`, data)
+        return postForm(`/api/group`, data)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.GROUP_CREATED))
             else return Promise.reject();
@@ -285,9 +282,9 @@ export function createGroup(data) {
 }
 
 export function deleteGroup(id) {
-    return function (dispatch) {
+    return (dispatch) => {
         dispatch(setStatus(Status.DELETING_GROUP));
-        deleteUrl(`/api/group/${id}`)
+        return deleteUrl(`/api/group/${id}`)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
             else return Promise.reject();
@@ -298,9 +295,9 @@ export function deleteGroup(id) {
 }
 
 export function leaveGroup(id) {
-    return function (dispatch) {
+    return (dispatch) => {
         dispatch(setStatus(Status.DELETING_GROUP));
-        leaveUrl(`/api/group/${id}`)
+        return leaveUrl(`/api/group/${id}`)
         .then(response => {
             if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
             else return Promise.reject();
@@ -312,9 +309,9 @@ export function leaveGroup(id) {
 }
 
 export function signUp(data) {
-    return function (dispatch) {
+    return (dispatch) => {
         dispatch(setSession(Status.SIGNING_UP));
-        postForm(`/api/user/signup`, data)
+        return postForm(`/api/user/signup`, data)
         .then(response => {
             if (response.ok) dispatch(setSession(Status.SIGNED_UP))
             else return Promise.reject();
@@ -325,11 +322,11 @@ export function signUp(data) {
 }
 
 export function signIn(data) {
-    return function (dispatch) {
+    return (dispatch) => {
         dispatch(setSession(Status.SIGNING_IN));
         return postForm(`/api/user/signin`, data)
         .then(response => {
-            if (response.ok) return dispatch(setSession(Status.SIGNED_IN));
+            if (response.ok) dispatch(setSession(Status.SIGNED_IN));
             else return Promise.reject();
         })
         .then(() => dispatch(login()))
@@ -337,3 +334,4 @@ export function signIn(data) {
         .catch(error => dispatch(setSession(Status.SIGNIN_FAILED, Status)));
     }
 }
+ 
