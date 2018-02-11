@@ -8,7 +8,8 @@ export function predicate(key, status, target, state) {
 
 export function setPageTitle(newTitle) {
   const title = document.querySelector('title');
-  title.innerText = newTitle;
+  if (title)
+    title.innerText = newTitle;
 }
 
 export function getElapsedTime(timeString) {

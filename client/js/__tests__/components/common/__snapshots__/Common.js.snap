@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Common should render Button 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="btn waves-effect waves-light undefined undefined"
+    type={undefined}
+  />
+</div>
+`;
+
+exports[`Common should render Fab 1`] = `
+<div
+  className="fixed-action-btn"
+  onClick={undefined}
+>
+  <a
+    className="btn-floating btn-large modal-trigger undefined"
+    href={undefined}
+  >
+    <i
+      className="material-icons white-text"
+    />
+  </a>
+</div>
+`;
+
+exports[`Common should render Footer 1`] = `
+<footer>
+  <div
+    className="footer-copyright"
+  >
+    <small
+      className="grey-text"
+    >
+      <p
+        className={undefined}
+      >
+        © 
+        2018
+         Andela 
+        <b>
+          ·
+        </b>
+         MIT License 
+        <b>
+          ·
+        </b>
+         GitHub 
+        <b>
+          ·
+        </b>
+         facebook
+      </p>
+    </small>
+  </div>
+</footer>
+`;
+
+exports[`Common should render Icon 1`] = `
+<i
+  className="material-icons undefined"
+/>
+`;
+
+exports[`Common should render InputField 1`] = `
+<div
+  className={undefined}
+>
+  <label
+    htmlFor={undefined}
+  />
+  <input
+    defaultValue={undefined}
+    id={undefined}
+    name={undefined}
+    onChange={undefined}
+    placeholder={undefined}
+    required={undefined}
+    type={undefined}
+    value={undefined}
+  />
+</div>
+`;
+
+exports[`Common should render Loader 1`] = `
+<div
+  className="preloader-wrapper small active"
+>
+  <div
+    className="spinner-layer spinner-green-only"
+  >
+    <div
+      className="circle-clipper left"
+    >
+      <div
+        className="circle"
+      />
+    </div>
+    <div
+      className="gap-patch"
+    >
+      <div
+        className="circle"
+      />
+    </div>
+    <div
+      className="circle-clipper right"
+    >
+      <div
+        className="circle"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Common should render Logo 1`] = `
+<span
+  className="grey-text text-darken-1 hide-on-med-and-down"
+  href={undefined}
+  id="brand-logo"
+>
+  PostIt
+</span>
+`;

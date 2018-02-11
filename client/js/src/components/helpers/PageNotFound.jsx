@@ -5,7 +5,6 @@ import Footer from '../common/Footer';
 import { setPageTitle } from '../../helpers/utils';
 
 export default ({location}) => {
-    console.log(location);
     const { from } = location.state || { from : { pathname: '/' } };
     setPageTitle('Page not found | PostIt');
     const footer = {

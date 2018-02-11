@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Searchbar from './Searchbar';
 import SearchBox from '../../containers/SearchBox';
 import Logo from '../common/Logo';
@@ -81,7 +82,7 @@ export default class Navbar extends React.Component {
                 <a href='#' className='sidenav-trigger hide-on-large-only' data-target='slide-out'>
                   <Icon className='grey-text text-darken-2'>menu</Icon>
                 </a>  
-                <Logo />
+                <NavLink to='/dashboard'><Logo /></NavLink>
   		          <span id='location' className='grey-text text-darken-2'>{ page }</span>
 
                 <div className='nav-display right'>
