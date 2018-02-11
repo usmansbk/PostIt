@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchItem should render component 1`] = `
+<div
+  className="row card-panel"
+  id="search-item"
+>
+  <div
+    className="col s12"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col s6 valign-wrapper"
+      >
+        <i
+          className="material-icons grey-text text-darken-2"
+        >
+          account_box
+        </i>
+        <span
+          className="grey-text text-darken-2"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

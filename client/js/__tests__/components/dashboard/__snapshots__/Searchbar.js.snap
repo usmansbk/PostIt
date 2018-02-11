@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Searchbar should render component 1`] = `
+<div
+  className="navbar-fixed nav-wrapper"
+>
+  <nav>
+    <div
+      className="input-field"
+    >
+      <input
+        className="center-align grey lighten-3"
+        id="searchbar"
+        onChange={undefined}
+        placeholder="Search PostIt"
+        type="search"
+      />
+      <label
+        className="label-icon grey-text"
+        htmlFor="searchbar"
+      >
+        <i
+          className="material-icons undefined"
+        >
+          search
+        </i>
+      </label>
+      <i
+        className="material-icons undefined"
+        name="cancel-search"
+        onClick={undefined}
+      >
+        close
+      </i>
+    </div>
+  </nav>
+</div>
+`;
