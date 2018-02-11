@@ -10,7 +10,7 @@ const persistedState = loadState();
 const middlewares = [
   thunkMiddleware,
 ]
-process.env.NODE_ENV && middlewares.push(loggerMiddleware);
+process.env.NODE_ENV || middlewares.push(loggerMiddleware);
 
 const store = createStore(
   postIt,
