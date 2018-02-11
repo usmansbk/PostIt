@@ -23,5 +23,5 @@ function setup() {
 }
 
 describe('SearchItem', () => {
-  
+  it('should return ', () => expect(true).toBeTruthy())
 })
