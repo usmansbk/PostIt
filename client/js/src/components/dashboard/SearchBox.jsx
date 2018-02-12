@@ -28,7 +28,7 @@ export default class Searchbox extends React.Component {
   }
 
   render() {
-      const {users, page, isFetching, failed, found, gid, add, addFailed} = this.props;
+    const {users, page, isFetching, failed, found, gid, add, addFailed} = this.props;
     const style = {
       padding: '0px',
       margin: '0px',
