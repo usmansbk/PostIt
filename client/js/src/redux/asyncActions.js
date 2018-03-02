@@ -27,6 +27,7 @@ import {
 const SOCKET_URL = process.env.SOCKET_URL;
 const PORT = process.env.PORT || 8888;
 const END_POINT = SOCKET_URL || `http://localhost:${PORT}`;
+console.log(END_POINT);
 const socket = io(END_POINT);
 
 const inGroup = (id) => {

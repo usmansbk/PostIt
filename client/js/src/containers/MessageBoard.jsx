@@ -19,6 +19,7 @@ const getPosts = (posts, members, groups, page, group) => {
         , authorId = post.authorId
         , message = post.message
         , createdAt = post.createdAt
+        , priority = post.priority
         , duration = getElapsedTime(createdAt);
 
     const postInfo = {};
@@ -26,6 +27,7 @@ const getPosts = (posts, members, groups, page, group) => {
     postInfo.groupName = groups.byId[groupId].name;
     postInfo.duration = duration;
     postInfo.groupId = post.groupId;
+    postInfo.priority = priority;
 
     return {
       message,

@@ -5,7 +5,7 @@ const { Op } = Sequelize;
 
 export default class GroupController {
   static postMessage(req, res) {
-    const { message } = req.body,
+    const { message, priority } = req.body,
       { guid } = req.params,
       { userId } = req.session;
     Group.findOne({
@@ -18,7 +18,7 @@ export default class GroupController {
     }).then((group) => {
       return User.findById(userId).then(user =>
         sequelize.transaction(t =>
-          Post.create({ message }, { transaction: t }).then(post =>
+          Post.create({ message, priority }, { transaction: t }).then(post =>
             post.setAuthor(user, { transaction: t }).then(() =>
               group.addPost(post, { transaction: t })))));
     }).then(() =>

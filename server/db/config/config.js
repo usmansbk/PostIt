@@ -1,6 +1,6 @@
 module.exports = {
   development: {
-    username: process.env.DEV_DB_USERNAME || 'usman',
+    username: process.env.DEV_DB_USERNAME || 'uxximan',
     password: process.env.DEV_DB_PASSWORD || null,
     database: process.env.DEV_DB_NAME || 'postit_dev',
     host: process.env.DEV_DB_HOSTNAME || '127.0.0.1',

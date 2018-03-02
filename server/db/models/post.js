@@ -12,6 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       get() {
         return this.getDataValue('message');
       }
+    },
+    priority: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     }
   });
   Post.associate = function associate(models) {

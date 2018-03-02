@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Icon from '../common/Icon';
 import '../../../../stylesheets/sass/components/PostInfo.scss'
 
-export default ({authorUsername, groupName, duration, groupId}) => {
+export default ({authorUsername, groupName, duration, groupId, priority}) => {
 
   const div = {
     width: '100%',
@@ -27,6 +27,7 @@ export default ({authorUsername, groupName, duration, groupId}) => {
             <Icon className='tiny'>access_time</Icon>
             <small><span className='grey-text'>{duration}</span></small>
           </div>
+          <span id='message-priority' className='right valign-wrapper badge'>{priority}</span>
         </div>
       </div>
     </div>

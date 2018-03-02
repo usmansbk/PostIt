@@ -1,6 +1,7 @@
 import React from 'react';
 import Fab from '../common/Fab';
 import Loader from '../common/Loader';
+import Icon from '../common/Icon';
 import SelectGroup from './SelectGroup';
 import M from '../../../materialize'
 
@@ -16,6 +17,7 @@ export default class NewPostModal extends React.Component {
     this.clearFields = this.clearFields.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this._initSelect = this._initSelect.bind(this);
   }
 
   handleSelect(event) {
@@ -30,6 +32,10 @@ export default class NewPostModal extends React.Component {
     this.setState({
       [name]: value
     });
+  }
+  _initSelect() {
+    const elem = document.querySelector('#priority');
+    const instance = M.Select.init(elem);
   }
 
   clearFields() {
@@ -50,6 +56,7 @@ export default class NewPostModal extends React.Component {
     let instance = M.Modal.init(elem);
     elem = document.querySelector('#newpost');
     this.instance = M.Modal.init(elem);
+    this._initSelect();
   }
 
   componentWillReceiveProps(nexProps) {
@@ -76,10 +83,8 @@ export default class NewPostModal extends React.Component {
     const {posting, failed } = this.props;
       const loader =  <div className='center-align section'>
                         <Loader />
-                    </div>
-
-        const isInvalid = (this.state.message.trim() === '' || this.state.gid === '');
-
+                      </div>
+    const isInvalid = (this.state.message.trim() === '' || this.state.gid === '');
     return (
       <div>
         <Fab href='#newpost' color='red'onClick={this.clearFields} >mode_edit</Fab>
@@ -88,6 +93,14 @@ export default class NewPostModal extends React.Component {
             { (posting && !failed) && loader }
             <form id='new-post-modal' onSubmit={this.handleSubmit}>
               <SelectGroup groups={this.state.groups} onChange={this.handleSelect} />
+              <div className='input-field'>
+                <select id='priority' name='priority' onChange={this.handleSelect} defaultValue='normal'>
+                  <option value='normal'>Normal</option>
+                  <option value='urgent'>Urgent</option>
+                  <option value='critical'>Critical</option>
+                </select>
+                <label className='valign-wrapper'>Priority <Icon className='tiny blue-text'>priority_high</Icon></label>
+              </div>
               <div className='input-field' id='message'>
                 <textarea className='materialize-textarea' name='message' id='message' value={this.state.message} onChange={this.handleChange} />
                 <label htmlFor='message'>Whats new with you</label>
