@@ -8,7 +8,7 @@
     "build": "npm run build:server & npm run build:client:prod",
     "build:server": "sh server/scripts/build.sh",
     "build:client": "webpack --config client/webpack.config.js",
-    "build:client:prod": "webpack --config client/webpack.config.prod.js --watch",
+    "build:client:prod": "webpack --config client/webpack.config.prod.js",
     "start": "node server/build/bin/www",
     "start:dev": "nodemon server/build/bin/www",
     "client:dev": "webpack-dev-server --config client/webpack.config.js",
