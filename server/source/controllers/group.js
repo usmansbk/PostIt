@@ -166,7 +166,7 @@ export default class GroupController {
            members
          }
        });
-     }).catch((error) => {
+     }).catch(() => {
        res.status(400).json({
          status: 'failed',
          data: {
@@ -195,7 +195,7 @@ export default class GroupController {
           message: 'Group info updated'
         }
       })
-    }).catch(error => {
+    }).catch(() => {
       res.status(400).json({
         status: 'fail',
         data: {
@@ -228,8 +228,7 @@ export default class GroupController {
         }
       })
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       res.status(400).json({
         status: 'fail',
         data: {

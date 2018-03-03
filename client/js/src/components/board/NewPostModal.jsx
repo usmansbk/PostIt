@@ -11,6 +11,7 @@ export default class NewPostModal extends React.Component {
     this.state = {
       gid: '',
       message: '',
+      priority: 'normal',
       groups: []
     }
     this.handleSubmit = this.handleSubmit.bind(this);

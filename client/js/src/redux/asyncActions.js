@@ -245,10 +245,7 @@ export function fetchPosts(filter) {
             const simplified = simplify.messages(posts);
             dispatch(receivePosts(simplified));
         })
-        .catch(error => {
-            console.log(error);
-            dispatch(setErrorMessage(Status.FAILED_TO_FETCH_POSTS))
-        })
+        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_FETCH_POSTS)))
     }
 }
 
@@ -262,10 +259,7 @@ export function postMessage(data) {
             else return Promise.reject();
         })
         .then(() => socket.emit(Status.MESSAGE_POSTED, { id }))
-        .catch(error => {
-            console.log(error)
-            dispatch(setErrorMessage(Status.FAILED_TO_POST_MESSAGE))
-        })
+        .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_POST_MESSAGE)))
     }
 }
 
