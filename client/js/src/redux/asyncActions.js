@@ -297,6 +297,7 @@ export function leaveGroup(id) {
             if (response.ok) dispatch(setStatus(Status.GROUP_DELETED))
             else return Promise.reject();
         })
+        .then(() => dispatch(deleteGroupPosts(id)))
         .then(() => dispatch(removeGroup(id)))
         .then(() => socket.emit(Status.USER_REMOVED, { gid: id, uid: store.getState().account.id }))
         .catch(error => dispatch(setErrorMessage(Status.FAILED_TO_DELETE_GROUP)));
