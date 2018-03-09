@@ -262,7 +262,8 @@ const postIt = combineReducers({ ...reducers });
 let state;
 const rootReducers = (state, action) => {
   if (action.type === USER_LOGOUT) {
-    state  = undefined
+    state  = undefined;
+    localStorage.removeItem('PostIt-token');
   }
   
   return postIt(state, action)

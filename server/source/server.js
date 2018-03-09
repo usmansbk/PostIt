@@ -1,8 +1,7 @@
 import express from 'express';
 import http from 'http';
 import path from 'path';
-import socketIo from 'socket.io'
-import session from 'express-session';
+import socketIo from 'socket.io';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import bunyan from 'bunyan';
@@ -16,10 +15,6 @@ export const log = bunyan.createLogger({ name: 'PostIt-Server' });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger);
-app.use(session({
-  secret: 's3cr3t',
-  cookie: {}
-}));
 
 app.use(favicon(path.join(__dirname, '../../client/favicon.ico')));
 app.use(express.static(path.join(__dirname, '../../client')));

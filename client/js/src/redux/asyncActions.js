@@ -67,11 +67,13 @@ socket.on(Status.USER_ADDED, (data) => {
 })
 
 function postForm(url, json) {
-    const form = formurlencoded(json);
+    const form = formurlencoded(json)
+        , token = localStorage.getItem('PostIt-token');
     return fetch(url, {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
+            'authorization': `bearer ${token}`
         }),
         body: form,
         credentials: 'include',
@@ -79,11 +81,13 @@ function postForm(url, json) {
 }
 
 function patchForm(url, json) {
-    const form = formurlencoded(json);
+    const form = formurlencoded(json)
+        , token = localStorage.getItem('PostIt-token');
     return fetch(url, {
         method: 'PATCH',
         headers: new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
+            'authorization': `bearer ${token}`
         }),
         body: form,
         credentials: 'include',
@@ -91,22 +95,37 @@ function patchForm(url, json) {
 }
 
 function deleteUrl(url) {
+    const token = localStorage.getItem('PostIt-token');
     return fetch(url, {
         method: 'DELETE',
+        headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'authorization': `bearer ${token}`
+        }),
         credentials: 'include',
     })
 }
 
 function leaveUrl(url) {
+    const token = localStorage.getItem('PostIt-token');
     return fetch(url, {
         method: 'PATCH',
+        headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'authorization': `bearer ${token}`
+        }),
         credentials: 'include',
     })
 }
 
 function get(url) {
+    const token = localStorage.getItem('PostIt-token');
     return fetch (url, {
         method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'authorization': `bearer ${token}`
+        }),
         credentials: 'include',
     })
 }
@@ -322,9 +341,14 @@ export function signIn(data) {
         dispatch(setSession(Status.SIGNING_IN));
         return postForm(`/api/user/signin`, data)
         .then(response => {
-            if (response.ok) dispatch(setSession(Status.SIGNED_IN));
+            if (response.ok) return response.json()
             else return Promise.reject();
         })
+        .then((json) => {
+            const { token } = json;
+            localStorage.setItem('PostIt-token', token);
+        })
+        .then(() => dispatch(setSession(Status.SIGNED_IN)))
         .then(() => dispatch(login()))
         .then(() => dispatch(fetchAll(Filter.ALL)))
         .catch(error => dispatch(setSession(Status.SIGNIN_FAILED, Status)));

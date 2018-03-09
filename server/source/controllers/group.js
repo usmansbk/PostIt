@@ -7,7 +7,7 @@ export default class GroupController {
   static postMessage(req, res) {
     const { message, priority } = req.body,
       { guid } = req.params,
-      { userId } = req.session;
+      { userId } = req;
     Group.findOne({
       where: { id: guid },
       include: [{
@@ -40,7 +40,7 @@ export default class GroupController {
 
   static retrieveMessages(req, res) {
     const { guid } = req.params,
-      { userId } = req.session;
+      { userId } = req;
     Group.findOne({
       where: { id: guid },
       include: [{
@@ -68,7 +68,7 @@ export default class GroupController {
   static addUsers(req, res) {
     const { guid } = req.params,
       { invites } = req.body,
-      { userId } = req.session,
+      { userId } = req,
       usersQueryList = Util.makeColumnList(invites, 'username');
     Group.findOne({
       where: { id: guid },
@@ -100,7 +100,7 @@ export default class GroupController {
   }
 
   static createGroup(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     User.findById(userId).then(user =>
       sequelize.transaction((t) => {
         if (!user) throw new Error();
@@ -126,8 +126,7 @@ export default class GroupController {
 
   static deleteGroup(req, res) {
     const { guid } = req.params;
-    const { userId } = req.session;
-
+    const { userId } = req;
     Group.findOne({
       where: {
         id: guid,
@@ -150,7 +149,7 @@ export default class GroupController {
 
   static getMembers(req, res) {
     const { guid } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     Group.findOne({
       where: { id: guid },
       include: [{
@@ -178,7 +177,7 @@ export default class GroupController {
 
   static updateModel(req, res) {
     const { id, name, purpose } = req.body;
-    const { userId } = req.session;
+    const { userId } = req;
     Group.findOne({
       where: {
         id,
@@ -208,7 +207,7 @@ export default class GroupController {
   static removeUser(req, res) {
     const { uid } = req.query;
     const { guid } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     let group;
     Group.findOne({
       where: {

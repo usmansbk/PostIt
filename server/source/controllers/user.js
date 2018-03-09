@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { User, Group, Post, Sequelize } from '../../db/models';
 
 const { Op } = Sequelize;
@@ -18,13 +19,15 @@ export default class UserController {
       attributes: { exclude: ['password'] }
     }).then((user) => {
       if (!user) throw new Error();
-      req.session.userId = user.id;
-      res.status(200).json({
-        status: 'success',
-        data: {
-          message: 'Logged in',
-        }
-      });
+      jwt.sign({ user }, 'secret', (err, token) => {
+        res.status(200).json({
+          token,
+          status: 'success',
+          data: {
+            message: 'Logged in',
+          }
+        });
+      })
     }).catch(() => {
       res.status(400).json({
         status: 'fail',
@@ -58,7 +61,7 @@ export default class UserController {
     });
   }
   static fetchAll(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     User.findOne({
       where: { id: userId },
       attributes: ['username', 'email', 'createdAt', 'id'],
@@ -117,7 +120,7 @@ export default class UserController {
    * @return {null} -the response object
    */
   static retrieveGroups(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     User.findById(userId).then(user => user.getGroups({
       include: [{
         model: User,
@@ -129,7 +132,6 @@ export default class UserController {
         attributes: ['username', 'email', 'id', 'createdAt']
       }]
     })).then((groups) => {
-
       let message = '', statusCode = 200;
       if (groups.length === 0) {
         message = 'You don\'t belong to any group';
@@ -140,7 +142,6 @@ export default class UserController {
         data: { message, groups }
       });
     }).catch((error) => {
-      console.log(error);
       res.status(400).json({
         status: 'fail',
         data: {
@@ -156,7 +157,7 @@ export default class UserController {
    * @return {null} -the response object
    */
   static retrievePosts(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     Post.findAll({
       where: {
         authorId: userId
@@ -208,7 +209,7 @@ export default class UserController {
    */
   static leaveGroup(req, res) {
     const { guid } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     let associateGroup;
 
     Group.findById(guid).then((group) => {
