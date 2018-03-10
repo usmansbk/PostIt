@@ -11,24 +11,6 @@ The root of this project contains 3 directories as follows:
 * **client** - this contains the front-end implementation in ReactJS(Redux)
 * **server** - this houses the back-end implementation in NodeJS-Express-Postgres
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purpose.
-
-### Prerequisites
-
-```
-```
-### Installing
-
-```
-```
-
-### Running the tests
-
-```
-```
-
 ## Author
 
 * **Babakolo Usman** - [usmansbk](https://github.com/usmansbk)
